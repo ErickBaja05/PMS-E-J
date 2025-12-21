@@ -11,7 +11,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Carga el FXML desde resources
-        Parent root = FXMLLoader.load(getClass().getResource("/administracion/fxml/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/administracion/fxml/eliminarUser.fxml"));
 
         Scene scene = new Scene(root);
         primaryStage.setTitle("Sistema de Gestión PMSEYJ");
