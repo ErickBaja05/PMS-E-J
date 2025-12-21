@@ -74,23 +74,21 @@
                         </VBox>
 
                         <VBox spacing="5.0" GridPane.columnIndex="1">
-                            <children>
-                                <Label text="Stock Total:" />
-                                <TextField fx:id="txtStock" prefHeight="35.0" promptText="Ingrese el Stock" />
-                            </children>
+                     <children>
+      
+                              <VBox spacing="5.0">
+                                  <children>
+                                      <Label text="PVP:" />
+                                      <TextField fx:id="txtPVP" prefHeight="35.0" promptText="Ingrese el PVP" />
+                                  </children>
+                              </VBox>
+                     </children>
                         </VBox>
 
                         <VBox spacing="5.0" GridPane.rowIndex="1">
                             <children>
                                 <Label text="Precio de Venta:" />
                                 <TextField fx:id="txtPrecioVenta" prefHeight="35.0" promptText="Ingrese el Precio de Venta" />
-                            </children>
-                        </VBox>
-
-                        <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <children>
-                                <Label text="PVP:" />
-                                <TextField fx:id="txtPVP" prefHeight="35.0" promptText="Ingrese el PVP" />
                             </children>
                         </VBox>
 
