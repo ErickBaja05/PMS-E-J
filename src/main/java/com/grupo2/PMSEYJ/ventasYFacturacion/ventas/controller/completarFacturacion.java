@@ -1,4 +1,4 @@
 package com.grupo2.PMSEYJ.ventasYFacturacion.ventas.controller;
 
-public class verEstructrua {
+public class completarFacturacion {
 }

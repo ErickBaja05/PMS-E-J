@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -204,6 +205,9 @@ public class ventanaPrincipalController implements Initializable {
     private VBox proveedoresSubMenu;
 
     @FXML
+    private Pane contenedorPrincipal;
+
+    @FXML
     void logOut(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Hasta pronto");
@@ -302,6 +306,27 @@ public class ventanaPrincipalController implements Initializable {
         inventarioSubMenu.setVisible(true);
         inventarioSubMenu.setManaged(true);
     }
+
+    public void cargarContenido(String rutaFXML) {
+        try {
+            // Cargar el FXML secundario
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(rutaFXML));
+            Parent contenido = loader.load();
+
+            // Limpiar el contenedor y añadir el nuevo contenido
+            contenedorPrincipal.getChildren().clear();
+            contenedorPrincipal.getChildren().add(contenido);
+            contenedorPrincipal.getStyleClass().remove("imagenFondo");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void facturarProductos(ActionEvent event) {
+        cargarContenido("/ventasYFacturacion/ventas/fxml/facturarProductos.fxml");
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
