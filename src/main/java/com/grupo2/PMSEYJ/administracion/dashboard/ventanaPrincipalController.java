@@ -456,6 +456,149 @@ public class ventanaPrincipalController implements Initializable {
 
     }
 
+    @FXML
+    void abrirAjustarStock(ActionEvent event) {
+
+    }
+
+    @FXML
+    void abrirConsultarClienteN(ActionEvent event) {
+        cargarContenido("/clientes/fxml/gestionClienteN.fxml");
+
+    }
+
+    @FXML
+    void abrirConsultarClienteJ(ActionEvent event) {
+        cargarContenido("/clientes/fxml/gestionClienteJ.fxml");
+
+    }
+
+    @FXML
+    void abrirConsultarMovimientos(ActionEvent event) {
+
+    }
+
+    @FXML
+    void abrirConsultarPedido(ActionEvent event) {
+        cargarContenido("/proveedores/fxml/consultarPedidoActualPendiente.fxml");
+
+    }
+
+    @FXML
+    void abrirConsultarStock(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/consultarStockProducto.fxml");
+
+    }
+
+    @FXML
+    void abrirConsultarVencimiento(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/consultarFechaDeVenci.fxml");
+
+    }
+
+    @FXML
+    void abrirCotejarFactura(ActionEvent event) {
+        cargarContenido("/proveedores/fxml/cotejarFactura.fxml");
+
+    }
+
+    @FXML
+    void abrirCrearUsuario(ActionEvent event) {
+        cargarContenido("/administracion/fxml/crearUser.fxml");
+
+    }
+
+    @FXML
+    void abrirEliminarUsuario(ActionEvent event) {
+        cargarContenido("/administracion/fxml/eliminarUser.fxml");
+    }
+
+    @FXML
+    void abrirFirmaElectronica(ActionEvent event) {
+        cargarContenido("/administracion/fxml/cargarFirmaElectronica.fxml");
+
+    }
+
+    @FXML
+    void abrirGenerarKardex(ActionEvent event) {
+
+    }
+
+    @FXML
+    void abrirHerramientas(ActionEvent event) {
+        cargarContenido("/administracion/fxml/configuracionPagosImpuestos.fxml");
+
+    }
+
+    @FXML
+    void abrirIngresarFactura(ActionEvent event) {
+
+    }
+
+    @FXML
+    void abrirMenuAperturaCaja(ActionEvent event) {
+        cargarContenido("/ventasYFacturacion/caja/fxml/realizarAperturaDeCaja.fxml");
+
+    }
+
+
+    @FXML
+    void abrirMenuArqueoCaja(ActionEvent event) {
+        cargarContenido("/ventasYFacturacion/caja/fxml/realizarArqueoDeCaja.fxml");
+    }
+
+    @FXML
+    void abrirMenuAvanceCaja(ActionEvent event) {
+        cargarContenido("/ventasYFacturacion/caja/fxml/realizarAvanceDeCaja.fxml");
+    }
+
+    @FXML
+    void abrirMenuCierreCaja(ActionEvent event) {
+        cargarContenido("/ventasYFacturacion/caja/fxml/realizarCierreDeCaja.fxml");
+    }
+
+    @FXML
+    void abrirMenuValeCaja(ActionEvent event) {
+        cargarContenido("/ventasYFacturacion/caja/fxml/realizarValeDeCaja.fxml");
+    }
+
+    @FXML
+    void abrirMetasIncentivos(ActionEvent event) {
+        cargarContenido("/administracion/fxml/definirIncentivosYMetas.fxml");
+
+    }
+
+
+
+    @FXML
+    void abrirModificarProducto(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/modificarProducto.fxml");
+
+    }
+
+    @FXML
+    void abrirDefinirPromociones(ActionEvent event) {
+        cargarContenido("/administracion/fxml/definirPromocion.fxml");
+
+    }
+
+    @FXML
+    void abrirProveedores(ActionEvent event) {
+        cargarContenido("/proveedores/fxml/definirContactoProveedores.fxml");
+
+    }
+
+    @FXML
+    void abrirRegistrarCliente(ActionEvent event) {
+
+    }
+
+    @FXML
+    void abrirRegistrarProducto(ActionEvent event) {
+
+    }
+
+
 
 
 

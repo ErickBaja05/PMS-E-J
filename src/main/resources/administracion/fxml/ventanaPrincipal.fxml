@@ -25,8 +25,8 @@
       <AnchorPane id="navMenu" layoutY="36.0" prefHeight="686.0" prefWidth="260.0">
          <children>
 
-            <Label id="label" layoutX="87.0" layoutY="94.0" text="BIENVENIDO," />
-            <Label id="label" layoutX="101.0" layoutY="120.0" text="RONALD" />
+            <Label id="label" layoutX="87.0" layoutY="94.0" styleClass="labelVentana" text="BIENVENIDO," />
+            <Label id="label" layoutX="101.0" layoutY="120.0" styleClass="labelVentana" text="RONALD" />
             <Line endX="154.40000915527344" layoutX="80.0" layoutY="147.0" startX="-49.00001525878906">
                <stroke>
                   <LinearGradient endX="0.3749999638759728" endY="0.5833333333333333" startX="0.6931818468552648" startY="0.24242422797463156">
@@ -119,27 +119,27 @@
                               </Button>
                               <VBox fx:id="cajaSubMenu" managed="false" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                  <children>
-                                    <Button fx:id="btnAperturaCaja" alignment="TOP_LEFT" mnemonicParsing="false" text="APERTURA">
+                                    <Button fx:id="btnAperturaCaja" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirMenuAperturaCaja" text="APERTURA">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnCierreCaja" alignment="TOP_LEFT" mnemonicParsing="false" text="CIERRE">
+                                    <Button fx:id="btnCierreCaja" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirMenuCierreCaja" text="CIERRE">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnValeCaja" alignment="TOP_LEFT" mnemonicParsing="false" text="VALE">
+                                    <Button fx:id="btnValeCaja" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirMenuValeCaja" text="VALE">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnAvanceCaja" alignment="TOP_LEFT" mnemonicParsing="false" text="AVANCE">
+                                    <Button fx:id="btnAvanceCaja" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirMenuAvanceCaja" text="AVANCE">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnArqueoCaja" alignment="TOP_LEFT" mnemonicParsing="false" text="ARQUEO">
+                                    <Button fx:id="btnArqueoCaja" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirMenuArqueoCaja" text="ARQUEO">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
@@ -153,16 +153,22 @@
                </Button>
                               <VBox fx:id="clientesSubMenu" managed="false" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                  <children>
-                                    <Button fx:id="btnRegistrarCliente" alignment="TOP_LEFT" mnemonicParsing="false" text="REGISTRAR CLIENTE">
+                                    <Button fx:id="btnRegistrarCliente" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarCliente" text="REGISTRAR CLIENTE">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnConsultarCliente" alignment="TOP_LEFT" mnemonicParsing="false" text="CONSULTAR CLIENTE">
+                                    <Button fx:id="btnConsultarCliente" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteN" text="CONSULTAR CLIENTE NATURAL">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
+                                    <Button fx:id="btnConsultarCliente1" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteJ" text="CONSULTAR CLIENTE JURIDICO">
+                                       <styleClass>
+                                          <String fx:value="navBtn" />
+                                          <String fx:value="navBtnSubmenu" />
+                                       </styleClass>
+                                    </Button>
                                  </children></VBox>
                            </children>
                         </VBox>
@@ -173,37 +179,37 @@
                  </Button>
                               <VBox fx:id="inventarioSubMenu" managed="false" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                  <children>
-                                    <Button fx:id="btnRegistrarProducto" alignment="TOP_LEFT" mnemonicParsing="false" text="REGISTRAR PRODUCTO">
+                                    <Button fx:id="btnRegistrarProducto" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarProducto" text="REGISTRAR PRODUCTO">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnModificarProducto" alignment="TOP_LEFT" mnemonicParsing="false" text="MODIFICAR PRODUCTO">
+                                    <Button fx:id="btnModificarProducto" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirModificarProducto" text="MODIFICAR PRODUCTO">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnConsultarStock" alignment="TOP_LEFT" mnemonicParsing="false" text="CONSULTAR STOCK">
+                                    <Button fx:id="btnConsultarStock" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarStock" text="CONSULTAR STOCK">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnConsultarFechaVencimiento" alignment="TOP_LEFT" mnemonicParsing="false" text="CONSULTAR VENCIMIENTO">
+                                    <Button fx:id="btnConsultarFechaVencimiento" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarVencimiento" text="CONSULTAR VENCIMIENTO">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnMovimientosProductos" alignment="TOP_LEFT" mnemonicParsing="false" text="CONSULTAR MOVIMIENTOS">
+                                    <Button fx:id="btnMovimientosProductos" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarMovimientos" text="CONSULTAR MOVIMIENTOS">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnRegistrarProducto5" alignment="TOP_LEFT" mnemonicParsing="false" text="AJUSTAR STOCK">
+                                    <Button fx:id="btnRegistrarProducto5" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirAjustarStock" text="AJUSTAR STOCK">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnRegistrarProducto6" alignment="TOP_LEFT" mnemonicParsing="false" text="GENERAR KARDEX">
+                                    <Button fx:id="btnRegistrarProducto6" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirGenerarKardex" text="GENERAR KARDEX">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
@@ -217,12 +223,12 @@
               </Button>
                               <VBox fx:id="proveedoresSubMenu" managed="false" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                  <children>
-                                    <Button fx:id="btnIngresarFactura" alignment="TOP_LEFT" mnemonicParsing="false" text="INGRESAR FACTURA">
+                                    <Button fx:id="btnIngresarFactura" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirIngresarFactura" text="INGRESAR FACTURA">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnCotejarFactura" alignment="TOP_LEFT" mnemonicParsing="false" text="COTEJAR FACTURA">
+                                    <Button fx:id="btnCotejarFactura" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirCotejarFactura" text="COTEJAR FACTURA">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
@@ -234,8 +240,7 @@
                                        </styleClass></Button>
                                     <VBox fx:id="pedidosSubMenu" managed="false" onMouseExited="#ocultarPedidos" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                        <children>
-                                          <Button fx:id="btnConsultarPedido" alignment="TOP_LEFT" mnemonicParsing="false" styleClass="navBtn" text="CONSULTAR PEDIDO" />
-                                          <Button fx:id="btnModificarPedido" alignment="TOP_LEFT" mnemonicParsing="false" styleClass="navBtn" text="MODIFICAR PEDIDO" />
+                                          <Button fx:id="btnConsultarPedido" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarPedido" styleClass="navBtn" text="CONSULTAR PEDIDO" />
                                        </children>
                                     </VBox>
                                  </children></VBox>
@@ -247,12 +252,12 @@
                </Button>
                               <VBox fx:id="gestionUsuariosSubMenu" managed="false" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                  <children>
-                                    <Button fx:id="btnCrearUsuario" alignment="TOP_LEFT" mnemonicParsing="false" text="CREAR USUARIO">
+                                    <Button fx:id="btnCrearUsuario" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirCrearUsuario" text="CREAR USUARIO">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnEliminarUsuario" alignment="TOP_LEFT" mnemonicParsing="false" text="ELIMINAR USUARIO">
+                                    <Button fx:id="btnEliminarUsuario" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirEliminarUsuario" text="ELIMINAR USUARIO">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
@@ -266,27 +271,27 @@
               </Button>
                               <VBox fx:id="gestiosParametrosSubMenu" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                  <children>
-                                    <Button fx:id="btnFirmaElectronica" alignment="TOP_LEFT" mnemonicParsing="false" text="FIRMA ELECTRÓNICA">
+                                    <Button fx:id="btnFirmaElectronica" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirFirmaElectronica" text="FIRMA ELECTRÓNICA">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnMetasIncentivos" alignment="TOP_LEFT" mnemonicParsing="false" text="METAS E INCENTIVOS">
+                                    <Button fx:id="btnMetasIncentivos" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirMetasIncentivos" text="METAS E INCENTIVOS">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnPromociones" alignment="TOP_LEFT" mnemonicParsing="false" text="PROMOCIONES">
+                                    <Button fx:id="btnPromociones" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirDefinirPromociones" text="PROMOCIONES">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnContactoProveedores" alignment="TOP_LEFT" mnemonicParsing="false" text="PROVEEDORES">
+                                    <Button fx:id="btnContactoProveedores" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirProveedores" text="PROVEEDORES">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnHerramientas" alignment="TOP_LEFT" mnemonicParsing="false" text="HERRAMIENTAS">
+                                    <Button fx:id="btnHerramientas" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirHerramientas" text="HERRAMIENTAS">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
