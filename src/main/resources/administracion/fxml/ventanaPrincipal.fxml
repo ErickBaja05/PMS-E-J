@@ -70,41 +70,41 @@
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnVerFacturas" alignment="TOP_LEFT" mnemonicParsing="false" text="VER FACTURAS">
+                                    <Button fx:id="btnVerFacturas" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#verFacturas" text="VER FACTURAS">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnRealizarProforma" alignment="TOP_LEFT" mnemonicParsing="false" text="PROFORMAS">
+                                    <Button fx:id="btnRealizarProforma" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#realizarProforma" text="PROFORMAS">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnGenerarReporteVentas" alignment="TOP_LEFT" mnemonicParsing="false" text="REPORTE DE VENTAS">
+                                    <Button fx:id="btnGenerarReporteVentas" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#verReporteDeVentas" text="REPORTE DE VENTAS">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="btnReporteARCSA" alignment="TOP_LEFT" mnemonicParsing="false" text="REPORTE ARCSA">
+                                    <Button fx:id="btnReporteARCSA" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#verReporteARCSA" text="REPORTE ARCSA">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="btngenerarReporteRentabilidad" alignment="TOP_LEFT" mnemonicParsing="false" text="REPORTE DE RENTABILIDAD">
+                                    <Button fx:id="btngenerarReporteRentabilidad" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#verReporteRentabilidad" text="REPORTE DE RENTABILIDAD">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="btnProgresoIncentivos" alignment="TOP_LEFT" mnemonicParsing="false" text="PROGESO DE INCENTIVOS">
+                                    <Button fx:id="btnProgresoIncentivos" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#verProgresoIncentivos" text="PROGESO DE INCENTIVOS">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="btnPromocionesExistentes" alignment="TOP_LEFT" mnemonicParsing="false" text="PROMOCIONES VIGENTES">
+                                    <Button fx:id="btnPromocionesExistentes" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#verPromocionesExistentes" text="PROMOCIONES VIGENTES">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />

@@ -327,6 +327,43 @@ public class ventanaPrincipalController implements Initializable {
         cargarContenido("/ventasYFacturacion/ventas/fxml/facturarProductos.fxml");
     }
 
+    @FXML
+    void realizarProforma(ActionEvent event) {
+
+    }
+
+    @FXML
+    void verFacturas(ActionEvent event) {
+        cargarContenido("/ventasYFacturacion/ventas/fxml/verFacturas.fxml");
+
+    }
+
+    @FXML
+    void verProgresoIncentivos(ActionEvent event) {
+
+    }
+
+    @FXML
+    void verPromocionesExistentes(ActionEvent event) {
+
+    }
+
+    @FXML
+    void verReporteARCSA(ActionEvent event) {
+
+    }
+
+    @FXML
+    void verReporteDeVentas(ActionEvent event) {
+
+    }
+
+    @FXML
+    void verReporteRentabilidad(ActionEvent event) {
+
+    }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

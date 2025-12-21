@@ -13,10 +13,10 @@
 <AnchorPane prefHeight="686.0" prefWidth="1016.0" stylesheets="@../css/facturarProductos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.ventasYFacturacion.ventas.controller.facturarProductos">
    <children>
       <Button fx:id="btnFacturar" layoutX="641.0" layoutY="594.0" mnemonicParsing="false" onAction="#terminarFacturacion" prefHeight="17.0" prefWidth="158.0" styleClass="boton" text="Facturar" />
-      <Pane layoutX="8.0" layoutY="28.0" prefHeight="566.0" prefWidth="447.0">
+      <Pane layoutX="8.0" layoutY="28.0" prefHeight="566.0" prefWidth="482.0">
          <children>
-            <ScrollPane layoutX="14.0" layoutY="54.0" prefHeight="508.0" prefWidth="394.0">
-                <TableView fx:id="tablaProductos" prefHeight="476.0" prefWidth="393.0" styleClass="tablaProductos">
+            <ScrollPane layoutX="14.0" layoutY="54.0" prefHeight="508.0" prefWidth="463.0">
+                <TableView fx:id="tablaProductos" prefHeight="476.0" prefWidth="1010.0" styleClass="tablaProductos">
                     <columns>
                         <!-- Columna con botón -->
                         <TableColumn fx:id="colAccion" prefWidth="44.79998475313187" resizable="false" styleClass="columnaTablaProductos" text="+" />
@@ -30,42 +30,43 @@
                 </TableView>
 
             </ScrollPane>
-            <TextField fx:id="txtNombreProducto" layoutX="27.0" layoutY="22.0" prefHeight="25.0" prefWidth="197.0" styleClass="textArea" />
-            <Button fx:id="btnConsultarVademecum" layoutX="230.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" styleClass="boton" text="VADÉMECUM" />
+            <TextField fx:id="txtNombreProducto" layoutX="34.0" layoutY="14.0" prefHeight="25.0" prefWidth="197.0" promptText="BUSCAR PRODUCTO" styleClass="textArea" />
+            <Button fx:id="btnConsultarVademecum" layoutX="261.0" layoutY="12.0" mnemonicParsing="false" onAction="#consultarVademecum" prefHeight="25.0" prefWidth="170.0" styleClass="boton" text="VADEMÉCUM" />
          </children>
       </Pane>
-      <Pane layoutX="439.0" layoutY="23.0" prefHeight="279.0" prefWidth="548.0">
+      <Pane layoutX="492.0" layoutY="15.0" prefHeight="263.0" prefWidth="508.0" styleClass="box">
          <children>
             <Label layoutX="157.0" layoutY="7.0" styleClass="lblDatosFactura" text="DATOS DEL CLIENTE PARA FACTURA" />
-            <Label layoutX="14.0" layoutY="36.0" styleClass="lblDatosFactura" text="TIPO DE CLIENTE:" />
-            <Label layoutX="34.0" layoutY="79.0" styleClass="lblDatosFactura" text="NOMBRES:" />
-            <Label layoutX="31.0" layoutY="125.0" styleClass="lblDatosFactura" text="APELLIDOS:" />
-            <ComboBox fx:id="opcionesCliente" layoutX="123.0" layoutY="35.0" prefHeight="33.0" prefWidth="148.0" styleClass="opciones" />
-            <Label layoutX="31.0" layoutY="172.0" styleClass="lblDatosFactura" text="DIRECCIÓN:" />
-            <Label layoutX="46.0" layoutY="216.0" styleClass="lblDatosFactura" text="EMAIL:" />
-            <TextField layoutX="285.0" layoutY="36.0" prefHeight="29.0" prefWidth="187.0" promptText="Ingrese la cedula o RUC" styleClass="textArea" />
-            <TextField fx:id="txtNombresCliente" editable="false" layoutX="118.0" layoutY="72.0" prefHeight="25.0" prefWidth="394.0" styleClass="textArea" />
-            <TextField fx:id="txtApellidosCliente" editable="false" layoutX="118.0" layoutY="110.0" prefHeight="25.0" prefWidth="394.0" styleClass="textArea" />
-            <TextField fx:id="txtDireccionCliente" editable="false" layoutX="118.0" layoutY="153.0" prefHeight="39.0" prefWidth="394.0" />
-            <TextField fx:id="txtEmailCliente" editable="false" layoutX="118.0" layoutY="209.0" prefHeight="25.0" prefWidth="394.0" styleClass="textArea" />
-            <Button fx:id="btnBuscarCliente" layoutX="480.0" layoutY="19.0" mnemonicParsing="false" styleClass="btnBuscarCliente" />
+            <Label layoutX="35.0" layoutY="42.0" styleClass="lblDatosFactura" text="TIPO:" />
+            <Label layoutX="34.0" layoutY="84.0" styleClass="lblDatosFactura" text="NOMBRES:" />
+            <Label layoutX="32.0" layoutY="123.0" styleClass="lblDatosFactura" text="APELLIDOS:" />
+            <ComboBox fx:id="opcionesCliente" layoutX="83.0" layoutY="33.0" prefHeight="33.0" prefWidth="148.0" styleClass="opciones" />
+            <Label layoutX="32.0" layoutY="170.0" styleClass="lblDatosFactura" text="DIRECCIÓN:" />
+            <Label layoutX="47.0" layoutY="214.0" styleClass="lblDatosFactura" text="EMAIL:" />
+            <TextField fx:id="txtIdentificacionCliente" layoutX="239.0" layoutY="35.0" prefHeight="29.0" prefWidth="187.0" promptText="CÉDULA O RUC" styleClass="textArea" />
+            <TextField fx:id="txtNombresCliente" editable="false" layoutX="113.0" layoutY="77.0" prefHeight="29.0" prefWidth="383.0" styleClass="textArea" />
+            <TextField fx:id="txtApellidosCliente" editable="false" layoutX="113.0" layoutY="113.0" prefHeight="29.0" prefWidth="383.0" styleClass="textArea" />
+            <TextField fx:id="txtDireccionCliente" editable="false" layoutX="113.0" layoutY="156.0" prefHeight="39.0" prefWidth="383.0" />
+            <TextField fx:id="txtEmailCliente" editable="false" layoutX="113.0" layoutY="212.0" prefHeight="29.0" prefWidth="383.0" styleClass="textArea" />
+            <Button fx:id="btnBuscarCliente" layoutX="448.0" layoutY="25.0" mnemonicParsing="false" onAction="#consultarCliente" styleClass="btnBuscarCliente" />
          </children>
       </Pane>
-      <ScrollPane layoutX="443.0" layoutY="282.0" prefHeight="306.0" prefWidth="548.0">
+      <ScrollPane layoutX="493.0" layoutY="282.0" prefHeight="306.0" prefWidth="498.0">
         <content>
-            <TableView fx:id="tablaCarrito" prefHeight="303.0" prefWidth="546.0" styleClass="tablaCarrito">
+            <TableView fx:id="tablaCarrito" editable="true" prefHeight="303.0" prefWidth="546.0" styleClass="tablaCarrito">
                 <columns>
                     <!-- Nombre del producto -->
-                    <TableColumn fx:id="colNombreProducto" prefWidth="208.79995423555374" resizable="false" styleClass="columnaTablaCarrito" text="Producto" />
+                    <TableColumn fx:id="colNombreProducto" prefWidth="260.79996967315674" resizable="false" styleClass="columnaTablaCarrito" text="Producto" />
 
                     <!-- Cantidad editable -->
-                    <TableColumn fx:id="colCantidad" prefWidth="79.20002746582031" resizable="false" styleClass="columnaTablaCarrito" text="Cantidad" />
+                    <TableColumn fx:id="colCantidad" prefWidth="60.79998779296875" resizable="false" styleClass="columnaTablaCarrito" text="Cantidad" />
+                  <TableColumn prefWidth="82.4000244140625" text="Precio" />
 
                     <!-- Subtotal -->
-                    <TableColumn fx:id="colSubtotal" prefWidth="71.20001220703125" resizable="false" styleClass="columnaTablaCarrito" text="Subtotal" />
+                    <TableColumn fx:id="colSubtotal" prefWidth="75.2000732421875" resizable="false" styleClass="columnaTablaCarrito" text="Subtotal" />
 
                     <!-- Botón eliminar -->
-                    <TableColumn fx:id="colEliminar" prefWidth="39.99993896484375" resizable="false" styleClass="columnaTablaCarrito" text="-" />
+                    <TableColumn fx:id="colEliminar" prefWidth="44.79998475313187" resizable="false" styleClass="columnaTablaCarrito" text="-" />
                 </columns>
             </TableView>
 
