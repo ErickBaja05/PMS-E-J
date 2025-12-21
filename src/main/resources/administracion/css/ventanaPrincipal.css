@@ -85,7 +85,7 @@
     -fx-text-fill: black;
 }
 
-#imagenFondo{
+.imagenFondo{
     -fx-background-image: url(../img/fondo.jpg);
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;

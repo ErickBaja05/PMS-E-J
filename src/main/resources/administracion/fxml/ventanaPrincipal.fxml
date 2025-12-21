@@ -65,7 +65,7 @@
                               </Button>
                               <VBox fx:id="facturacionSubMenu" managed="false" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                  <children>
-                                    <Button fx:id="btnFacturar" alignment="TOP_LEFT" mnemonicParsing="false" text="FACTURAR">
+                                    <Button fx:id="btnFacturar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#facturarProductos" text="FACTURAR">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />
@@ -301,6 +301,6 @@
             <Label fx:id="lblLogoMed" layoutX="101.0" layoutY="22.0" text="Label" />
          </children>
       </AnchorPane>
-      <Pane id="imagenFondo" layoutX="260.0" layoutY="36.0" prefHeight="686.0" prefWidth="1016.0" />
+      <Pane fx:id="contenedorPrincipal" layoutX="260.0" layoutY="36.0" prefHeight="686.0" prefWidth="1016.0" styleClass="imagenFondo" />
    </children>
 </AnchorPane>
