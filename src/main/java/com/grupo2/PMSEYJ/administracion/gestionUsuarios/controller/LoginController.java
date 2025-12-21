@@ -50,7 +50,10 @@ public class LoginController {
     }
 
     @FXML
-    void recuperarContraseña(ActionEvent event) {
+    void recuperarContraseña(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/administracion/fxml/recuperarPassword.fxml"));
+        Parent root = loader.load();
+        NavigationUtil.openNewWindow(event,root,"Recuperar Password");
 
     }
 
