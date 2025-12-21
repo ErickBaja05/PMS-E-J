@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="682.0" prefWidth="1016.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.inventarioYProductos.controller.consultarFechaDeVenciController">
+    <children>
+        <VBox alignment="TOP_CENTER" spacing="25.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="50.0">
+            <padding>
+                <Insets bottom="40.0" left="50.0" right="50.0" top="40.0" />
+            </padding>
+            <children>
+                <Label text="Consulta de Fecha de Vencimiento">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Label>
+                <Separator prefWidth="200.0" />
+
+                <GridPane hgap="40.0" VBox.vgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="rbPorCodigo" mnemonicParsing="false" onAction="#handleCambioSeleccion" selected="true" text="Consultar por Código">
+                            <font><Font name="System Bold" size="16.0" /></font>
+                            <toggleGroup>
+                                <ToggleGroup fx:id="grupoConsulta" />
+                            </toggleGroup>
+                        </RadioButton>
+
+                        <VBox fx:id="vboxCodigo" spacing="15.0" GridPane.rowIndex="1">
+                            <padding><Insets top="20.0" /></padding>
+                            <children>
+                                <Label text="Código de Barras:">
+                                    <font><Font name="System Bold" size="13.0" /></font>
+                                </Label>
+                                <TextField fx:id="txtCodigoBarras" prefHeight="40.0" promptText="Ingrese código..." />
+                                <Label text="Número de Lote:">
+                                    <font><Font name="System Bold" size="13.0" /></font>
+                                </Label>
+                                <TextField fx:id="txtLoteCodigo" prefHeight="40.0" promptText="Ingrese lote..." />
+                            </children>
+                        </VBox>
+
+                        <RadioButton fx:id="rbPorNombre" mnemonicParsing="false" onAction="#handleCambioSeleccion" text="Consultar por Nombre" GridPane.columnIndex="1">
+                            <font><Font name="System Bold" size="16.0" /></font>
+                            <toggleGroup>
+                                <fx:reference source="grupoConsulta" />
+                            </toggleGroup>
+                        </RadioButton>
+
+                        <VBox fx:id="vboxNombre" disable="true" opacity="0.4" spacing="15.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <padding><Insets top="20.0" /></padding>
+                            <children>
+                                <Label text="Nombre del Producto:">
+                                    <font><Font name="System Bold" size="13.0" /></font>
+                                </Label>
+                                <TextField fx:id="txtNombreProducto" prefHeight="40.0" promptText="Ingrese nombre..." />
+                                <Label text="Número de Lote:">
+                                    <font><Font name="System Bold" size="13.0" /></font>
+                                </Label>
+                                <TextField fx:id="txtLoteNombre" prefHeight="40.0" promptText="Ingrese lote..." />
+                            </children>
+                        </VBox>
+                    </children>
+                </GridPane>
+
+                <Button fx:id="btnConsultar" onAction="#handleConsultar" prefHeight="55.0" prefWidth="300.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white;" text="CONSULTAR FECHA">
+                    <font><Font name="System Bold" size="15.0" /></font>
+                    <cursor><Cursor fx:constant="HAND" /></cursor>
+                </Button>
+
+                <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #fdf2e9; -fx-padding: 20; -fx-background-radius: 10; -fx-border-color: #e67e22;">
+                    <children>
+                        <Label text="Fecha de Vencimiento:">
+                            <font><Font name="System Bold" size="16.0" /></font>
+                        </Label>
+                        <Label fx:id="lblFechaVencimiento" text="---" textFill="#e67e22">
+                            <font><Font name="System Bold" size="40.0" /></font>
+                        </Label>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
