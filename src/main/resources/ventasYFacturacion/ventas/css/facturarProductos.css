@@ -135,3 +135,9 @@
     -fx-fill: white;
 }
 
+.box{
+    -fx-background-color: #e5edeb;
+
+    -fx-background-radius: 15;
+
+}

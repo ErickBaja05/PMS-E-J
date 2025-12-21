@@ -8,6 +8,9 @@ module com.grupo2.PMSEYJ {
 
     // Otros módulos comunes
     requires java.sql;
+    requires java.desktop;
+    requires javafx.base;
+
 
 
     // Abre los paquetes con controladores para FXML

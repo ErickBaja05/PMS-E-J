@@ -13,13 +13,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Region;
 import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -95,11 +100,110 @@ public class facturarProductos implements Initializable {
     @FXML
     private TextField txtNombresCliente;
 
+    @FXML
+    private TextField txtIdentificacionCliente;
+
     private String tiposIdentificacion [] = {"CEDULA", "RUC"};
+
+    @FXML
+    private void consultarVademecum(ActionEvent event) {
+        try {
+            // Check if Desktop API is supported
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(new URI("https://mx.mivademecum.com/"));
+            } else {
+                System.err.println("Desktop browsing not supported on this system.");
+            }
+        } catch (IOException | URISyntaxException e) {
+            System.err.println("Failed to open website: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void consultarCliente(ActionEvent event) {
+        try{
+
+        }catch(Exception e){
+
+        }
+        if(opcionesCliente.getValue().equals("CEDULA")) {
+
+            if(txtIdentificacionCliente.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error: No se especifico una cédula para la busqueda");
+                alert.setContentText("Ingrese un valor de cédula de identidad para consultar los datos de un cliente");
+                alert.showAndWait();
+
+            }else if(txtIdentificacionCliente.getText().length() != 10) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error: La cédula de identidad no tiene una longitud de 10 digitos");
+                alert.setContentText("Ingrese un valor de cédula de identidad válido para consultar los datos de un cliente");
+                alert.showAndWait();
+            }else{
+                txtApellidosCliente.setText("NOMBRE DE UN CLIENTE NATURAL");
+                txtDireccionCliente.setText("APELLIDO DE UN CLIENTE NATURAL");
+                txtNombresCliente.setText("DIRECCION DE UN CLIENTE NATURAL");
+                txtEmailCliente.setText("EMAIL DE UN CLIENTE NATURAL");
+            }
+
+        }else{
+            if(txtIdentificacionCliente.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error: No se especifico un RUC para la busqueda");
+                alert.setContentText("Ingrese un valor de RUC para consultar los datos de un cliente");
+                alert.showAndWait();
+
+            }else if(txtIdentificacionCliente.getText().length() != 13) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error: El RUC no tiene una longitud de 13 digitos");
+                alert.setContentText("Ingrese un valor de RUC para consultar los datos de un cliente");
+                alert.showAndWait();
+            }else{
+                txtApellidosCliente.setText("NOMBRE CLIENTE JURIDICO");
+                txtDireccionCliente.setText("APELLIDO DE UN CLIENTE NATURAL");
+                txtNombresCliente.setText("DIRECCION DE UN CLIENTE JURIDICO");
+                txtEmailCliente.setText("EMAIL DE UN CLIENTE JURIDICO");
+            }
+
+        }
+
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         opcionesCliente.getItems().addAll(tiposIdentificacion);
+        opcionesCliente.getSelectionModel().select(0);
+
+        txtIdentificacionCliente.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (opcionesCliente.getValue().equals("CEDULA")) {
+                // Elimina todo lo que no sea número
+                txtIdentificacionCliente.setText(newValue.replaceAll("[^0-9]", ""));
+                // Opcional: limitar a 10 dígitos
+                if (txtIdentificacionCliente.getText().length() > 10) {
+                    txtIdentificacionCliente.setText(txtIdentificacionCliente.getText().substring(0, 10));
+                }
+            } else if (opcionesCliente.getValue().equals("RUC")) {
+                // Elimina todo lo que no sea número
+                txtIdentificacionCliente.setText(newValue.replaceAll("[^0-9]", ""));
+                // Opcional: validar que termine en 001
+                if (!txtIdentificacionCliente.getText().endsWith("001")) {
+                    // Aquí decides si corriges automáticamente o solo validas al final
+                    // Ejemplo: forzar que termine en 001
+                    if (txtIdentificacionCliente.getText().length() >= 13) {
+                        txtIdentificacionCliente.setText(
+                                txtIdentificacionCliente.getText().substring(0, 10) + "001"
+                        );
+                    }
+                }
+            }
+        });
+
+
         FontIcon icon = new FontIcon("fa-book");
         icon.getStyleClass().add("insideButtonIcon");
         btnConsultarVademecum.setGraphic(icon);
@@ -181,7 +285,7 @@ public class facturarProductos implements Initializable {
 
                 btnEliminar.setOnMouseExited(e -> {
                     btnEliminar.setCursor(Cursor.DEFAULT);
-                    btnEliminar.setStyle("-fx-background-color: #2a9d8f; -fx-text-fill: white;");
+                    btnEliminar.setStyle("-fx-background-color: #9a1430; -fx-text-fill: white;");
                 });
 
                 btnEliminar.setContentDisplay(ContentDisplay.LEFT); // icono a la izquierda del texto
