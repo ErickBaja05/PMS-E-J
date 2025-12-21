@@ -3,9 +3,12 @@ module com.grupo2.PMSEYJ {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
+    requires org.kordamp.ikonli.javafx;
+    requires org.kordamp.ikonli.fontawesome;
 
     // Otros módulos comunes
     requires java.sql;
+
 
     // Abre los paquetes con controladores para FXML
     opens com.grupo2.PMSEYJ.auditoria.controller to javafx.fxml;
@@ -16,6 +19,7 @@ module com.grupo2.PMSEYJ {
     opens com.grupo2.PMSEYJ.clientes.controller to javafx.fxml;
     opens com.grupo2.PMSEYJ.proveedores.controller to javafx.fxml;
     opens com.grupo2.PMSEYJ.inventarioYProductos.controller to javafx.fxml;
+    opens com.grupo2.PMSEYJ.administracion.dashboard to javafx.fxml;
     opens com.grupo2.PMSEYJ.app to javafx.fxml;
 
     exports com.grupo2.PMSEYJ.app;
