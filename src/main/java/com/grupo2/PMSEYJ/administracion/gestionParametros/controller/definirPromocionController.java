@@ -2,44 +2,87 @@ package com.grupo2.PMSEYJ.administracion.gestionParametros.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
-public class definirPromocionController {
+public class definirPromocionController implements Initializable {
 
-    @FXML private Button btValidar;
-    @FXML private Button btnCancelar;
-    @FXML private Button btnRegistrar;
-    @FXML private DatePicker dpFechaFin;
-    @FXML private DatePicker dpFechaInicio;
+    @FXML private Button btValidar, btnCancelar, btnRegistrar;
+    @FXML private DatePicker dpFechaFin, dpFechaInicio;
     @FXML private Label lblMensaje;
-    @FXML private TextField txtCodigoProducto;
     @FXML private TextArea txtCondiciones;
 
-    // Bandera lógica para el flujo del caso de uso
+    // Elementos de "Un Producto"
+    @FXML private RadioButton rtDUnProducto;
+    @FXML private TextField txtCodigoProducto;
+
+    // Elementos de "Toda la Mercadería"
+    @FXML private RadioButton rtDTodaMercaderia;
+    @FXML private TextField txtCodigoProducto1; // Este es el del porcentaje de descuento
+
+    private ToggleGroup grupoPromocion;
     private boolean productoValidado = false;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // 1. Crear el grupo para que sean excluyentes
+        grupoPromocion = new ToggleGroup();
+        rtDUnProducto.setToggleGroup(grupoPromocion);
+        rtDTodaMercaderia.setToggleGroup(grupoPromocion);
+
+        // 2. Estado inicial: Seleccionamos "Un Producto" por defecto
+        rtDUnProducto.setSelected(true);
+        actualizarEstados(true);
+    }
+
+    // --- LÓGICA DE BLOQUEO ---
+
+    @FXML
+    void darDescuentoUP(ActionEvent event) {
+        actualizarEstados(true);
+    }
+
+    @FXML
+    void darDescuentoTM(ActionEvent event) {
+        actualizarEstados(false);
+    }
+
+    private void actualizarEstados(boolean esProductoIndividual) {
+        // Si es producto individual, habilitamos sus campos y bloqueamos el otro
+        txtCodigoProducto.setDisable(!esProductoIndividual);
+        btValidar.setDisable(!esProductoIndividual);
+
+        // Bloqueamos/Habilitamos el campo de porcentaje (Toda la mercadería)
+        txtCodigoProducto1.setDisable(esProductoIndividual);
+
+        // Si cambiamos a Mercadería, reseteamos la validación de producto
+        if (!esProductoIndividual) {
+            productoValidado = true; // No necesita validación de código
+            txtCodigoProducto.clear();
+        } else {
+            productoValidado = false;
+            txtCodigoProducto1.clear();
+        }
+    }
+
+    // --- ACCIONES PRINCIPALES ---
 
     @FXML
     void validarProducto(ActionEvent event) {
         String codigo = txtCodigoProducto.getText().trim();
-        lblMensaje.setText(""); // Limpiar mensajes previos
+        lblMensaje.setText("");
 
-        // ESCENARIO ALTERNATIVO 1: Código no válido (ejemplo: vacío o formato incorrecto)
         if (codigo.isEmpty() || !codigo.matches("^[a-zA-Z0-9-]+$")) {
-            mostrarMensaje("Código no valido, ingrese nuevamente", true);
+            mostrarMensaje("Código no válido, ingrese nuevamente", true);
             productoValidado = false;
             return;
         }
 
-        // ESCENARIO ALTERNATIVO 2: El producto no existe
-        // Aquí llamarías a tu lógica de negocio/DB. Ejemplo simulado:
         boolean existe = verificarExistenciaProductoEnDB(codigo);
-
         if (!existe) {
             mostrarMensaje("Producto no encontrado", true);
             productoValidado = false;
@@ -51,44 +94,38 @@ public class definirPromocionController {
 
     @FXML
     void registrarPromocion(ActionEvent event) {
-        // Primero verificamos que el producto haya sido validado previamente
-        if (!productoValidado) {
+        // Validación de contexto
+        if (rtDUnProducto.isSelected() && !productoValidado) {
             mostrarMensaje("Debe validar un producto existente primero", true);
             return;
         }
 
-        // ESCENARIO ALTERNATIVO 3: Condiciones no validas
-        if (txtCondiciones.getText().trim().isEmpty() || txtCondiciones.getText().length() < 5) {
-            mostrarMensaje("Condiciones no validas", true);
+        if (rtDTodaMercaderia.isSelected() && txtCodigoProducto1.getText().trim().isEmpty()) {
+            mostrarMensaje("Debe ingresar el porcentaje de descuento", true);
             return;
         }
 
-        // ESCENARIO ALTERNATIVO 4: Fecha de inicio no valida
-        LocalDate fechaInicio = dpFechaInicio.getValue();
-        if (fechaInicio == null || fechaInicio.isBefore(LocalDate.now())) {
-            mostrarMensaje("Fecha de inicio no valida", true);
+        // Validaciones comunes (Fechas y condiciones)
+        if (txtCondiciones.getText().trim().length() < 5) {
+            mostrarMensaje("Condiciones no válidas (mín. 5 caracteres)", true);
             return;
         }
 
-        // ESCENARIO ALTERNATIVO 5: Fecha de finalización no valida
-        LocalDate fechaFin = dpFechaFin.getValue();
-        if (fechaFin == null || fechaFin.isBefore(fechaInicio)) {
-            mostrarMensaje("Fecha de finalización no valida", true);
+        LocalDate inicio = dpFechaInicio.getValue();
+        LocalDate fin = dpFechaFin.getValue();
+
+        if (inicio == null || inicio.isBefore(LocalDate.now())) {
+            mostrarMensaje("Fecha de inicio no válida", true);
+            return;
+        }
+        if (fin == null || fin.isBefore(inicio)) {
+            mostrarMensaje("Fecha de finalización no válida", true);
             return;
         }
 
-        // ESCENARIO BÁSICO: Registro exitoso
-        boolean exitoAlGuardar = registrarEnBaseDeDatos(
-                txtCodigoProducto.getText(),
-                txtCondiciones.getText(),
-                fechaInicio,
-                fechaFin
-        );
-
-        if (exitoAlGuardar) {
-            mostrarMensaje("Promoción registrada", false);
-            limpiarCampos();
-        }
+        // Simulación de guardado
+        mostrarMensaje("Promoción registrada exitosamente", false);
+        limpiarCampos();
     }
 
     @FXML
@@ -98,8 +135,6 @@ public class definirPromocionController {
         lblMensaje.setTextFill(Color.GRAY);
     }
 
-    // --- Métodos de apoyo ---
-
     private void mostrarMensaje(String texto, boolean esError) {
         lblMensaje.setText(texto);
         lblMensaje.setTextFill(esError ? Color.RED : Color.GREEN);
@@ -107,20 +142,15 @@ public class definirPromocionController {
 
     private void limpiarCampos() {
         txtCodigoProducto.clear();
+        txtCodigoProducto1.clear();
         txtCondiciones.clear();
         dpFechaInicio.setValue(null);
         dpFechaFin.setValue(null);
-        productoValidado = false;
+        rtDUnProducto.setSelected(true);
+        actualizarEstados(true);
     }
 
-    // Simulación de lógica de negocio (Sustituir con servicios reales)
     private boolean verificarExistenciaProductoEnDB(String codigo) {
-        // Lógica de búsqueda real aquí
-        return !codigo.equals("000"); // Simula que el código "000" no existe
-    }
-
-    private boolean registrarEnBaseDeDatos(String cod, String cond, LocalDate inicio, LocalDate fin) {
-        // Lógica de persistencia real aquí
-        return true;
+        return !codigo.equals("000");
     }
 }
