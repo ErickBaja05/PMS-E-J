@@ -472,6 +472,7 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     void abrirAjustarStock(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/ajustarStock.fxml");
 
     }
 

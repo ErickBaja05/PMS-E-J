@@ -1,8 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="686.0" prefWidth="1016.0" stylesheets="@../css/ajustarStock.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.inventarioYProductos.controller.ajustarStock">
+   <children>
+      <TabPane layoutX="14.0" layoutY="14.0" prefHeight="686.0" prefWidth="1016.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="CONTROL DE INVENTARIO">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="5.0" layoutY="37.0" prefHeight="610.0" prefWidth="1006.0">
+                           <children>
+                              <Button layoutX="416.0" layoutY="531.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="211.0" styleClass="boton" text="AJUSTAR STOCK" />
+                              <Button layoutX="649.0" layoutY="66.0" mnemonicParsing="false" styleClass="boton" text="VER KARDEX" />
+                              <TextField layoutX="391.0" layoutY="71.0" prefHeight="26.0" prefWidth="226.0" />
+                              <Label layoutX="321.0" layoutY="29.0" styleClass="lblTitulo" text="AJUSTAR INVENTARIO POR CONTROL DE INVENTARIO" />
+                              <Label layoutX="249.0" layoutY="75.0" prefHeight="18.0" prefWidth="124.0" styleClass="lblInfo" text="Número de Kardex:" />
+                               <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutX="14.0" layoutY="111.0" prefHeight="402.0" prefWidth="981.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+                                   <content>
+                                       <TableView fx:id="tablaControlKardex" editable="true" prefHeight="401.0" prefWidth="979.0">
+                                           <columns>
+                                               <TableColumn fx:id="colProducto" prefWidth="113.6000297665596" text="PRODUCTO" />
+                                               <TableColumn fx:id="colExistenciaUnidadesSistema" prefWidth="176.79998779296875" text="CAJAS SISTEMA" />
+                                               <TableColumn fx:id="colExistenciaCaja" prefWidth="181.60003662109375" text="FRACCION SISTEMA" />
+                                               <TableColumn fx:id="colExistenciaUnidadesControl" prefWidth="211.99996948242188" text="CAJAS ENCONTRADAS" />
+                                               <TableColumn fx:id="colExistenciaCajasControl" prefWidth="288.7999267578125" text="FRACCIONES ENCONTRADAS">
+
+                                               </TableColumn>
+                                           </columns>
+                                       </TableView>
+                                   </content>
+                               </ScrollPane>
 
 
-<AnchorPane prefHeight="686.0" prefWidth="1016.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.inventarioYProductos.controller.ajustarStock">
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="DEVOLUCIÓN AL PROVEEDOR">
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                          <Pane layoutX="5.0" layoutY="37.0" prefHeight="610.0" prefWidth="1002.0">
+                              <children>
+                                  <Button layoutX="389.0" layoutY="528.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="220.0" styleClass="boton" text="AJUSTAR STOCK" />
+                                  <Label layoutX="284.0" layoutY="26.0" styleClass="lblTitulo" text="AJUSTAR STOCK POR DEVOLUCION AL PROVEEDOR" />
+                                  <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutX="14.0" layoutY="61.0" prefHeight="452.0" prefWidth="979.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+                                      <content>
+                                          <TableView fx:id="tableView" editable="true" prefHeight="434.0" prefWidth="940.0">
+                                              <columns>
+                                                  <TableColumn fx:id="colProducto" prefWidth="319.2000053524971" text="PRODUCTO" />
+                                                  <TableColumn fx:id="colExistenciaUnidadesSistema" prefWidth="143.99993896484375" text="CAJAS DEVUELTAS" />
+                                                  <TableColumn fx:id="colExistenciaCaja" prefWidth="228.80001831054688" text="FRACCIONES DEVUELTAS" />
+                                                  <TableColumn fx:id="colExistenciaUnidadesControl" prefWidth="278.4000244140625" text="MOTIVO DEVOLUCIÓN" />
+                                              </columns>
+                                          </TableView>
+                                      </content>
+                                  </ScrollPane>
 
+
+                              </children>
+                          </Pane>
+                      </children>
+                  </AnchorPane>
+              </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
 </AnchorPane>
