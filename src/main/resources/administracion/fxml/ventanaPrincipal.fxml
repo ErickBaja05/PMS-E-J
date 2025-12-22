@@ -153,17 +153,23 @@
                </Button>
                               <VBox fx:id="clientesSubMenu" managed="false" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                  <children>
-                                    <Button fx:id="btnRegistrarCliente" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarCliente" text="REGISTRAR CLIENTE">
+                                    <Button fx:id="btnRegistrarClienteN" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarClienteN" text="REGISTAR CLIENTE NATURAL">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnConsultarCliente" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteN" text="CONSULTAR CLIENTE NATURAL">
+                                    <Button fx:id="btnRegistrarClienteJ" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarClienteJ" text="REGISTRAR CLIENTE JURÍDICO">
+                                       <styleClass>
+                                          <String fx:value="navBtn" />
+                                          <String fx:value="navBtnSubmenu" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button fx:id="btnConsultarClienteN" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteN" text="CONSULTAR CLIENTE NATURAL">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnConsultarCliente1" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteJ" text="CONSULTAR CLIENTE JURIDICO">
+                                    <Button fx:id="btnConsultarClienteJ" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteJ" text="CONSULTAR CLIENTE JURÍDICO">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
@@ -199,11 +205,23 @@
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
-                                    <Button fx:id="btnMovimientosProductos" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarMovimientos" text="CONSULTAR MOVIMIENTOS">
+                                    <Button fx:id="btnProductosBajaRotacion" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirProductosBajaRotacion" text="PRODUCTOS BAJA ROTACIÓN">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
+                                    <Button fx:id="btnProductosProximosCaducar" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirProductosProximosCaducar" text="PRODUCTOS POR CADUCAR">
+                                       <styleClass>
+                                          <String fx:value="navBtn" />
+                                          <String fx:value="navBtnSubmenu" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button fx:id="btnReportePsicotropicos" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirReportePsicotropicos" text="REPORTE PSICOTRÓPICOS">
+                                       <styleClass>
+                                          <String fx:value="navBtn" />
+                                          <String fx:value="navBtnSubmenu" />
+                                       </styleClass>
+                                    </Button>
                                     <Button fx:id="btnRegistrarProducto5" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirAjustarStock" text="AJUSTAR STOCK">
                                        <styleClass>
                                           <String fx:value="navBtn" />
