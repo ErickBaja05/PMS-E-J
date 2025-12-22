@@ -1,12 +1,16 @@
 package com.grupo2.PMSEYJ.proveedores.controller;
 
+import com.grupo2.PMSEYJ.core.util.NavigationUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,7 +86,7 @@ public class cotejarFacturaController {
     }
 
     @FXML
-    void handleCotejarFactura(ActionEvent event) {
+    void handleCotejarFactura(ActionEvent event) throws IOException {
         if (listaCotejo.isEmpty()) {
             mostrarMensaje("Error", "No hay productos ingresados para comparar.", Alert.AlertType.WARNING);
             return;
@@ -102,7 +106,9 @@ public class cotejarFacturaController {
             mostrarMensaje("Éxito", "Cotejo de factura con sobrantes o excedentes.", Alert.AlertType.INFORMATION);
         }
 
-        System.out.println("Nuevo estado de la factura: " + estadoFactura);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/proveedores/fxml/resultadoCotejo.fxml"));
+        Parent root = loader.load();
+        NavigationUtil.openNewWindow(event,root,"Resultado Cotejo");
         limpiarTodo();
     }
 

@@ -489,14 +489,17 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     void abrirProductosBajaRotacion(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/productosBajaRotacion.fxml");
 
     }
     @FXML
     void abrirProductosProximosCaducar(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/productosProximosCaducar.fxml");
 
     }
     @FXML
     void abrirReportePsicotropicos(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/reporteMedicamentosPsicotropicos.fxml");
 
     }
 
@@ -554,6 +557,7 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     void abrirIngresarFactura(ActionEvent event) {
+        cargarContenido("/proveedores/fxml/ingresarFactura.fxml");
 
     }
 

@@ -185,7 +185,7 @@
                  </Button>
                               <VBox fx:id="inventarioSubMenu" managed="false" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                  <children>
-                                    <Button fx:id="btnRegistrarProducto" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarProducto" text="REGISTRAR PRODUCTO">
+                                    <Button fx:id="btnRegistrarProducto" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarProducto" text="CREAR PRODUCTO">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />

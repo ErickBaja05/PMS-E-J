@@ -6,32 +6,33 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="686.0" prefWidth="1016.0" stylesheets="@../css/reporteMedicamentosPsicotropicos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.inventarioYProductos.controller.reporteMedicamentosPsicotrópicos">
     <children>
-        <Label fx:id="lblTitulo" layoutX="334.0" layoutY="49.0" styleClass="lblTitulo" text="REPORTE DE VALOR DE VENTAS DIARIO " />
-        <Label layoutX="145.0" layoutY="110.0" styleClass="labelInfo" text="FECHA INICIO" />
-        <Label layoutX="532.0" layoutY="110.0" styleClass="labelInfo" text="FECHA FIN" />
+        <Label fx:id="lblTitulo" layoutX="152.0" layoutY="49.0" styleClass="lblTitulo" text="REPORTE DE VENTA DE MOVIMIENTOS CON SUSTANCIAS SUJETAS A FISCALIZACIÓN" />
+        <Label layoutX="145.0" layoutY="110.0" styleClass="lblInfo" text="FECHA INICIO" />
+        <Label layoutX="544.0" layoutY="107.0" styleClass="lblInfo" text="FECHA FIN" />
         <DatePicker fx:id="fechaInicio" layoutX="249.0" layoutY="103.0" styleClass="dateFields" />
         <DatePicker fx:id="fechaFin" layoutX="615.0" layoutY="102.0" styleClass="dateFields" />
-        <ScrollPane layoutX="80.0" layoutY="155.0" prefHeight="436.0" prefWidth="843.0">
+        <ScrollPane layoutX="114.0" layoutY="158.0" prefHeight="434.0" prefWidth="787.0">
             <content>
-                <TableView fx:id="tableFacturas" prefHeight="434.0" prefWidth="838.0" styleClass="infoFacturas">
+                <TableView fx:id="tableFacturas" prefHeight="434.0" prefWidth="784.0" styleClass="infoFacturas">
                     <columns>
-                        <TableColumn fx:id="colFecha" prefWidth="412.8000154495239" styleClass="infoFacturasColumns" text="Fecha" />
-                        <TableColumn fx:id="colValor" prefWidth="411.20001220703125" styleClass="infoFacturasColumns" text="Valor" />
+                        <TableColumn fx:id="colFecha" prefWidth="176.80000019073486" styleClass="infoFacturasColumns" text="PRODUCTO" />
+                        <TableColumn fx:id="colValor" prefWidth="137.59999084472656" styleClass="infoFacturasColumns" text="LOTE" />
+                  <TableColumn prefWidth="157.5999755859375" text="UNIDADES COMPRADAS" />
+                  <TableColumn prefWidth="188.79998779296875" text="UNIDADES VENDIDAS" />
+                  <TableColumn prefWidth="110.4000244140625" text="PRECIO VENTA" />
                     </columns>
                 </TableView>
             </content>
         </ScrollPane>
-        <Label fx:id="lblIcono" layoutX="200.0" layoutY="52.0" text="Label" />
+        <Label fx:id="lblIcono" layoutX="105.0" layoutY="52.0" text="Label" />
         <Label fx:id="lblIconoCalendario1" layoutX="105.0" layoutY="109.0" text="Label" />
         <Label fx:id="lblIconoCalendario2" layoutX="494.0" layoutY="108.0" text="Label" />
-        <Button fx:id="btnIconoBuscar" layoutX="854.0" layoutY="97.0" mnemonicParsing="false" onAction="#buscarFacturas" prefHeight="37.0" prefWidth="43.0" styleClass="btnBuscarCliente" />
-        <Label layoutX="80.0" layoutY="620.0" styleClass="lblTitulo" text="TOTAL DE VENTAS EN EL PERIODO INDICADO" />
-        <TextField fx:id="txtTotalVentas" editable="false" layoutX="564.0" layoutY="612.0" style="-fx-font-size: 18;" />
-        <Label fx:id="lblIconoDolar" layoutX="532.0" layoutY="623.0" text="Label" />
+        <Button fx:id="btnIconoBuscar" layoutX="832.0" layoutY="96.0" mnemonicParsing="false" onAction="#buscarProductos" prefHeight="37.0" prefWidth="43.0" styleClass="btnBuscar" />
+      <Button layoutX="444.0" layoutY="609.0" mnemonicParsing="false" onAction="#generarReporte" styleClass="btnBuscar" text="DESCARGAR REPORTE" />
+      <Label fx:id="lblIconoPdf" layoutX="396.0" layoutY="618.0" text="Label" />
     </children>
 </AnchorPane>
