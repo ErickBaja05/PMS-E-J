@@ -546,6 +546,7 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     void abrirGenerarKardex(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/generarKardex.fxml");
 
     }
 
@@ -626,6 +627,7 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     void abrirRegistrarProducto(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/registrarProducto.fxml");
 
     }
 

@@ -1,4 +1,4 @@
 package com.grupo2.PMSEYJ.inventarioYProductos.controller;
 
-public class verEstructrua {
+public class ajustarStock {
 }
