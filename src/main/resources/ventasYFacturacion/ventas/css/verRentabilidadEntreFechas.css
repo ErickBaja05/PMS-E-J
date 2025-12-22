@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+.labelInfo{
+    -fx-text-fill: black;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Roboto", sans-serif;
+}
+
+.lblTitulo{
+    -fx-text-fill: black;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Roboto", sans-serif;
+}
+
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d0d5dd;
+    -fx-border-radius: 6;
+    -fx-table-cell-border-color: #e0e4ea;
+    -fx-padding: 5;
+}
+.table-view .column-header {
+    -fx-background-color: rgba(7, 73, 23, 0.42);
+}
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+.table-view .table-cell {
+    -fx-text-fill: #1d2939;
+    -fx-font-size: 12px;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.lblIcono{
+    -fx-icon-size: 45;
+}
+
+.lblIconoPersona, .lblIconoCalendario1, .lblIconoCalendario2{
+    -fx-icon-size: 25;
+}
+
+.searchIcon{
+    -fx-icon-color: white;
+    -fx-icon-size: 18;
+}
+
+.btnBuscarCliente{
+    -fx-background-color: #2a9d8f;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
+    -fx-font-size: 14px;
+}
+.btnBuscarCliente:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #21867a;
+}
+
+.dateFields, .txtFields {
+    -fx-text-fill: black;
+    -fx-font-size: 15px;
+    -fx-font-family: "Roboto", sans-serif;
+}
+
+/* === ICONOS DENTRO DE BOTONES === */
+.insideButtonIcon {
+    -fx-icon-color: white;
+    -fx-icon-size: 16;
+
+}
+
+.iconoDolarGrande{
+    -fx-icon-size: 30;
+
+}

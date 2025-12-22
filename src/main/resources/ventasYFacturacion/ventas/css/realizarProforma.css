@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+/* === GENERAL === */
+.root {
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-background-color: #f5f7fa;
+}
+
+/* === TEXTFIELDS Y TEXTAREA === */
+.textArea {
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d0d5dd;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 6 10;
+    -fx-text-fill: #1d2939;
+    -fx-font-size: 13px;
+    -fx-prompt-text-fill: #98a2b3;
+}
+
+/* === BOTONES PRINCIPALES === */
+.boton,.btnBuscarCliente{
+    -fx-background-color: #2a9d8f;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
+    -fx-font-size: 14px;
+}
+.boton:hover, .btnBuscarCliente:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #21867a;
+}
+
+/* === ICONOS DENTRO DE BOTONES === */
+.insideButtonIcon {
+    -fx-icon-color: white;
+    -fx-icon-size: 16;
+
+}
+
+/* === ICONO DE BÚSQUEDA === */
+.searchIcon {
+    -fx-icon-color: white;
+    -fx-icon-size: 18;
+}
+
+
+/* === LABELS DE DATOS DE FACTURA === */
+.lblDatosFactura {
+    -fx-text-fill: black;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+/* === COMBOBOX === */
+.opciones {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d0d5dd;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 4 10;
+    -fx-font-size: 13px;
+    -fx-text-fill: #1d2939;
+}
+.opciones .arrow {
+    -fx-background-color: #2a9d8f;
+}
+
+/* === TABLEVIEW === */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d0d5dd;
+    -fx-border-radius: 6;
+    -fx-table-cell-border-color: #e0e4ea;
+    -fx-padding: 5;
+}
+.table-view .column-header {
+    -fx-background-color: #2a9d8f;
+}
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+.table-view .table-cell {
+    -fx-text-fill: #1d2939;
+    -fx-font-size: 12px;
+}
+
+/* === SCROLLPANE === */
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* === LISTVIEW (Carrito) === */
+.list-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d0d5dd;
+    -fx-border-radius: 6;
+    -fx-padding: 5;
+}
+.list-view .list-cell {
+    -fx-text-fill: #1d2939;
+    -fx-font-size: 13px;
+}
+
+/* === TITULARES Y SECCIONES === */
+.section-title {
+    -fx-text-fill: #2a9d8f;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-cell .button.botonAñadirCarrito {
+    -fx-background-color: #2a9d8f;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.table-view .table-cell .button.botonAñadirCarrito:hover {
+    -fx-background-color: #21867a;
+}
+
+.botonAñadirCarrito .ikonli-font-icon {
+    -fx-fill: white;
+}
+
+.box{
+    -fx-background-color: #e5edeb;
+
+    -fx-background-radius: 15;
+
+}
