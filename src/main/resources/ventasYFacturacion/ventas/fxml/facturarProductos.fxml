@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="686.0" prefWidth="1016.0" stylesheets="@../css/facturarProductos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.ventasYFacturacion.ventas.controller.facturarProductos">
+   <children>
+      <Button fx:id="btnFacturar" layoutX="641.0" layoutY="594.0" mnemonicParsing="false" onAction="#terminarFacturacion" prefHeight="17.0" prefWidth="158.0" styleClass="boton" text="Facturar" />
+      <Pane layoutX="8.0" layoutY="28.0" prefHeight="566.0" prefWidth="482.0">
+         <children>
+            <ScrollPane layoutX="14.0" layoutY="54.0" prefHeight="508.0" prefWidth="463.0">
+                <TableView fx:id="tablaProductos" prefHeight="476.0" prefWidth="1010.0" styleClass="tablaProductos">
+                    <columns>
+                        <!-- Columna con botón -->
+                        <TableColumn fx:id="colAccion" prefWidth="44.79998475313187" resizable="false" styleClass="columnaTablaProductos" text="+" />
+                        <TableColumn fx:id="colCodigo" prefWidth="172.8000144958496" resizable="false" styleClass="columnaTablaProductos" text="Código de barras" />
+                        <TableColumn fx:id="colNombre" prefWidth="266.3999938964844" resizable="false" styleClass="columnaTablaProductos" text="Nombre" />
+                        <TableColumn fx:id="colDescripcion" minWidth="0.0" prefWidth="172.8000144958496" resizable="false" styleClass="columnaTablaProductos" text="Descripcion" />
+                        <TableColumn fx:id="colPrecio" minWidth="0.0" prefWidth="94.4000244140625" resizable="false" styleClass="columnaTablaProductos" text="Precio" />
+                        <TableColumn fx:id="colStock" prefWidth="48.0" resizable="false" styleClass="columnaTablaProductos" text="Stock" />
+                        <TableColumn fx:id="colCodigoAux" prefWidth="172.8000144958496" resizable="false" styleClass="columnaTablaProductos" text="codAuxiliar" />
+                    </columns>
+                </TableView>
+
+            </ScrollPane>
+            <TextField fx:id="txtNombreProducto" layoutX="34.0" layoutY="14.0" prefHeight="25.0" prefWidth="197.0" promptText="BUSCAR PRODUCTO" styleClass="textArea" />
+            <Button fx:id="btnConsultarVademecum" layoutX="261.0" layoutY="12.0" mnemonicParsing="false" onAction="#consultarVademecum" prefHeight="25.0" prefWidth="170.0" styleClass="boton" text="VADEMÉCUM" />
+         </children>
+      </Pane>
+      <Pane layoutX="492.0" layoutY="15.0" prefHeight="263.0" prefWidth="508.0" styleClass="box">
+         <children>
+            <Label layoutX="157.0" layoutY="7.0" styleClass="lblDatosFactura" text="DATOS DEL CLIENTE PARA FACTURA" />
+            <Label layoutX="35.0" layoutY="42.0" styleClass="lblDatosFactura" text="TIPO:" />
+            <Label layoutX="34.0" layoutY="84.0" styleClass="lblDatosFactura" text="NOMBRES:" />
+            <Label layoutX="32.0" layoutY="123.0" styleClass="lblDatosFactura" text="APELLIDOS:" />
+            <ComboBox fx:id="opcionesCliente" layoutX="83.0" layoutY="33.0" prefHeight="33.0" prefWidth="148.0" styleClass="opciones" />
+            <Label layoutX="32.0" layoutY="170.0" styleClass="lblDatosFactura" text="DIRECCIÓN:" />
+            <Label layoutX="47.0" layoutY="214.0" styleClass="lblDatosFactura" text="EMAIL:" />
+            <TextField fx:id="txtIdentificacionCliente" layoutX="239.0" layoutY="35.0" prefHeight="29.0" prefWidth="187.0" promptText="CÉDULA O RUC" styleClass="textArea" />
+            <TextField fx:id="txtNombresCliente" editable="false" layoutX="113.0" layoutY="77.0" prefHeight="29.0" prefWidth="383.0" styleClass="textArea" />
+            <TextField fx:id="txtApellidosCliente" editable="false" layoutX="113.0" layoutY="113.0" prefHeight="29.0" prefWidth="383.0" styleClass="textArea" />
+            <TextField fx:id="txtDireccionCliente" editable="false" layoutX="113.0" layoutY="156.0" prefHeight="39.0" prefWidth="383.0" />
+            <TextField fx:id="txtEmailCliente" editable="false" layoutX="113.0" layoutY="212.0" prefHeight="29.0" prefWidth="383.0" styleClass="textArea" />
+            <Button fx:id="btnBuscarCliente" layoutX="448.0" layoutY="25.0" mnemonicParsing="false" onAction="#consultarCliente" styleClass="btnBuscarCliente" />
+         </children>
+      </Pane>
+      <ScrollPane layoutX="493.0" layoutY="282.0" prefHeight="306.0" prefWidth="498.0">
+        <content>
+            <TableView fx:id="tablaCarrito" editable="true" prefHeight="303.0" prefWidth="546.0" styleClass="tablaCarrito">
+                <columns>
+                    <!-- Nombre del producto -->
+                    <TableColumn fx:id="colNombreProducto" prefWidth="260.79996967315674" resizable="false" styleClass="columnaTablaCarrito" text="Producto" />
+
+                    <!-- Cantidad editable -->
+                    <TableColumn fx:id="colCantidad" prefWidth="60.79998779296875" resizable="false" styleClass="columnaTablaCarrito" text="Cantidad" />
+                  <TableColumn prefWidth="82.4000244140625" text="Precio" />
+
+                    <!-- Subtotal -->
+                    <TableColumn fx:id="colSubtotal" prefWidth="75.2000732421875" resizable="false" styleClass="columnaTablaCarrito" text="Subtotal" />
+
+                    <!-- Botón eliminar -->
+                    <TableColumn fx:id="colEliminar" prefWidth="44.79998475313187" resizable="false" styleClass="columnaTablaCarrito" text="-" />
+                </columns>
+            </TableView>
+
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

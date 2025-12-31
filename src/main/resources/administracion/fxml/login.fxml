@@ -1,12 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.administracion.gestionUsuarios.controller.LoginController">
+<AnchorPane id="fondo" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/loginStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.administracion.gestionUsuarios.controller.LoginController">
    <children>
-      <Pane layoutX="14.0" layoutY="14.0" prefHeight="697.0" prefWidth="250.0" />
-      <Pane layoutX="273.0" layoutY="22.0" prefHeight="682.0" prefWidth="994.0" />
+      <ImageView fitHeight="184.0" fitWidth="483.0" layoutX="140.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/logoFarmacia.jpeg" />
+         </image>
+      </ImageView>
+      <Line id="separador" endX="-130.99517822265625" endY="266.5999755859375" layoutX="894.0" layoutY="381.0" startX="-130.99517822265625" startY="-216.60000610351562">
+         <stroke>
+            <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="0.6363636512647977" startY="0.30303030303030304">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.14937448501586914" green="0.12479999661445618" blue="0.1599999964237213" opacity="0.6600000262260437" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.15555556118488312" green="0.2911890745162964" blue="0.7368420958518982" opacity="0.6399999856948853" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke>
+         <rotationAxis>
+            <Point3D y="1.0" />
+         </rotationAxis>
+      </Line>
+      <TextField fx:id="textFieldUsername" layoutX="840.0" layoutY="235.0" prefHeight="88.0" prefWidth="350.0" promptText="Ingrese su usuario" styleClass="textField" />
+      <PasswordField fx:id="textFieldPassword" layoutX="840.0" layoutY="362.0" prefHeight="88.0" prefWidth="350.0" promptText="Ingrese su contraseña" styleClass="textField" />
+      <Button id="botonLogin" fx:id="botonLogin" layoutX="840.0" layoutY="491.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="58.0" prefWidth="350.0" text="INICIAR SESIÓN" />
+      <Label layoutX="350.0" layoutY="84.0" prefHeight="44.0" prefWidth="634.0" styleClass="labels" text="SISTEMA DE FACTURACIÓN PMS-E&amp;J" textAlignment="CENTER" textFill="#ececec">
+         <font>
+            <Font name="Garamond" size="36.0" />
+         </font>
+      </Label>
+      <Button id="btnPassOlvi" fx:id="btnPassOlvi" layoutX="921.0" layoutY="577.0" mnemonicParsing="false" onAction="#recuperarContraseña" styleClass="labels" text="¿Olvidó su contraseña?" />
    </children>
 </AnchorPane>
