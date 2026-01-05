@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.boton{
+    -fx-background-color: #2a9d8f;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
+    -fx-font-size: 14px;
+}
+
+.boton:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #21867a;
+}
+
+.botonEnviarProforma{
+    -fx-background-color: #bd9936;
+}
+
+.botonEnviarProforma:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #ac8317;
+}
+
+.lblInformacion{
+    -fx-font-size: 13px;
+    -fx-fon-family: 'Roboto', sans-serif;
+    -fx-font-weight: bold;
+}
+
+.cajaTotal{
+    -fx-background-color: #2ec8b6;
+    -fx-text-fill: white;
+
+}
+.txtTotal{
+    -fx-font-weight: bold;
+    -fx-font-size: 16;
+}
+
+.iconoDolarGrande{
+    -fx-icon-size: 30;
+
+}
+
+.iconoDolarPequeño{
+    -fx-icon-size: 10;
+}
+
+.iconos{
+    -fx-icon-size: 45;
+}

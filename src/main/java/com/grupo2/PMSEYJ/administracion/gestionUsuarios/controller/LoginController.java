@@ -37,14 +37,28 @@ public class LoginController {
             alert.showAndWait();
 
         }else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Login exitoso");
-            alert.setHeaderText("Ingreso exitoso al sistema");
-            alert.setContentText("Bienvenido al Sistema PMS-E&J");
-            alert.showAndWait();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/administracion/fxml/ventanaPrincipal.fxml"));
-            Parent root = loader.load();
-            NavigationUtil.changeScene(event,root);
+
+            if(textFieldUsername.getText().equals("audit") && textFieldPassword.getText().equals("12345")){
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Login para auditoria");
+                alert.setHeaderText("Ingreso al módulo de auditoria");
+                alert.setContentText("Bienvenido al Sistema PMS-E&J");
+                alert.showAndWait();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/auditoria/fxml/ventanaDeAuditoria.fxml"));
+                Parent root = loader.load();
+                NavigationUtil.changeScene(event,root);
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Login exitoso");
+                alert.setHeaderText("Ingreso exitoso al sistema");
+                alert.setContentText("Bienvenido al Sistema PMS-E&J");
+                alert.showAndWait();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/administracion/fxml/ventanaPrincipal.fxml"));
+                Parent root = loader.load();
+                NavigationUtil.changeScene(event,root);
+            }
+
         }
 
     }

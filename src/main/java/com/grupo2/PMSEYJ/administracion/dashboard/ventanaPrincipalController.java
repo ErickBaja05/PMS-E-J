@@ -43,7 +43,10 @@ public class ventanaPrincipalController implements Initializable {
     private Button btnCliente;
 
     @FXML
-    private Button btnConsultarCliente;
+    private Button btnConsultarClienteJ;
+
+    @FXML
+    private Button btnConsultarClienteN;
 
     @FXML
     private Button btnConsultarFechaVencimiento;
@@ -94,19 +97,19 @@ public class ventanaPrincipalController implements Initializable {
     private Button btnMetasIncentivos;
 
     @FXML
-    private Button btnModificarPedido;
-
-    @FXML
     private Button btnModificarProducto;
-
-    @FXML
-    private Button btnMovimientosProductos;
 
     @FXML
     private Button btnParametros;
 
     @FXML
     private Button btnPedidos;
+
+    @FXML
+    private Button btnProductosBajaRotacion;
+
+    @FXML
+    private Button btnProductosProximosCaducar;
 
     @FXML
     private Button btnProgresoIncentivos;
@@ -124,7 +127,10 @@ public class ventanaPrincipalController implements Initializable {
     private Button btnRealizarProforma;
 
     @FXML
-    private Button btnRegistrarCliente;
+    private Button btnRegistrarClienteJ;
+
+    @FXML
+    private Button btnRegistrarClienteN;
 
     @FXML
     private Button btnRegistrarProducto;
@@ -137,6 +143,9 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     private Button btnReporteARCSA;
+
+    @FXML
+    private Button btnReportePsicotropicos;
 
     @FXML
     private Button btnUsuarios;
@@ -161,6 +170,9 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     private VBox clientesSubMenu;
+
+    @FXML
+    private Pane contenedorPrincipal;
 
     @FXML
     private VBox facturacionBox;
@@ -203,9 +215,6 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     private VBox proveedoresSubMenu;
-
-    @FXML
-    private Pane contenedorPrincipal;
 
     @FXML
     void logOut(ActionEvent event) throws IOException {
@@ -329,6 +338,7 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     void realizarProforma(ActionEvent event) {
+        cargarContenido("/ventasYFacturacion/ventas/fxml/realizarProforma.fxml");
 
     }
 
@@ -340,26 +350,30 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     void verProgresoIncentivos(ActionEvent event) {
+        cargarContenido("/ventasYFacturacion/ventas/fxml/verProgresoIncentivosYMetas.fxml");
 
     }
 
     @FXML
     void verPromocionesExistentes(ActionEvent event) {
-
+        cargarContenido("/ventasYFacturacion/ventas/fxml/verPromocionesVigentes.fxml");
     }
 
     @FXML
     void verReporteARCSA(ActionEvent event) {
+        cargarContenido("/ventasYFacturacion/ventas/fxml/generarReporteARCSA.fxml");
 
     }
 
     @FXML
     void verReporteDeVentas(ActionEvent event) {
+        cargarContenido("/ventasYFacturacion/ventas/fxml/verVentasEntreFechas.fxml");
 
     }
 
     @FXML
     void verReporteRentabilidad(ActionEvent event) {
+        cargarContenido("/ventasYFacturacion/ventas/fxml/verRentabilidadEntreFechas.fxml");
 
     }
 
@@ -458,6 +472,7 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     void abrirAjustarStock(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/ajustarStock.fxml");
 
     }
 
@@ -474,7 +489,18 @@ public class ventanaPrincipalController implements Initializable {
     }
 
     @FXML
-    void abrirConsultarMovimientos(ActionEvent event) {
+    void abrirProductosBajaRotacion(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/productosBajaRotacion.fxml");
+
+    }
+    @FXML
+    void abrirProductosProximosCaducar(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/productosProximosCaducar.fxml");
+
+    }
+    @FXML
+    void abrirReportePsicotropicos(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/reporteMedicamentosPsicotropicos.fxml");
 
     }
 
@@ -521,6 +547,7 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     void abrirGenerarKardex(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/generarKardex.fxml");
 
     }
 
@@ -532,6 +559,7 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     void abrirIngresarFactura(ActionEvent event) {
+        cargarContenido("/proveedores/fxml/ingresarFactura.fxml");
 
     }
 
@@ -589,12 +617,18 @@ public class ventanaPrincipalController implements Initializable {
     }
 
     @FXML
-    void abrirRegistrarCliente(ActionEvent event) {
+    void abrirRegistrarClienteN(ActionEvent event) {
+        cargarContenido("/clientes/fxml/registrarClienteN.fxml");
+    }
 
+    @FXML
+    void abrirRegistrarClienteJ(ActionEvent event) {
+        cargarContenido("/clientes/fxml/registrarClienteJ.fxml");
     }
 
     @FXML
     void abrirRegistrarProducto(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/registrarProducto.fxml");
 
     }
 

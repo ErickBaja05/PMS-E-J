@@ -16,6 +16,7 @@ public class Producto {
         this.tipo = new SimpleStringProperty(tipo);
         this.precio = new SimpleDoubleProperty(precio);
         this.stock = new SimpleIntegerProperty(stock);
+
     }
 
     public StringProperty codigoProperty() { return codigo; }

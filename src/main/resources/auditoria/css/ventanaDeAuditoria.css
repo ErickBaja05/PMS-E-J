@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.boton{
+    -fx-background-color: #2a9d8f;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
+
+}
+.boton:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #21867a;
+}
+
+.lblTitulo{
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+
+.lblSubtitulos{
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
