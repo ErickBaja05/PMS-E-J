@@ -524,7 +524,7 @@ public class ventanaPrincipalController implements Initializable {
 
     @FXML
     void abrirCotejarFactura(ActionEvent event) {
-        cargarContenido("/proveedores/fxml/cotejarFactura.fxml");
+        cargarContenido("/proveedores/fxml/cotejarFactura2.fxml");
 
     }
 

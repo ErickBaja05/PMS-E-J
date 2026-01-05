@@ -15,9 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+public class cotejarFacturaController {
 
     // Campos de texto y Botones
     @FXML private TextField txtNumFactura, txtNombre, txtCantidad;
@@ -62,30 +60,7 @@ import java.util.List;
     @FXML
     void buscarFactura(ActionEvent event) {
         String numFactura = txtNumFactura.getText().trim();
-public class cotejarFacturaController {
 
-    @FXML private TextField txtNumFactura, txtNombre, txtCantidad;
-    @FXML private TableView<ProductoDetalle> tvDetalleFactura;
-    @FXML private TableColumn<ProductoDetalle, String> colProducto;
-    @FXML private TableColumn<ProductoDetalle, Integer> colCantidad;
-
-    // Lista de la tabla (lo que el usuario ingresa)
-    private ObservableList<ProductoDetalle> listaCotejo = FXCollections.observableArrayList();
-
-    // Lista simulada de la Base de Datos (lo que la factura dice que debe venir)
-    private List<ProductoDetalle> facturaOriginal = new ArrayList<>();
-    private String estadoFactura = "";
-
-    @FXML
-    public void initialize() {
-        colProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-        tvDetalleFactura.setItems(listaCotejo);
-    }
-
-    @FXML
-    void buscarFactura(ActionEvent event) {
-        String numFactura = txtNumFactura.getText().trim();
         if (numFactura.isEmpty()) {
             mostrarMensaje("Error", "Ingrese un número de factura.", Alert.AlertType.WARNING);
             return;
@@ -95,9 +70,6 @@ public class cotejarFacturaController {
         if (numFactura.equals("F-001")) {
             estadoFactura = "NO COTEJADA";
 
-            estadoFactura = "NO COTEJADA"; // Simulación de atributo
-
-            // Validar Estado
             if (!estadoFactura.equals("NO COTEJADA")) {
                 mostrarMensaje("Aviso", "La factura ya fue cotejada previamente.", Alert.AlertType.WARNING);
                 return;
@@ -150,15 +122,6 @@ public class cotejarFacturaController {
         btnAgregarItem.setText("AGREGAR");
         btnAgregarItem.setStyle("-fx-background-color: #3498db; -fx-text-fill: white;"); // Azul original
         btnCancelarEdicion.setDisable(true);
-            // Cargar datos originales que se supone deben venir en la factura
-            facturaOriginal.clear();
-            facturaOriginal.add(new ProductoDetalle("Paracetamol", 10));
-            facturaOriginal.add(new ProductoDetalle("Ibuprofeno", 5));
-
-            mostrarMensaje("Éxito", "Factura cargada. Proceda a ingresar la mercancía física.", Alert.AlertType.INFORMATION);
-        } else {
-            mostrarMensaje("Error", "Factura no encontrada.", Alert.AlertType.ERROR);
-        }
     }
 
     @FXML
@@ -198,11 +161,6 @@ public class cotejarFacturaController {
                 txtNombre.requestFocus();
             }
 
-            listaCotejo.add(new ProductoDetalle(nombre, cantidad));
-
-            txtNombre.clear();
-            txtCantidad.clear();
-            txtNombre.requestFocus();
         } catch (NumberFormatException e) {
             mostrarMensaje("Error", "Cantidad inválida.", Alert.AlertType.ERROR);
         }
@@ -218,12 +176,10 @@ public class cotejarFacturaController {
         boolean coincidenTodas = compararListas();
 
         if (coincidenTodas) {
-            // ESCENARIO BÁSICO
             estadoFactura = "COTEJADA";
             mostrarMensaje("Resultado", "La mercancía recibida coincide con la factura.", Alert.AlertType.INFORMATION);
             mostrarMensaje("Éxito", "Cotejo de factura exitoso.", Alert.AlertType.INFORMATION);
         } else {
-            // ESCENARIO ALTERNATIVO (Inconsistencias)
             estadoFactura = "COTEJADO CON DETALLE";
             mostrarMensaje("Discrepancia", "La cantidad comprada y la cantidad recibida no coinciden.", Alert.AlertType.WARNING);
             mostrarMensaje("Éxito", "Cotejo de factura con sobrantes o excedentes.", Alert.AlertType.INFORMATION);
@@ -292,48 +248,5 @@ public class cotejarFacturaController {
 
         public int getCantidad() { return cantidad; }
         public void setCantidad(int cantidad) { this.cantidad = cantidad; } // Necesario set para editar
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/proveedores/fxml/resultadoCotejo.fxml"));
-        Parent root = loader.load();
-        NavigationUtil.openNewWindow(event,root,"Resultado Cotejo");
-        limpiarTodo();
-    }
-
-    private boolean compararListas() {
-        if (listaCotejo.size() != facturaOriginal.size()) return false;
-
-        for (int i = 0; i < facturaOriginal.size(); i++) {
-            ProductoDetalle original = facturaOriginal.get(i);
-            // Buscamos si el producto ingresado coincide en nombre y cantidad
-            boolean encontrado = listaCotejo.stream().anyMatch(p ->
-                    p.getNombre().equalsIgnoreCase(original.getNombre()) &&
-                            p.getCantidad() == original.getCantidad()
-            );
-
-            if (!encontrado) return false;
-        }
-        return true;
-    }
-
-    private void mostrarMensaje(String titulo, String msj, Alert.AlertType tipo) {
-        Alert alert = new Alert(tipo);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(msj);
-        alert.showAndWait();
-    }
-
-    private void limpiarTodo() {
-        txtNumFactura.clear();
-        listaCotejo.clear();
-        facturaOriginal.clear();
-        estadoFactura = "";
-    }
-
-    public static class ProductoDetalle {
-        private String nombre;
-        private int cantidad;
-        public ProductoDetalle(String nombre, int cantidad) { this.nombre = nombre; this.cantidad = cantidad; }
-        public String getNombre() { return nombre; }
-        public int getCantidad() { return cantidad; }
     }
 }
