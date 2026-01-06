@@ -124,6 +124,9 @@ public class ventanaPrincipalController implements Initializable {
     private Button btnProveedores;
 
     @FXML
+    private Button btnAdministracion;
+
+    @FXML
     private Button btnRealizarProforma;
 
     @FXML
@@ -160,7 +163,7 @@ public class ventanaPrincipalController implements Initializable {
     private Button btngenerarReporteRentabilidad;
 
     @FXML
-    private VBox cajaBox;
+    private VBox cajaBoxSubMenu;
 
     @FXML
     private VBox cajaSubMenu;
@@ -228,20 +231,99 @@ public class ventanaPrincipalController implements Initializable {
         NavigationUtil.changeScene(event,root);
 
     }
+    @FXML
+    void mostrarClientes(ActionEvent event) {
+        boolean abierto = clientesSubMenu.isVisible();
+        ocultarTodos();
+        if(!abierto){
+            clientesSubMenu.setVisible(true);
+            clientesSubMenu.setManaged(true);
+        }
+
+    }
+
 
     @FXML
-    void mostrarFacturacion(MouseEvent event) {
-        ocultarTodos(event);
-        facturacionSubMenu.setVisible(true);
-        facturacionSubMenu.setManaged(true);
+    void mostrarProveedores(ActionEvent event) {
+        boolean abierto = proveedoresSubMenu.isVisible();
+        ocultarTodos();
+        if(!abierto){
+            proveedoresSubMenu.setVisible(true);
+            proveedoresSubMenu.setManaged(true);
+        }
+    }
+    @FXML
+    void mostrarInventario(ActionEvent event) {
+        boolean abierto = inventarioSubMenu.isVisible();
+        ocultarTodos();
+        if(!abierto){
+            inventarioSubMenu.setVisible(true);
+            inventarioSubMenu.setManaged(true);
+        }
+
+    }
+    @FXML
+    void mostrarFacturacion(ActionEvent event) {
+        boolean abierto = facturacionSubMenu.isVisible();
+        ocultarTodos();
+        if (!abierto) {
+            facturacionSubMenu.setVisible(true);
+            facturacionSubMenu.setManaged(true);
+        }
+
     }
 
     @FXML
-    void ocultarTodos(MouseEvent event) {
+    void mostrarCaja(ActionEvent event) {
+        boolean abierto = cajaSubMenu.isVisible();
+        ocultarCaja();
+        if (!abierto) {
+            cajaSubMenu.setVisible(true);
+            cajaSubMenu.setManaged(true);
+        }
+
+    }
+    @FXML
+    void mostrarAdministracion(ActionEvent event) {
+        boolean abierto = gestionUsuariosBox.isVisible() && gestionParametrosBox.isVisible();
+        ocultarTodos();
+        if (!abierto) {
+            gestionUsuariosBox.setVisible(true);
+            gestionUsuariosBox.setManaged(true);
+            gestionParametrosBox.setVisible(true);
+            gestionParametrosBox.setManaged(true);
+        }
+
+    }
+    @FXML
+    void mostrarGestionUsuarios(ActionEvent event) {
+        boolean abierto = gestionUsuariosSubMenu.isVisible();
+        ocultarGestionUsuarios();
+        if (!abierto) {
+            gestionUsuariosSubMenu.setVisible(true);
+            gestionUsuariosSubMenu.setManaged(true);
+        }
+
+    }
+
+    @FXML
+    void mostrarGestionParametros(ActionEvent event) {
+        boolean abierto = gestiosParametrosSubMenu.isVisible();
+        ocultarGestionParametros();
+        if (!abierto) {
+            gestiosParametrosSubMenu.setVisible(true);
+            gestiosParametrosSubMenu.setManaged(true);
+        }
+
+    }
+
+
+
+
+
+    void ocultarTodos() {
         facturacionSubMenu.setVisible(false);
         facturacionSubMenu.setManaged(false);
-        pedidosSubMenu.setVisible(false);
-        pedidosSubMenu.setManaged(false);
         cajaSubMenu.setVisible(false);
         cajaSubMenu.setManaged(false);
         clientesSubMenu.setVisible(false);
@@ -254,67 +336,30 @@ public class ventanaPrincipalController implements Initializable {
         gestionUsuariosSubMenu.setManaged(false);
         gestiosParametrosSubMenu.setVisible(false);
         gestiosParametrosSubMenu.setManaged(false);
+        gestionParametrosBox.setVisible(false);
+        gestionParametrosBox.setManaged(false);
+        gestionUsuariosBox.setVisible(false);
+        gestionUsuariosBox.setManaged(false);
     }
 
-    @FXML
-    void ocultarPedidos(MouseEvent event) {
-
+    void ocultarCaja(){
+        cajaSubMenu.setVisible(false);
+        cajaSubMenu.setManaged(false);
     }
 
-
-
-
-
-    @FXML
-    void mostrarPedidos(MouseEvent event) {
-
-        pedidosSubMenu.setVisible(true);
-        pedidosSubMenu.setManaged(true);
+    void ocultarGestionParametros(){
+        gestiosParametrosSubMenu.setVisible(false);
+        gestiosParametrosSubMenu.setManaged(false);
     }
 
-    @FXML
-    void mostrarProveedores(MouseEvent event) {
-        ocultarTodos(event);
-        proveedoresSubMenu.setVisible(true);
-        proveedoresSubMenu.setManaged(true);
-    }
-
-    @FXML
-    void mostrarCaja(MouseEvent event) {
-        ocultarTodos(event);
-        cajaSubMenu.setVisible(true);
-        cajaSubMenu.setManaged(true);
-    }
-
-    @FXML
-    void mostrarClientes(MouseEvent event) {
-        ocultarTodos(event);
-        clientesSubMenu.setVisible(true);
-        clientesSubMenu.setManaged(true);
+    void ocultarGestionUsuarios(){
+        gestionUsuariosSubMenu.setVisible(false);
+        gestionUsuariosSubMenu.setManaged(false);
     }
 
 
 
-    @FXML
-    void mostrarGestionParametros(MouseEvent event) {
-        ocultarTodos(event);
-        gestiosParametrosSubMenu.setVisible(true);
-        gestiosParametrosSubMenu.setManaged(true);
-    }
 
-    @FXML
-    void mostrarGestionUsuarios(MouseEvent event) {
-        ocultarTodos(event);
-        gestionUsuariosSubMenu.setVisible(true);
-        gestionUsuariosSubMenu.setManaged(true);
-    }
-
-    @FXML
-    void mostrarInventario(MouseEvent event) {
-        ocultarTodos(event);
-        inventarioSubMenu.setVisible(true);
-        inventarioSubMenu.setManaged(true);
-    }
 
     public void cargarContenido(String rutaFXML) {
         try {
@@ -401,6 +446,8 @@ public class ventanaPrincipalController implements Initializable {
         icon9.getStyleClass().add("buttonsIcon");
         FontIcon icon10 = new FontIcon("fa-user-md");
         icon10.getStyleClass().add("userMdIcon");
+        FontIcon icon11 = new FontIcon("fa-briefcase");
+        icon11.getStyleClass().add("buttonsIcon");
 
         btnLogOut.setGraphic(icon);
         btnFacturacion.setGraphic(icon3);
@@ -408,12 +455,14 @@ public class ventanaPrincipalController implements Initializable {
         btnCliente.setGraphic(icon5);
         btnInventario.setGraphic(icon6);
         btnProveedores.setGraphic(icon7);
+
         btnUsuarios.setGraphic(icon8);
         btnParametros.setGraphic(icon9);
         lblLogoste.setGraphic(icon2);
         lblLogoste.setText(null);
         lblLogoMed.setGraphic(icon10);
         lblLogoMed.setText(null);
+        btnAdministracion.setGraphic(icon11);
 
 
         facturacionSubMenu.setOnMouseEntered(e -> {
@@ -466,6 +515,22 @@ public class ventanaPrincipalController implements Initializable {
         gestionUsuariosSubMenu.setOnMouseExited(e -> {
             btnUsuarios.getStyleClass().remove("navBtn-activo");
         });
+
+        gestionUsuariosBox.setOnMouseEntered(e -> {
+            btnAdministracion.getStyleClass().add("navBtn-activo");
+        });
+        gestionUsuariosBox.setOnMouseExited(e -> {
+            btnAdministracion.getStyleClass().remove("navBtn-activo");
+        });
+
+        gestionParametrosBox.setOnMouseEntered(e -> {
+            btnAdministracion.getStyleClass().add("navBtn-activo");
+        });
+        gestionParametrosBox.setOnMouseExited(e -> {
+            btnAdministracion.getStyleClass().remove("navBtn-activo");
+        });
+
+
 
 
     }
