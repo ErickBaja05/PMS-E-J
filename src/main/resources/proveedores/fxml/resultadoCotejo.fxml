@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="682.0" prefWidth="1016.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.proveedores.controller.resultadoCotejoController">
+<AnchorPane prefHeight="682.0" prefWidth="1016.0" stylesheets="@../css/resultadoCotejoStyles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.proveedores.controller.resultadoCotejoController">
     <children>
-        <VBox layoutX="30.0" layoutY="30.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+        <VBox layoutX="30.0" layoutY="30.0" spacing="20.0" styleClass="main-card" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
             <padding>
                 <Insets bottom="25.0" left="30.0" right="30.0" top="25.0" />
             </padding>
@@ -28,19 +28,19 @@
                         </Label>
                         <HBox spacing="20.0">
                             <children>
-                                <Label fx:id="lblFacturaNro" text="FACTURA:" textFill="#555555">
+                                <Label fx:id="lblFacturaNro" styleClass="label-titulo-dato" text="# DE FACTURA:">
                                     <font>
                                         <Font name="System Bold" size="16.0" />
                                     </font>
                                 </Label>
-                        <TextField editable="false" prefHeight="26.0" prefWidth="273.0" />
+                                <TextField editable="false" prefHeight="26.0" prefWidth="224.0" />
                                 <Separator orientation="VERTICAL" />
-                                <Label fx:id="lblEstadoFinal" text="ESTADO: " textFill="#5e5852">
+                                <Label fx:id="lblEstadoFinal" styleClass="label-titulo-estado" text="ESTADO DE FACTURA: ">
                                     <font>
                                         <Font name="System Bold" size="16.0" />
                                     </font>
                                 </Label>
-                        <TextField editable="false" prefHeight="26.0" prefWidth="270.0" />
+                                <TextField editable="false" prefHeight="26.0" prefWidth="270.0" />
                             </children>
                         </HBox>
                     </children>
@@ -50,7 +50,7 @@
 
                 <TableView fx:id="tvResultados" prefHeight="400.0" prefWidth="894.0" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colProducto" prefWidth="300.0" text="Producto" />
+                        <TableColumn fx:id="colProducto" prefWidth="300.0" text="Nombre del Producto" />
                         <TableColumn fx:id="colEsperado" prefWidth="150.0" text="Cant. Facturada" />
                         <TableColumn fx:id="colRecibido" prefWidth="150.0" text="Cant. Recibida" />
                         <TableColumn fx:id="colDiferencia" prefWidth="150.0" text="Diferencia" />
@@ -65,15 +65,15 @@
                     <children>
                         <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                             <children>
-                                <Label text="* Diferencia positiva indica excedente, negativa indica faltante." textFill="#7f8c8d">
+                                <Label styleClass="label-hint" text="* Diferencia positiva indica excedente, negativa indica faltante.">
                                     <font>
                                         <Font name="System Italic" size="12.0" />
                                     </font>
                                 </Label>
                             </children>
                         </VBox>
-                        <Button fx:id="btnImprimir" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #34495e; -fx-text-fill: white;" text="IMPRIMIR REPORTE" />
-                        <Button fx:id="btnCerrar" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" text="CERRAR" />
+                        <Button fx:id="btnImprimir" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="btn-imprimir" text="IMPRIMIR REPORTE" />
+                        <Button fx:id="btnCerrar" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="40.0" prefWidth="150.0" styleClass="btn-cerrar" text="CERRAR" />
                     </children>
                 </HBox>
             </children>
