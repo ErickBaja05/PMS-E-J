@@ -10,21 +10,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="682.0" prefWidth="1016.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.proveedores.controller.definirContactoProveedoresController">
+<AnchorPane prefHeight="682.0" prefWidth="1016.0" stylesheets="@../css/definirContactoStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.proveedores.controller.definirContactoProveedoresController">
     <children>
-        <VBox layoutX="50.0" layoutY="50.0" spacing="25.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+        <VBox layoutX="50.0" layoutY="50.0" spacing="25.0" styleClass="card-form" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
             <padding>
                 <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
             </padding>
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label text="Definir Contacto de Proveedor">
+                        <Label styleClass="label-titulo" text="Definir Contacto de Proveedor">
                             <font>
                                 <Font name="System Bold" size="28.0" />
                             </font>
                         </Label>
-                        <Label text="Ingrese la información del nuevo proveedor para su registro en el sistema." textFill="#707070">
+                        <Label styleClass="label-descripcion" text="Ingrese la información del nuevo proveedor para su registro en el sistema.">
                             <font>
                                 <Font size="15.0" />
                             </font>
@@ -36,7 +36,7 @@
                     <children>
                         <VBox spacing="5.0">
                             <children>
-                                <Label text="Nombre del Proveedor">
+                                <Label styleClass="label-campo" text="Nombre del Proveedor">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
@@ -47,7 +47,7 @@
 
                         <VBox spacing="5.0">
                             <children>
-                                <Label text="Número de Teléfono">
+                                <Label styleClass="label-campo" text="Número de Teléfono">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
@@ -58,7 +58,7 @@
 
                         <VBox spacing="5.0">
                             <children>
-                                <Label text="Correo Electrónico">
+                                <Label styleClass="label-campo" text="Correo Electrónico">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
@@ -71,23 +71,17 @@
 
                 <HBox alignment="CENTER_LEFT" spacing="20.0">
                     <children>
-                        <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#registrarProveedor" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white;" text="REGISTRAR PROVEEDOR">
+                        <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#registrarProveedor" prefHeight="45.0" prefWidth="200.0" styleClass="btn-registrar" text="REGISTRAR PROVEEDOR">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
                         </Button>
-                        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelarOperacion" prefHeight="45.0" prefWidth="150.0" text="CANCELAR">
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
+                        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelarOperacion" prefHeight="45.0" prefWidth="150.0" styleClass="btn-cancelar" text="CANCELAR">
                         </Button>
                     </children>
                 </HBox>
 
-                <Label fx:id="lblMensaje" wrapText="true">
+                <Label fx:id="lblMensaje" styleClass="label-mensaje" wrapText="true">
                     <font>
                         <Font name="System Italic" size="14.0" />
                     </font>
