@@ -1,37 +1,155 @@
 package com.grupo2.PMSEYJ.administracion.gestionUsuarios.controller;
 
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.model.Usuario;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import java.util.Optional;
 
-public class eliminarUserController {
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.ResourceBundle;
 
+public class eliminarUserController implements Initializable {
+
+    // =====================
+    // CONTROLES FXML
+    // =====================
     @FXML private ComboBox<String> cmbPerfil;
     @FXML private TextField txtBuscarUsuario;
-    @FXML private TableView<Object> tablaUsuarios; // Cambiar Object por tu modelo de Usuario
+    @FXML private Button btnBuscar;
+    @FXML private Button btnEliminar;
 
-    /**
-     * Lanza una ventana de confirmación antes de proceder.
-     */
-    private boolean mostrarConfirmacion(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmar Acción");
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
+    @FXML private TableView<Usuario> tablaUsuarios;
+    @FXML private TableColumn<Usuario, String> colUsuario;
+    @FXML private TableColumn<Usuario, String> colCorreo;
+    @FXML private TableColumn<Usuario, String> colRol;
 
-        ButtonType btnAceptar = new ButtonType("Aceptar");
-        ButtonType btnCancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().setAll(btnAceptar, btnCancelar);
+    // =====================
+    // DATOS
+    // =====================
+    private final ObservableList<Usuario> usuarios =
+            FXCollections.observableArrayList();
 
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.isPresent() && result.get() == btnAceptar;
+    // =====================
+    // INITIALIZE
+    // =====================
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        colUsuario.setCellValueFactory(cell -> cell.getValue().nombreProperty());
+        colCorreo.setCellValueFactory(cell -> cell.getValue().correoProperty());
+        colRol.setCellValueFactory(cell -> cell.getValue().perfilProperty());
+
+        tablaUsuarios.setItems(usuarios);
+        btnEliminar.setDisable(true);
     }
 
-    /**
-     * Lanza una ventana informativa para éxito o error.
-     */
-    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
+    // =====================
+    // BUSCAR USUARIO
+    // =====================
+    @FXML
+    void buscarUsuario(ActionEvent event) {
+
+        usuarios.clear();
+        btnEliminar.setDisable(true);
+
+        String perfilSeleccionado = cmbPerfil.getValue();
+        String nombreUsuario = txtBuscarUsuario.getText().trim();
+
+        if (perfilSeleccionado == null) {
+            mostrarAlerta(
+                    "Error",
+                    "Debe seleccionar un perfil",
+                    Alert.AlertType.WARNING
+            );
+            return;
+        }
+
+        if (nombreUsuario.length() < 3) {
+            mostrarAlerta(
+                    "Error",
+                    "Debe ingresar al menos 3 caracteres",
+                    Alert.AlertType.WARNING
+            );
+            return;
+        }
+
+        Usuario usuario = buscarUsuarioEnDB(nombreUsuario, perfilSeleccionado);
+
+        if (usuario == null) {
+            mostrarAlerta(
+                    "Error",
+                    "El usuario no existe",
+                    Alert.AlertType.ERROR
+            );
+            return;
+        }
+
+        usuarios.add(usuario);
+        btnEliminar.setDisable(false);
+    }
+
+    // =====================
+    // ELIMINAR USUARIO
+    // =====================
+    @FXML
+    void eliminarUsuario(ActionEvent event) {
+
+        Usuario seleccionado =
+                tablaUsuarios.getSelectionModel().getSelectedItem();
+
+        if (seleccionado == null) {
+            mostrarAlerta(
+                    "Error",
+                    "Debe seleccionar un usuario",
+                    Alert.AlertType.WARNING
+            );
+            return;
+        }
+
+        String perfil = seleccionado.getPerfil();
+        String nombre = seleccionado.getNombre();
+
+        eliminarUsuarioEnDB(seleccionado);
+
+        if (perfil.equals("ADMINISTRADOR")) {
+            mostrarAlerta(
+                    "Éxito",
+                    "Usuario administrador eliminado exitosamente",
+                    Alert.AlertType.INFORMATION
+            );
+            registrarAuditoria(
+                    "Eliminación de usuario Administrador",
+                    nombre
+            );
+        } else if (perfil.equals("AUXILIAR")) {
+            mostrarAlerta(
+                    "Éxito",
+                    "Usuario auxiliar eliminado exitosamente",
+                    Alert.AlertType.INFORMATION
+            );
+            registrarAuditoria(
+                    "Eliminación de usuario Auxiliar",
+                    nombre
+            );
+        }
+
+        usuarios.clear();
+        btnEliminar.setDisable(true);
+        txtBuscarUsuario.clear();
+        cmbPerfil.setValue(null);
+    }
+
+    // =====================
+    // ALERTAS
+    // =====================
+    private void mostrarAlerta(String titulo,
+                               String mensaje,
+                               Alert.AlertType tipo) {
+
         Alert alert = new Alert(tipo);
         alert.setTitle(titulo);
         alert.setHeaderText(null);
@@ -39,63 +157,48 @@ public class eliminarUserController {
         alert.showAndWait();
     }
 
-    @FXML
-    void buscarUsuario(ActionEvent event) {
-        String perfil = cmbPerfil.getValue();
-        String nombre = txtBuscarUsuario.getText().trim();
+    // =====================
+    // SIMULACIÓN BD
+    // =====================
+    private Usuario buscarUsuarioEnDB(String nombre, String perfil) {
 
-        // Validación simple de campos vacíos
-        if (perfil == null || nombre.isEmpty()) {
-            mostrarAlerta("Campos Requeridos", "Debe seleccionar un perfil e ingresar un nombre para buscar.", Alert.AlertType.WARNING);
-            return;
+        if (perfil.equals("Administrador")
+                && nombre.equalsIgnoreCase("Carlos")) {
+
+            return new Usuario(
+                    "Carlos",
+                    "carlos@farmacia.com",
+                    "ADMINISTRADOR"
+            );
         }
 
-        // Simulación de búsqueda exitosa
-        //mostrarAlerta("Búsqueda", "Búsqueda finalizada para el perfil " + perfil, Alert.AlertType.INFORMATION);
+        if (perfil.equals("Auxiliar")
+                && nombre.equalsIgnoreCase("Ana")) {
+
+            return new Usuario(
+                    "Ana",
+                    "ana@farmacia.com",
+                    "AUXILIAR"
+            );
+        }
+
+        return null;
     }
 
-    @FXML
-    void eliminarUsuario(ActionEvent event) {
-        // Validación: Debe seleccionar un usuario de la tabla primero
-        Object seleccionado = tablaUsuarios.getSelectionModel().getSelectedItem();
-        String perfilSeleccionado = cmbPerfil.getValue();
-
-        if (seleccionado == null) {
-            mostrarAlerta("Selección Requerida", "Debe seleccionar un usuario de la tabla para eliminar.", Alert.AlertType.WARNING);
-            return;
-        }
-
-        String nombreUsuario = txtBuscarUsuario.getText(); // Simulación del nombre capturado
-
-        // Lógica según los Casos de Uso y Perfiles
-        if ("Administrador".equals(perfilSeleccionado)) {
-            // Caso de Uso 1: Eliminar Administrador
-            if (confirmarEliminacion(nombreUsuario, "ADMINISTRADOR")) {
-                ejecutarFlujoEliminacion("Usuario administrador eliminado exitosamente");
-            }
-        } else if ("Auxiliar".equals(perfilSeleccionado)) {
-            // Caso de Uso 2: Eliminar Auxiliar
-            if (confirmarEliminacion(nombreUsuario, "AUXILIAR")) {
-                ejecutarFlujoEliminacion("Usuario auxiliar eliminado exitosamente");
-            }
-        }
+    private void eliminarUsuarioEnDB(Usuario usuario) {
+        // Simulación eliminación
     }
 
-    private boolean confirmarEliminacion(String usuario, String perfil) {
-        return mostrarConfirmacion("¿Desea eliminar al usuario " + usuario + " con perfil " + perfil + "?");
-    }
+    private void registrarAuditoria(String accion,
+                                    String usuarioEliminado) {
 
-    private void ejecutarFlujoEliminacion(String mensajeExito) {
-        // Aquí se simula la verificación de existencia
-        boolean existe = true; // Esto se validará con la lógica compleja después
+        String usuarioActual = "adminActual";
+        LocalDateTime fechaHora = LocalDateTime.now();
 
-        if (existe) {
-            // Escenario Básico: Eliminación exitosa
-            mostrarAlerta("Éxito", mensajeExito, Alert.AlertType.INFORMATION);
-            tablaUsuarios.getItems().remove(tablaUsuarios.getSelectionModel().getSelectedItem());
-        } else {
-            // Escenario Alternativo: El usuario no existe
-            mostrarAlerta("Error", "El usuario no existe", Alert.AlertType.ERROR);
-        }
+        System.out.println("MÓDULO: Administración");
+        System.out.println("ACCIÓN: " + accion);
+        System.out.println("FECHA/HORA: " + fechaHora);
+        System.out.println("USUARIO ELIMINADO: " + usuarioEliminado);
+        System.out.println("REALIZADO POR: " + usuarioActual);
     }
 }
