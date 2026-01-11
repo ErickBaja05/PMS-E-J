@@ -1,0 +1,103 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+/* Estilo base para botones */
+.button {
+    -fx-cursor: hand;
+    -fx-background-radius: 5;
+    -fx-font-weight: bold;
+}
+
+/* --- CONTENEDORES --- */
+/* Tarjeta Principal Blanca */
+.card-main {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 15;
+}
+
+/* Sección Gris (Contenedor del IVA) */
+.section-box {
+    -fx-background-color: #fafafa;
+    -fx-border-color: #eeeeee;
+    -fx-border-radius: 10;
+    -fx-padding: 20;
+}
+
+/* Caja de Estado (Azul claro para el IVA actual) */
+.status-box-blue {
+    -fx-background-color: #e3f2fd;
+    -fx-background-radius: 5;
+    -fx-padding: 5 10;
+}
+
+/* --- TEXTOS --- */
+.label-header {
+    -fx-text-fill: black;
+}
+
+.label-subheader {
+    -fx-text-fill: black;
+}
+
+.label-status-blue {
+    -fx-text-fill: #1565c0; /* Azul medio */
+}
+
+/* --- INPUTS --- */
+.input-field {
+    -fx-background-radius: 5;
+    -fx-background-color: white;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 5;
+}
+
+/* --- BOTONES ESPECÍFICOS --- */
+
+/* Botón Actualizar (Azul Oscuro) */
+.btn-update {
+    -fx-background-color: #2c3e50;
+    -fx-text-fill: white;
+}
+.btn-update:hover {
+    -fx-background-color: #34495e;
+}
+
+/* Botón Habilitar (Verde) */
+.btn-success {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+}
+.btn-success:hover {
+    -fx-background-color: #2ecc71;
+}
+
+/* Botón Deshabilitar (Rojo) */
+.btn-danger {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+}
+.btn-danger:hover {
+    -fx-background-color: #c0392b;
+}
+
+/* --- TABLAS --- */
+.table-view-rounded {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+/* --- TABLAS (TableView) --- */
+
+/* 1. Centrar el contenido de TODAS las celdas (filas de datos) */
+.table-cell {
+    -fx-alignment: CENTER;
+}
+
+/* 2. Centrar los encabezados (títulos de columnas) */
+.column-header .label {
+    -fx-alignment: CENTER;
+}
