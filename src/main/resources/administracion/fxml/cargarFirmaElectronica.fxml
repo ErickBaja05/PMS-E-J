@@ -10,21 +10,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="682.0" prefWidth="1016.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.administracion.gestionParametros.controller.cargarFirmaElectronicaController">
+<AnchorPane prefHeight="682.0" prefWidth="1016.0" stylesheets="@../css/cargarFirmaStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.administracion.gestionParametros.controller.cargarFirmaElectronicaController">
     <children>
-        <VBox layoutX="50.0" layoutY="50.0" spacing="30.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+        <VBox layoutX="50.0" layoutY="50.0" spacing="30.0" styleClass="card-panel" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
             <padding>
                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
             </padding>
             <children>
                 <VBox spacing="10.0">
                     <children>
-                        <Label text="Cargar Firma Electrónica">
+                        <Label styleClass="label-titulo" text="Cargar Firma Electrónica">
                             <font>
                                 <Font name="System Bold" size="28.0" />
                             </font>
                         </Label>
-                        <Label text="Seleccione el archivo de firma electrónica (.p12) para registrarlo en el sistema." textFill="#707070">
+                        <Label styleClass="label-instruccion" text="Seleccione el archivo de firma electrónica (.p12) para registrarlo en el sistema.">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -34,25 +34,22 @@
 
                 <VBox spacing="15.0">
                     <children>
-                        <Label text="Archivo de Firma (.p12):">
+                        <Label styleClass="label-campo" text="Archivo de Firma (.p12):">
                             <font>
                                 <Font name="System Bold" size="16.0" />
                             </font>
                         </Label>
                         <HBox spacing="15.0">
                             <children>
-                                <TextField fx:id="txtRutaArchivo" editable="false" prefHeight="45.0" prefWidth="600.0" promptText="No se ha seleccionado ningún archivo..." style="-fx-background-color: #f9f9f9; -fx-border-color: #dcdcdc; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
+                                <TextField fx:id="txtRutaArchivo" editable="false" prefHeight="45.0" prefWidth="600.0" promptText="No se ha seleccionado ningún archivo..." styleClass="input-path" HBox.hgrow="ALWAYS">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </TextField>
-                                <Button fx:id="btnExplorar" mnemonicParsing="false" onAction="#explorarArchivo" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white;" text="EXPLORAR">
+                                <Button fx:id="btnExplorar" mnemonicParsing="false" onAction="#explorarArchivo" prefHeight="45.0" prefWidth="150.0" styleClass="btn-explorar" text="EXPLORAR">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
                                 </Button>
                             </children>
                         </HBox>
@@ -61,26 +58,20 @@
 
                 <HBox alignment="CENTER_LEFT" spacing="20.0">
                     <children>
-                        <Button fx:id="btnCargar" mnemonicParsing="false" onAction="#procesarFirma" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #27ae60; -fx-text-fill: white;" text="REGISTRAR FIRMA">
+                        <Button fx:id="btnCargar" mnemonicParsing="false" onAction="#procesarFirma" prefHeight="50.0" prefWidth="250.0" styleClass="btn-registrar" text="REGISTRAR FIRMA">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
                         </Button>
-                        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelarAccion" prefHeight="50.0" prefWidth="150.0" text="CANCELAR">
+                        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelarAccion" prefHeight="50.0" prefWidth="150.0" styleClass="btn-cancelar" text="CANCELAR">
                             <font>
                                 <Font size="14.0" />
                             </font>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
                         </Button>
                     </children>
                 </HBox>
 
-                <Label fx:id="lblEstado" textFill="#5b5b5b">
+                <Label fx:id="lblEstado" styleClass="label-estado">
                     <font>
                         <Font name="System Italic" size="14.0" />
                     </font>
