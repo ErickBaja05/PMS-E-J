@@ -1,140 +1,172 @@
 package com.grupo2.PMSEYJ.proveedores.controller;
 
+import com.grupo2.PMSEYJ.proveedores.model.ProductoPedido;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import java.util.Optional;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class consultarPedidoActualPendienteController {
 
-    @FXML private Button btnAnadir, btnEliminar, btnEnviar, btnImport, btnModificar;
-    @FXML private TableColumn<?, ?> colCodigo, colNombre, colPrecio;
-    @FXML private ImageView imgProducto;
-    @FXML private TableView<Object> tablaPedido;
-    @FXML private TextField txtCantidad, txtCantidad1, txtCodigo, txtCodigo1;
+    @FXML private TextField txtCodigo, txtNombre, txtCantidad;
+    @FXML private TableView<ProductoPedido> tvPedidos;
+    @FXML private TableColumn<ProductoPedido, Integer> colNum, colCantidad;
+    @FXML private TableColumn<ProductoPedido, String> colCodigo, colNombre;
 
-    // --- SISTEMA DE VENTANAS EMERGENTES (ALERTS) ---
+    private ObservableList<ProductoPedido> masterData = FXCollections.observableArrayList();
 
-    /**
-     * Lanza una ventana de confirmación con botones Aceptar/Cancelar.
-     */
-    private boolean confirmarAccion(String titulo, String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
+    @FXML
+    public void initialize() {
 
-        ButtonType btnAceptar = new ButtonType("Aceptar");
-        ButtonType btnCancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().setAll(btnAceptar, btnCancelar);
+        // ===== CONFIGURACIÓN DE COLUMNAS (LAMBDAS + PROPERTIES) =====
+        colNum.setCellValueFactory(cell -> cell.getValue().numProperty().asObject());
 
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.isPresent() && result.get() == btnAceptar;
+        colCodigo.setCellValueFactory(cell -> cell.getValue().codigoProperty());
+
+        colNombre.setCellValueFactory(cell -> cell.getValue().nombreProperty());
+
+        colCantidad.setCellValueFactory(cell -> cell.getValue().cantidadProperty().asObject());
+
+        // ===== DATOS DE PRUEBA =====
+        masterData.add(new ProductoPedido(1, "A100", "Paracetamol 500mg", 10));
+        masterData.add(new ProductoPedido(2, "B200", "Ibuprofeno 400mg", 5));
+
+        tvPedidos.setItems(masterData);
+
+        // Placeholder (opcional pero recomendado)
+        tvPedidos.setPlaceholder(new Label("No existen productos en el pedido"));
     }
 
-    /**
-     * Lanza una ventana informativa para éxito o error.
-     */
-    private void mostrarNotificacion(String titulo, String mensaje, Alert.AlertType tipo) {
+
+    private void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);
-        alert.setTitle(titulo);
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
 
-    // --- ACCIONES DEL PEDIDO ---
+    // Metodo auxiliar para buscar el producto en el pedido
+    private ProductoPedido buscarEnPedido(String codigo) {
+        return masterData.stream()
+                .filter(p -> p.getCodigo().equals(codigo))
+                .findFirst()
+                .orElse(null);
+    }
 
     @FXML
-    void anadirProducto(ActionEvent event) {
-        if (txtCodigo.getText().isEmpty() || txtCantidad.getText().isEmpty()) {
-            mostrarNotificacion("Campos Vacíos", "Debe ingresar el código y la cantidad.", Alert.AlertType.WARNING);
-            return;
-        }
+    void handleBuscar(ActionEvent event) {
+        String codigo = txtCodigo.getText().trim();
+        ProductoPedido encontrado = buscarEnPedido(codigo);
 
-        if (confirmarAccion("Confirmar Adición", "¿Desea añadir este producto al pedido?")) {
-            mostrarNotificacion("Éxito", "Producto añadido exitosamente.", Alert.AlertType.INFORMATION);
+        if (encontrado != null) {
+            txtNombre.setText(encontrado.getNombre());
+            txtCantidad.setText(String.valueOf(encontrado.getCantidad()));
         } else {
-            mostrarNotificacion("Cancelado", "La acción ha sido rechazada.", Alert.AlertType.INFORMATION);
+            // Escenario Alternativo 1 de ambos Casos de Uso
+            mostrarAlerta("Producto no encontrado, el pedido no se ha modificado", Alert.AlertType.ERROR);
+            txtNombre.clear();
+            txtCantidad.clear();
         }
     }
 
     @FXML
-    void modificarProducto(ActionEvent event) {
-        // Validación simple: debe haber seleccionado algo
-        if (txtCodigo.getText().isEmpty()) {
-            mostrarNotificacion("Selección Requerida", "Debe seleccionar primero un producto de la tabla.", Alert.AlertType.WARNING);
+    void handleModificar(ActionEvent event) {
+        // 1. Verificar códigoAuxiliar (Paso 1 y 2)
+        String codigo = txtCodigo.getText().trim();
+        ProductoPedido producto = buscarEnPedido(codigo);
+
+        if (producto == null) {
+            // ESCENARIO ALTERNATIVO 1
+            mostrarAlerta("Producto no encontrado, el pedido no se ha modificado", Alert.AlertType.ERROR);
             return;
         }
 
-        String cantidadStr = txtCantidad.getText();
-        // Validación de tipo de dato (Solo números enteros positivos)
-        if (!cantidadStr.matches("\\d+") || Integer.parseInt(cantidadStr) <= 0) {
-            mostrarNotificacion("Error de Cantidad", "Cantidad no válida, el pedido no se ha modificado.", Alert.AlertType.ERROR);
-            return;
-        }
+        // 2. Validar nuevaCantidad (Paso 4)
+        try {
+            int nuevaCantidad = Integer.parseInt(txtCantidad.getText().trim());
 
-        if (confirmarAccion("Confirmar Modificación", "¿Está seguro de modificar la cantidad?")) {
-            mostrarNotificacion("Éxito", "Pedido modificado exitosamente.", Alert.AlertType.INFORMATION);
+            if (nuevaCantidad > 0) {
+                // ESCENARIO BÁSICO (Paso 5 y 6)
+                producto.setCantidad(nuevaCantidad);
+                tvPedidos.refresh();
+                mostrarAlerta("Pedido modificado exitosamente", Alert.AlertType.INFORMATION);
+            } else {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            // ESCENARIO ALTERNATIVO 2
+            mostrarAlerta("Cantidad no válida, el pedido no se ha modificado", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    void handleEliminar(ActionEvent event) {
+        // 1. Verificar códigoAuxiliar (Paso 1 y 2)
+        String codigo = txtCodigo.getText().trim();
+        ProductoPedido producto = buscarEnPedido(codigo);
+
+        if (producto != null) {
+            // ESCENARIO BÁSICO (Paso 3 y 4)
+            masterData.remove(producto);
+            mostrarAlerta("Pedido modificado exitosamente", Alert.AlertType.INFORMATION);
+            txtCodigo.clear();
+            txtNombre.clear();
+            txtCantidad.clear();
         } else {
-            mostrarNotificacion("Cancelado", "La modificación ha sido rechazada.", Alert.AlertType.INFORMATION);
+            // ESCENARIO ALTERNATIVO 1
+            mostrarAlerta("Producto no encontrado, el pedido no se ha modificado", Alert.AlertType.ERROR);
         }
     }
 
     @FXML
-    void eliminarProducto(ActionEvent event) {
-        if (txtCodigo.getText().isEmpty()) {
-            mostrarNotificacion("Selección Requerida", "Seleccione un producto para eliminar.", Alert.AlertType.WARNING);
+    void handleEnviar(ActionEvent event) {
+        if (masterData.isEmpty()) {
+            mostrarAlerta("No existen pedidos pendientes", Alert.AlertType.WARNING);
             return;
         }
 
-        if (confirmarAccion("Confirmar Eliminación", "¿Desea eliminar el producto del pedido?")) {
-            mostrarNotificacion("Éxito", "Pedido modificado exitosamente.", Alert.AlertType.INFORMATION);
-            limpiarCampos();
-        } else {
-            mostrarNotificacion("Cancelado", "La eliminación ha sido rechazada.", Alert.AlertType.INFORMATION);
+        try {
+            // La ruta debe incluir la carpeta 'fxml' que se ve en tu imagen
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/proveedores/fxml/enviarPedido.fxml"));
+
+            // Verificación de seguridad
+            if (loader.getLocation() == null) {
+                System.err.println("ERROR: No se encontró el archivo en /proveedores/fxml/enviarPedido.fxml");
+                return;
+            }
+
+            javafx.scene.Parent root = loader.load();
+
+            enviarPedidoController controller = loader.getController();
+            controller.cargarReporte(masterData);
+
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setTitle("Confirmar Envío de Pedido");
+            stage.setScene(new javafx.scene.Scene(root));
+            stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+            //stage.show();
+            // CAMBIO AQUÍ: Usar showAndWait para pausar la ejecución del padre
+            stage.showAndWait();
+
+            // Al cerrar la ventana, si la lista está vacía es porque se envió con éxito
+            if (masterData.isEmpty()) {
+                limpiarCamposProducto(); // Limpia txtCodigo, txtNombre y txtCantidad
+            }
+
+        } catch (java.io.IOException e) {
+            System.err.println("Error al cargar la ventana de envío: " + e.getMessage());
+            e.printStackTrace();
         }
+
+
     }
 
-    @FXML
-    void enviarPedido(ActionEvent event) {
-        String proveedor = txtCantidad1.getText(); // txtCantidad1 representa el Proveedor
-
-        if (tablaPedido.getItems().isEmpty()) {
-            mostrarNotificacion("Sin Pedidos", "No existen pedidos pendientes.", Alert.AlertType.WARNING);
-            return;
-        }
-
-        if (proveedor.isEmpty()) {
-            mostrarNotificacion("Proveedor Requerido", "Debe ingresar el nombre del proveedor.", Alert.AlertType.WARNING);
-            return;
-        }
-
-        if (confirmarAccion("Enviar Pedido", "¿Desea enviar el pedido al proveedor " + proveedor + "?")) {
-            // Lógica simple de éxito según Caso de Uso
-            mostrarNotificacion("Éxito", "Pedido enviado exitosamente.", Alert.AlertType.INFORMATION);
-            limpiarCampos();
-            tablaPedido.getItems().clear();
-        } else {
-            mostrarNotificacion("Cancelado", "El envío ha sido rechazado.", Alert.AlertType.INFORMATION);
-        }
-    }
-
-    @FXML
-    void seleccionarProducto(MouseEvent event) {
-        Object seleccionado = tablaPedido.getSelectionModel().getSelectedItem();
-        if (seleccionado != null) {
-            // Simulación de carga de datos al seleccionar la fila
-            mostrarNotificacion("Información", "Datos cargados para edición.", Alert.AlertType.INFORMATION);
-        }
-    }
-
-    private void limpiarCampos() {
+    private void limpiarCamposProducto() {
         txtCodigo.clear();
-        txtCodigo1.clear();
+        txtNombre.clear();
         txtCantidad.clear();
-        txtCantidad1.clear();
     }
 }

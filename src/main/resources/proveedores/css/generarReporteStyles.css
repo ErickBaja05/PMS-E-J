@@ -1,0 +1,106 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+.root {
+    -fx-background-color: #F8FAFC; /* Fondo gris muy claro */
+}
+
+/* Estilo base para botones */
+.button {
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+/* --- CONTENEDORES --- */
+
+/* Panel principal blanco (Tarjeta) */
+.card-panel {
+    -fx-background-color: white;
+    -fx-padding: 30;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);
+}
+
+/* Barra gris de información (Factura consultada/Estado) */
+.info-bar {
+    -fx-background-color: #F1F5F9;
+    -fx-padding: 15;
+    -fx-background-radius: 8;
+}
+
+/* --- INPUTS Y TABLAS --- */
+.input-field {
+    -fx-background-radius: 8;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 8;
+    -fx-background-color: white;
+}
+
+.table-view-reporte {
+    -fx-background-radius: 10;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 10;
+}
+
+/* --- TEXTOS --- */
+.label-titulo {
+    -fx-text-fill: #1E293B;
+}
+
+.label-subtitulo {
+    -fx-text-fill: #64748B;
+}
+
+.label-strong {
+    -fx-text-fill: #1E293B; /* Texto oscuro para énfasis */
+}
+
+.label-dato {
+    -fx-text-fill: #0f172a; /* Texto casi negro para datos */
+}
+
+.label-nota {
+    -fx-text-fill: #94a3b8;
+    -fx-font-style: italic;
+}
+
+/* --- BOTONES ESPECÍFICOS --- */
+
+/* Botón Generar (Gris Oscuro / Slate) */
+.btn-generar {
+    -fx-background-color: #334155;
+    -fx-text-fill: white;
+}
+.btn-generar:hover {
+    -fx-background-color: #1e293b;
+}
+
+/* Botón Imprimir (Azul Cielo / Sky) */
+.btn-imprimir {
+    -fx-background-color: #0EA5E9;
+    -fx-text-fill: white;
+}
+.btn-imprimir:hover {
+    -fx-background-color: #0284c7;
+}
+
+/* Botón Cerrar (Gris Claro) */
+.btn-cerrar {
+    -fx-background-color: #cbd5e1;
+    -fx-text-fill: #334155;
+}
+.btn-cerrar:hover {
+    -fx-background-color: #94a3b8;
+    -fx-text-fill: white;
+}
+
+/* --- TABLAS (TableView) --- */
+
+/* 1. Centrar el contenido de TODAS las celdas (filas de datos) */
+.table-cell {
+    -fx-alignment: CENTER;
+}
+
+/* 2. Centrar los encabezados (títulos de columnas) */
+.column-header .label {
+    -fx-alignment: CENTER;
+}

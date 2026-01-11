@@ -59,3 +59,9 @@
 .label-hint {
     -fx-text-fill: #95a5a6;
 }
+/* --- TABLAS (TableView) --- */
+
+/* 1. Centrar el contenido de TODAS las celdas (filas de datos) */
+.table-cell {
+    -fx-alignment: CENTER;
+}

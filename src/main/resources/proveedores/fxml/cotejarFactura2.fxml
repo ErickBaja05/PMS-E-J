@@ -21,13 +21,17 @@
             <VBox spacing="10" styleClass="card-container">
                 <children>
                     <Label text="Cotejo de Mercancía contra Factura">
-                        <font><Font size="20" name="System Bold"/></font>
+                        <font>
+                            <Font size="20" name="System Bold"/>
+                        </font>
                     </Label>
 
                     <HBox spacing="15" alignment="CENTER_LEFT">
                         <children>
                             <Label text="Número de Factura:">
-                                <font><Font size="14" name="System Bold"/></font>
+                                <font>
+                                    <Font size="14" name="System Bold"/>
+                                </font>
                             </Label>
 
                             <TextField fx:id="txtNumFactura"
@@ -51,7 +55,9 @@
                     <children>
                         <Label text="Detalle de Factura (Esperado)"
                                styleClass="label-titulo-esperado">
-                            <font><Font size="16" name="System Bold"/></font>
+                            <font>
+                                <Font size="16" name="System Bold"/>
+                            </font>
                         </Label>
 
                         <TableView fx:id="tvFacturaOriginal" VBox.vgrow="ALWAYS">
@@ -75,7 +81,9 @@
                     <children>
                         <Label text="Mercancía Física (Recibida)"
                                styleClass="label-titulo-recibido">
-                            <font><Font size="16" name="System Bold"/></font>
+                            <font>
+                                <Font size="16" name="System Bold"/>
+                            </font>
                         </Label>
 
                         <Label text="* Seleccione una fila para editar"
@@ -144,7 +152,9 @@
             <!-- PIE -->
             <HBox alignment="CENTER_RIGHT" styleClass="bottom-bar">
                 <children>
-                    <Button text="FINALIZAR COTEJO"
+
+                    <Button fx:id="btnCotejarFactura"
+                            text="FINALIZAR COTEJO"
                             onAction="#handleCotejarFactura"
                             styleClass="btn-finalizar"
                             prefWidth="250"

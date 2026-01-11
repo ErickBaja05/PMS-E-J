@@ -1,0 +1,67 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+/* Estilo base para botones */
+.button {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
+.main-card {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 15;
+    /* Nota: El padding interno se mantiene en el FXML o se puede poner aquí con -fx-padding */
+}
+
+/* --- ETIQUETAS DE TEXTO --- */
+.label-titulo-dato {
+    -fx-text-fill: #555555;
+}
+
+.label-titulo-estado {
+    -fx-text-fill: #5e5852;
+}
+
+.label-hint {
+    -fx-text-fill: #7f8c8d;
+}
+
+/* --- BOTONES ESPECÍFICOS --- */
+.btn-imprimir {
+    -fx-background-color: #34495e; /* Azul oscuro */
+}
+
+.btn-cerrar {
+    -fx-background-color: #e74c3c; /* Rojo */
+}
+
+/* Efecto hover para interactividad */
+.btn-imprimir:hover {
+    -fx-background-color: #2c3e50;
+}
+.btn-cerrar:hover {
+    -fx-background-color: #c0392b;
+}
+
+.btn-generar {
+    -fx-background-color: #34495e; /* Gris azulado oscuro */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+}
+.btn-generar:hover {
+    -fx-background-color: #2c3e50;
+}
+
+/* --- TABLAS (TableView) --- */
+
+/* 1. Centrar el contenido de TODAS las celdas (filas de datos) */
+.table-cell {
+    -fx-alignment: CENTER;
+}
