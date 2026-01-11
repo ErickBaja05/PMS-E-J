@@ -1,0 +1,59 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+.root {
+    -fx-background-color: #F8FAFC; /* Fondo gris muy claro */
+}
+
+/* --- TEXTOS --- */
+.label-titulo {
+    -fx-text-fill: #1E293B; /* Slate oscuro */
+}
+
+.label-subtitulo {
+    -fx-text-fill: #64748B; /* Slate medio */
+}
+
+/* --- CONTENEDORES --- */
+.card-seleccion {
+    -fx-background-color: white;
+    -fx-padding: 15;
+    -fx-background-radius: 10;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 10;
+}
+
+/* --- BOTONES --- */
+.button {
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+/* Botón Cancelar (Gris claro) */
+.btn-cancelar {
+    -fx-background-color: #F1F5F9;
+    -fx-text-fill: #475569;
+}
+.btn-cancelar:hover {
+    -fx-background-color: #e2e8f0;
+}
+
+/* Botón Confirmar (Verde Esmeralda) */
+.btn-confirmar {
+    -fx-background-color: #10B981;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+.btn-confirmar:hover {
+    -fx-background-color: #059669;
+}
+
+/* --- TABLAS (TableView) --- */
+
+/* 1. Centrar el contenido de TODAS las celdas (filas de datos) */
+.table-cell {
+    -fx-alignment: CENTER;
+}
+
+/* 2. Centrar los encabezados (títulos de columnas) */
+.column-header .label {
+    -fx-alignment: CENTER;
+}

@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -122,9 +123,50 @@ public class consultarPedidoActualPendienteController {
 
     @FXML
     void handleEnviar(ActionEvent event) {
-        if (!masterData.isEmpty()) {
-            mostrarAlerta("Pedido enviado exitosamente al proveedor", Alert.AlertType.INFORMATION);
-            masterData.clear();
+        if (masterData.isEmpty()) {
+            mostrarAlerta("No existen pedidos pendientes", Alert.AlertType.WARNING);
+            return;
         }
+
+        try {
+            // La ruta debe incluir la carpeta 'fxml' que se ve en tu imagen
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/proveedores/fxml/enviarPedido.fxml"));
+
+            // Verificación de seguridad
+            if (loader.getLocation() == null) {
+                System.err.println("ERROR: No se encontró el archivo en /proveedores/fxml/enviarPedido.fxml");
+                return;
+            }
+
+            javafx.scene.Parent root = loader.load();
+
+            enviarPedidoController controller = loader.getController();
+            controller.cargarReporte(masterData);
+
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setTitle("Confirmar Envío de Pedido");
+            stage.setScene(new javafx.scene.Scene(root));
+            stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+            //stage.show();
+            // CAMBIO AQUÍ: Usar showAndWait para pausar la ejecución del padre
+            stage.showAndWait();
+
+            // Al cerrar la ventana, si la lista está vacía es porque se envió con éxito
+            if (masterData.isEmpty()) {
+                limpiarCamposProducto(); // Limpia txtCodigo, txtNombre y txtCantidad
+            }
+
+        } catch (java.io.IOException e) {
+            System.err.println("Error al cargar la ventana de envío: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void limpiarCamposProducto() {
+        txtCodigo.clear();
+        txtNombre.clear();
+        txtCantidad.clear();
     }
 }
