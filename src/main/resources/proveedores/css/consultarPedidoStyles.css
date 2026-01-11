@@ -1,0 +1,94 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+.root {
+    -fx-background-color: #F8FAFC; /* Fondo gris muy claro/azulado */
+}
+
+/* Estilo base para todos los botones */
+.button {
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+/* --- CONTENEDOR TIPO TARJETA --- */
+.card-container {
+    -fx-background-color: white;
+    -fx-padding: 25;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);
+}
+
+/* --- ETIQUETAS (LABELS) --- */
+.label-titulo {
+    -fx-text-fill: #1E293B; /* Slate oscuro */
+}
+
+.label-campo {
+    -fx-text-fill: #64748B; /* Slate medio */
+    -fx-font-weight: bold;
+}
+
+/* --- CAMPOS DE TEXTO (INPUTS) --- */
+.input-field {
+    -fx-background-radius: 8;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 8;
+    -fx-background-color: white;
+}
+
+/* Campo de texto de solo lectura (grisáceo) */
+.input-readonly {
+    -fx-background-color: #F1F5F9;
+}
+
+/* --- TABLA --- */
+.table-view-rounded {
+    -fx-background-radius: 10;
+}
+
+/* --- BOTONES ESPECÍFICOS --- */
+
+/* Botón Buscar (Gris oscuro) */
+.btn-buscar {
+    -fx-background-color: #334155;
+    -fx-text-fill: white;
+}
+
+/* Botón Modificar (Gris claro) */
+.btn-modificar {
+    -fx-background-color: #F1F5F9;
+    -fx-text-fill: #475569;
+}
+
+/* Botón Eliminar (Rojo suave) */
+.btn-eliminar {
+    -fx-background-color: #FEE2E2;
+    -fx-text-fill: #DC2626;
+}
+
+/* Botón Enviar (Verde Esmeralda con sombra) */
+.btn-enviar {
+    -fx-background-color: #10B981;
+    -fx-text-fill: white;
+    -fx-background-radius: 12; /* Un poco más redondo */
+    -fx-effect: dropshadow(three-pass-box, rgba(16,185,129,0.3), 10, 0, 0, 5);
+}
+
+/* --- EFECTOS HOVER (Opcional) --- */
+.btn-buscar:hover { -fx-background-color: #1e293b; }
+.btn-modificar:hover { -fx-background-color: #e2e8f0; }
+.btn-eliminar:hover { -fx-background-color: #fecaca; }
+.btn-enviar:hover { -fx-background-color: #059669; }
+
+.table-cell {
+    -fx-alignment: CENTER;
+}
+
+/* 2. Centrar los encabezados (títulos de columnas) */
+.column-header .label {
+    -fx-alignment: CENTER;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #F1F5F9; /* Fondo gris claro para los encabezados */
+}
