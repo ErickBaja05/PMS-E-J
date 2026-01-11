@@ -48,3 +48,13 @@
 .btn-cerrar:hover {
     -fx-background-color: #c0392b;
 }
+
+.btn-generar {
+    -fx-background-color: #34495e; /* Gris azulado oscuro */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+}
+.btn-generar:hover {
+    -fx-background-color: #2c3e50;
+}
