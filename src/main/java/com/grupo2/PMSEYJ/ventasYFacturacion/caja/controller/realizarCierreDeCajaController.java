@@ -1,23 +1,36 @@
 package com.grupo2.PMSEYJ.ventasYFacturacion.caja.controller;
 
+import com.grupo2.PMSEYJ.ventasYFacturacion.caja.model.MovimientoCaja;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
 import java.util.Optional;
 
 public class realizarCierreDeCajaController {
 
-    @FXML private TableView<Object> tablaMovimientos;
-    @FXML private TableColumn<Object, String> colTipo;
-    @FXML private TableColumn<Object, Double> colMonto;
+    // ===============================
+    // COMPONENTES FXML
+    // ===============================
+    @FXML private TableView<MovimientoCaja> tablaMovimientos;
+    @FXML private TableColumn<MovimientoCaja, String> colTipo;
+    @FXML private TableColumn<MovimientoCaja, Double> colMonto;
     @FXML private TextField txtSaldoFinal;
 
-    // Simulación del estado de la caja para la interfaz
+    // ===============================
+    // DATOS
+    // ===============================
+    private final ObservableList<MovimientoCaja> listaMovimientos =
+            FXCollections.observableArrayList();
+
+    // Simulación del estado de la caja
     private boolean cajaYaCerrada = false;
 
-    /**
-     * Método para mostrar alertas de acuerdo a los escenarios
-     */
+    // ===============================
+    // ALERTAS
+    // ===============================
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);
         alert.setTitle(titulo);
@@ -26,18 +39,39 @@ public class realizarCierreDeCajaController {
         alert.showAndWait();
     }
 
+    // ===============================
+    // INICIALIZADOR
+    // ===============================
+    @FXML
+    public void initialize() {
+
+        // CONFIGURACIÓN DE TABLA (LAMBDA + PROPERTIES)
+        colTipo.setCellValueFactory(cell -> cell.getValue().tipoProperty());
+        colMonto.setCellValueFactory(cell -> cell.getValue().montoProperty().asObject());
+
+        tablaMovimientos.setItems(listaMovimientos);
+
+        // VALORES QUEMADOS (REPORTE SIMULADO)
+        if (!cajaYaCerrada) {
+            cargarReporteMovimientos();
+        }
+    }
+
+    // ===============================
+    // CIERRE DE CAJA
+    // ===============================
     @FXML
     void handleCerrarCaja(ActionEvent event) {
-        // 1. Verificación del estado de la Caja (Paso 1 del caso de uso)
+
+        // 1. Verificación del estado de la Caja
         if (cajaYaCerrada) {
-            // ESCENARIO ALTERNATIVO 1: Caja ya cerrada
             mostrarAlerta("Información", "La caja ya se encuentra cerrada", Alert.AlertType.INFORMATION);
             return;
         }
 
         String inputSaldo = txtSaldoFinal.getText().trim();
 
-        // 2. Validación de campo vacío o formato decimal (Paso 4)
+        // 2. Validación campo vacío
         if (inputSaldo.isEmpty()) {
             mostrarAlerta("Error", "Monto no válido", Alert.AlertType.ERROR);
             return;
@@ -46,44 +80,57 @@ public class realizarCierreDeCajaController {
         try {
             double saldoFinal = Double.parseDouble(inputSaldo);
 
-            // 3. Validación de saldo mayor que 0 (Paso 5)
+            // 3. Validación saldo > 0
             if (saldoFinal > 0) {
-                // Confirmación previa al registro (Buena práctica de interfaz)
+
                 Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
                 confirmacion.setTitle("Confirmar Cierre");
-                confirmacion.setContentText("¿Está seguro que desea cerrar la caja con un saldo de $" + saldoFinal + "?");
+                confirmacion.setContentText(
+                        "¿Está seguro que desea cerrar la caja con un saldo de $" + saldoFinal + "?"
+                );
 
                 Optional<ButtonType> resultado = confirmacion.showAndWait();
+
                 if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-                    // ESCENARIO BÁSICO: Cierre exitoso
+                    // ESCENARIO BÁSICO
                     cajaYaCerrada = true;
                     txtSaldoFinal.setEditable(false);
+
+                    // LIMPIAR TODO
+                    limpiarFormulario();
+
                     mostrarAlerta("Éxito", "Caja cerrada exitosamente", Alert.AlertType.INFORMATION);
                 }
+
             } else {
-                // ESCENARIO ALTERNATIVO 3: Saldo decimal pero no mayor a 0
                 mostrarAlerta("Error", "Monto no válido", Alert.AlertType.ERROR);
             }
 
         } catch (NumberFormatException e) {
-            // ESCENARIO ALTERNATIVO 2: No es un número decimal
             mostrarAlerta("Error", "Monto no válido", Alert.AlertType.ERROR);
         }
     }
 
-    /**
-     * Método inicializador para cargar el reporte si la caja está abierta
-     */
-    @FXML
-    public void initialize() {
-        // Según Paso 2 del Escenario Básico, si no está cerrada, mostrar reporte
-        if (!cajaYaCerrada) {
-            cargarReporteMovimientos();
-        }
+    // ===============================
+    // CARGA DE MOVIMIENTOS (SIMULADO)
+    // ===============================
+    private void cargarReporteMovimientos() {
+
+        listaMovimientos.clear();
+
+        listaMovimientos.addAll(
+                new MovimientoCaja("Venta", 120.50),
+                new MovimientoCaja("Avance", 50.00),
+                new MovimientoCaja("Vale", 30.75),
+                new MovimientoCaja("Venta", 200.00)
+        );
     }
 
-    private void cargarReporteMovimientos() {
-        // Aquí se implementaría la carga de ventas, avances y vales en la tabla
-        System.out.println("Cargando reporte de ventas, avances y vales...");
+    // ===============================
+    // LIMPIEZA TOTAL
+    // ===============================
+    private void limpiarFormulario() {
+        txtSaldoFinal.clear();
+        tablaMovimientos.getItems().clear();
     }
 }

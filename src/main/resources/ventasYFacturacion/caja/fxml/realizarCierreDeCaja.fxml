@@ -12,21 +12,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="682.0" prefWidth="1016.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.ventasYFacturacion.caja.controller.realizarCierreDeCajaController">
+<AnchorPane prefHeight="682.0" prefWidth="1016.0" stylesheets="@../css/realizarCierreDeCajaStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.ventasYFacturacion.caja.controller.realizarCierreDeCajaController">
     <children>
-        <VBox layoutX="50.0" layoutY="50.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+        <VBox layoutX="50.0" layoutY="50.0" spacing="20.0" styleClass="card-panel" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
             <padding>
                 <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
             </padding>
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label text="Cierre de Caja">
+                        <Label styleClass="label-titulo" text="Cierre de Caja">
                             <font>
                                 <Font name="System Bold" size="26.0" />
                             </font>
                         </Label>
-                        <Label text="Visualización de movimientos registrados y registro de saldo final para cierre de jornada." textFill="#707070">
+                        <Label styleClass="label-subtitulo" text="Visualización de movimientos registrados y registro de saldo final para cierre de jornada.">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -36,7 +36,7 @@
 
                 <VBox spacing="10.0" VBox.vgrow="ALWAYS">
                     <children>
-                        <Label text="Reporte de Ventas, Avances y Vales">
+                        <Label styleClass="label-seccion" text="Reporte de Ventas, Avances y Vales">
                             <font>
                                 <Font name="System Bold" size="16.0" />
                             </font>
@@ -53,30 +53,24 @@
                     </children>
                 </VBox>
 
-                <HBox alignment="CENTER_RIGHT" spacing="20.0" style="-fx-background-color: #f9f9f9; -fx-padding: 20; -fx-background-radius: 10; -fx-border-color: #eeeeee;">
+                <HBox alignment="CENTER_RIGHT" spacing="20.0" styleClass="footer-box">
                     <children>
                         <VBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
                             <children>
-                                <Label text="Saldo Final:">
+                                <Label styleClass="label-seccion" text="Saldo Final:">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Label text="Ingrese el saldo de cierre de la caja." textFill="#8d8d8d" />
+                                <Label styleClass="label-subtitulo" text="Ingrese el saldo de cierre de la caja." />
                             </children>
                         </VBox>
-                        <TextField fx:id="txtSaldoFinal" prefHeight="50.0" prefWidth="250.0" promptText="0.00">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
+                        <TextField fx:id="txtSaldoFinal" prefHeight="50.0" prefWidth="250.0" promptText="0.00" styleClass="input-field-large">
                         </TextField>
-                        <Button fx:id="btnCerrarCaja" mnemonicParsing="false" onAction="#handleCerrarCaja" prefHeight="55.0" prefWidth="200.0" style="-fx-background-color: #c0392b; -fx-text-fill: white;" text="CONFIRMAR CIERRE">
+                        <Button fx:id="btnCerrarCaja" mnemonicParsing="false" onAction="#handleCerrarCaja" prefHeight="55.0" prefWidth="200.0" styleClass="btn-cierre" text="CONFIRMAR CIERRE">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
                         </Button>
                     </children>
                 </HBox>
