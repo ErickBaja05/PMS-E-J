@@ -1,121 +1,195 @@
 package com.grupo2.PMSEYJ.clientes.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
+
+import java.time.LocalDateTime;
 
 public class gestionClienteJController {
 
-    @FXML private Button btnBuscarJ, btnDarAltaJ, btnDarBajaJ, btnModificarJ;
-    @FXML private Label lblMensaje;
-    @FXML private TextField txtCedulaJ, txtCelularJ, txtCorreoJ, txtDireccionJ, txtEstado, txtNombre;
+    @FXML private Button btnBuscar, btnDarAltaJ, btnDarBajaJ, btnModificarJ;
+    @FXML private TextField txtRuc, txtCelularJ, txtCorreoJ, txtDireccionJ,
+            txtEstado, txtNombre;
 
-    // --- 1. CONSULTAR CLIENTE ---
+    // RUC de prueba
+    private final String RUC_TEST = "1790012345001";
+    private boolean clienteCargado = false;
+
+    // Valores originales
+    private String celularOriginal;
+    private String direccionOriginal;
+    private String correoOriginal;
+
     @FXML
-    void consultarClienteJ(ActionEvent event) {
-        String cedula = txtCedulaJ.getText().trim();
+    public void initialize() {
+        bloquearCampos(true);
+        btnBuscar.setDisable(true);
 
-        // Validación de entrada vacía
-        if (cedula.isEmpty()) {
-            mostrarMensaje("Por favor, ingrese una cédula para buscar.", true);
-            return;
-        }
+        txtRuc.textProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal.length() == 13) {
+                btnBuscar.setDisable(false);
+            } else {
+                btnBuscar.setDisable(true);
+                limpiarCamposDatos();
+                bloquearCampos(true);
+                clienteCargado = false;
+            }
+        });
+    }
 
-        // Lógica de búsqueda (Simulada para conectar a BD luego)
-        if (cedula.equals("1234567890123")) {
-            txtNombre.setText("Juan Pérez");
-            txtCorreoJ.setText("juan@mail.com");
-            txtDireccionJ.setText("Calle Falsa 123");
-            txtCelularJ.setText("0987654321");
-            txtEstado.setText("ACTIVO");
-            mostrarMensaje("Información del Cliente recuperada exitosamente", false);
+    // ---------- UTILIDADES ----------
+    private void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
+        Alert alert = new Alert(tipo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private void registrarLog(String accion) {
+        System.out.println("LOG [Módulo Clientes] - " + LocalDateTime.now() +
+                ": Acción: " + accion +
+                " | RUC: " + txtRuc.getText() +
+                " | Usuario: Admin");
+    }
+
+    // ---------- CONSULTAR CLIENTE ----------
+    @FXML
+    void consultarClienteJ() {
+        String ruc = txtRuc.getText().trim();
+
+        if (ruc.equals(RUC_TEST)) {
+            txtNombre.setText("Empresa Farmacéutica S.A.");
+            txtCorreoJ.setText("contacto@empresa.com");
+            txtDireccionJ.setText("Av. Amazonas y Naciones Unidas");
+            txtCelularJ.setText("0991234567");
+            txtEstado.setText("INACTIVO");
+
+            // Guardar valores originales
+            celularOriginal = txtCelularJ.getText();
+            direccionOriginal = txtDireccionJ.getText();
+            correoOriginal = txtCorreoJ.getText();
+
+            bloquearCampos(false);
+            clienteCargado = true;
         } else {
             limpiarCamposDatos();
-            mostrarMensaje("No existe un cliente en el Sistema con la cedula de identidad ingresada", true);
+            bloquearCampos(true);
+            clienteCargado = false;
+            mostrarAlerta("Cliente no registrado", Alert.AlertType.ERROR);
         }
     }
 
-    // --- 2, 3 y 4. MODIFICAR DATOS (Celular, Dirección, Correo) ---
+    // ---------- DAR DE ALTA ----------
     @FXML
-    void modificarDatosJ(ActionEvent event) {
-        // Verificar que haya un cliente cargado
-        if (txtNombre.getText().isEmpty()) {
-            mostrarMensaje("Cliente no registrado", true);
-            return;
-        }
-
-        // Validación CELULAR (Caso de Uso 2)
-        String cel = txtCelularJ.getText().trim();
-        if (cel.length() != 10) {
-            mostrarMensaje("Número celular no válido, el número ingresado no tiene 10 dígitos", true);
-            return;
-        }
-        if (!cel.matches("[0-9]+")) {
-            mostrarMensaje("Número celular no válido, el número ingresado contiene caracteres no permitidos", true);
-            return;
-        }
-        if (!cel.startsWith("09")) {
-            mostrarMensaje("Número celular no válido, el número ingresado con comienza con 09", true);
-            return;
-        }
-
-        // Validación DIRECCIÓN (Caso de Uso 3)
-        String dir = txtDireccionJ.getText().trim();
-        if (dir.isEmpty() || dir.length() > 100) {
-            mostrarMensaje("Dirección no válida, la dirección ingresada está vacía o tiene más de 100 caracteres", true);
-            return;
-        }
-
-        // Validación CORREO (Caso de Uso 4)
-        String corr = txtCorreoJ.getText().trim();
-        if (corr.isEmpty() || corr.length() > 50) {
-            mostrarMensaje("Correo no válido, el correo ingresado está vacío o tiene más de 50 caracteres", true);
-            return;
-        }
-
-        // Si todo es correcto:
-        mostrarMensaje("Datos actualizados correctamente", false);
-    }
-
-    // --- 5. DAR DE BAJA ---
-    @FXML
-    void darBajaClienteJ(ActionEvent event) {
-        if (txtNombre.getText().isEmpty()) {
-            mostrarMensaje("Cliente no registrado", true);
-            return;
-        }
-
-        if (txtEstado.getText().equals("INACTIVO")) {
-            mostrarMensaje("Este cliente ya fue dado de baja", true);
-        } else {
-            txtEstado.setText("INACTIVO");
-            mostrarMensaje("Cliente dado de baja con éxito", false);
-        }
-    }
-
-    // --- 6. DAR DE ALTA ---
-    @FXML
-    void darAltaClienteJ(ActionEvent event) {
-        if (txtNombre.getText().isEmpty()) {
-            mostrarMensaje("Cliente no registrado", true);
+    void darAltaClienteJ() {
+        if (!clienteCargado) {
+            mostrarAlerta("Cliente no registrado", Alert.AlertType.ERROR);
             return;
         }
 
         if (txtEstado.getText().equals("ACTIVO")) {
-            mostrarMensaje("Este cliente ya fue dado de alta", true);
-        } else {
-            txtEstado.setText("ACTIVO");
-            mostrarMensaje("Cliente dado de alta con éxito", false);
+            mostrarAlerta("Este cliente ya fue dado de alta", Alert.AlertType.WARNING);
+            return;
         }
+
+        txtEstado.setText("ACTIVO");
+        registrarLog("Alta de cliente jurídico");
+        mostrarAlerta("Cliente dado de alta con éxito", Alert.AlertType.INFORMATION);
     }
 
-    // --- FUNCIONES DE APOYO ---
-    private void mostrarMensaje(String texto, boolean esError) {
-        lblMensaje.setText(texto);
-        lblMensaje.setTextFill(esError ? Color.RED : Color.GREEN);
+    // ---------- DAR DE BAJA ----------
+    @FXML
+    void darBajaClienteJ() {
+        if (!clienteCargado) {
+            mostrarAlerta("Cliente no registrado", Alert.AlertType.ERROR);
+            return;
+        }
+
+        if (txtEstado.getText().equals("INACTIVO")) {
+            mostrarAlerta("Este cliente ya fue dado de baja", Alert.AlertType.WARNING);
+            return;
+        }
+
+        txtEstado.setText("INACTIVO");
+        registrarLog("Baja de cliente jurídico");
+        mostrarAlerta("Cliente dado de baja con éxito", Alert.AlertType.INFORMATION);
+    }
+
+    // ---------- MODIFICAR DATOS ----------
+    @FXML
+    void modificarDatosJ() {
+        if (!clienteCargado) {
+            mostrarAlerta("Cliente no registrado", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // CASO: MODIFICAR CELULAR
+        String nuevoCelular = txtCelularJ.getText().trim();
+        if (!nuevoCelular.equals(celularOriginal)) {
+
+            if (nuevoCelular.length() != 10) {
+                mostrarAlerta("Número celular no válido, el número ingresado no tiene 10 dígitos", Alert.AlertType.ERROR);
+                return;
+            }
+            if (!nuevoCelular.matches("[0-9]+")) {
+                mostrarAlerta("Número celular no válido, el número ingresado contiene caracteres no permitidos", Alert.AlertType.ERROR);
+                return;
+            }
+            if (!nuevoCelular.startsWith("09")) {
+                mostrarAlerta("Número celular no válido, el número ingresado con comienza con 09", Alert.AlertType.ERROR);
+                return;
+            }
+
+            registrarLog("Modificación de número celular de cliente jurídico");
+            mostrarAlerta("Número celular actualizado correctamente", Alert.AlertType.INFORMATION);
+            celularOriginal = nuevoCelular;
+            return;
+        }
+
+        // CASO: MODIFICAR DIRECCIÓN
+        String nuevaDireccion = txtDireccionJ.getText().trim();
+        if (!nuevaDireccion.equals(direccionOriginal)) {
+
+            if (nuevaDireccion.isEmpty() || nuevaDireccion.length() > 100) {
+                mostrarAlerta("Dirección no válida, la dirección ingresada está vacía o tiene más de 100 caracteres", Alert.AlertType.ERROR);
+                return;
+            }
+
+            registrarLog("Modificación de dirección de cliente jurídico");
+            mostrarAlerta("Dirección modificada correctamente", Alert.AlertType.INFORMATION);
+            direccionOriginal = nuevaDireccion;
+            return;
+        }
+
+        // CASO: MODIFICAR CORREO
+        String nuevoCorreo = txtCorreoJ.getText().trim();
+        if (!nuevoCorreo.equals(correoOriginal)) {
+
+            if (nuevoCorreo.isEmpty() || nuevoCorreo.length() > 50) {
+                mostrarAlerta("Correo no válido, el correo ingresado está vacío o tiene más de 50 caracteres", Alert.AlertType.ERROR);
+                return;
+            }
+
+            registrarLog("Modificación de correo de cliente jurídico");
+            mostrarAlerta("Dirección modificada correctamente", Alert.AlertType.INFORMATION);
+            correoOriginal = nuevoCorreo;
+            return;
+        }
+
+        mostrarAlerta("No se detectaron cambios para modificar", Alert.AlertType.WARNING);
+    }
+
+    // ---------- INTERFAZ ----------
+    private void bloquearCampos(boolean bloquear) {
+        txtCelularJ.setDisable(bloquear);
+        txtCorreoJ.setDisable(bloquear);
+        txtDireccionJ.setDisable(bloquear);
+
+        btnModificarJ.setDisable(bloquear);
+        btnDarAltaJ.setDisable(bloquear);
+        btnDarBajaJ.setDisable(bloquear);
     }
 
     private void limpiarCamposDatos() {
