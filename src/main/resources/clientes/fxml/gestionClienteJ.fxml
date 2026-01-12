@@ -14,19 +14,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="682.0" prefWidth="1016.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.clientes.controller.gestionClienteJController">
+<AnchorPane prefHeight="682.0" prefWidth="1016.0" stylesheets="@../css/gestionClienteStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.clientes.controller.gestionClienteJController">
     <children>
-        <VBox layoutX="50.0" layoutY="50.0" spacing="30.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+        <VBox layoutX="50.0" layoutY="50.0" spacing="30.0" styleClass="card-panel" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
             <padding>
                 <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
             </padding>
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label text="Gestión de Cliente Tipo Persona Jurídica">
+                        <Label styleClass="label-titulo" text="Gestión de Cliente Tipo Persona Jurídica">
                             <font><Font name="System Bold" size="28.0" /></font>
                         </Label>
-                        <Label text="Consulte, modifique o cambie el estado de un cliente tipo persona jurídica mediante su Número de RUC." textFill="#707070">
+                        <Label styleClass="label-subtitulo" text="Consulte, modifique o cambie el estado de un cliente tipo persona jurídica mediante su Número de RUC.">
                             <font><Font size="15.0" /></font>
                         </Label>
                     </children>
@@ -36,15 +36,14 @@
                     <children>
                         <VBox spacing="10.0">
                             <children>
-                                <Label text="Número de RUC">
+                                <Label styleClass="label-campo" text="Número de RUC">
                                     <font><Font name="System Bold" size="18.0" /></font>
                                 </Label>
                                 <TextField fx:id="txtRuc" prefHeight="40.0" prefWidth="400.0" promptText="Ingrese 13 dígitos" />
                             </children>
                         </VBox>
-                        <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#consultarClienteJ" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white;" text="BUSCAR">
+                        <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#consultarClienteJ" prefHeight="40.0" prefWidth="150.0" styleClass="btn-buscar" text="BUSCAR">
                             <font><Font name="System Bold" size="13.0" /></font>
-                            <cursor><Cursor fx:constant="HAND" /></cursor>
                         </Button>
                     </children>
                 </HBox>
@@ -64,42 +63,32 @@
                     <children>
                         <VBox spacing="5.0">
                             <children>
-                                <Label maxWidth="Infinity" style="-fx-background-color: #bad7f2;" text="Nombre Completo / Razón Social">
-                                    <padding><Insets left="5.0" /></padding>
-                                </Label>
-                                <TextField fx:id="txtNombre" editable="false" prefHeight="35.0" style="-fx-background-color: #f9f9f9;" />
+                                <Label maxWidth="Infinity" styleClass="label-header-field" text="Nombre Completo / Razón Social" />
+                                <TextField fx:id="txtNombre" editable="false" prefHeight="35.0" styleClass="input-readonly" />
                             </children>
                         </VBox>
                         <VBox spacing="5.0" GridPane.rowIndex="1">
                             <children>
-                                <Label maxWidth="Infinity" style="-fx-background-color: #bad7f2;" text="Estado Actual">
-                                    <padding><Insets left="5.0" /></padding>
-                                </Label>
-                                <TextField fx:id="txtEstado" editable="false" prefHeight="35.0" style="-fx-background-color: #f9f9f9;" />
+                                <Label maxWidth="Infinity" styleClass="label-header-field" text="Estado Actual" />
+                                <TextField fx:id="txtEstado" editable="false" prefHeight="35.0" styleClass="input-readonly" />
                             </children>
                         </VBox>
 
                         <VBox spacing="5.0" GridPane.columnIndex="1">
                             <children>
-                                <Label maxWidth="Infinity" style="-fx-background-color: #bad7f2;" text="Correo Electrónico">
-                                    <padding><Insets left="5.0" /></padding>
-                                </Label>
+                                <Label maxWidth="Infinity" styleClass="label-header-field" text="Correo Electrónico" />
                                 <TextField fx:id="txtCorreoJ" prefHeight="35.0" promptText="ejemplo@correo.com" />
                             </children>
                         </VBox>
                         <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <children>
-                                <Label maxWidth="Infinity" style="-fx-background-color: #bad7f2;" text="Dirección">
-                                    <padding><Insets left="5.0" /></padding>
-                                </Label>
+                                <Label maxWidth="Infinity" styleClass="label-header-field" text="Dirección" />
                                 <TextField fx:id="txtDireccionJ" prefHeight="35.0" promptText="Calle Principal y Secundaria" />
                             </children>
                         </VBox>
                         <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <children>
-                                <Label maxWidth="Infinity" style="-fx-background-color: #bad7f2;" text="Teléfono Celular">
-                                    <padding><Insets left="5.0" /></padding>
-                                </Label>
+                                <Label maxWidth="Infinity" styleClass="label-header-field" text="Teléfono Celular" />
                                 <TextField fx:id="txtCelularJ" prefHeight="35.0" promptText="09XXXXXXXX" />
                             </children>
                         </VBox>
@@ -108,14 +97,11 @@
 
                 <HBox alignment="CENTER_RIGHT" spacing="15.0" VBox.vgrow="ALWAYS">
                     <children>
-                        <Button fx:id="btnModificarJ" mnemonicParsing="false" onAction="#modificarDatosJ" prefHeight="45.0" prefWidth="130.0" text="MODIFICAR">
-                            <cursor><Cursor fx:constant="HAND" /></cursor>
+                        <Button fx:id="btnModificarJ" mnemonicParsing="false" onAction="#modificarDatosJ" prefHeight="45.0" prefWidth="130.0" styleClass="btn-modificar" text="MODIFICAR">
                         </Button>
-                        <Button fx:id="btnDarAltaJ" mnemonicParsing="false" onAction="#darAltaClienteJ" prefHeight="45.0" prefWidth="130.0" style="-fx-border-color: green; -fx-text-fill: green;" text="DAR DE ALTA">
-                            <cursor><Cursor fx:constant="HAND" /></cursor>
+                        <Button fx:id="btnDarAltaJ" mnemonicParsing="false" onAction="#darAltaClienteJ" prefHeight="45.0" prefWidth="130.0" styleClass="btn-alta" text="DAR DE ALTA">
                         </Button>
-                        <Button fx:id="btnDarBajaJ" mnemonicParsing="false" onAction="#darBajaClienteJ" prefHeight="45.0" prefWidth="130.0" style="-fx-border-color: red; -fx-text-fill: red;" text="DAR DE BAJA">
-                            <cursor><Cursor fx:constant="HAND" /></cursor>
+                        <Button fx:id="btnDarBajaJ" mnemonicParsing="false" onAction="#darBajaClienteJ" prefHeight="45.0" prefWidth="130.0" styleClass="btn-baja" text="DAR DE BAJA">
                         </Button>
                     </children>
                 </HBox>
