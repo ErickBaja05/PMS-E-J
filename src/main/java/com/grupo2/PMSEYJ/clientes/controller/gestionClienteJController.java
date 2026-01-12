@@ -20,7 +20,7 @@ public class gestionClienteJController {
 
         // Validación de entrada vacía
         if (cedula.isEmpty()) {
-            mostrarMensaje("Por favor, ingrese una cédula para buscar.", true);
+            mostrarMensaje("Por favor, ingrese un RUC para buscar.", true);
             return;
         }
 
@@ -114,8 +114,15 @@ public class gestionClienteJController {
 
     // --- FUNCIONES DE APOYO ---
     private void mostrarMensaje(String texto, boolean esError) {
+
+        if(esError) {
+            lblMensaje.getStyleClass().remove("mensajeConfirmacion");
+            lblMensaje.getStyleClass().add("mensajeError");
+        }else{
+            lblMensaje.getStyleClass().remove("mensajeError");
+            lblMensaje.getStyleClass().add("mensajeConfirmacion");
+        }
         lblMensaje.setText(texto);
-        lblMensaje.setTextFill(esError ? Color.RED : Color.GREEN);
     }
 
     private void limpiarCamposDatos() {

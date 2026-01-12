@@ -33,7 +33,7 @@
 }
 .boton:hover, .btnBuscarCliente:hover {
     -fx-cursor: hand;
-    -fx-background-color: #21867a;
+    -fx-background-color: #1b655c;
 }
 
 /* === ICONOS DENTRO DE BOTONES === */

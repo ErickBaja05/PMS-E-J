@@ -76,13 +76,13 @@
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="btnConsultarClienteN" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteN" text="CONSULTAR CLIENTE NATURAL">
+                                    <Button fx:id="btnConsultarClienteN" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteN" text="GESTIÓN CLIENTE NATURAL">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="btnConsultarClienteJ" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteJ" text="CONSULTAR CLIENTE JURÍDICO">
+                                    <Button fx:id="btnConsultarClienteJ" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteJ" text="GESTIÓN CLIENTE JURÍDICO">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />

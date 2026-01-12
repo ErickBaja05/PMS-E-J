@@ -17,6 +17,21 @@
     -fx-cursor: hand;
 }
 
+.btnAccion{
+    -fx-font-weight: bold;
+    -fx-background-color: #f3efee;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
+    -fx-font-size: 13px;
+
+}
+
+.btnAccion:hover{
+    -fx-background-color: #b5b8ab;
+    -fx-cursor: hand;
+}
+
 .lblInformacion{
     -fx-font-family: "Roboto", sans-serif;
     -fx-background-color: #0a7e73;
@@ -33,6 +48,10 @@
     -fx-background-color: #f3efee;
     -fx-font-family: "Roboto", sans-serif;
     -fx-font-size: 16;
+}
+
+.txtFieldNegrita{
+    -fx-font-weight: bold;
 }
 
 .mensajeError{

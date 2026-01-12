@@ -115,8 +115,15 @@ public class gestionClienteNController {
 
     // --- FUNCIONES DE APOYO ---
     private void mostrarMensaje(String texto, boolean esError) {
+
+        if(esError) {
+            lblMensaje.getStyleClass().remove("mensajeConfirmacion");
+            lblMensaje.getStyleClass().add("mensajeError");
+        }else{
+            lblMensaje.getStyleClass().remove("mensajeError");
+            lblMensaje.getStyleClass().add("mensajeConfirmacion");
+        }
         lblMensaje.setText(texto);
-        lblMensaje.setTextFill(esError ? Color.RED : Color.GREEN);
     }
 
     private void limpiarCamposDatos() {
