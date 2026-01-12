@@ -16,22 +16,19 @@
 
 <AnchorPane prefHeight="682.0" prefWidth="1016.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.clientes.controller.gestionClienteNController">
     <children>
-        <VBox layoutX="50.0" layoutY="50.0" spacing="30.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="50.799999999999955" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.799999999999955" AnchorPane.topAnchor="50.0">
+        <VBox layoutX="50.0" layoutY="50.0" spacing="30.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
             <padding>
                 <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
             </padding>
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label text="Gestión de Cliente Natural">
-                            <font>
-                                <Font name="System Bold" size="28.0" />
-                            </font>
+                        <Label text="Gestión de Cliente Tipo Persona Natural">
+                            <font><Font name="System Bold" size="28.0" /></font>
                         </Label>
-                        <Label text="Consulte, modifique o cambie el estado de un cliente natural mediante su Cédula de Identidad." textFill="#707070">
-                     <font>
-                        <Font size="15.0" />
-                     </font></Label>
+                        <Label text="Consulte, modifique o cambie el estado de un cliente tipo persona natural mediante su Cédula de Identidad." textFill="#707070">
+                            <font><Font size="15.0" /></font>
+                        </Label>
                     </children>
                 </VBox>
 
@@ -40,20 +37,14 @@
                         <VBox spacing="10.0">
                             <children>
                                 <Label text="Cédula de Identidad">
-                                    <font>
-                                        <Font name="System Bold" size="18.0" />
-                                    </font>
+                                    <font><Font name="System Bold" size="18.0" /></font>
                                 </Label>
                                 <TextField fx:id="txtCedula" prefHeight="40.0" prefWidth="400.0" promptText="Ingrese 10 dígitos" />
                             </children>
                         </VBox>
                         <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#consultarCliente" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white;" text="BUSCAR">
-                            <font>
-                                <Font name="System Bold" size="13.0" />
-                            </font>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
+                            <font><Font name="System Bold" size="13.0" /></font>
+                            <cursor><Cursor fx:constant="HAND" /></cursor>
                         </Button>
                     </children>
                 </HBox>
@@ -87,6 +78,14 @@
                                 <TextField fx:id="txtFechaNacimiento" editable="false" prefHeight="35.0" style="-fx-background-color: #f9f9f9;" />
                             </children>
                         </VBox>
+                        <VBox spacing="5.0" GridPane.rowIndex="2">
+                            <children>
+                                <Label maxWidth="Infinity" style="-fx-background-color: #bad7f2;" text="Estado Actual">
+                                    <padding><Insets left="5.0" /></padding>
+                                </Label>
+                                <TextField fx:id="txtEstado" editable="false" prefHeight="35.0" style="-fx-background-color: #f9f9f9;" />
+                            </children>
+                        </VBox>
 
                         <VBox spacing="5.0" GridPane.columnIndex="1">
                             <children>
@@ -112,14 +111,6 @@
                                 <TextField fx:id="txtCelular" prefHeight="35.0" promptText="09XXXXXXXX" />
                             </children>
                         </VBox>
-                        <VBox spacing="5.0" GridPane.rowIndex="2">
-                            <children>
-                                <Label maxWidth="Infinity" style="-fx-background-color: #bad7f2;" text="Estado Actual">
-                                    <padding><Insets left="5.0" /></padding>
-                                </Label>
-                                <TextField fx:id="txtEstado" editable="false" prefHeight="35.0" style="-fx-background-color: #f9f9f9;" />
-                            </children>
-                        </VBox>
                     </children>
                 </GridPane>
 
@@ -136,12 +127,6 @@
                         </Button>
                     </children>
                 </HBox>
-
-                <Label fx:id="lblMensaje" wrapText="true">
-                    <font>
-                        <Font name="System Italic" size="14.0" />
-                    </font>
-                </Label>
             </children>
         </VBox>
     </children>
