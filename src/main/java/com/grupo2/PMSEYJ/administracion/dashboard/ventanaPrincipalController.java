@@ -1,5 +1,6 @@
 package com.grupo2.PMSEYJ.administracion.dashboard;
 
+import com.grupo2.PMSEYJ.core.session.SesionActual;
 import com.grupo2.PMSEYJ.core.util.NavigationUtil;
 import javafx.css.Styleable;
 import javafx.event.ActionEvent;
@@ -220,7 +221,11 @@ public class ventanaPrincipalController implements Initializable {
     private VBox proveedoresSubMenu;
 
     @FXML
+    private Label lblUsuario;
+
+    @FXML
     void logOut(ActionEvent event) throws IOException {
+        SesionActual.cerrarSesion();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Hasta pronto");
         alert.setHeaderText("Sesión cerrada con éxito");
@@ -426,6 +431,12 @@ public class ventanaPrincipalController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        if(SesionActual.haySesion()){
+            lblUsuario.setText(
+                    SesionActual.getUsuario().getNombre_us().toUpperCase()
+            );
+        }
         FontIcon icon = new FontIcon("fa-angle-double-left");
         icon.getStyleClass().add("buttonsIcon");
         FontIcon icon2 = new FontIcon("fa-stethoscope");
