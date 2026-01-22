@@ -29,7 +29,7 @@
                                 <Label text="Número de Factura:">
                                     <font><Font name="System Bold" size="14.0" /></font>
                                 </Label>
-                                <TextField fx:id="txtNumFactura" prefHeight="35.0" prefWidth="250.0" promptText="Solo valores numéricos" />
+                                <TextField fx:id="txtNumFactura" prefHeight="35.0" prefWidth="250.0" promptText="Factura del proveedor" />
                         <Button fx:id="btnValidarFactura" onAction="#handleValidarFactura" prefHeight="27.0" prefWidth="131.0" styleClass="btn-agregar" text="Validar">
                            <font>
                               <Font name="System Bold" size="13.0" />

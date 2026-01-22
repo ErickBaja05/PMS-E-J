@@ -36,7 +36,7 @@
 
                             <TextField fx:id="txtNumFactura"
                                        prefWidth="250"
-                                       promptText="Ej: F-001"/>
+                                       promptText="Ej: 101"/>
 
                             <Button text="BUSCAR"
                                     onAction="#buscarFactura"

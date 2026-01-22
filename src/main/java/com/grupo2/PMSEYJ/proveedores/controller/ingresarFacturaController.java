@@ -88,6 +88,7 @@ public class ingresarFacturaController {
 
         String numFact = txtNumFactura.getText().trim();
 
+
         // Escenario Alternativo 1
         try {
             int fact = Integer.parseInt(numFact);

@@ -22,28 +22,32 @@ public class recuperarPasswordController {
         // 1. VALIDACIÓN: ¿Está vacío?
         if (correo.isEmpty()) {
             lblMensaje.setText("Por favor, ingrese un correo electrónico.");
-            lblMensaje.setStyle("-fx-text-fill: red;");
+            lblMensaje.getStyleClass().remove("mensajeConfirmacion");
+            lblMensaje.getStyleClass().add("mensajeError");
             return;
         }
 
         // 2. ESCENARIO 1: Validar formato de correo
         if (!esFormatoValido(correo)) {
             lblMensaje.setText("Formato del correo incorrecto");
-            lblMensaje.setStyle("-fx-text-fill: red;");
+            lblMensaje.getStyleClass().remove("mensajeConfirmacion");
+            lblMensaje.getStyleClass().add("mensajeError");
             return;
         }
         // Para la base de datos
         // 3. ESCENARIO 2: Verificar si está registrado
         if (!estaRegistrado(correo)) {
             lblMensaje.setText("No existe una cuenta asociada a ese correo");
-            lblMensaje.setStyle("-fx-text-fill: red;");
+            lblMensaje.getStyleClass().remove("mensajeConfirmacion");
+            lblMensaje.getStyleClass().add("mensajeError");
             return;
         }
 
         // 4. ESCENARIO BÁSICO: Envío exitoso
         enviarCorreo(correo);
         lblMensaje.setText("Correo con los datos del usuario enviados correctamente");
-        lblMensaje.setStyle("-fx-text-fill: green;");
+        lblMensaje.getStyleClass().remove("mensajeError");
+        lblMensaje.getStyleClass().add("mensajeConfirmacion");
 
         // 5. REGISTRO DE LOGS (Auditoría)
         registrarAccion(correo);

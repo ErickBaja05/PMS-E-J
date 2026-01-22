@@ -105,7 +105,7 @@ public class cotejarFacturaController2 {
         }
 
         // SIMULACIÓN BD
-        if (!"F-001".equals(numFactura)) {
+        if (!"101".equals(numFactura)) {
             mostrarMensaje("Error", "Factura no registrada", Alert.AlertType.ERROR);
             limpiarTodo();
             return;

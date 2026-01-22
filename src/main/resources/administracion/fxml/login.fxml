@@ -45,7 +45,7 @@
       <TextField fx:id="textFieldUsername" layoutX="840.0" layoutY="235.0" prefHeight="88.0" prefWidth="350.0" promptText="Ingrese su usuario" styleClass="textField" />
       <PasswordField fx:id="textFieldPassword" layoutX="840.0" layoutY="362.0" prefHeight="88.0" prefWidth="350.0" promptText="Ingrese su contraseña" styleClass="textField" />
       <Button id="botonLogin" fx:id="botonLogin" layoutX="840.0" layoutY="491.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="58.0" prefWidth="350.0" text="INICIAR SESIÓN" />
-      <Label layoutX="350.0" layoutY="84.0" prefHeight="44.0" prefWidth="634.0" styleClass="labels" text="SISTEMA DE FACTURACIÓN PMS-E&amp;J" textAlignment="CENTER" textFill="#ececec">
+      <Label layoutX="350.0" layoutY="84.0" prefHeight="44.0" prefWidth="634.0" styleClass="labels" text="SISTEMA DE GESTIÓN PMS-E&amp;J" textAlignment="CENTER" textFill="#ececec">
          <font>
             <Font name="Garamond" size="36.0" />
          </font>

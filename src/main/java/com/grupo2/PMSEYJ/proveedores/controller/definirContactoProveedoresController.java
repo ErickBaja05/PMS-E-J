@@ -25,7 +25,7 @@ public class definirContactoProveedoresController {
             validarVacio(txtCorreo, "Correo Electrónico");
 
             // 2. Validar formatos específicos
-            validarFormato(txtNombre.getText(), "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{5,30}$",
+            validarFormato(txtNombre.getText(), "^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{5,30}$",
                     "El nombre debe tener entre 5 y 30 letras.");
 
             validarFormato(txtTelefono.getText(), "\\d{10}",
