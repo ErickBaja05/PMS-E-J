@@ -24,7 +24,7 @@
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label styleClass="lblCedula" text="Gestión de Cliente Jurídico">
+                        <Label styleClass="lblTitulo" text="Gestión de Cliente Jurídico">
                             <font>
                                 <Font name="System Bold" size="28.0" />
                             </font>

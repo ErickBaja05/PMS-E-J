@@ -51,7 +51,7 @@ public class eliminarUserController {
         }
 
         // Simulación de búsqueda exitosa
-        //mostrarAlerta("Búsqueda", "Búsqueda finalizada para el perfil " + perfil, Alert.AlertType.INFORMATION);
+        mostrarAlerta("Búsqueda", "Búsqueda finalizada para el perfil " + perfil, Alert.AlertType.INFORMATION);
     }
 
     @FXML

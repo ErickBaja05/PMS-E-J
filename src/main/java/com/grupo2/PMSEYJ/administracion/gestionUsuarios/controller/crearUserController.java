@@ -3,8 +3,10 @@ package com.grupo2.PMSEYJ.administracion.gestionUsuarios.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -50,29 +52,41 @@ public class crearUserController implements Initializable {
         String password = txtPassword.getText();
         String tipoUsuario = ComboBTipoUser.getValue();
 
-        // ESCENARIO ALTERNATIVO 1: Usuario no válido
-        if (usuario == null || usuario.trim().isEmpty()) {
-            mostrarError("Nombre de usuario no válido");
-            return;
-        }
-
-        // ESCENARIO ALTERNATIVO 2: Correo no válido
-        if (correo == null || !correo.matches("^.+@.+\\..+$")) {
-            mostrarError("Correo electrónico no válido");
-            return;
-        }
-
-        // ESCENARIO ALTERNATIVO 3: Contraseña no válida
-        if (password == null || password.length() < 6) {
-            mostrarError("Contraseña no válida (mínimo 6 caracteres)");
-            return;
-        }
-
         // Validación adicional: tipo de usuario
         if (tipoUsuario == null) {
             mostrarError("Seleccione el tipo de usuario");
             return;
         }
+
+        // ESCENARIO ALTERNATIVO 1: Usuario no válido
+        if (usuario == null || usuario.trim().isEmpty()) {
+            mostrarError("El nombre de usuario no puede estar vacio");
+            return;
+        }
+
+        // ESCENARIO ALTERNATIVO 2: Correo no válido
+        if (correo == null || correo.trim().isEmpty()) {
+            mostrarError("El correo electrónico  no puede estar vacio");
+            return;
+        }
+
+        if(!correo.matches("^.+@.+\\..+$"))
+        {
+            mostrarError("Correo electrónico no válido");
+            return;
+        }
+
+        // ESCENARIO ALTERNATIVO 3: Contraseña no válida
+        if (password == null || password.trim().isEmpty()) {
+            mostrarError("Debe proporcionar una contraseña");
+            return;
+        }
+
+        if (password.length() < 6) {
+            mostrarError("Contraseña no válida (mínimo 6 caracteres)");
+            return;
+        }
+
 
         // ESCENARIO ALTERNATIVO 4: Usuario o correo existente (simulado)
         boolean existeUsuario = false; // luego irá base de datos
@@ -94,12 +108,16 @@ public class crearUserController implements Initializable {
     }
 
     private void mostrarError(String mensaje) {
-        lblMensaje.setStyle("-fx-text-fill: red;");
+        lblMensaje.setTextAlignment(TextAlignment.CENTER);
+        lblMensaje.setAlignment(Pos.CENTER);
+        lblMensaje.getStyleClass().setAll("mensajeError");
         lblMensaje.setText(mensaje);
     }
 
     private void mostrarExito(String mensaje) {
-        lblMensaje.setStyle("-fx-text-fill: green;");
+        lblMensaje.setTextAlignment(TextAlignment.CENTER);
+        lblMensaje.setAlignment(Pos.CENTER);
+        lblMensaje.getStyleClass().setAll("mensajeConfirmacion");
         lblMensaje.setText(mensaje);
     }
 
