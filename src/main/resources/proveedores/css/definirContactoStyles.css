@@ -34,12 +34,17 @@
 
 /* Botón Principal (Registrar) */
 .btn-registrar {
-    -fx-background-color: #2c3e50; /* Azul oscuro */
-    -fx-text-fill: white;
+        -fx-font-weight: bold;
+        -fx-font-size: 12;
+        -fx-background-color: #10B981;
+        -fx-text-fill: white;
+        -fx-background-radius: 12; /* Un poco más redondo */
+
+
 }
 
 .btn-registrar:hover {
-    -fx-background-color: #34495e; /* Un poco más claro al pasar el mouse */
+    -fx-background-color: rgba(18, 149, 91, 0.42); /* Un poco más claro al pasar el mouse */
 }
 
 /* Botón Secundario (Cancelar) */
