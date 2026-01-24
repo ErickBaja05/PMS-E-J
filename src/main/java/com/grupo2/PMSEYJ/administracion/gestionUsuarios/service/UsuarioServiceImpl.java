@@ -4,6 +4,8 @@ import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.NuevoUsuarioDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.UsuarioSesionDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.model.Usuario;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dao.UsuarioDAO;
+import com.grupo2.PMSEYJ.core.exception.UsuarioYaExisteException;
+
 public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -35,11 +37,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public boolean insertarUsuario(NuevoUsuarioDTO nuevoUsuario) {
+    public void insertarUsuario(NuevoUsuarioDTO nuevoUsuario) {
         Usuario existenteNombre = usuarioDAO.buscarPorNombre(nuevoUsuario.getNombre());
         Usuario existeCorreo = usuarioDAO.buscarPorEmail(nuevoUsuario.getCorreo());
-        if (existenteNombre != null  && existeCorreo != null) {
-            return false;
+        if(existenteNombre != null) {
+            throw new UsuarioYaExisteException("El nombre de usuario ya esta registrado!");
+        }
+        if(existeCorreo != null) {
+            throw new UsuarioYaExisteException("El correo de usuario ya esta registrado!");
         }
 
         Usuario usuario = new Usuario();
@@ -48,7 +53,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setCorreo(nuevoUsuario.getCorreo());
         usuario.setPerfil(nuevoUsuario.getPerfil());
         usuarioDAO.insertar(usuario);
-        return true;
+
 
 
 

@@ -4,6 +4,7 @@ import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.NuevoUsuarioDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.UsuarioSesionDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.service.UsuarioService;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.service.UsuarioServiceImpl;
+import com.grupo2.PMSEYJ.core.exception.UsuarioYaExisteException;
 import com.grupo2.PMSEYJ.core.session.SesionActual;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -113,13 +114,8 @@ public class crearUserController implements Initializable {
         nuevoUsuario.setNombre(usuario);
         nuevoUsuario.setPerfil(perfil);
 
-        // ESCENARIO ALTERNATIVO 4: Usuario o correo existente (simulado)
-        boolean sePudoInsertar = usuarioService.insertarUsuario(nuevoUsuario);
-
-
-        if (!sePudoInsertar) {
-            mostrarError("Usuario o Correo electrónico ya registrados. Ingrese datos diferentes");
-        }else{
+        try{
+            usuarioService.insertarUsuario(nuevoUsuario);
             LocalDateTime timestamp = LocalDateTime.now();
             String usuarioAccion = SesionActual.getUsuario().getNombre_us();
 
@@ -128,7 +124,12 @@ public class crearUserController implements Initializable {
 
             mostrarExito("El usuario " + nuevoUsuario.getNombre() + " se ha registrado correctamente");
             limpiarFormulario();
+        }catch(UsuarioYaExisteException e){
+            mostrarError(e.getMessage());
         }
+        // ESCENARIO ALTERNATIVO 4: Usuario o correo existente (simulado)
+
+
 
 
 

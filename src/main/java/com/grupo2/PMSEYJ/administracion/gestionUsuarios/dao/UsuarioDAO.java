@@ -157,7 +157,7 @@ public class UsuarioDAO {
     }
 
     public Usuario buscarPorEmail(String email) {
-        String sql = "SELECT * FROM usuarios WHERE email = ?";
+        String sql = "SELECT * FROM usuarios WHERE correo_us = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
