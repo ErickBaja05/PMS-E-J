@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.root{
+    -fx-font-family: 'Roboto', sans-serif;
+}
+
+.lblTitulo,.lblSubtitulo,.lblCedula{
+    -fx-font-family: "Roboto", sans-serif;
+}
+
+.btn{
+    -fx-background-color: #0a7e73;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
+    -fx-font-size: 14px;
+    -fx-font-family: "Roboto", sans-serif;
+}
+
+.btn:hover{
+    -fx-background-color: #1b655c;
+    -fx-cursor: hand;
+}
+.textField{
+    -fx-background-color: #f3efee;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 16;
+}
+.lblInformacion{
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+}
+.btnAccion{
+    -fx-font-weight: bold;
+    -fx-background-color: #f3efee;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
+    -fx-font-size: 13px;
+
+}
+
+.btnAccion:hover{
+    -fx-background-color: #b5b8ab;
+    -fx-cursor: hand;
+}

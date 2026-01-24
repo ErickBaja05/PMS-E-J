@@ -93,9 +93,9 @@ public class modificarProductoController implements Initializable {
 
     @FXML
     void limpiarCampos() {
+        mostrarAlerta("Operacion Cancelada", "No se realizaron cambios", Alert.AlertType.INFORMATION);
         txtBusquedaCodigo.clear();
         txtNombre.clear();
-        // Se eliminó txtStock.clear()
         txtPrecioVenta.clear();
         txtPVP.clear();
         txtDescripcion.clear();

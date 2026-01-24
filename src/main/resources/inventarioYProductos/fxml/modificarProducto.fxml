@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="682.0" prefWidth="1016.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.inventarioYProductos.controller.modificarProductoController">
+<AnchorPane prefHeight="682.0" prefWidth="1016.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../css/modificarProducto.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.inventarioYProductos.controller.modificarProductoController">
     <children>
         <VBox layoutX="50.0" layoutY="50.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
             <padding>
@@ -25,20 +25,20 @@
             <children>
                 <VBox spacing="10.0">
                     <children>
-                        <Label text="Modificación Integral de Productos">
+                        <Label styleClass="lblTitulo" text="Modificación Integral de Productos">
                             <font>
                                 <Font name="System Bold" size="26.0" />
                             </font>
                         </Label>
                         <HBox alignment="CENTER_LEFT" spacing="15.0">
                             <children>
-                                <Label text="Código Auxiliar:">
+                                <Label styleClass="lblCedula" text="Código Auxiliar:">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="txtBusquedaCodigo" prefHeight="35.0" prefWidth="250.0" promptText="Ingrese código para buscar..." />
-                                <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#buscarProducto" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white;" text="BUSCAR">
+                                <TextField fx:id="txtBusquedaCodigo" prefHeight="35.0" prefWidth="250.0" promptText="Código para buscar" styleClass="textField" />
+                                <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#buscarProducto" prefHeight="35.0" prefWidth="120.0" styleClass="btn" text="BUSCAR">
                                     <font>
                                         <Font name="System Bold" size="12.0" />
                                     </font>
@@ -68,8 +68,8 @@
                     <children>
                         <VBox spacing="5.0">
                             <children>
-                                <Label text="Nombre del Producto:" />
-                                <TextField fx:id="txtNombre" prefHeight="35.0" promptText="Ingrese el Nombre del Producto" />
+                                <Label styleClass="lblInformacion" text="Nombre del Producto:" />
+                                <TextField fx:id="txtNombre" prefHeight="35.0" promptText="Ingrese el Nombre del Producto" styleClass="textField" />
                             </children>
                         </VBox>
 
@@ -78,8 +78,8 @@
       
                               <VBox spacing="5.0">
                                   <children>
-                                      <Label text="PVP:" />
-                                      <TextField fx:id="txtPVP" prefHeight="35.0" promptText="Ingrese el PVP" />
+                                      <Label styleClass="lblInformacion" text="PVP:" />
+                                      <TextField fx:id="txtPVP" prefHeight="35.0" promptText="Ingrese el PVP" styleClass="textField" />
                                   </children>
                               </VBox>
                      </children>
@@ -87,29 +87,29 @@
 
                         <VBox spacing="5.0" GridPane.rowIndex="1">
                             <children>
-                                <Label text="Precio de Venta:" />
-                                <TextField fx:id="txtPrecioVenta" prefHeight="35.0" promptText="Ingrese el Precio de Venta" />
+                                <Label styleClass="lblInformacion" text="Precio de Venta:" />
+                                <TextField fx:id="txtPrecioVenta" prefHeight="35.0" promptText="Ingrese el Precio de Venta" styleClass="textField" />
                             </children>
                         </VBox>
 
                         <VBox spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                             <children>
-                                <Label text="Descripción:" />
-                                <TextArea fx:id="txtDescripcion" prefHeight="80.0" promptText="Ingrese la descripción del producto" wrapText="true" />
+                                <Label styleClass="lblInformacion" text="Descripción:" />
+                                <TextArea fx:id="txtDescripcion" prefHeight="80.0" promptText="Ingrese la descripción del producto" styleClass="textField" wrapText="true" />
                             </children>
                         </VBox>
 
                         <VBox spacing="5.0" GridPane.rowIndex="3">
                             <children>
-                                <Label text="Forma de Venta:" />
-                                <ComboBox fx:id="cmbFormaVenta" prefHeight="35.0" prefWidth="Infinity" promptText="Seleccione..." />
+                                <Label styleClass="lblInformacion" text="Forma de Venta:" />
+                                <ComboBox fx:id="cmbFormaVenta" prefHeight="35.0" prefWidth="Infinity" promptText="Seleccione..." styleClass="textField" />
                             </children>
                         </VBox>
 
                         <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <children>
-                                <Label text="Tipo de Venta:" />
-                                <ComboBox fx:id="cmbTipoVenta" prefHeight="35.0" prefWidth="Infinity" promptText="Seleccione..." />
+                                <Label styleClass="lblInformacion" text="Tipo de Venta:" />
+                                <ComboBox fx:id="cmbTipoVenta" prefHeight="35.0" prefWidth="Infinity" promptText="Seleccione..." styleClass="textField" />
                             </children>
                         </VBox>
                     </children>
@@ -117,8 +117,8 @@
 
                 <HBox alignment="CENTER_RIGHT" spacing="15.0">
                     <children>
-                        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#limpiarCampos" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #bdc3c7;" text="CANCELAR" />
-                        <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarModificaciones" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #27ae60; -fx-text-fill: white;" text="GUARDAR CAMBIOS">
+                        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#limpiarCampos" prefHeight="45.0" prefWidth="150.0" styleClass="btnAccion" text="CANCELAR" />
+                        <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarModificaciones" prefHeight="45.0" prefWidth="250.0" styleClass="btn" text="GUARDAR CAMBIOS">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
