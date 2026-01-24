@@ -1,5 +1,6 @@
 package com.grupo2.PMSEYJ.administracion.gestionUsuarios.service;
 
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.NuevoUsuarioDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.UsuarioSesionDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.model.Usuario;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dao.UsuarioDAO;
@@ -31,5 +32,25 @@ public class UsuarioServiceImpl implements UsuarioService {
                 usuario.getNombre(),
                 usuario.getPerfil()
         );
+    }
+
+    @Override
+    public boolean insertarUsuario(NuevoUsuarioDTO nuevoUsuario) {
+        Usuario existenteNombre = usuarioDAO.buscarPorNombre(nuevoUsuario.getNombre());
+        Usuario existeCorreo = usuarioDAO.buscarPorEmail(nuevoUsuario.getCorreo());
+        if (existenteNombre != null  && existeCorreo != null) {
+            return false;
+        }
+
+        Usuario usuario = new Usuario();
+        usuario.setNombre(nuevoUsuario.getNombre());
+        usuario.setPassword(nuevoUsuario.getPassword());
+        usuario.setCorreo(nuevoUsuario.getCorreo());
+        usuario.setPerfil(nuevoUsuario.getPerfil());
+        usuarioDAO.insertar(usuario);
+        return true;
+
+
+
     }
 }

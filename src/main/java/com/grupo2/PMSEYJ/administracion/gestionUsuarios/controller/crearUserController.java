@@ -1,5 +1,10 @@
 package com.grupo2.PMSEYJ.administracion.gestionUsuarios.controller;
 
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.NuevoUsuarioDTO;
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.UsuarioSesionDTO;
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.service.UsuarioService;
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.service.UsuarioServiceImpl;
+import com.grupo2.PMSEYJ.core.session.SesionActual;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,8 +40,11 @@ public class crearUserController implements Initializable {
     @FXML
     private TextField txtUsuario;
 
+    private UsuarioService usuarioService;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        usuarioService = new UsuarioServiceImpl();
         // Cargar tipos de usuario
         ComboBTipoUser.getItems().addAll(
                 "Administrador", "Auxiliar"
@@ -47,15 +55,27 @@ public class crearUserController implements Initializable {
     @FXML
     void crearUsuario(ActionEvent event) {
 
+
         String usuario = txtUsuario.getText();
         String correo = txtCorreo.getText();
         String password = txtPassword.getText();
-        String tipoUsuario = ComboBTipoUser.getValue();
+        String tipoUsuario = ComboBTipoUser.getSelectionModel().getSelectedItem();
+        String perfil;
+
+        // PARSING A LO VALORES DE TIPO DE USUARIO
+
+
 
         // Validación adicional: tipo de usuario
         if (tipoUsuario == null) {
             mostrarError("Seleccione el tipo de usuario");
             return;
+        }
+
+        if(tipoUsuario.equals("Administrador")){
+            perfil = "AD";
+        }else{
+            perfil = "VE";
         }
 
         // ESCENARIO ALTERNATIVO 1: Usuario no válido
@@ -87,24 +107,31 @@ public class crearUserController implements Initializable {
             return;
         }
 
+        NuevoUsuarioDTO nuevoUsuario = new NuevoUsuarioDTO();
+        nuevoUsuario.setCorreo(correo);
+        nuevoUsuario.setPassword(password);
+        nuevoUsuario.setNombre(usuario);
+        nuevoUsuario.setPerfil(perfil);
 
         // ESCENARIO ALTERNATIVO 4: Usuario o correo existente (simulado)
-        boolean existeUsuario = false; // luego irá base de datos
+        boolean sePudoInsertar = usuarioService.insertarUsuario(nuevoUsuario);
 
-        if (existeUsuario) {
+
+        if (!sePudoInsertar) {
             mostrarError("Usuario o Correo electrónico ya registrados. Ingrese datos diferentes");
-            return;
+        }else{
+            LocalDateTime timestamp = LocalDateTime.now();
+            String usuarioAccion = SesionActual.getUsuario().getNombre_us();
+
+            System.out.println("Usuario creado en: " + timestamp);
+            System.out.println("Acción realizada por: " + usuarioAccion);
+
+            mostrarExito("El usuario " + nuevoUsuario.getNombre() + " se ha registrado correctamente");
+            limpiarFormulario();
         }
 
-        // ESCENARIO BÁSICO: Usuario creado exitosamente
-        LocalDateTime timestamp = LocalDateTime.now();
-        String usuarioAccion = "admin"; // simulado
 
-        System.out.println("Usuario creado en: " + timestamp);
-        System.out.println("Acción realizada por: " + usuarioAccion);
 
-        mostrarExito("El usuario Administrador fue creado exitosamente.");
-        limpiarFormulario();
     }
 
     private void mostrarError(String mensaje) {

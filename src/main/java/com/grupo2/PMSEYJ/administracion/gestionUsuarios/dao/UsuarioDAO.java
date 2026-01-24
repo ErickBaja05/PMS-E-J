@@ -136,13 +136,33 @@ public class UsuarioDAO {
         return u;
     }
 
-    public Usuario buscarPorNombre(String correo) {
+    public Usuario buscarPorNombre(String nombre_us) {
         String sql = "SELECT * FROM usuarios WHERE nombre_us = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, correo);
+            ps.setString(1, nombre_us);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return mapearUsuario(rs);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al buscar usuario por nombre", e);
+        }
+
+        return null;
+    }
+
+    public Usuario buscarPorEmail(String email) {
+        String sql = "SELECT * FROM usuarios WHERE email = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
