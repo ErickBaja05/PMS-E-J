@@ -1,0 +1,60 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+/* Estilo base para botones */
+.button {
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+/* --- PANEL PRINCIPAL (TARJETA GRANDE) --- */
+.card-panel {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 15;
+}
+
+/* --- BARRA INFERIOR (RESUMEN) --- */
+.footer-box {
+    -fx-background-color: #f9f9f9;
+    -fx-background-radius: 10;
+    -fx-border-color: #eeeeee;
+    -fx-border-radius: 10;
+    -fx-padding: 20; /* Se puede definir aquí para limpiar el FXML */
+}
+
+/* --- TEXTOS --- */
+.label-titulo {
+    -fx-text-fill: black;
+}
+
+.label-subtitulo {
+    -fx-text-fill: #707070;
+}
+
+.label-seccion {
+    -fx-text-fill: black;
+}
+
+/* --- INPUTS --- */
+/* Campo grande para el saldo final */
+.input-field-large {
+    -fx-font-size: 20px;
+    -fx-background-radius: 5;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 5;
+}
+
+/* --- BOTONES --- */
+/* Botón de Cierre (Rojo Intenso) */
+.btn-cierre {
+    -fx-background-color: #c0392b;
+    -fx-text-fill: white;
+}
+
+.btn-cierre:hover {
+    -fx-background-color: #a93226; /* Rojo más oscuro */
+}

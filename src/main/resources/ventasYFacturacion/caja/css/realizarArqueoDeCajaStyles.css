@@ -1,0 +1,61 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+/* Estilo base para botones */
+.button {
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+/* --- TARJETA CENTRAL --- */
+.card-center {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+/* --- CAJA INFORMATIVA (SALDO SISTEMA) --- */
+.info-box {
+    -fx-background-color: #f8f9fa; /* Gris muy claro */
+    -fx-padding: 15;
+    -fx-background-radius: 10;
+}
+
+/* --- TEXTOS --- */
+.label-titulo {
+    -fx-text-fill: black;
+}
+
+.label-instruccion {
+    -fx-text-fill: #707070;
+}
+
+/* El número grande del saldo ($ 0.00) */
+.label-monto-grande {
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+/* --- INPUTS --- */
+/* Campo grande para ingresar el efectivo físico */
+.input-field-large {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 5;
+    -fx-font-size: 18px; /* Letra más grande para mejor visibilidad */
+}
+
+/* --- BOTONES --- */
+.btn-primary {
+    -fx-background-color: #2c3e50; /* Azul oscuro */
+    -fx-text-fill: white;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #34495e;
+}
