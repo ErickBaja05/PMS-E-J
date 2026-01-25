@@ -1,0 +1,75 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+/* Estilo base para botones y cursores */
+.button {
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+/* --- TARJETA CENTRAL --- */
+.card-center {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+/* --- TEXTOS --- */
+.label-titulo {
+    -fx-text-fill: black;
+}
+
+.label-instruccion {
+    -fx-text-fill: #707070;
+}
+
+.label-campo {
+    -fx-text-fill: black;
+}
+
+/* --- INPUTS --- */
+/* Campo de texto normal (Monto) */
+.input-field {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 5;
+    -fx-font-size: 16px;
+}
+
+/* Área de texto (Motivo) */
+.text-area-field {
+    /* El TextArea por defecto tiene fondo blanco, solo ajustamos el borde */
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+/* Corrección para que el contenido del TextArea respete el radio */
+.text-area-field .content {
+    -fx-background-radius: 5;
+}
+
+/* --- BOTONES --- */
+/* Botón Principal (Azul Oscuro) */
+.btn-primary {
+    -fx-background-color: #2c3e50;
+    -fx-text-fill: white;
+}
+.btn-primary:hover {
+    -fx-background-color: #34495e;
+}
+
+/* Botón Cancelar (Gris Claro) */
+.btn-cancelar {
+    -fx-background-color: #ecf0f1;
+    -fx-text-fill: #7f8c8d;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 4;
+}
+.btn-cancelar:hover {
+    -fx-background-color: #bdc3c7;
+    -fx-text-fill: white;
+}

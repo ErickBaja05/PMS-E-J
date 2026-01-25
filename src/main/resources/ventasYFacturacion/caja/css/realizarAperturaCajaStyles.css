@@ -1,0 +1,55 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+/* Estilo base para botones */
+.button {
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+/* --- CONTENEDOR CENTRAL (TARJETA) --- */
+.card-center {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+/* --- TEXTOS --- */
+.label-titulo {
+    -fx-text-fill: black;
+}
+
+.label-instruccion {
+    -fx-text-fill: #707070; /* Gris medio */
+}
+
+.label-campo {
+    -fx-text-fill: black;
+}
+
+.label-estado {
+    -fx-text-fill: #9a9a9a; /* Gris muy claro para estado inactivo/cerrado */
+    -fx-font-style: italic;
+}
+
+/* --- INPUTS --- */
+.input-field {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 5;
+    -fx-font-size: 16px; /* Tamaño de letra grande para dinero */
+}
+
+/* --- BOTONES --- */
+/* Botón Principal (Azul Oscuro) */
+.btn-abrir {
+    -fx-background-color: #2c3e50;
+    -fx-text-fill: white;
+}
+.btn-abrir:hover {
+    -fx-background-color: #34495e;
+}
