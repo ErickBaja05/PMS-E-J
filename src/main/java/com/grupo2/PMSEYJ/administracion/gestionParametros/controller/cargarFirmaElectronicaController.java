@@ -59,13 +59,13 @@ public class cargarFirmaElectronicaController {
     void procesarFirma(ActionEvent event) {
         // ESCENARIO ALTERNATIVO 1: Verificar que se haya proporcionado un archivo
         if (archivoSeleccionado == null) {
-            mostrarDialogo("Error de Carga", "Cargue un archivo antes de continuar", Alert.AlertType.WARNING);
+            mostrarDialogo("Error", "Error de carga. Cargue un archivo antes de continuar", Alert.AlertType.WARNING);
             return;
         }
 
         // ESCENARIO ALTERNATIVO 2: Validar extensión .p12
         if (!archivoSeleccionado.getName().toLowerCase().endsWith(".p12")) {
-            mostrarDialogo("Extensión No Permitida", "Cargue un archivo de firma electrónica (.p12)", Alert.AlertType.ERROR);
+            mostrarDialogo("Error", "Extensión No Permitida. Cargue un archivo de firma electrónica (.p12)", Alert.AlertType.ERROR);
             return;
         }
 

@@ -5,42 +5,58 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class definirPromocionController implements Initializable {
 
-    @FXML private Button btValidar, btnCancelar, btnRegistrar;
-    @FXML private DatePicker dpFechaFin, dpFechaInicio;
+    // =====================
+    // CONTROLES FXML
+    // =====================
+    @FXML private Button btValidar;
+    @FXML private Button btnCancelar;
+    @FXML private Button btnRegistrar;
+
+    @FXML private DatePicker dpFechaInicio;
+    @FXML private DatePicker dpFechaFin;
+
     @FXML private Label lblMensaje;
     @FXML private TextArea txtCondiciones;
 
-    // Elementos de "Un Producto"
+    // Radio buttons
     @FXML private RadioButton rtDUnProducto;
-    @FXML private TextField txtCodigoProducto;
-
-    // Elementos de "Toda la Mercadería"
     @FXML private RadioButton rtDTodaMercaderia;
-    @FXML private TextField txtCodigoProducto1; // Este es el del porcentaje de descuento
 
-    private ToggleGroup grupoPromocion;
+    // Campos de texto
+    @FXML private TextField txtCodigoProducto;
+    @FXML private TextField txtCodigoProducto1;
+
+    // ToggleGroup (YA EXISTE EN EL FXML)
+    @FXML private ToggleGroup grupoPromocion;
+
+    // =====================
+    // ESTADO
+    // =====================
     private boolean productoValidado = false;
 
+    // =====================
+    // INITIALIZE
+    // =====================
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // 1. Crear el grupo para que sean excluyentes
-        grupoPromocion = new ToggleGroup();
-        rtDUnProducto.setToggleGroup(grupoPromocion);
-        rtDTodaMercaderia.setToggleGroup(grupoPromocion);
 
-        // 2. Estado inicial: Seleccionamos "Un Producto" por defecto
+        // Estado inicial: Un Producto seleccionado
         rtDUnProducto.setSelected(true);
         actualizarEstados(true);
+
+        lblMensaje.setText("");
     }
 
-    // --- LÓGICA DE BLOQUEO ---
-
+    // =====================
+    // CAMBIO DE TIPO PROMOCIÓN
+    // =====================
     @FXML
     void darDescuentoUP(ActionEvent event) {
         actualizarEstados(true);
@@ -52,27 +68,29 @@ public class definirPromocionController implements Initializable {
     }
 
     private void actualizarEstados(boolean esProductoIndividual) {
-        // Si es producto individual, habilitamos sus campos y bloqueamos el otro
+
+        // Un producto
         txtCodigoProducto.setDisable(!esProductoIndividual);
         btValidar.setDisable(!esProductoIndividual);
 
-        // Bloqueamos/Habilitamos el campo de porcentaje (Toda la mercadería)
+        // Toda la mercadería
         txtCodigoProducto1.setDisable(esProductoIndividual);
 
-        // Si cambiamos a Mercadería, reseteamos la validación de producto
-        if (!esProductoIndividual) {
-            productoValidado = true; // No necesita validación de código
-            txtCodigoProducto.clear();
-        } else {
-            productoValidado = false;
+        if (esProductoIndividual) {
             txtCodigoProducto1.clear();
+            productoValidado = false;
+        } else {
+            txtCodigoProducto.clear();
+            productoValidado = true; // No requiere validación
         }
     }
 
-    // --- ACCIONES PRINCIPALES ---
-
+    // =====================
+    // VALIDAR PRODUCTO
+    // =====================
     @FXML
     void validarProducto(ActionEvent event) {
+
         String codigo = txtCodigoProducto.getText().trim();
         lblMensaje.setText("");
 
@@ -92,20 +110,23 @@ public class definirPromocionController implements Initializable {
         }
     }
 
+    // =====================
+    // REGISTRAR PROMOCIÓN
+    // =====================
     @FXML
     void registrarPromocion(ActionEvent event) {
-        // Validación de contexto
+
         if (rtDUnProducto.isSelected() && !productoValidado) {
             mostrarMensaje("Debe validar un producto existente primero", true);
             return;
         }
 
-        if (rtDTodaMercaderia.isSelected() && txtCodigoProducto1.getText().trim().isEmpty()) {
+        if (rtDTodaMercaderia.isSelected()
+                && txtCodigoProducto1.getText().trim().isEmpty()) {
             mostrarMensaje("Debe ingresar el porcentaje de descuento", true);
             return;
         }
 
-        // Validaciones comunes (Fechas y condiciones)
         if (txtCondiciones.getText().trim().length() < 5) {
             mostrarMensaje("Condiciones no válidas (mín. 5 caracteres)", true);
             return;
@@ -118,16 +139,19 @@ public class definirPromocionController implements Initializable {
             mostrarMensaje("Fecha de inicio no válida", true);
             return;
         }
+
         if (fin == null || fin.isBefore(inicio)) {
             mostrarMensaje("Fecha de finalización no válida", true);
             return;
         }
 
-        // Simulación de guardado
         mostrarMensaje("Promoción registrada exitosamente", false);
         limpiarCampos();
     }
 
+    // =====================
+    // CANCELAR
+    // =====================
     @FXML
     void cancelarOperacion(ActionEvent event) {
         limpiarCampos();
@@ -135,6 +159,9 @@ public class definirPromocionController implements Initializable {
         lblMensaje.setTextFill(Color.GRAY);
     }
 
+    // =====================
+    // UTILIDADES
+    // =====================
     private void mostrarMensaje(String texto, boolean esError) {
         lblMensaje.setText(texto);
         lblMensaje.setTextFill(esError ? Color.RED : Color.GREEN);

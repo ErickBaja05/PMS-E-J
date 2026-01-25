@@ -1,0 +1,102 @@
+
+/* --- CONFIGURACIÓN GENERAL --- */
+.root {
+    -fx-background-color: #F0F4F4; /* Fondo general menta muy suave */
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* --- TARJETA PRINCIPAL --- */
+.card-panel {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 4); /* Sombra suave */
+    -fx-padding: 30;
+}
+
+/* --- TEXTOS --- */
+.label-titulo {
+    -fx-text-fill: #009688; /* Color Teal para el título */
+    -fx-font-weight: bold;
+}
+
+.label-instruccion {
+    -fx-text-fill: #7F8C8D;
+}
+
+.label-campo {
+    -fx-text-fill: #34495E;
+    -fx-font-weight: bold;
+}
+
+/* --- CAMPOS DE TEXTO (Inputs) --- */
+.text-field {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 6;
+    -fx-border-color: #BDC3C7;
+    -fx-border-radius: 6;
+    -fx-padding: 8;
+}
+
+.text-field:focused {
+    -fx-border-color: #009688; /* Borde verde al escribir */
+    -fx-background-color: #FDFEFE;
+}
+
+/* --- TABS (PESTAÑAS MODERNAS) --- */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tab {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 10 20;
+}
+
+.tab:selected {
+    -fx-background-color: white;
+    -fx-background-radius: 5 5 0 0;
+    -fx-border-color: #009688; /* Línea verde abajo */
+    -fx-border-width: 0 0 3 0;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #7F8C8D;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #009688; /* Texto verde cuando está activa */
+}
+
+/* --- BOTONES --- */
+.button {
+    -fx-cursor: hand;
+    -fx-background-radius: 6;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+}
+
+/* Botón Guardar (Principal) */
+.btn-guardar {
+    -fx-background-color: #009688; /* Teal Médico */
+    -fx-text-fill: white;
+}
+
+.btn-guardar:hover {
+    -fx-background-color: #00796B; /* Teal más oscuro */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,150,136,0.4), 8, 0, 0, 2);
+}
+
+/* Botón Cancelar */
+.btn-cancelar {
+    -fx-background-color: #ECF0F1;
+    -fx-text-fill: #7F8C8D;
+    -fx-border-color: transparent;
+}
+
+.btn-cancelar:hover {
+    -fx-background-color: #BDC3C7;
+    -fx-text-fill: #FFFFFF;
+}
