@@ -1,6 +1,9 @@
 package com.grupo2.PMSEYJ.administracion.gestionParametros.controller;
 
+import com.grupo2.PMSEYJ.administracion.gestionParametros.dto.IvaDTO;
 import com.grupo2.PMSEYJ.administracion.gestionParametros.model.MetodoPago;
+import com.grupo2.PMSEYJ.administracion.gestionParametros.service.ParametrosService;
+import com.grupo2.PMSEYJ.administracion.gestionParametros.service.ParametrosServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,11 +35,19 @@ public class configuracionPagosImpuestosController {
     private final ObservableList<MetodoPago> listaMetodos =
             FXCollections.observableArrayList();
 
+    private ParametrosService parametrosService;
+
     @FXML
     public void initialize() {
 
+        parametrosService = new ParametrosServiceImpl();
+
+        IvaDTO iva = new IvaDTO(0.0);
+
+        iva.setNuevo_valor(parametrosService.consultarValorIva());
+
         // Inicializar valor de IVA (Simulado)
-        lblIvaActual.setText("12.0%");
+        lblIvaActual.setText(iva.getNuevo_valor().toString() + "%");
 
         // ===== TableView con LAMBDAS + PROPERTIES =====
         colNombre.setCellValueFactory(cell -> cell.getValue().nombreProperty());
@@ -64,8 +75,10 @@ public class configuracionPagosImpuestosController {
             double valorIVA = Double.parseDouble(input);
 
             if (valorIVA > 0 && valorIVA <= 100) {
+                IvaDTO iva = new IvaDTO(valorIVA);
+                parametrosService.actualizarValorIva(iva);
 
-                lblIvaActual.setText(valorIVA + "%");
+                lblIvaActual.setText(iva.getNuevo_valor().toString() + "%");
 
                 System.out.println("LOG [Módulo Administración]: Registro del valor del IVA (" + valorIVA +
                         ") por UsuarioAdmin a las " + LocalDateTime.now());

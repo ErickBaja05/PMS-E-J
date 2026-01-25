@@ -1,18 +1,26 @@
 package com.grupo2.PMSEYJ.administracion.gestionParametros.controller;
 
+import com.grupo2.PMSEYJ.administracion.gestionParametros.dto.FirmaDTO;
+import com.grupo2.PMSEYJ.administracion.gestionParametros.service.ParametrosService;
+import com.grupo2.PMSEYJ.administracion.gestionParametros.service.ParametrosServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class cargarFirmaElectronicaController {
+public class cargarFirmaElectronicaController implements Initializable {
 
     @FXML private Button btnCancelar, btnCargar, btnExplorar;
     @FXML private Label lblEstado;
     @FXML private TextField txtRutaArchivo;
+
+    private ParametrosService parametrosService;
 
     private File archivoSeleccionado;
 
@@ -110,7 +118,13 @@ public class cargarFirmaElectronicaController {
     }
 
     private void registrarFirma() {
-        // Aquí iría la lógica para copiar el archivo o guardar la ruta en el sistema
+        FirmaDTO firmaDTO = new FirmaDTO(txtRutaArchivo.getText());
+        parametrosService.guardarFirma(firmaDTO);
         System.out.println("Firma registrada: " + archivoSeleccionado.getName());
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        parametrosService = new ParametrosServiceImpl();
     }
 }
