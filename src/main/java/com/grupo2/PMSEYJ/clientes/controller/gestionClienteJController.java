@@ -1,41 +1,57 @@
 package com.grupo2.PMSEYJ.clientes.controller;
 
+import com.grupo2.PMSEYJ.clientes.dto.GestionClienteJuridicoDTO;
+import com.grupo2.PMSEYJ.clientes.service.ClienteJuridicoService;
+import com.grupo2.PMSEYJ.clientes.service.ClienteJurididoServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 
-public class gestionClienteJController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class gestionClienteJController implements Initializable {
 
     @FXML private Button btnBuscarJ, btnDarAltaJ, btnDarBajaJ, btnModificarJ;
     @FXML private Label lblMensaje;
     @FXML private TextField txtCedulaJ, txtCelularJ, txtCorreoJ, txtDireccionJ, txtEstado, txtNombre;
 
+    private ClienteJuridicoService clienteJuridicoService;
+    private GestionClienteJuridicoDTO clienteConsultado;
+
     // --- 1. CONSULTAR CLIENTE ---
     @FXML
     void consultarClienteJ(ActionEvent event) {
-        String cedula = txtCedulaJ.getText().trim();
+        String RUC = txtCedulaJ.getText().trim();
 
         // Validación de entrada vacía
-        if (cedula.isEmpty()) {
+        if (RUC.isEmpty()) {
             mostrarMensaje("Por favor, ingrese un RUC para buscar.", true);
             return;
         }
 
         // Lógica de búsqueda (Simulada para conectar a BD luego)
-        if (cedula.equals("1234567890123")) {
-            txtNombre.setText("Juan Pérez");
-            txtCorreoJ.setText("juan@mail.com");
-            txtDireccionJ.setText("Calle Falsa 123");
-            txtCelularJ.setText("0987654321");
-            txtEstado.setText("ACTIVO");
+        try{
+            GestionClienteJuridicoDTO cliente = clienteJuridicoService.consultarClienteJuridico(RUC);
+            txtNombre.setText(cliente.getRazonSocial());
+            txtCorreoJ.setText(cliente.getCorreo());
+            txtDireccionJ.setText(cliente.getDireccion());
+            txtEstado.setText(cliente.getEstado());
+            txtCelularJ.setText(cliente.getTelefono());
             mostrarMensaje("Información del Cliente recuperada exitosamente", false);
-        } else {
+            clienteConsultado = cliente;
+            btnDarBajaJ.setDisable(false);
+            btnDarAltaJ.setDisable(false);
+            btnModificarJ.setDisable(false);
+
+        }catch(IllegalArgumentException e){
             limpiarCamposDatos();
-            mostrarMensaje("No existe un cliente en el Sistema con la cedula de identidad ingresada", true);
+            mostrarMensaje(e.getMessage(), true);
         }
+
     }
 
     // --- 2, 3 y 4. MODIFICAR DATOS (Celular, Dirección, Correo) ---
@@ -58,9 +74,10 @@ public class gestionClienteJController {
             return;
         }
         if (!cel.startsWith("09")) {
-            mostrarMensaje("Número celular no válido, el número ingresado con comienza con 09", true);
+            mostrarMensaje("Número celular no válido, el número ingresado debe comenzar con 09", true);
             return;
         }
+
 
         // Validación DIRECCIÓN (Caso de Uso 3)
         String dir = txtDireccionJ.getText().trim();
@@ -76,22 +93,23 @@ public class gestionClienteJController {
             return;
         }
 
-        // Si todo es correcto:
+        clienteJuridicoService.actualizarCorreo(txtCedulaJ.getText(),corr);
+        clienteJuridicoService.actualizarDireccion(txtCedulaJ.getText(), dir);
+        clienteJuridicoService.actualizarTelefono(txtCedulaJ.getText(),cel);
         mostrarMensaje("Datos actualizados correctamente", false);
     }
 
     // --- 5. DAR DE BAJA ---
     @FXML
     void darBajaClienteJ(ActionEvent event) {
-        if (txtNombre.getText().isEmpty()) {
-            mostrarMensaje("Cliente no registrado", true);
-            return;
-        }
 
-        if (txtEstado.getText().equals("INACTIVO")) {
+
+        if (clienteConsultado.getEstado().equals("INACTIVO")) {
             mostrarMensaje("Este cliente ya fue dado de baja", true);
         } else {
+            clienteJuridicoService.darDeBaja(clienteConsultado.getRuc());
             txtEstado.setText("INACTIVO");
+            clienteConsultado.setEstado("INACTIVO");
             mostrarMensaje("Cliente dado de baja con éxito", false);
         }
     }
@@ -99,15 +117,12 @@ public class gestionClienteJController {
     // --- 6. DAR DE ALTA ---
     @FXML
     void darAltaClienteJ(ActionEvent event) {
-        if (txtNombre.getText().isEmpty()) {
-            mostrarMensaje("Cliente no registrado", true);
-            return;
-        }
-
-        if (txtEstado.getText().equals("ACTIVO")) {
-            mostrarMensaje("Este cliente ya fue dado de alta", true);
+        if (clienteConsultado.getEstado().equals("ACTIVO")) {
+            mostrarMensaje("El cliente se encuentra en estado activo", true);
         } else {
+            clienteJuridicoService.darDeAlta(clienteConsultado.getRuc());
             txtEstado.setText("ACTIVO");
+            clienteConsultado.setEstado("ACTIVO");
             mostrarMensaje("Cliente dado de alta con éxito", false);
         }
     }
@@ -116,11 +131,11 @@ public class gestionClienteJController {
     private void mostrarMensaje(String texto, boolean esError) {
 
         if(esError) {
-            lblMensaje.getStyleClass().remove("mensajeConfirmacion");
-            lblMensaje.getStyleClass().add("mensajeError");
+            lblMensaje.getStyleClass().setAll("mensajeError");
+
         }else{
-            lblMensaje.getStyleClass().remove("mensajeError");
-            lblMensaje.getStyleClass().add("mensajeConfirmacion");
+            lblMensaje.getStyleClass().setAll("mensajeConfirmacion");
+
         }
         lblMensaje.setText(texto);
     }
@@ -131,5 +146,13 @@ public class gestionClienteJController {
         txtDireccionJ.clear();
         txtCelularJ.clear();
         txtEstado.clear();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        clienteJuridicoService = new ClienteJurididoServiceImpl();
+        btnDarAltaJ.setDisable(true);
+        btnDarBajaJ.setDisable(true);
+        btnModificarJ.setDisable(true);
     }
 }

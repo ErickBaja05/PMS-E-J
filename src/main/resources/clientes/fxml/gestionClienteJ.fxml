@@ -74,7 +74,7 @@
                     <children>
                         <VBox spacing="5.0">
                             <children>
-                                <Label maxWidth="Infinity" styleClass="lblInformacion" text="Nombre Completo">
+                                <Label maxWidth="Infinity" styleClass="lblInformacion" text="Razón Social">
                                     <padding><Insets left="5.0" /></padding>
                                 </Label>
                                 <TextField fx:id="txtNombre" editable="false" prefHeight="35.0" style="-fx-background-color: #f9f9f9;">

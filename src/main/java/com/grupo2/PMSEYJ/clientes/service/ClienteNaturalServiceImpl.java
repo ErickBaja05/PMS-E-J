@@ -1,6 +1,7 @@
 package com.grupo2.PMSEYJ.clientes.service;
 
 import com.grupo2.PMSEYJ.clientes.dao.ClienteNaturalDAO;
+import com.grupo2.PMSEYJ.clientes.dto.GestionClienteNaturalDTO;
 import com.grupo2.PMSEYJ.clientes.dto.NuevoClienteNaturalDTO;
 import com.grupo2.PMSEYJ.clientes.model.ClienteNatural;
 import com.grupo2.PMSEYJ.core.exception.CedulaNoValidaException;
@@ -49,6 +50,58 @@ public class ClienteNaturalServiceImpl implements ClienteNaturalService {
         clienteNaturalDAO.insertar(nuevoCliente);
 
     }
+
+    @Override
+    public GestionClienteNaturalDTO consultarCliente(String cedula) {
+        ClienteNatural clienteNatural = clienteNaturalDAO.consultarPorCedula(cedula);
+        String parsingEstado;
+        if (clienteNatural == null) {
+            throw new IllegalArgumentException("No existe un cliente con la cédula proporcionada!");
+        }
+
+        if(clienteNatural.getEstado_cn().equals("A")){
+            parsingEstado = "ACTIVO";
+        }else{
+            parsingEstado = "INACTIVO";
+        }
+        return new GestionClienteNaturalDTO(
+                clienteNatural.getCedula_cn(),
+                clienteNatural.getNombre_cn(),
+                clienteNatural.getCorreo_cn(),
+                clienteNatural.getTelefono_cn(),
+                clienteNatural.getFecha_cn(),
+                clienteNatural.getDireccion_cn(),
+                parsingEstado
+
+        );
+    }
+
+    @Override
+    public void actualizarCorreo(String cedula, String correo) {
+        clienteNaturalDAO.actualizarCorreoPorCedula(cedula, correo);
+    }
+
+    @Override
+    public void actualizarDireccion(String cedula, String direccion) {
+        clienteNaturalDAO.actualizarDireccionPorCedula(cedula, direccion);
+    }
+
+    @Override
+    public void actualizarTelefono(String cedula, String telefono) {
+        clienteNaturalDAO.actualizarTelefonoPorCedula(cedula, telefono);
+
+    }
+
+    @Override
+    public void darDeBaja(String cedula) {
+        clienteNaturalDAO.darDeBaja(cedula);
+    }
+
+    @Override
+    public void darDeAlta(String cedula) {
+        clienteNaturalDAO.darDeAlta(cedula);
+    }
+
     public static boolean validarProvincia(String cedula) {
         if (cedula == null || !cedula.matches("\\d{10}")) {
             return false; // Debe tener exactamente 10 dígitos numéricos

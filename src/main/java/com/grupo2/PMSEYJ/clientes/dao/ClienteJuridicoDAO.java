@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import com.grupo2.PMSEYJ.administracion.gestionUsuarios.model.Usuario;
+
 import com.grupo2.PMSEYJ.clientes.model.ClienteJuridico;
 import com.grupo2.PMSEYJ.core.database.DatabaseConnection;
 
@@ -84,10 +82,83 @@ public class ClienteJuridicoDAO {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error al consultar cliente jurídico por ID", e);
+            throw new RuntimeException("Error al consultar cliente jurídico por RUC", e);
         }
 
         return null;
+    }
+
+    public void actualizarCorreoPorRUC(String ruc, String nuevoCorreo) {
+        String sql = "UPDATE cliente_juridico SET correo_cj = ? WHERE ruc = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, nuevoCorreo);
+            ps.setString(2, ruc);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el correo del cliente juridico", e);
+        }
+    }
+    public void actualizarDireccionPorRUC(String ruc, String nuevaDireccion) {
+        String sql = "UPDATE cliente_juridico SET direccion_cj = ? WHERE ruc = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, nuevaDireccion);
+            ps.setString(2, ruc);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar la dirección del cliente juridico", e);
+        }
+    }
+    public void actualizarTelefonoPorRUC(String ruc, String nuevoTelefono) {
+        String sql = "UPDATE cliente_juridico SET telefono_cj = ? WHERE ruc = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, nuevoTelefono);
+            ps.setString(2, ruc);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el teléfono del cliente juridico", e);
+        }
+    }
+
+    public void darDeBaja(String RUC) {
+        String sql = "UPDATE cliente_juridico SET estado_cj = ? WHERE ruc = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "I");
+            ps.setString(2, RUC);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al dar de baja al cliente juridico", e);
+        }
+    }
+
+    public void darDeAlta(String RUC) {
+        String sql = "UPDATE cliente_juridico SET estado_cj = ? WHERE ruc = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "A");
+            ps.setString(2, RUC);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el teléfono del cliente natural", e);
+        }
     }
 
     public void eliminar(int id_cj) {

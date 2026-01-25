@@ -1,6 +1,7 @@
 package com.grupo2.PMSEYJ.clientes.service;
 
 import com.grupo2.PMSEYJ.clientes.dao.ClienteJuridicoDAO;
+import com.grupo2.PMSEYJ.clientes.dto.GestionClienteJuridicoDTO;
 import com.grupo2.PMSEYJ.clientes.dto.NuevoClienteJuridicoDTO;
 import com.grupo2.PMSEYJ.clientes.model.ClienteJuridico;
 import com.grupo2.PMSEYJ.core.exception.ClienteYaExisteException;
@@ -30,6 +31,56 @@ public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
 
 
 
+    }
+
+    @Override
+    public GestionClienteJuridicoDTO consultarClienteJuridico(String RUC) {
+        ClienteJuridico cliente = clienteJuridicoDAO.consultarPorRuc(RUC);
+        String parsingEstado;
+        if(cliente == null){
+            throw new IllegalArgumentException("No existe un cliente con el RUC proporcionado");
+        }
+        if(cliente.getEstado_cj().equals("A")){
+            parsingEstado = "ACTIVO";
+        }else{
+            parsingEstado = "INACTIVO";
+        }
+        return new GestionClienteJuridicoDTO(
+                cliente.getRuc(),
+                cliente.getRazon_social(),
+                cliente.getCorreo_cj(),
+                cliente.getTelefono_cj(),
+                cliente.getDireccion_cj(),
+                parsingEstado
+        );
+    }
+
+    @Override
+    public void actualizarCorreo(String RUC, String correo) {
+        clienteJuridicoDAO.actualizarCorreoPorRUC(RUC, correo);
+
+    }
+
+    @Override
+    public void actualizarDireccion(String cedula, String direccion) {
+        clienteJuridicoDAO.actualizarDireccionPorRUC(cedula, direccion);
+
+    }
+
+    @Override
+    public void actualizarTelefono(String cedula, String telefono) {
+        clienteJuridicoDAO.actualizarTelefonoPorRUC(cedula, telefono);
+
+    }
+
+    @Override
+    public void darDeBaja(String RUC) {
+        clienteJuridicoDAO.darDeBaja(RUC);
+    }
+
+    @Override
+    public void darDeAlta(String RUC) {
+        clienteJuridicoDAO.darDeAlta(RUC);
     }
 
     public static boolean validarProvincia(String numero) {

@@ -91,6 +91,78 @@ public class ClienteNaturalDAO {
         return null;
     }
 
+    public void actualizarCorreoPorCedula(String cedula_cn, String nuevoCorreo) {
+        String sql = "UPDATE cliente_natural SET correo_cn = ? WHERE cedula_cn = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, nuevoCorreo);
+            ps.setString(2, cedula_cn);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el correo del cliente natural", e);
+        }
+    }
+    public void actualizarDireccionPorCedula(String cedula_cn, String nuevaDireccion) {
+        String sql = "UPDATE cliente_natural SET direccion_cn = ? WHERE cedula_cn = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, nuevaDireccion);
+            ps.setString(2, cedula_cn);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar la dirección del cliente natural", e);
+        }
+    }
+    public void actualizarTelefonoPorCedula(String cedula_cn, String nuevoTelefono) {
+        String sql = "UPDATE cliente_natural SET telefono_cn = ? WHERE cedula_cn = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, nuevoTelefono);
+            ps.setString(2, cedula_cn);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el teléfono del cliente natural", e);
+        }
+    }
+    public void darDeBaja(String cedula_cn) {
+        String sql = "UPDATE cliente_natural SET estado_cn = ? WHERE cedula_cn = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "I");
+            ps.setString(2, cedula_cn);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el teléfono del cliente natural", e);
+        }
+    }
+
+    public void darDeAlta(String cedula_cn) {
+        String sql = "UPDATE cliente_natural SET estado_cn = ? WHERE cedula_cn = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "A");
+            ps.setString(2, cedula_cn);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el teléfono del cliente natural", e);
+        }
+    }
+
     public void eliminar(int id_cn) {
         String sql = "DELETE FROM cliente_natural WHERE id_cn = ?";
 
