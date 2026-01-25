@@ -32,7 +32,7 @@
 
 /* --- TEXTOS --- */
 .label-titulo {
-    -fx-text-fill: #009688; /* Teal */
+    -fx-font-family: "Roboto", sans-serif;
     -fx-font-weight: bold;
 }
 
@@ -47,11 +47,9 @@
 
 /* --- CAMPOS DE ENTRADA (Inputs) --- */
 .text-field, .text-area, .date-picker {
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 6;
-    -fx-border-color: #BDC3C7;
-    -fx-border-radius: 6;
-    -fx-padding: 8;
+    -fx-background-color: #f3efee;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-size: 14;
 }
 
 .text-field:focused, .text-area:focused, .date-picker:focused {
@@ -103,11 +101,14 @@
 
 /* Botón Cancelar */
 .btn-cancelar {
-    -fx-background-color: #ECF0F1;
-    -fx-text-fill: #7F8C8D;
-    -fx-border-color: transparent;
+    -fx-font-weight: bold;
+    -fx-background-color: #f3efee;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
+    -fx-font-size: 13px;
 }
 .btn-cancelar:hover {
-    -fx-background-color: #BDC3C7;
-    -fx-text-fill: white;
+    -fx-background-color: #b5b8ab;
+    -fx-cursor: hand;
 }

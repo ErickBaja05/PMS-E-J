@@ -54,6 +54,11 @@
     -fx-font-weight: bold;
 }
 
+.textField:focused {
+    -fx-border-color: #009688; /* Borde verde al escribir */
+    -fx-background-color: #FDFEFE;
+}
+
 .mensajeError{
     -fx-font-family: "Roboto", sans-serif;
     -fx-font-size: 16;
