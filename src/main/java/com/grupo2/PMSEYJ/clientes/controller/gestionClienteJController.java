@@ -3,6 +3,7 @@ package com.grupo2.PMSEYJ.clientes.controller;
 import com.grupo2.PMSEYJ.clientes.dto.GestionClienteJuridicoDTO;
 import com.grupo2.PMSEYJ.clientes.service.ClienteJuridicoService;
 import com.grupo2.PMSEYJ.clientes.service.ClienteJurididoServiceImpl;
+import com.grupo2.PMSEYJ.core.session.SesionActual;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,9 +44,11 @@ public class gestionClienteJController implements Initializable {
             txtCelularJ.setText(cliente.getTelefono());
             mostrarMensaje("Información del Cliente recuperada exitosamente", false);
             clienteConsultado = cliente;
-            btnDarBajaJ.setDisable(false);
-            btnDarAltaJ.setDisable(false);
-            btnModificarJ.setDisable(false);
+            if(SesionActual.getUsuario().getPerfil_us().equals("AD")){
+                btnModificarJ.setDisable(false);
+                btnDarBajaJ.setDisable(false);
+                btnDarAltaJ.setDisable(false);
+            }
 
         }catch(IllegalArgumentException e){
             limpiarCamposDatos();

@@ -437,6 +437,42 @@ public class ventanaPrincipalController implements Initializable {
                     SesionActual.getUsuario().getNombre_us().toUpperCase()
             );
         }
+        if(SesionActual.getUsuario().getPerfil_us().equals("VE")){
+
+            btnAdministracion.setVisible(false);
+            btnContactoProveedores.setVisible(false);
+            btnRegistrarProducto.setVisible(false);
+            btnModificarProducto.setVisible(false);
+            btnReportePsicotropicos.setVisible(false);
+            btnRegistrarProducto5.setVisible(false);
+            btnProductosBajaRotacion.setVisible(false);
+            btnProductosProximosCaducar.setVisible(false);
+            btnAvanceCaja.setVisible(false);
+            btnArqueoCaja.setVisible(false);
+            btngenerarReporteRentabilidad.setVisible(false);
+            btnVerFacturas.setVisible(false);
+            btnPromocionesExistentes.setVisible(false);
+            btnGenerarReporteVentas.setVisible(false);
+            btnReporteARCSA.setVisible(false);
+
+
+            btnAdministracion.setManaged(false);
+            btnContactoProveedores.setManaged(false);
+            btnRegistrarProducto.setManaged(false);
+            btnModificarProducto.setManaged(false);
+            btnReportePsicotropicos.setManaged(false);
+            btnRegistrarProducto5.setManaged(false);
+            btnProductosBajaRotacion.setManaged(false);
+            btnProductosProximosCaducar.setManaged(false);
+            btnAvanceCaja.setManaged(false);
+            btnArqueoCaja.setManaged(false);
+            btngenerarReporteRentabilidad.setManaged(false);
+            btnVerFacturas.setManaged(false);
+            btnPromocionesExistentes.setManaged(false);
+            btnGenerarReporteVentas.setManaged(false);
+            btnReporteARCSA.setManaged(false);
+
+        }
         FontIcon icon = new FontIcon("fa-angle-double-left");
         icon.getStyleClass().add("buttonsIcon");
         FontIcon icon2 = new FontIcon("fa-stethoscope");

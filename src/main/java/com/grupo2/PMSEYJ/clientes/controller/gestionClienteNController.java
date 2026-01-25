@@ -3,6 +3,7 @@ package com.grupo2.PMSEYJ.clientes.controller;
 import com.grupo2.PMSEYJ.clientes.dto.GestionClienteNaturalDTO;
 import com.grupo2.PMSEYJ.clientes.service.ClienteNaturalService;
 import com.grupo2.PMSEYJ.clientes.service.ClienteNaturalServiceImpl;
+import com.grupo2.PMSEYJ.core.session.SesionActual;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,9 +53,12 @@ public class gestionClienteNController implements Initializable {
             txtCelular.setText(cliente.getTelefono());
             mostrarMensaje("Información del Cliente recuperada exitosamente", false);
             clienteConsultado = cliente;
-            btnModificar.setDisable(false);
-            btnDarBaja.setDisable(false);
-            btnDarAlta.setDisable(false);
+            if(SesionActual.getUsuario().getPerfil_us().equals("AD")){
+                btnModificar.setDisable(false);
+                btnDarBaja.setDisable(false);
+                btnDarAlta.setDisable(false);
+            }
+
 
         }catch(IllegalArgumentException e){
             limpiarCamposDatos();
