@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -23,35 +20,14 @@
             <children>
                 <VBox spacing="10.0">
                     <children>
-                        <Label styleClass="lblTitulo" text="ELIMINACIÓN USUARIOS DEL SISTEMA">
+                        <Label styleClass="lblTitulo" text="CONSULTA Y ELIMINACIÓN DE USUARIOS DEL SISTEMA">
                             <font>
                                 <Font name="System Bold" size="22.0" />
                             </font>
                         </Label>
-                        <Label styleClass="lblSubtitulo" text="Filtre por perfil e ingrese el nombre del usuario para buscar y luego eliminar." textFill="#5b5b5b" />
+                        <Label styleClass="lblSubtitulo" text="Ingrese el nombre de usuario para consultar su información y eliminarlo" textFill="#5b5b5b" />
                         <HBox alignment="CENTER_LEFT" spacing="15.0">
                             <children>
-                                <VBox spacing="5.0">
-                                    <children>
-                                        <Label styleClass="lblCedula" text="Perfil de Usuario:">
-                                            <font>
-                                                <Font name="System Bold" size="13.0" />
-                                            </font>
-                                        </Label>
-                                        <ComboBox fx:id="cmbPerfil" prefHeight="40.0" prefWidth="180.0" promptText="Seleccione">
-                                            <items>
-                                                <FXCollections fx:factory="observableArrayList">
-                                                    <String fx:value="Administrador" />
-                                                    <String fx:value="Auxiliar" />
-                                                </FXCollections>
-                                            </items>
-                                 <styleClass>
-                                    <String fx:value="textField" />
-                                    <String fx:value="txtFieldNegrita" />
-                                 </styleClass>
-                                        </ComboBox>
-                                    </children>
-                                </VBox>
                                 <VBox spacing="5.0" HBox.hgrow="ALWAYS">
                                     <children>
                                         <Label styleClass="lblCedula" text="Nombre de Usuario:">
@@ -77,7 +53,7 @@
 
                 <TableView fx:id="tablaUsuarios" prefHeight="400.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colUsuario" prefWidth="250.0" text="USUARIO" />
+                        <TableColumn fx:id="colUsuario" prefWidth="250.0" text="NOMBRE DE USUARIO" />
                         <TableColumn fx:id="colCorreo" prefWidth="350.0" text="CORREO ELECTRÓNICO" />
                         <TableColumn fx:id="colRol" prefWidth="250.0" text="PERFIL" />
                     </columns>

@@ -109,13 +109,13 @@ public class UsuarioDAO {
     // ===============================
     // DELETE
     // ===============================
-    public void eliminar(int id) {
-        String sql = "DELETE FROM usuarios WHERE id_usuario = ?";
+    public void eliminarPorNombre(String nombre_us) {
+        String sql = "DELETE FROM usuarios WHERE nombre_us = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, id);
+            ps.setString(1, nombre_us);
             ps.executeUpdate();
 
         } catch (SQLException e) {

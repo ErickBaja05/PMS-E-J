@@ -1,19 +1,31 @@
 package com.grupo2.PMSEYJ.administracion.gestionUsuarios.controller;
 
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dao.UsuarioDAO;
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.InfoUsuarioDTO;
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.model.Usuario;
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.service.UsuarioService;
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.service.UsuarioServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import java.time.LocalDateTime;
 
-public class recuperarPasswordController {
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.ResourceBundle;
+
+public class recuperarPasswordController implements Initializable {
 
     @FXML private Button butEnviar;
     @FXML private VBox contenedorCentral;
     @FXML private Label lblMensaje; // Usaremos este label para los errores y éxitos
     @FXML private TextField txtCorreo;
+
+    private UsuarioService usuarioService;
+    private UsuarioDAO usuarioDAO;
 
     @FXML
     void enviarInstrucciones(ActionEvent event) {
@@ -63,7 +75,14 @@ public class recuperarPasswordController {
     private boolean estaRegistrado(String email) {
         // Aquí conectarás con tu Base de Datos más adelante
         // Por ahora simularemos que solo "admin@farmacia.com" existe
-        return email.equals("admin@farmacia.com");
+        try{
+            InfoUsuarioDTO usuario = usuarioService.consultarUsuarioPorEmail(email);
+            return usuario != null;
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+
+        }
+        return false;
     }
 
     private void enviarCorreo(String email) {
@@ -75,5 +94,10 @@ public class recuperarPasswordController {
         LocalDateTime timestamp = LocalDateTime.now();
         System.out.println("Acción guardada: Recuperación para " + email + " a las " + timestamp);
         // Aquí guardarías en tu tabla de auditoría/logs
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        usuarioService = new UsuarioServiceImpl();
     }
 }

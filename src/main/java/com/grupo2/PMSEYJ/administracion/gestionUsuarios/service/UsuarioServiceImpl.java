@@ -1,5 +1,6 @@
 package com.grupo2.PMSEYJ.administracion.gestionUsuarios.service;
 
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.InfoUsuarioDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.NuevoUsuarioDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.UsuarioSesionDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.model.Usuario;
@@ -54,8 +55,43 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setPerfil(nuevoUsuario.getPerfil());
         usuarioDAO.insertar(usuario);
 
+    }
 
+    @Override
+    public InfoUsuarioDTO consultarUsuarioPorNombre(String nombre) {
+        Usuario usuario = usuarioDAO.buscarPorNombre(nombre);
+        if (usuario == null) {
+            throw new IllegalArgumentException("No existe un usuario con el nombre de usuario proporcionado");
+        }
 
+        return new InfoUsuarioDTO(
+                usuario.getNombre(),
+                usuario.getCorreo(),
+                usuario.getPerfil()
+        );
+
+    }
+
+    @Override
+    public InfoUsuarioDTO consultarUsuarioPorEmail(String email) {
+        Usuario usuario = usuarioDAO.buscarPorEmail(email);
+        if (usuario == null) {
+            throw new IllegalArgumentException("No existe un usuario con el nombre de usuario proporcionado");
+        }
+
+        return new InfoUsuarioDTO(
+                usuario.getNombre(),
+                usuario.getCorreo(),
+                usuario.getPerfil()
+        );
+
+    }
+
+    @Override
+    public void eliminarUsuario(InfoUsuarioDTO infoUsuario) {
+        Usuario usuario = new Usuario();
+        usuario.setNombre(infoUsuario.getNombre_us());
+        usuarioDAO.eliminarPorNombre(usuario.getNombre());
 
     }
 }

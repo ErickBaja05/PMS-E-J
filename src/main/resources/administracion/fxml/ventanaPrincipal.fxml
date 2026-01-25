@@ -295,7 +295,7 @@
                                                 <String fx:value="navBtnSeparation" />
                                              </styleClass>
                                           </Button>
-                                          <Button fx:id="btnEliminarUsuario" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirEliminarUsuario" text="ELIMINAR USUARIO">
+                                          <Button fx:id="btnEliminarUsuario" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirEliminarUsuario" text="GESTION USUARIOS">
                                              <styleClass>
                                                 <String fx:value="navBtn" />
                                                 <String fx:value="navBtnSubmenu" />

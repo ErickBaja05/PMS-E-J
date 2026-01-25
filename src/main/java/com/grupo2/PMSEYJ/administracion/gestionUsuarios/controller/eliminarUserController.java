@@ -1,32 +1,40 @@
 package com.grupo2.PMSEYJ.administracion.gestionUsuarios.controller;
 
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.InfoUsuarioDTO;
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.service.UsuarioService;
+import com.grupo2.PMSEYJ.administracion.gestionUsuarios.service.UsuarioServiceImpl;
+import com.grupo2.PMSEYJ.core.session.SesionActual;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class eliminarUserController {
+public class eliminarUserController implements Initializable {
 
-    @FXML private ComboBox<String> cmbPerfil;
+
     @FXML private TextField txtBuscarUsuario;
-    @FXML private TableView<Object> tablaUsuarios; // Cambiar Object por tu modelo de Usuario
+    @FXML private TableView<InfoUsuarioDTO> tablaUsuarios;
+    @FXML
+    private TableColumn<InfoUsuarioDTO, String> colCorreo;
 
-    /**
-     * Lanza una ventana de confirmación antes de proceder.
-     */
-    private boolean mostrarConfirmacion(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmar Acción");
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
+    @FXML
+    private TableColumn<InfoUsuarioDTO, String> colRol;
 
-        ButtonType btnAceptar = new ButtonType("Aceptar");
-        ButtonType btnCancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().setAll(btnAceptar, btnCancelar);
+    @FXML
+    private TableColumn<InfoUsuarioDTO, String> colUsuario;
 
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.isPresent() && result.get() == btnAceptar;
-    }
+    private ObservableList<InfoUsuarioDTO> listaUsuarios;
+
+    private UsuarioService usuarioService;
+    private InfoUsuarioDTO usuarioConsultado;
+
 
     /**
      * Lanza una ventana informativa para éxito o error.
@@ -41,61 +49,82 @@ public class eliminarUserController {
 
     @FXML
     void buscarUsuario(ActionEvent event) {
-        String perfil = cmbPerfil.getValue();
+        if(usuarioConsultado!=null){
+            listaUsuarios.remove(usuarioConsultado);
+        }
+
         String nombre = txtBuscarUsuario.getText().trim();
 
         // Validación simple de campos vacíos
-        if (perfil == null || nombre.isEmpty()) {
-            mostrarAlerta("Campos Requeridos", "Debe seleccionar un perfil e ingresar un nombre para buscar.", Alert.AlertType.WARNING);
+        if (nombre.isEmpty()) {
+            mostrarAlerta("Campos Requeridos", "Debe ingresar un nombre de usuario para buscar.", Alert.AlertType.WARNING);
             return;
         }
 
-        // Simulación de búsqueda exitosa
-        mostrarAlerta("Búsqueda", "Búsqueda finalizada para el perfil " + perfil, Alert.AlertType.INFORMATION);
+
+        try{
+            InfoUsuarioDTO infoUsuario = usuarioService.consultarUsuarioPorNombre(nombre);
+            usuarioConsultado = infoUsuario;
+            listaUsuarios = FXCollections.observableArrayList();
+            listaUsuarios.add(infoUsuario);
+            tablaUsuarios.setItems(listaUsuarios);
+            mostrarAlerta("Búsqueda", "Usuario encontrado. Puede ver su información en la tabla", Alert.AlertType.INFORMATION);
+
+        }catch(IllegalArgumentException e){
+            mostrarAlerta("No existe usuario", e.getMessage(), Alert.AlertType.ERROR);
+        }
+
+
     }
 
     @FXML
     void eliminarUsuario(ActionEvent event) {
         // Validación: Debe seleccionar un usuario de la tabla primero
-        Object seleccionado = tablaUsuarios.getSelectionModel().getSelectedItem();
-        String perfilSeleccionado = cmbPerfil.getValue();
+        InfoUsuarioDTO seleccionado = tablaUsuarios.getSelectionModel().getSelectedItem();
 
         if (seleccionado == null) {
             mostrarAlerta("Selección Requerida", "Debe seleccionar un usuario de la tabla para eliminar.", Alert.AlertType.WARNING);
             return;
         }
 
-        String nombreUsuario = txtBuscarUsuario.getText(); // Simulación del nombre capturado
-
-        // Lógica según los Casos de Uso y Perfiles
-        if ("Administrador".equals(perfilSeleccionado)) {
-            // Caso de Uso 1: Eliminar Administrador
-            if (confirmarEliminacion(nombreUsuario, "ADMINISTRADOR")) {
-                ejecutarFlujoEliminacion("Usuario administrador eliminado exitosamente");
-            }
-        } else if ("Auxiliar".equals(perfilSeleccionado)) {
-            // Caso de Uso 2: Eliminar Auxiliar
-            if (confirmarEliminacion(nombreUsuario, "AUXILIAR")) {
-                ejecutarFlujoEliminacion("Usuario auxiliar eliminado exitosamente");
-            }
+        String nombreUsuario = seleccionado.getNombre_us();
+        if(nombreUsuario.equals(SesionActual.getUsuario().getNombre_us())){
+            mostrarAlerta("Error de eliminación", "No puede eliminar el usuario con el que inició sesión. Ingrese desde otro usuario e intente nuevamente", Alert.AlertType.ERROR);
+            return;
         }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Eliminar Usuario");
+        alert.setHeaderText("Confirmación de eliminación");
+        alert.setContentText("Desea eliminar al usuario: " + nombreUsuario);
+        if(alert.showAndWait().get() == ButtonType.OK){
+            ejecutarFlujoEliminacion("Usuario: " + usuarioConsultado.getNombre_us()+ " Eliminado con éxito");
+            listaUsuarios.remove(usuarioConsultado);
+        }else{
+            mostrarAlerta("Operación cancelada", "Se canceló la operación de eliminación", Alert.AlertType.INFORMATION);
+        }
+
+
+
+
+
     }
 
-    private boolean confirmarEliminacion(String usuario, String perfil) {
-        return mostrarConfirmacion("¿Desea eliminar al usuario " + usuario + " con perfil " + perfil + "?");
-    }
+
 
     private void ejecutarFlujoEliminacion(String mensajeExito) {
-        // Aquí se simula la verificación de existencia
-        boolean existe = true; // Esto se validará con la lógica compleja después
-
-        if (existe) {
-            // Escenario Básico: Eliminación exitosa
-            mostrarAlerta("Éxito", mensajeExito, Alert.AlertType.INFORMATION);
-            tablaUsuarios.getItems().remove(tablaUsuarios.getSelectionModel().getSelectedItem());
-        } else {
-            // Escenario Alternativo: El usuario no existe
-            mostrarAlerta("Error", "El usuario no existe", Alert.AlertType.ERROR);
+        if(usuarioConsultado != null){
+            usuarioService.eliminarUsuario(usuarioConsultado);
+            mostrarAlerta("Eliminación exitosa", mensajeExito, Alert.AlertType.INFORMATION);
+        }else{
+            mostrarAlerta("No se ha consultado un usuario", "Debe consultar un usuario para eliminarlo.", Alert.AlertType.ERROR);
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        usuarioService = new UsuarioServiceImpl();
+        colUsuario.setCellValueFactory(new PropertyValueFactory<>("nombre_us"));
+        colCorreo.setCellValueFactory(new PropertyValueFactory<>("correo_us"));
+        colRol.setCellValueFactory(new PropertyValueFactory<>("perfil"));
     }
 }
