@@ -1,5 +1,6 @@
 package com.grupo2.PMSEYJ.administracion.gestionParametros.controller;
 
+import com.grupo2.PMSEYJ.administracion.gestionParametros.dto.GestionMetodoPagoDTO;
 import com.grupo2.PMSEYJ.administracion.gestionParametros.dto.IvaDTO;
 import com.grupo2.PMSEYJ.administracion.gestionParametros.model.MetodoPago;
 import com.grupo2.PMSEYJ.administracion.gestionParametros.service.ParametrosService;
@@ -9,8 +10,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class configuracionPagosImpuestosController {
 
@@ -21,19 +25,18 @@ public class configuracionPagosImpuestosController {
     @FXML private Label lblIvaActual;
     @FXML private Button btnRegistrarIVA;
 
-    @FXML private TextField txtNombrePago;
+
     @FXML private Button btnHabilitar;
     @FXML private Button btnDeshabilitar;
 
-    @FXML private TableView<MetodoPago> tablaMetodosPago;
-    @FXML private TableColumn<MetodoPago, String> colNombre;
-    @FXML private TableColumn<MetodoPago, String> colEstado;
+    @FXML private TableView<GestionMetodoPagoDTO> tablaMetodosPago;
+    @FXML private TableColumn<GestionMetodoPagoDTO, String> colNombre;
+    @FXML private TableColumn<GestionMetodoPagoDTO, String> colEstado;
 
     // ==========================================
     // DATOS (Simulación de Base de Datos)
     // ==========================================
-    private final ObservableList<MetodoPago> listaMetodos =
-            FXCollections.observableArrayList();
+    private  ObservableList<GestionMetodoPagoDTO> listaMetodos;
 
     private ParametrosService parametrosService;
 
@@ -50,18 +53,19 @@ public class configuracionPagosImpuestosController {
         lblIvaActual.setText(iva.getNuevo_valor().toString() + "%");
 
         // ===== TableView con LAMBDAS + PROPERTIES =====
-        colNombre.setCellValueFactory(cell -> cell.getValue().nombreProperty());
-
-        colEstado.setCellValueFactory(cell -> cell.getValue().estadoProperty());
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre_pago"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado_pago"));
 
         // Cargar datos de prueba
-        listaMetodos.addAll(
-                new MetodoPago("Efectivo", "HABILITADO"),
-                new MetodoPago("Tarjeta de Crédito", "DESHABILITADO"),
-                new MetodoPago("Transferencia", "HABILITADO")
-        );
+        try{
+            List<GestionMetodoPagoDTO> listaMetodosPago = parametrosService.consultarMetodosPago();
+            listaMetodos = FXCollections.observableArrayList(listaMetodosPago);
+            tablaMetodosPago.setItems(listaMetodos);
+        }catch (RuntimeException e){
+            mostrarMensaje("Error al consultar metodos pagos", e.getMessage(), Alert.AlertType.ERROR);
+        }
 
-        tablaMetodosPago.setItems(listaMetodos);
+
     }
 
     // ==========================================
@@ -103,26 +107,22 @@ public class configuracionPagosImpuestosController {
     @FXML
     void habilitarMetodo(ActionEvent event) {
 
-        String nombrePago = txtNombrePago.getText().trim();
-
-        if (nombrePago.isEmpty()) {
-            mostrarMensaje("Aviso", "Ingrese un nombre de método de pago.", Alert.AlertType.WARNING);
-            return;
-        }
-
-        MetodoPago metodo = buscarMetodo(nombrePago);
-
-        if (metodo != null) {
-            metodo.setEstado("HABILITADO");
+        GestionMetodoPagoDTO gestionMetodoPagoDTO = tablaMetodosPago.getSelectionModel().getSelectedItem();
+        if(gestionMetodoPagoDTO != null){
+            if(gestionMetodoPagoDTO.getEstado_pago().equals("DESHABILITADO")){
+                mostrarMensaje("Método ya habilitado", "El método de pago: " + gestionMetodoPagoDTO.getNombre_pago() + " Ya se encuentra habilitado",
+                        Alert.AlertType.ERROR);
+                return;
+            }
+            parametrosService.habilitarMetodoPago(gestionMetodoPagoDTO.getNombre_pago());
+            gestionMetodoPagoDTO.setEstado_pago("HABILITADO");
             tablaMetodosPago.refresh();
-
-            mostrarMensaje("Éxito", "Método de pago habilitado exitosamente",
-                    Alert.AlertType.INFORMATION);
-            txtNombrePago.clear();
-        } else {
-            mostrarMensaje("Error", "El método de pago no existe",
+            mostrarMensaje("Éxito", "Metodo habilitado", Alert.AlertType.INFORMATION);
+        }else{
+            mostrarMensaje("Método de pago no seleccionado", "Debe seleccionar un método de pago para habilitar.",
                     Alert.AlertType.ERROR);
         }
+
     }
 
     // ==========================================
@@ -131,24 +131,19 @@ public class configuracionPagosImpuestosController {
     @FXML
     void deshabilitarMetodo(ActionEvent event) {
 
-        String nombrePago = txtNombrePago.getText().trim();
-
-        if (nombrePago.isEmpty()) {
-            mostrarMensaje("Aviso", "Ingrese un nombre de método de pago.", Alert.AlertType.WARNING);
-            return;
-        }
-
-        MetodoPago metodo = buscarMetodo(nombrePago);
-
-        if (metodo != null) {
-            metodo.setEstado("DESHABILITADO");
+        GestionMetodoPagoDTO gestionMetodoPagoDTO = tablaMetodosPago.getSelectionModel().getSelectedItem();
+        if(gestionMetodoPagoDTO != null){
+            if(gestionMetodoPagoDTO.getEstado_pago().equals("DESHABILITADO")){
+                mostrarMensaje("Método ya Deshabilitado", "El método de pago: " + gestionMetodoPagoDTO.getNombre_pago() + " Ya se encuentra deshabilitado",
+                        Alert.AlertType.ERROR);
+                return;
+            }
+            parametrosService.deshabilitarMetodoPago(gestionMetodoPagoDTO.getNombre_pago());
+            gestionMetodoPagoDTO.setEstado_pago("DESHABILITADO");
             tablaMetodosPago.refresh();
-
-            mostrarMensaje("Éxito", "Método de pago deshabilitado exitosamente",
-                    Alert.AlertType.INFORMATION);
-            txtNombrePago.clear();
-        } else {
-            mostrarMensaje("Error", "El método de pago no existe",
+            mostrarMensaje("Éxito", "Metodo deshabilitado", Alert.AlertType.INFORMATION);
+        }else{
+            mostrarMensaje("Método de pago no seleccionado", "Debe seleccionar un método de pago para deshabilitar.",
                     Alert.AlertType.ERROR);
         }
     }
@@ -156,14 +151,7 @@ public class configuracionPagosImpuestosController {
     // ==========================================
     // METODOS AUXILIARES
     // ==========================================
-    private MetodoPago buscarMetodo(String nombre) {
-        for (MetodoPago m : listaMetodos) {
-            if (m.getNombre().equalsIgnoreCase(nombre)) {
-                return m;
-            }
-        }
-        return null;
-    }
+
 
     private void mostrarMensaje(String titulo, String contenido, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);
