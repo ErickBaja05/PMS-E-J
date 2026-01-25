@@ -48,14 +48,12 @@ public class crearUserController implements Initializable {
         usuarioService = new UsuarioServiceImpl();
         // Cargar tipos de usuario
         ComboBTipoUser.getItems().addAll(
-                "Administrador", "Auxiliar"
-        );
+                "Administrador", "Auxiliar");
         ComboBTipoUser.setPromptText("Tipo de usuario");
     }
 
     @FXML
     void crearUsuario(ActionEvent event) {
-
 
         String usuario = txtUsuario.getText();
         String correo = txtCorreo.getText();
@@ -65,23 +63,23 @@ public class crearUserController implements Initializable {
 
         // PARSING A LO VALORES DE TIPO DE USUARIO
 
-
-
         // Validación adicional: tipo de usuario
         if (tipoUsuario == null) {
             mostrarError("Seleccione el tipo de usuario");
             return;
         }
 
-        if(tipoUsuario.equals("Administrador")){
+        if (tipoUsuario.equals("Administrador")) {
             perfil = "AD";
-        }else{
+        } else {
             perfil = "VE";
         }
 
-        // ESCENARIO ALTERNATIVO 1: Usuario no válido
-        if (usuario == null || usuario.trim().isEmpty()) {
-            mostrarError("El nombre de usuario no puede estar vacio");
+        // ESCENARIO ALTERNATIVO 1: nombreUsuario no cumple longitud
+        if (usuario == null || usuario.trim().isEmpty() ||
+                usuario.length() < 10 || usuario.length() >= 51) {
+
+            mostrarError("El usuario debe tener entre 10 y 50 caracteres ");
             return;
         }
 
@@ -91,8 +89,7 @@ public class crearUserController implements Initializable {
             return;
         }
 
-        if(!correo.matches("^.+@.+\\..+$"))
-        {
+        if (!correo.matches("^.+@.+\\..+$")) {
             mostrarError("Correo electrónico no válido");
             return;
         }
@@ -103,8 +100,16 @@ public class crearUserController implements Initializable {
             return;
         }
 
-        if (password.length() < 6) {
-            mostrarError("Contraseña no válida (mínimo 6 caracteres)");
+        // Expresión regular para:
+        // 8 a 16 caracteres
+        // al menos una minúscula
+        // al menos una mayúscula
+        // al menos un carácter especial
+        String regexPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,16}$";
+
+        if (!password.matches(regexPassword)) {
+            mostrarError(
+                    "La contraseña debe tener de entre 8 y 16 caracteres con al menos una minúscula, una mayúscula y un carácter especial");
             return;
         }
 
@@ -114,7 +119,7 @@ public class crearUserController implements Initializable {
         nuevoUsuario.setNombre(usuario);
         nuevoUsuario.setPerfil(perfil);
 
-        try{
+        try {
             usuarioService.insertarUsuario(nuevoUsuario);
             LocalDateTime timestamp = LocalDateTime.now();
             String usuarioAccion = SesionActual.getUsuario().getNombre_us();
@@ -124,14 +129,10 @@ public class crearUserController implements Initializable {
 
             mostrarExito("El usuario " + nuevoUsuario.getNombre() + " se ha registrado correctamente");
             limpiarFormulario();
-        }catch(UsuarioYaExisteException e){
+        } catch (UsuarioYaExisteException e) {
             mostrarError(e.getMessage());
         }
         // ESCENARIO ALTERNATIVO 4: Usuario o correo existente (simulado)
-
-
-
-
 
     }
 
@@ -156,4 +157,3 @@ public class crearUserController implements Initializable {
         ComboBTipoUser.getSelectionModel().clearSelection();
     }
 }
-
