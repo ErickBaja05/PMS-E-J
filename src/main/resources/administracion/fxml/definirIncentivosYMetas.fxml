@@ -15,21 +15,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="682.0" prefWidth="1016.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.administracion.gestionParametros.controller.definirIncentivosYMetasController">
+<AnchorPane prefHeight="682.0" prefWidth="1016.0" stylesheets="@../css/definirIncentivosStyles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.administracion.gestionParametros.controller.definirIncentivosYMetasController">
     <children>
-        <VBox layoutX="50.0" layoutY="50.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
-            <padding>
-                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-            </padding>
+        <VBox layoutX="50.0" layoutY="50.0" spacing="20.0" styleClass="card-panel" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label text="Gestión de Incentivos y Metas">
+                        <Label styleClass="label-titulo" text="Gestión de Incentivos y Metas">
                             <font>
-                                <Font name="System Bold" size="26.0" />
+                                <Font name="System Bold" size="28.0" />
                             </font>
                         </Label>
-                        <Label text="Defina los objetivos de ventas y recompensa correspondientes por producto o por laboratorio." textFill="#707070">
+                        <Label styleClass="label-instruccion" text="Defina los objetivos de ventas y recompensas por producto o laboratorio.">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -37,37 +34,31 @@
                     </children>
                 </VBox>
 
-                <TabPane fx:id="tabPaneGestion" prefHeight="315.0" prefWidth="841.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                <TabPane fx:id="tabPaneGestion" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                     <tabs>
                         <Tab text="Por Producto">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                                     <children>
-                                        <GridPane hgap="20.0" layoutX="30.0" layoutY="30.0" vgap="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                                        <GridPane hgap="20.0" layoutX="20.0" layoutY="30.0" vgap="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="200.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="150.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
                                             </columnConstraints>
                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                             <children>
-                                                <Label text="Código Auxiliar:">
-                                                    <font><Font name="System Bold" size="14.0" /></font>
-                                                </Label>
-                                                <TextField fx:id="txtCodigoProd" prefHeight="41.0" prefWidth="530.0" promptText="Ingrese código del producto" GridPane.columnIndex="1" />
+                                                <Label styleClass="label-campo" text="Código Auxiliar:" />
+                                                <TextField fx:id="txtCodigoProd" prefHeight="40.0" promptText="Ingrese código del producto" GridPane.columnIndex="1" />
 
-                                                <Label text="Meta de Ventas:" GridPane.rowIndex="1">
-                                                    <font><Font name="System Bold" size="14.0" /></font>
-                                                </Label>
-                                                <TextField fx:id="txtMetaProd" prefHeight="40.0" prefWidth="525.0" promptText="Ej: 100 (Número entero)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label styleClass="label-campo" text="Meta de Ventas:" GridPane.rowIndex="1" />
+                                                <TextField fx:id="txtMetaProd" prefHeight="40.0" promptText="Ej: 100 (unidades)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                                                <Label text="Incentivo:" GridPane.rowIndex="2">
-                                                    <font><Font name="System Bold" size="14.0" /></font>
-                                                </Label>
-                                                <TextField fx:id="txtIncentivoProd" prefHeight="41.0" prefWidth="529.0" promptText="Descripción del incentivo (5-51 caracteres)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label styleClass="label-campo" text="Incentivo:" GridPane.rowIndex="2" />
+                                                <TextField fx:id="txtIncentivoProd" prefHeight="40.0" promptText="Descripción del incentivo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                             </children>
                                         </GridPane>
                                     </children>
@@ -77,33 +68,27 @@
 
                         <Tab text="Por Laboratorio">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                                     <children>
-                                        <GridPane hgap="20.0" layoutX="30.0" layoutY="30.0" vgap="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                                        <GridPane hgap="20.0" layoutX="20.0" layoutY="30.0" vgap="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="200.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="150.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
                                             </columnConstraints>
                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                             <children>
-                                                <Label text="Nombre Laboratorio:">
-                                                    <font><Font name="System Bold" size="14.0" /></font>
-                                                </Label>
-                                                <TextField fx:id="txtNombreLab" prefHeight="40.0" prefWidth="527.0" promptText="Ingrese nombre del laboratorio" GridPane.columnIndex="1" />
+                                                <Label styleClass="label-campo" text="Nombre Laboratorio:" />
+                                                <TextField fx:id="txtNombreLab" prefHeight="40.0" promptText="Ingrese nombre del laboratorio" GridPane.columnIndex="1" />
 
-                                                <Label text="Meta de Ventas:" GridPane.rowIndex="1">
-                                                    <font><Font name="System Bold" size="14.0" /></font>
-                                                </Label>
-                                                <TextField fx:id="txtMetaLab" prefHeight="40.0" prefWidth="518.0" promptText="Ej: 500 (Número entero)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label styleClass="label-campo" text="Meta de Ventas:" GridPane.rowIndex="1" />
+                                                <TextField fx:id="txtMetaLab" prefHeight="40.0" promptText="Ej: 500 (unidades)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                                                <Label text="Incentivo:" GridPane.rowIndex="2">
-                                                    <font><Font name="System Bold" size="14.0" /></font>
-                                                </Label>
-                                                <TextField fx:id="txtIncentivoLab" prefHeight="40.0" prefWidth="525.0" promptText="Descripción del incentivo (5-51 caracteres)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label styleClass="label-campo" text="Incentivo:" GridPane.rowIndex="2" />
+                                                <TextField fx:id="txtIncentivoLab" prefHeight="40.0" promptText="Descripción del incentivo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                             </children>
                                         </GridPane>
                                     </children>
@@ -115,12 +100,11 @@
 
                 <HBox alignment="CENTER_RIGHT" spacing="15.0">
                     <children>
-                        <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarInformacion" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white;" text="GUARDAR INFORMACIÓN">
-                            <font><Font name="System Bold" size="13.0" /></font>
-                            <cursor><Cursor fx:constant="HAND" /></cursor>
-                        </Button>
-                        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelarOperacion" prefHeight="45.0" prefWidth="150.0" text="CANCELAR">
-                            <cursor><Cursor fx:constant="HAND" /></cursor>
+                        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelarOperacion" prefHeight="45.0" prefWidth="150.0" styleClass="btn-cancelar" text="CANCELAR" />
+                        <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarInformacion" prefHeight="45.0" prefWidth="200.0" styleClass="btn-guardar" text="GUARDAR DATOS">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
                         </Button>
                     </children>
                 </HBox>

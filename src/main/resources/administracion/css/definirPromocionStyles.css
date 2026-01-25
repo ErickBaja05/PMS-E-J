@@ -1,0 +1,113 @@
+/* --- PALETA FARMACIA ---
+   Primary: #009688 (Teal Médico)
+   Secondary: #607D8B (Gris Azulado - para acciones secundarias)
+   Background: #F0F4F4 (Menta Suave)
+   Text: #2C3E50 (Azul Oscuro)
+*/
+
+/* --- CONFIGURACIÓN GENERAL --- */
+.root {
+    -fx-background-color: #F0F4F4;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* --- TARJETA PRINCIPAL --- */
+.card-panel {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-border-color: #E0E0E0;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 10, 0, 0, 3);
+}
+
+/* --- SUB-PANELES (Opciones de RadioButton) --- */
+/* Esto dará un fondo sutil a cada opción para agruparlas visualmente */
+.option-panel {
+    -fx-background-color: #FAFAFA;
+    -fx-background-radius: 8;
+    -fx-border-color: #EEEEEE;
+    -fx-border-radius: 8;
+    -fx-padding: 15;
+}
+
+/* --- TEXTOS --- */
+.label-titulo {
+    -fx-text-fill: #009688; /* Teal */
+    -fx-font-weight: bold;
+}
+
+.label-subtitulo {
+    -fx-text-fill: #7F8C8D; /* Gris medio */
+}
+
+.label-seccion {
+    -fx-text-fill: #34495E;
+    -fx-font-weight: bold;
+}
+
+/* --- CAMPOS DE ENTRADA (Inputs) --- */
+.text-field, .text-area, .date-picker {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 6;
+    -fx-border-color: #BDC3C7;
+    -fx-border-radius: 6;
+    -fx-padding: 8;
+}
+
+.text-field:focused, .text-area:focused, .date-picker:focused {
+    -fx-border-color: #009688; /* Borde verde al escribir */
+    -fx-background-color: #FDFEFE;
+}
+
+/* --- RADIO BUTTONS --- */
+.radio-button {
+    -fx-text-fill: #2C3E50;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.radio-button .radio {
+    -fx-border-color: #009688;
+    -fx-border-radius: 10px;
+}
+
+.radio-button:selected .radio .dot {
+    -fx-background-color: #009688;
+}
+
+/* --- BOTONES --- */
+.button {
+    -fx-cursor: hand;
+    -fx-background-radius: 6;
+    -fx-font-weight: bold;
+}
+
+/* Botón Registrar (Principal) */
+.btn-registrar {
+    -fx-background-color: #009688;
+    -fx-text-fill: white;
+}
+.btn-registrar:hover {
+    -fx-background-color: #00796B;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,150,136,0.3), 8, 0, 0, 2);
+}
+
+/* Botón Validar (Secundario - Herramienta) */
+.btn-validar {
+    -fx-background-color: #607D8B; /* Gris Azulado */
+    -fx-text-fill: white;
+}
+.btn-validar:hover {
+    -fx-background-color: #546E7A;
+}
+
+/* Botón Cancelar */
+.btn-cancelar {
+    -fx-background-color: #ECF0F1;
+    -fx-text-fill: #7F8C8D;
+    -fx-border-color: transparent;
+}
+.btn-cancelar:hover {
+    -fx-background-color: #BDC3C7;
+    -fx-text-fill: white;
+}

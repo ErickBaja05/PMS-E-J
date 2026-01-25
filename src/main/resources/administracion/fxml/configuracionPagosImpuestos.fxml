@@ -12,37 +12,51 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="682.0" prefWidth="1016.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.administracion.gestionParametros.controller.configuracionPagosImpuestosController">
+<AnchorPane prefHeight="682.0" prefWidth="1016.0" stylesheets="@../css/configuracionPagosStyles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.administracion.gestionParametros.controller.configuracionPagosImpuestosController">
     <children>
-        <VBox layoutX="50.0" layoutY="50.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+        <VBox layoutX="50.0" layoutY="50.0" spacing="20.0" styleClass="card-main" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
             <padding>
                 <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
             </padding>
             <children>
-                <Label text="Configuración de Pagos e Impuestos">
+                <Label styleClass="label-header" text="Configuración de Pagos e Impuestos">
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>
                 </Label>
 
-                <VBox spacing="10.0" style="-fx-padding: 15; -fx-border-color: #eeeeee; -fx-border-radius: 10;">
+                <VBox spacing="15.0" styleClass="section-box">
                     <children>
-                        <Label text="Definir Valor de IVA">
-                            <font>
-                                <Font name="System Bold" size="16.0" />
-                            </font>
-                        </Label>
+                        <HBox alignment="CENTER_LEFT" spacing="20.0">
+                            <children>
+                                <Label styleClass="label-subheader" text="Definir Valor de IVA">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+
                         <HBox alignment="CENTER_LEFT" spacing="15.0">
                             <children>
-                                <TextField fx:id="txtValorIVA" prefHeight="40.0" prefWidth="250.0" promptText="Ingrese valor (ej: 15.0)" />
-                                <Button fx:id="btnRegistrarIVA" mnemonicParsing="false" onAction="#definirIVA" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white;" text="REGISTRAR IVA">
+                                <TextField fx:id="txtValorIVA" prefHeight="40.0" prefWidth="250.0" promptText="Ingrese un número decimal ej: 15.0" styleClass="input-field" />
+
+                                <Button fx:id="btnRegistrarIVA" mnemonicParsing="false" onAction="#definirIVA" prefHeight="40.0" prefWidth="160.0" styleClass="btn-update" text="ACTUALIZAR IVA">
                                     <font>
                                         <Font name="System Bold" size="12.0" />
                                     </font>
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
                                 </Button>
+
+                                <HBox alignment="CENTER_LEFT" spacing="8.0" styleClass="status-box-blue">
+                                    <children>
+                                        <Label styleClass="label-status-blue" text="Valor Actual de IVA:">
+                                            <font><Font name="System Bold" size="12.0" /></font>
+                                        </Label>
+                                        <Label fx:id="lblIvaActual" styleClass="label-status-blue" text="---">
+                                            <font><Font name="System Bold" size="15.0" /></font>
+                                        </Label>
+                                    </children>
+                                </HBox>
                             </children>
                         </HBox>
                     </children>
@@ -50,39 +64,34 @@
 
                 <VBox spacing="15.0" VBox.vgrow="ALWAYS">
                     <children>
-                        <Label text="Gestión de Métodos de Pago">
+                        <Label styleClass="label-subheader" text="Gestión de Métodos de Pago">
                             <font>
                                 <Font name="System Bold" size="16.0" />
                             </font>
                         </Label>
+
                         <HBox spacing="15.0">
                             <children>
-                                <TextField fx:id="txtNombrePago" prefHeight="40.0" prefWidth="350.0" promptText="Nombre del método de pago (ej: Efectivo)" />
-      
-                              <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="290.0" spacing="15.0">
-                                  <children>
-                                      <Button fx:id="btnHabilitar" mnemonicParsing="false" onAction="#habilitarMetodo" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: #27ae60; -fx-text-fill: white;" text="HABILITAR">
-                                          <font>
-                                              <Font name="System Bold" size="13.0" />
-                                          </font>
-                                          <cursor>
-                                              <Cursor fx:constant="HAND" />
-                                          </cursor>
-                                      </Button>
-                                      <Button fx:id="btnDeshabilitar" mnemonicParsing="false" onAction="#deshabilitarMetodo" prefHeight="45.0" prefWidth="180.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" text="DESHABILITAR">
-                                          <font>
-                                              <Font name="System Bold" size="13.0" />
-                                          </font>
-                                          <cursor>
-                                              <Cursor fx:constant="HAND" />
-                                          </cursor>
-                                      </Button>
-                                  </children>
-                              </HBox>
+                                <TextField fx:id="txtNombrePago" prefHeight="45.0" prefWidth="350.0" promptText="Nombre del método de pago (ej: Transferencia)" styleClass="input-field" />
+
+                                <HBox alignment="CENTER_RIGHT" spacing="15.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <Button fx:id="btnHabilitar" mnemonicParsing="false" onAction="#habilitarMetodo" prefHeight="45.0" prefWidth="150.0" styleClass="btn-success" text="HABILITAR">
+                                            <font>
+                                                <Font name="System Bold" size="13.0" />
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="btnDeshabilitar" mnemonicParsing="false" onAction="#deshabilitarMetodo" prefHeight="45.0" prefWidth="150.0" styleClass="btn-danger" text="DESHABILITAR">
+                                            <font>
+                                                <Font name="System Bold" size="13.0" />
+                                            </font>
+                                        </Button>
+                                    </children>
+                                </HBox>
                             </children>
                         </HBox>
 
-                        <TableView fx:id="tablaMetodosPago" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="tablaMetodosPago" prefHeight="200.0" prefWidth="200.0" styleClass="table-view-rounded" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="colNombre" prefWidth="450.0" text="Método de Pago" />
                                 <TableColumn fx:id="colEstado" prefWidth="450.0" text="Estado Actual" />

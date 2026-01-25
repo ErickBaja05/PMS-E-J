@@ -8,129 +8,122 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="682.0" prefWidth="1016.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.administracion.gestionParametros.controller.definirPromocionController">
+<AnchorPane prefHeight="682.0" prefWidth="1016.0" stylesheets="@../css/definirPromocionStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.administracion.gestionParametros.controller.definirPromocionController">
     <children>
-        <VBox alignment="TOP_LEFT" layoutX="50.0" layoutY="50.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+        <VBox layoutX="50.0" layoutY="50.0" spacing="15.0" styleClass="card-panel" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
             <padding>
-                <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
             </padding>
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label text="Definir Nueva Promoción">
+                        <Label styleClass="label-titulo" text="Definir Nueva Promoción">
                             <font>
-                                <Font name="System Bold" size="24.0" />
+                                <Font name="System Bold" size="26.0" />
                             </font>
                         </Label>
-                        <Label text="Complete los campos para registrar una promoción en el sistema." textFill="#707070" />
-                    </children>
-                </VBox>
-
-                <VBox spacing="10.0">
-                    <children>
-                  <RadioButton fx:id="rtDUnProducto" mnemonicParsing="false" onAction="#darDescuentoUP" text="Descuento en un Producto" />
-                        <HBox alignment="CENTER_LEFT" spacing="15.0">
-                            <children>
-                                <TextField fx:id="txtCodigoProducto" prefHeight="40.0" prefWidth="350.0" promptText="Ingrese el código del producto (Ej: PROD-102)">
-                                    <cursor>
-                                        <Cursor fx:constant="TEXT" />
-                                    </cursor></TextField>
-                                <Button fx:id="btValidar" mnemonicParsing="false" onAction="#validarProducto" prefHeight="38.0" prefWidth="125.0" text="Validar">
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
-                                </Button>
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-            <VBox layoutX="51.0" layoutY="128.0" spacing="10.0">
-               <children>
-                  <RadioButton fx:id="rtDTodaMercaderia" mnemonicParsing="false" onAction="#darDescuentoTM" text="Descuento en Toda la Mercadería" />
-                  <HBox alignment="CENTER_LEFT" spacing="15.0">
-                     <children>
-                        <TextField fx:id="txtCodigoProducto1" prefHeight="40.0" prefWidth="350.0" promptText="Ingrese el Descuento (Ej: 21 %)">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </TextField>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-
-                <VBox spacing="10.0">
-                    <children>
-                        <Label text="Condiciones o Reglas de la Promoción">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
-                        <TextArea fx:id="txtCondiciones" prefHeight="100.0" prefWidth="200.0" promptText="Describa las reglas aplicables (Ej: 2x1 en unidades seleccionadas)" wrapText="true">
-                            <cursor>
-                                <Cursor fx:constant="TEXT" />
-                            </cursor></TextArea>
-                    </children>
-                </VBox>
-
-                <HBox spacing="40.0">
-                    <children>
-                        <VBox spacing="10.0">
-                            <children>
-                                <Label text="Fecha de Inicio">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <DatePicker fx:id="dpFechaInicio" prefHeight="40.0" prefWidth="250.0" promptText="Seleccione fecha">
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor></DatePicker>
-                            </children>
-                        </VBox>
-                        <VBox spacing="10.0">
-                            <children>
-                                <Label text="Fecha de Fin">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <DatePicker fx:id="dpFechaFin" prefHeight="40.0" prefWidth="250.0" promptText="Seleccione fecha">
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor></DatePicker>
-                            </children>
-                        </VBox>
-                    </children>
-                </HBox>
-
-                <VBox alignment="CENTER_LEFT" spacing="20.0" VBox.vgrow="ALWAYS">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="20.0">
-                            <children>
-                                <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#registrarPromocion" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-cursor: hand;" text="REGISTRAR PROMOCIÓN">
-                                    <font>
-                                        <Font name="System Bold" size="13.0" />
-                                    </font>
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
-                                </Button>
-                                <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelarOperacion" prefHeight="45.0" prefWidth="150.0" text="CANCELAR">
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor></Button>
-                            </children>
-                        </HBox>
-                        <Label fx:id="lblMensaje" wrapText="true">
+                        <Label styleClass="label-subtitulo" text="Complete los campos para configurar y activar una promoción.">
                             <font>
                                 <Font size="14.0" />
                             </font>
+                        </Label>
+                    </children>
+                </VBox>
+
+                <VBox spacing="10.0" VBox.vgrow="NEVER">
+                    <children>
+                        <Label styleClass="label-seccion" text="Tipo de Aplicación">
+                            <font><Font name="System Bold" size="14.0" /></font>
+                        </Label>
+
+                        <VBox spacing="10.0">
+                            <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="option-panel">
+                                <children>
+                                    <RadioButton fx:id="rtDUnProducto" minWidth="260.0" mnemonicParsing="false" onAction="#darDescuentoUP" selected="true" text="Descuento Individual (Producto)">
+                                        <toggleGroup>
+                                            <ToggleGroup fx:id="grupoPromocion" />
+                                        </toggleGroup>
+                                        <font><Font size="13.0" /></font>
+                                    </RadioButton>
+                                    <TextField fx:id="txtCodigoProducto" prefHeight="40.0" promptText="Ingrese el código (Ej: PROD-102)" HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="btValidar" minWidth="100.0" mnemonicParsing="false" onAction="#validarProducto" prefHeight="40.0" styleClass="btn-validar" text="VALIDAR">
+                                        <cursor><Cursor fx:constant="HAND" /></cursor>
+                                        <font><Font name="System Bold" size="12.0" /></font>
+                                    </Button>
+                                </children>
+                            </HBox>
+
+                            <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="option-panel">
+                                <children>
+                                    <RadioButton fx:id="rtDTodaMercaderia" minWidth="260.0" mnemonicParsing="false" onAction="#darDescuentoTM" text="Descuento Global (Toda Mercadería)" toggleGroup="$grupoPromocion">
+                                        <font><Font size="13.0" /></font>
+                                    </RadioButton>
+                                    <TextField fx:id="txtCodigoProducto1" prefHeight="40.0" promptText="Ingrese porcentaje de descuento (Ej: 20%)" HBox.hgrow="ALWAYS" />
+                                </children>
+                            </HBox>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <GridPane hgap="30.0" vgap="10.0" VBox.vgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="60.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                    </rowConstraints>
+                    <children>
+                        <Label styleClass="label-seccion" text="Condiciones o Reglas" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <font><Font name="System Bold" size="14.0" /></font>
+                        </Label>
+                        <TextArea fx:id="txtCondiciones" promptText="Ej: Válido solo en pagos en efectivo, no acumulable con otras promociones." style="-fx-background-color: transparent;" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+                        <Label styleClass="label-seccion" text="Vigencia" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <font><Font name="System Bold" size="14.0" /></font>
+                        </Label>
+
+                        <VBox spacing="15.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <children>
+                                <VBox spacing="5.0">
+                                    <Label text="Fecha de Inicio:" textFill="#7f8c8d" />
+                                    <DatePicker fx:id="dpFechaInicio" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="DD/MM/AAAA" />
+                                </VBox>
+                                <VBox spacing="5.0">
+                                    <Label text="Fecha de Fin:" textFill="#7f8c8d" />
+                                    <DatePicker fx:id="dpFechaFin" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="DD/MM/AAAA" />
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </GridPane>
+
+                <VBox alignment="CENTER_LEFT" spacing="10.0">
+                    <children>
+                        <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                            <children>
+                                <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelarOperacion" prefHeight="45.0" prefWidth="150.0" styleClass="btn-cancelar" text="CANCELAR" />
+                                <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#registrarPromocion" prefHeight="45.0" prefWidth="220.0" styleClass="btn-registrar" text="REGISTRAR PROMOCIÓN">
+                                    <font><Font name="System Bold" size="13.0" /></font>
+                                    <cursor><Cursor fx:constant="HAND" /></cursor>
+                                </Button>
+                            </children>
+                        </HBox>
+                        <Label fx:id="lblMensaje" textFill="#e74c3c" wrapText="true">
+                            <font><Font name="System Italic" size="13.0" /></font>
                         </Label>
                     </children>
                 </VBox>
