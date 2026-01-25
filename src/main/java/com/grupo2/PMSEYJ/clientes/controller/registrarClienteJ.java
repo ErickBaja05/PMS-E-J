@@ -1,12 +1,22 @@
 package com.grupo2.PMSEYJ.clientes.controller;
 
+import com.grupo2.PMSEYJ.clientes.dto.NuevoClienteJuridicoDTO;
+import com.grupo2.PMSEYJ.clientes.service.ClienteJuridicoService;
+import com.grupo2.PMSEYJ.clientes.service.ClienteJurididoServiceImpl;
+import com.grupo2.PMSEYJ.core.exception.CedulaNoValidaException;
+import com.grupo2.PMSEYJ.core.exception.ClienteYaExisteException;
+import com.grupo2.PMSEYJ.core.exception.FechaNacimientoInvalidaException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class registrarClienteJ {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class registrarClienteJ implements Initializable {
 
     @FXML
     private Button btnRegistrarCliente;
@@ -28,6 +38,8 @@ public class registrarClienteJ {
 
     @FXML
     private TextField txtNombre;
+
+    private ClienteJuridicoService  clienteJuridicoService;
 
     @FXML
     void registrarCliente(ActionEvent event) {
@@ -74,8 +86,23 @@ public class registrarClienteJ {
             return;
         }
 
+        String ruc = txtCedulaJ.getText();
+        String correo = txtCorreoJ.getText();
+        String direccion = txtDireccionJ.getText();
+        String nombre = txtNombre.getText();
+        String telefono = txtCelularJ.getText();
+
+        NuevoClienteJuridicoDTO nuevoCliente = new NuevoClienteJuridicoDTO(ruc,nombre,direccion,correo,telefono);
+
         // SE CUMPLIERON TODAS LAS VALIDACIONES
-        mostrarMensaje("Cliente registrado exitosamente", false);
+        try{
+            clienteJuridicoService.insertarClienteJuridico(nuevoCliente);
+            mostrarMensaje("Cliente registrado exitosamente", false);
+            limpiarCampos();
+        }catch(ClienteYaExisteException | CedulaNoValidaException e){
+            mostrarMensaje(e.getMessage(), true);
+        }
+
     }
 
     private void mostrarMensaje(String texto, boolean esError) {
@@ -90,4 +117,17 @@ public class registrarClienteJ {
         lblMensaje.setText(texto);
     }
 
+    public void limpiarCampos(){
+        txtCedulaJ.setText("");
+        txtCorreoJ.setText("");
+        txtDireccionJ.setText("");
+        txtNombre.setText("");
+        txtCelularJ.setText("");
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        clienteJuridicoService = new ClienteJurididoServiceImpl();
+    }
 }

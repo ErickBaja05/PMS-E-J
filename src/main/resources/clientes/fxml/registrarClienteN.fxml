@@ -71,6 +71,14 @@
                                 <TextField fx:id="txtNombre" prefHeight="35.0" promptText="Ingrese su nombre" styleClass="textField" />
                             </children>
                         </VBox>
+                        <VBox spacing="5.0" GridPane.columnIndex="1">
+                            <children>
+                                <Label maxWidth="Infinity" styleClass="lblInformacion" text="Correo Electrónico">
+                                    <padding><Insets left="5.0" /></padding>
+                                </Label>
+                                <TextField fx:id="txtCorreo" prefHeight="35.0" promptText="ejemplo@correo.com" styleClass="textField" />
+                            </children>
+                        </VBox>
                         <VBox spacing="5.0" GridPane.rowIndex="1">
                             <children>
                                 <Label maxWidth="Infinity" styleClass="lblInformacion" text="Fecha de Nacimiento">
@@ -80,12 +88,14 @@
                             </children>
                         </VBox>
 
-                        <VBox spacing="5.0" GridPane.columnIndex="1">
+
+
+                        <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <children>
-                                <Label maxWidth="Infinity" styleClass="lblInformacion" text="Correo Electrónico">
+                                <Label maxWidth="Infinity" prefHeight="18.0" prefWidth="384.0" styleClass="lblInformacion" text="Teléfono Celular">
                                     <padding><Insets left="5.0" /></padding>
                                 </Label>
-                                <TextField fx:id="txtCorreo" prefHeight="35.0" promptText="ejemplo@correo.com" styleClass="textField" />
+                                <TextField fx:id="txtCelular" prefHeight="26.0" prefWidth="378.0" promptText="09XXXXXXXX" styleClass="textField" />
                             </children>
                         </VBox>
                         <VBox spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
@@ -94,14 +104,6 @@
                                     <padding><Insets left="5.0" /></padding>
                                 </Label>
                                 <TextField fx:id="txtDireccion" prefHeight="35.0" promptText="Calle Principal y Secundaria" styleClass="textField" />
-                            </children>
-                        </VBox>
-                        <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <children>
-                                <Label maxWidth="Infinity" prefHeight="18.0" prefWidth="384.0" styleClass="lblInformacion" text="Teléfono Celular">
-                                    <padding><Insets left="5.0" /></padding>
-                                </Label>
-                                <TextField fx:id="txtCelular" prefHeight="26.0" prefWidth="378.0" promptText="09XXXXXXXX" styleClass="textField" />
                             </children>
                         </VBox>
                     </children>

@@ -1,12 +1,26 @@
 package com.grupo2.PMSEYJ.clientes.controller;
 
+import com.grupo2.PMSEYJ.clientes.dto.NuevoClienteNaturalDTO;
+import com.grupo2.PMSEYJ.clientes.service.ClienteNaturalService;
+import com.grupo2.PMSEYJ.clientes.service.ClienteNaturalServiceImpl;
+import com.grupo2.PMSEYJ.core.exception.CedulaNoValidaException;
+import com.grupo2.PMSEYJ.core.exception.ClienteYaExisteException;
+import com.grupo2.PMSEYJ.core.exception.FechaFormatoErroneoException;
+import com.grupo2.PMSEYJ.core.exception.FechaNacimientoInvalidaException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class registrarClienteN {
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ResourceBundle;
+
+public class registrarClienteN implements Initializable {
 
     @FXML
     private Button btnRegistrarCliente;
@@ -31,6 +45,8 @@ public class registrarClienteN {
 
     @FXML
     private TextField txtNombre;
+
+    private ClienteNaturalService clienteNaturalService;
 
     @FXML
     void registrarCliente(ActionEvent event) {
@@ -78,8 +94,35 @@ public class registrarClienteN {
             return;
         }
 
-        // SE CUMPLIERON TODAS LAS VALIDACIONES
-        mostrarMensaje("Cliente registrado exitosamente", false);
+        String cedula = txtCedula.getText();
+        String nombre  = txtNombre.getText();
+        String correo  = txtCorreo.getText();
+        String telefono   = txtCelular.getText();
+        String direccion = txtDireccion.getText();
+        LocalDate fechaNacimiento;
+
+
+        String fecha_nacimientoS = txtFechaNacimiento.getText(); // "18/08/2027"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try{
+            fechaNacimiento = LocalDate.parse(fecha_nacimientoS, formatter);
+
+        }catch(DateTimeParseException e){
+            mostrarMensaje("La fecha debe tener el formato dd/mm/yyyy",true);
+            return;
+        }
+
+        NuevoClienteNaturalDTO nuevoCliente = new NuevoClienteNaturalDTO(cedula,nombre,correo,telefono,fechaNacimiento,direccion);
+        
+
+        try{
+            clienteNaturalService.insertarClienteNatural(nuevoCliente);
+            mostrarMensaje("Cliente registrado exitosamente", false);
+            limpiarCampos();
+        }catch(ClienteYaExisteException | FechaNacimientoInvalidaException  | CedulaNoValidaException e){
+            mostrarMensaje(e.getMessage(), true);
+        }
+
 
 
     }
@@ -96,4 +139,17 @@ public class registrarClienteN {
         lblMensaje.setText(texto);
     }
 
+    private void limpiarCampos() {
+        txtCedula.setText("");
+        txtCelular.setText("");
+        txtCorreo.setText("");
+        txtDireccion.setText("");
+        txtFechaNacimiento.setText("");
+        txtNombre.setText("");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        clienteNaturalService = new ClienteNaturalServiceImpl();
+    }
 }
