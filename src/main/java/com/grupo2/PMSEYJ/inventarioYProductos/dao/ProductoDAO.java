@@ -14,7 +14,7 @@ public class ProductoDAO {
         Producto p = new Producto();
         p.setCodigo_aux(rs.getString("codigo_ax"));
         p.setId_lab(rs.getInt("id_lab"));
-        p.setCodigo_br(rs.getDouble("codigo_br"));
+        p.setCodigo_br(rs.getString("codigo_br"));
         p.setNombre_p(rs.getString("nombre_p"));
         p.setDescripcion(rs.getString("descripcion"));
         p.setCategoria(rs.getString("categoria"));       // char(1) → String
@@ -116,7 +116,7 @@ public class ProductoDAO {
 
             ps.setString(1, p.getCodigo_aux());
             ps.setInt(2, p.getId_lab());
-            ps.setDouble(3, p.getCodigo_br());
+            ps.setString(3, p.getCodigo_br());
             ps.setString(4, p.getNombre_p());
             ps.setString(5, p.getDescripcion());
             ps.setString(6, p.getCategoria());     // ya es String

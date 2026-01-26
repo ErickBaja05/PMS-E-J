@@ -59,6 +59,14 @@
                                 <TextField fx:id="txtCodigoAuxiliar" prefHeight="35.0" promptText="14455-COD-45" styleClass="textField" />
                             </children>
                         </VBox>
+                        <VBox spacing="5.0" GridPane.columnIndex="1">
+                            <children>
+                                <Label maxWidth="Infinity" styleClass="lblInformacion" text="Código de Barras">
+                                    <padding><Insets left="5.0" /></padding>
+                                </Label>
+                                <TextField fx:id="txtCodigoBarras" prefHeight="35.0" promptText="1445566895" styleClass="textField" />
+                            </children>
+                        </VBox>
                         <VBox spacing="5.0" GridPane.rowIndex="1">
                             <children>
                                 <Label maxWidth="Infinity" styleClass="lblInformacion" text="Nombre de Producto">
@@ -67,15 +75,16 @@
                         <TextField fx:id="txtNombreProducto" prefHeight="35.0" promptText="Ingrese el nombre" styleClass="textField" />
                             </children>
                         </VBox>
-
-                        <VBox spacing="5.0" GridPane.columnIndex="1">
+                        <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <children>
-                                <Label maxWidth="Infinity" styleClass="lblInformacion" text="Código de Barras">
+                                <Label maxWidth="Infinity" prefHeight="18.0" prefWidth="384.0" styleClass="lblInformacion" text="Descripción Producto">
                                     <padding><Insets left="5.0" /></padding>
                                 </Label>
-                        <TextField fx:id="txtCodigoBarras" prefHeight="35.0" promptText="1445566895" styleClass="textField" />
+                                <TextField fx:id="txtDescripcion" prefHeight="35.0" promptText="Ingrese una descripcion " styleClass="textField" />
                             </children>
                         </VBox>
+
+
                         <VBox spacing="5.0" GridPane.rowIndex="2">
                             <children>
                                 <Label maxWidth="Infinity" styleClass="lblInformacion" text="Categoria">
@@ -84,14 +93,7 @@
                         <ComboBox fx:id="comboCategoria" prefHeight="0.0" prefWidth="385.0" promptText="Escoja una categoría" styleClass="textField" />
                             </children>
                         </VBox>
-                        <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <children>
-                                <Label maxWidth="Infinity" prefHeight="18.0" prefWidth="384.0" styleClass="lblInformacion" text="Descripción Producto">
-                                    <padding><Insets left="5.0" /></padding>
-                                </Label>
-                        <TextField fx:id="txtDescripcion" prefHeight="35.0" promptText="Ingrese una descripcion " styleClass="textField" />
-                            </children>
-                        </VBox>
+
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <Label maxWidth="Infinity" styleClass="lblInformacion" text="Forma de Venta">

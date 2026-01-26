@@ -47,7 +47,7 @@ public class ProductoServiceImpl implements ProductosService{
         Laboratorio laboratorio;
 
         p.setCodigo_aux(nuevoProducto.getCodigo_aux());
-        p.setCodigo_br(Double.parseDouble(nuevoProducto.getCodigo_br()));
+        p.setCodigo_br(nuevoProducto.getCodigo_br());
         p.setNombre_p(nuevoProducto.getNombre_p());
         p.setDescripcion(nuevoProducto.getDescripcion());
         p.setCategoria(nuevoProducto.getCategoria());
