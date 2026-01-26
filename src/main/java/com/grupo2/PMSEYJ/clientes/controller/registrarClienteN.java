@@ -3,10 +3,7 @@ package com.grupo2.PMSEYJ.clientes.controller;
 import com.grupo2.PMSEYJ.clientes.dto.NuevoClienteNaturalDTO;
 import com.grupo2.PMSEYJ.clientes.service.ClienteNaturalService;
 import com.grupo2.PMSEYJ.clientes.service.ClienteNaturalServiceImpl;
-import com.grupo2.PMSEYJ.core.exception.CedulaNoValidaException;
-import com.grupo2.PMSEYJ.core.exception.ClienteYaExisteException;
-import com.grupo2.PMSEYJ.core.exception.FechaFormatoErroneoException;
-import com.grupo2.PMSEYJ.core.exception.FechaNacimientoInvalidaException;
+import com.grupo2.PMSEYJ.core.exception.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -119,7 +116,7 @@ public class registrarClienteN implements Initializable {
             clienteNaturalService.insertarClienteNatural(nuevoCliente);
             mostrarMensaje("Cliente registrado exitosamente", false);
             limpiarCampos();
-        }catch(ClienteYaExisteException | FechaNacimientoInvalidaException  | CedulaNoValidaException e){
+        }catch(ClienteYaExisteException | FechaNacimientoInvalidaException  | CedulaNoValidaException | CelularNoValidoException e){
             mostrarMensaje(e.getMessage(), true);
         }
 

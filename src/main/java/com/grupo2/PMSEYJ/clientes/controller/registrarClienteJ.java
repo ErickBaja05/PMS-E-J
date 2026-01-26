@@ -4,6 +4,7 @@ import com.grupo2.PMSEYJ.clientes.dto.NuevoClienteJuridicoDTO;
 import com.grupo2.PMSEYJ.clientes.service.ClienteJuridicoService;
 import com.grupo2.PMSEYJ.clientes.service.ClienteJurididoServiceImpl;
 import com.grupo2.PMSEYJ.core.exception.CedulaNoValidaException;
+import com.grupo2.PMSEYJ.core.exception.CelularNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.ClienteYaExisteException;
 import com.grupo2.PMSEYJ.core.exception.FechaNacimientoInvalidaException;
 import javafx.event.ActionEvent;
@@ -99,7 +100,7 @@ public class registrarClienteJ implements Initializable {
             clienteJuridicoService.insertarClienteJuridico(nuevoCliente);
             mostrarMensaje("Cliente registrado exitosamente", false);
             limpiarCampos();
-        }catch(ClienteYaExisteException | CedulaNoValidaException e){
+        }catch(ClienteYaExisteException | CedulaNoValidaException | CelularNoValidoException e){
             mostrarMensaje(e.getMessage(), true);
         }
 

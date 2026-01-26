@@ -4,6 +4,7 @@ import com.grupo2.PMSEYJ.clientes.dao.ClienteJuridicoDAO;
 import com.grupo2.PMSEYJ.clientes.dto.GestionClienteJuridicoDTO;
 import com.grupo2.PMSEYJ.clientes.dto.NuevoClienteJuridicoDTO;
 import com.grupo2.PMSEYJ.clientes.model.ClienteJuridico;
+import com.grupo2.PMSEYJ.core.exception.CelularNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.ClienteYaExisteException;
 
 public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
@@ -20,6 +21,9 @@ public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
             throw new ClienteYaExisteException("Error en el número de RUC");
         }
 
+        if(!clienteJuridico.getTelefono_cj().matches("^09\\d{8}$")){
+            throw new CelularNoValidoException("El número de celular debe comenzar con 09");
+        }
         ClienteJuridico nuevoCliente = new ClienteJuridico();
         nuevoCliente.setRuc(clienteJuridico.getRuc());
         nuevoCliente.setCorreo_cj(clienteJuridico.getCorreo_cj());

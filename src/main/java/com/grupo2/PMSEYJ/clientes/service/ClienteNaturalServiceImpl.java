@@ -5,6 +5,7 @@ import com.grupo2.PMSEYJ.clientes.dto.GestionClienteNaturalDTO;
 import com.grupo2.PMSEYJ.clientes.dto.NuevoClienteNaturalDTO;
 import com.grupo2.PMSEYJ.clientes.model.ClienteNatural;
 import com.grupo2.PMSEYJ.core.exception.CedulaNoValidaException;
+import com.grupo2.PMSEYJ.core.exception.CelularNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.ClienteYaExisteException;
 import com.grupo2.PMSEYJ.core.exception.FechaNacimientoInvalidaException;
 
@@ -36,7 +37,9 @@ public class ClienteNaturalServiceImpl implements ClienteNaturalService {
 
         }
 
-
+        if(!clienteNatural.getTelefono().matches("^09\\d{8}$")){
+            throw new CelularNoValidoException("El número de celular debe comenzar con 09");
+        }
 
 
         ClienteNatural nuevoCliente = new ClienteNatural();
