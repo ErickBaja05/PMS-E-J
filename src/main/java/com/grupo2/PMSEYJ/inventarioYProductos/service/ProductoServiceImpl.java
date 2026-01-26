@@ -1,5 +1,6 @@
 package com.grupo2.PMSEYJ.inventarioYProductos.service;
 
+import com.grupo2.PMSEYJ.core.exception.CodigoDeBarrasNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.ProductoYaExisteException;
 import com.grupo2.PMSEYJ.inventarioYProductos.dao.LaboratorioDAO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dao.ProductoDAO;
@@ -36,6 +37,10 @@ public class ProductoServiceImpl implements ProductosService{
 
         if(verificarExistenciaProducto(nuevoProducto.getCodigo_aux())){
             throw new ProductoYaExisteException("Ya existe un producto con el código auxiliar proporcionado");
+        }
+
+        if(!nuevoProducto.getCodigo_br().toString().matches("^\\d{1,13}$")){
+            throw new CodigoDeBarrasNoValidoException("El código de barras no puede exceder los 13 caracteres");
         }
 
         Producto p = new Producto();

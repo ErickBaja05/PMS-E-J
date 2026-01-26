@@ -1,6 +1,7 @@
 package com.grupo2.PMSEYJ.inventarioYProductos.controller;
 
 
+import com.grupo2.PMSEYJ.core.exception.CodigoDeBarrasNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.ProductoYaExisteException;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoLaboratorioDTO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoProductoDTO;
@@ -95,7 +96,7 @@ public class registrarProducto implements Initializable {
             return;
         };
 
-        if(!validarFormato(txtCodigoAuxiliar.getText(),"[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\\- ]{5,12}$", "El código auxiliar tiene formato invalido o sobrepasa los 12 caracteres")){
+        if(!validarFormato(txtCodigoAuxiliar.getText(),"[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\\- ]{2,15}$", "El código auxiliar tiene formato invalido o sobrepasa los 15 caracteres")){
             return;
         };
         if(!validarFormato(txtCodigoBarras.getText(),"[0-9]+","El código de barras solo deben ser números")){
@@ -156,7 +157,7 @@ public class registrarProducto implements Initializable {
         try{
             productosService.insertarProducto(nuevoProductoDTO,nuevoLaboratorioDTO);
             mostrarMensaje("Producto registrado exitosamente",false);
-        }catch(ProductoYaExisteException e){
+        }catch(ProductoYaExisteException | CodigoDeBarrasNoValidoException e){
             mostrarMensaje(e.getMessage(),true);
         }
 
