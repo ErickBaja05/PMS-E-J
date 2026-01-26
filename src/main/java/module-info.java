@@ -10,7 +10,7 @@ module com.grupo2.PMSEYJ {
     requires java.sql;
     requires java.desktop;
     requires javafx.base;
-    requires com.grupo2.PMSEYJ;
+
 
 
     // Abre los paquetes con controladores para FXML
