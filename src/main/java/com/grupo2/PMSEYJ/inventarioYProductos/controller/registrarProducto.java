@@ -95,10 +95,13 @@ public class registrarProducto implements Initializable {
             return;
         };
 
-        if(!validarFormato(txtCodigoAuxiliar.getText(),"[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\\- ]{5,100}$", "El código auxiliar del producto no cumple con el formato deseado")){
+        if(!validarFormato(txtCodigoAuxiliar.getText(),"[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\\- ]{5,12}$", "El código auxiliar tiene formato invalido o sobrepasa los 12 caracteres")){
             return;
         };
         if(!validarFormato(txtCodigoBarras.getText(),"[0-9]+","El código de barras solo deben ser números")){
+            return;
+        }
+        if(!validarFormato(txtPVP.getText(),"^\\d+(\\.\\d+)?$","El PVP deben ser solo números. Utilize \".\" para separar decimales si lo requiere")){
             return;
         }
 
