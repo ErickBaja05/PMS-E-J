@@ -102,7 +102,7 @@ public class registrarProducto implements Initializable {
         if(!validarFormato(txtCodigoBarras.getText(),"[0-9]+","El código de barras solo deben ser números")){
             return;
         }
-        if(!validarFormato(txtPVP.getText(),"^\\d+(\\.\\d+)?$","El PVP deben ser solo números. Utilize \".\" para separar decimales si lo requiere")){
+        if(!validarFormato(txtPVP.getText(),"^\\d+(\\.\\d{1,2})?$","El PVP deben ser solo números. Utilize \".\" para separar decimales (máximo 2)")){
             return;
         }
 
