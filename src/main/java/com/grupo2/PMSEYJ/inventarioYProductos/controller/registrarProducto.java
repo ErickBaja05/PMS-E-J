@@ -108,7 +108,7 @@ public class registrarProducto implements Initializable {
 
 
         String codigo_aux = txtCodigoAuxiliar.getText();
-        Double codigo_br = Double.parseDouble(txtCodigoBarras.getText());
+        String codigo_br = txtCodigoBarras.getText();
         String nombre_p = txtNombreProducto.getText();
         String descripcion = txtDescripcion.getText();
         String categoria = null;

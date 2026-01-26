@@ -39,7 +39,7 @@ public class ProductoServiceImpl implements ProductosService{
             throw new ProductoYaExisteException("Ya existe un producto con el código auxiliar proporcionado");
         }
 
-        if(!nuevoProducto.getCodigo_br().toString().matches("^\\d{1,13}$")){
+        if(!nuevoProducto.getCodigo_br().matches("^\\d{1,13}$")){
             throw new CodigoDeBarrasNoValidoException("El código de barras no puede exceder los 13 caracteres");
         }
 
@@ -47,7 +47,7 @@ public class ProductoServiceImpl implements ProductosService{
         Laboratorio laboratorio;
 
         p.setCodigo_aux(nuevoProducto.getCodigo_aux());
-        p.setCodigo_br(nuevoProducto.getCodigo_br());
+        p.setCodigo_br(Double.parseDouble(nuevoProducto.getCodigo_br()));
         p.setNombre_p(nuevoProducto.getNombre_p());
         p.setDescripcion(nuevoProducto.getDescripcion());
         p.setCategoria(nuevoProducto.getCategoria());

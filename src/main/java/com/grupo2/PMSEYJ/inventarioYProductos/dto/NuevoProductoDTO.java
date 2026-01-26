@@ -2,7 +2,7 @@ package com.grupo2.PMSEYJ.inventarioYProductos.dto;
 
 public class NuevoProductoDTO {
     private String codigo_aux;
-    private Double codigo_br;
+    private String codigo_br;
     private String nombre_p;
     private String descripcion;
     private String categoria;
@@ -15,7 +15,7 @@ public class NuevoProductoDTO {
 
     }
 
-    public NuevoProductoDTO(String codigo_aux, Double codigo_br, String nombre_p, String descripcion, String categoria, String forma_venta, String tipo_venta, Double pvp, String indice_t) {
+    public NuevoProductoDTO(String codigo_aux, String codigo_br, String nombre_p, String descripcion, String categoria, String forma_venta, String tipo_venta, Double pvp, String indice_t) {
         this.codigo_aux = codigo_aux;
         this.codigo_br = codigo_br;
         this.nombre_p = nombre_p;
@@ -35,11 +35,11 @@ public class NuevoProductoDTO {
         this.codigo_aux = codigo_aux;
     }
 
-    public Double getCodigo_br() {
+    public String getCodigo_br() {
         return codigo_br;
     }
 
-    public void setCodigo_br(Double codigo_br) {
+    public void setCodigo_br(String codigo_br) {
         this.codigo_br = codigo_br;
     }
 
