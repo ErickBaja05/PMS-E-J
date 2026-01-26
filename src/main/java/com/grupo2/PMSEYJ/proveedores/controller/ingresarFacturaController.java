@@ -27,6 +27,8 @@ public class ingresarFacturaController {
     @FXML private TableColumn<DetalleFactura, String> colProducto, colLote, colVencimiento;
     @FXML private TableColumn<DetalleFactura, Double> colPrecioCompra, colSubtotal;
     @FXML private TableColumn<DetalleFactura, Integer> colCajas;
+    @FXML
+    private CheckBox checkIVA;
 
     private final ObservableList<DetalleFactura> masterData = FXCollections.observableArrayList();
 

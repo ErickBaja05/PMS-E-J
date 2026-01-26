@@ -46,7 +46,8 @@
 
 /* --- BOTONES ESPECÍFICOS --- */
 .btn-agregar {
-    -fx-background-color: #3498db; /* Azul claro */
+    -fx-background-color: #0c815b;
+    -fx-text-fill: white;
 }
 
 .btn-guardar {
@@ -55,13 +56,24 @@
 
 /* Efecto hover */
 .btn-agregar:hover {
-    -fx-background-color: #2980b9;
+    -fx-background-color: #08714e;
+    -fx-cursor: hand;
 }
 .btn-guardar:hover {
     -fx-background-color: #219150;
 }
 
 /* --- TABLAS (TableView) --- */
+
+.table-view .column-header {
+    -fx-background-color: #10B981;
+}
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+
+}
 
 /* 1. Centrar el contenido de TODAS las celdas (filas de datos) */
 .table-cell {

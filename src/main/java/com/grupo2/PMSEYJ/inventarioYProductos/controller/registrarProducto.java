@@ -1,6 +1,11 @@
 package com.grupo2.PMSEYJ.inventarioYProductos.controller;
 
 
+import com.grupo2.PMSEYJ.core.exception.ProductoYaExisteException;
+import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoLaboratorioDTO;
+import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoProductoDTO;
+import com.grupo2.PMSEYJ.inventarioYProductos.service.ProductoServiceImpl;
+import com.grupo2.PMSEYJ.inventarioYProductos.service.ProductosService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,30 +57,104 @@ public class registrarProducto implements Initializable {
     private final String [] formasVenta = {"POR CAJA", "POR UNIDAD"};
     private final String [] tipoVenta = {"OTC - VENTA LIBRE", "PRESENTACIÓN RECETA", "RETENCIÓN RECETA"};
 
+    private ProductosService productosService;
 
     @FXML
     void crearProducto(ActionEvent event) {
+
+        if(!validarVacio(txtCodigoAuxiliar,"Codigo Auxiliar")){
+            return;
+        }
+
+        if(!validarVacio(txtCodigoBarras,"Codigo Barras")){
+            return;
+        }
+        if(!validarVacio(txtNombreProducto,"Nombre")){
+            return;
+        }
+        if(!validarVacio(txtDescripcion,"Descripcion")){
+            return;
+        }
+        if(!validarVacio(txtPVP,"PVP")){
+            return;
+        }
+        if(!validarVacio(txtIndiceTerapeutico,"Indice Terapeutico")){
+            return;
+        }
+        if(!validarVacio(txtLaboratorio,"Laboratorio")){
+            return;
+        }
+        if(!validarSeleccion(comboCategoria,"Categoria")){
+            return;
+        }
+        if(!validarSeleccion(comboFormaVenta,"Forma de Venta")){
+            return;
+        }
+
+        if(!validarSeleccion(comboTipoVenta,"Tipo Venta")){
+            return;
+        };
+
+        if(!validarFormato(txtCodigoAuxiliar.getText(),"[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\\- ]{5,100}$", "El código auxiliar del producto no cumple con el formato deseado")){
+            return;
+        };
+        if(!validarFormato(txtCodigoBarras.getText(),"[0-9]+","El código de barras solo deben ser números")){
+            return;
+        }
+
+
+        String codigo_aux = txtCodigoAuxiliar.getText();
+        Double codigo_br = Double.parseDouble(txtCodigoBarras.getText());
+        String nombre_p = txtNombreProducto.getText();
+        String descripcion = txtDescripcion.getText();
+        String categoria = null;
+        String forma_venta = null;
+        String tipo_venta = null;
+        switch (comboFormaVenta.getValue()) {
+            case "POR CAJA":
+                forma_venta = "C";
+                break;
+            case "POR UNIDAD":
+                forma_venta = "U";
+                break;
+
+        }
+
+        switch (comboTipoVenta.getValue()) {
+            case "OTC - VENTA LIBRE":
+                tipo_venta = "O";
+                break;
+            case "PRESENTACIÓN RECETA":
+                tipo_venta = "P";
+                break;
+            case "RETENCIÓN RECETA":
+                tipo_venta = "R";
+                break;
+        }
+
+        switch (comboCategoria.getValue()) {
+            case "MEDICAMENTO":
+                categoria = "M";
+                break;
+            case "HIGIENE":
+                categoria = "H";
+                break;
+            case "OTROS":
+                categoria = "O";
+                break;
+        }
+
+
+        Double pvp = Double.parseDouble(txtPVP.getText());
+        String indice_t = txtIndiceTerapeutico.getText().toUpperCase();
+
+        NuevoProductoDTO nuevoProductoDTO = new NuevoProductoDTO(codigo_aux,codigo_br,nombre_p,descripcion,categoria,forma_venta,tipo_venta,pvp,indice_t);
+        NuevoLaboratorioDTO nuevoLaboratorioDTO = new NuevoLaboratorioDTO(txtLaboratorio.getText().toUpperCase());
         try{
-            validarVacio(txtCodigoAuxiliar,"Codigo Auxiliar");
-            validarVacio(txtCodigoBarras,"Codigo Barras");
-            validarVacio(txtNombreProducto,"Nombre");
-            validarVacio(txtDescripcion,"Descripcion");
-            validarVacio(txtPVP,"PVP");
-            validarVacio(txtIndiceTerapeutico,"Indice Terapeutico");
-            validarVacio(txtLaboratorio,"Laboratorio");
-            validarSeleccion(comboCategoria,"Categoria");
-            validarSeleccion(comboFormaVenta,"Forma de Venta");
-            validarSeleccion(comboTipoVenta,"Tipo Venta");
-
-
-            validarFormato(txtCodigoAuxiliar.getText(),"[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{5,100}$", "El código auxiliar del producto no cumple con el formato deseado");
-            validarFormato(txtCodigoBarras.getText(),"[0-9]+","El código de barras solo deben ser números");
-
-
+            productosService.insertarProducto(nuevoProductoDTO,nuevoLaboratorioDTO);
             mostrarMensaje("Producto registrado exitosamente",false);
-
-        }catch(Exception e){
-            mostrarMensaje(e.getMessage(), true);
+        }catch(ProductoYaExisteException e){
+            mostrarMensaje(e.getMessage(),true);
         }
 
 
@@ -85,6 +164,7 @@ public class registrarProducto implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        productosService = new ProductoServiceImpl();
         comboCategoria.getItems().addAll(categorias);
         comboFormaVenta.getItems().addAll(formasVenta);
         comboTipoVenta.getItems().addAll(tipoVenta);
@@ -96,23 +176,30 @@ public class registrarProducto implements Initializable {
 
     // --- MÉTODOS DE VALIDACIÓN PERSONALIZADOS ---
 
-    private void validarVacio(TextField campo, String nombreCampo) {
+    private boolean validarVacio(TextField campo, String nombreCampo) {
         if (campo.getText() == null || campo.getText().trim().isEmpty()) {
-            throw new IllegalArgumentException("El campo " + nombreCampo + " no puede estar vacío.");
+            mostrarMensaje("El campo " + nombreCampo + " no puede estar vacío.",true);
+            return false;
+
         }
+        return true;
     }
 
-    private void validarSeleccion(ComboBox campo, String nombreCampo) {
+    private boolean validarSeleccion(ComboBox campo, String nombreCampo) {
         if(campo.getValue()== null ){
-            throw new IllegalArgumentException("Debe seleccionar una opcion en " + nombreCampo);
+            mostrarMensaje("Debe seleccionar una opcion en " + nombreCampo,true);
+            return false;
         }
+        return true;
     }
 
 
-    private void validarFormato(String valor, String regex, String mensajeError) {
+    private boolean validarFormato(String valor, String regex, String mensajeError) {
         if (!valor.trim().matches(regex)) {
-            throw new IllegalArgumentException(mensajeError);
+            mostrarMensaje(mensajeError,true);
+            return false;
         }
+        return true;
     }
 
     // --- APOYO ---
