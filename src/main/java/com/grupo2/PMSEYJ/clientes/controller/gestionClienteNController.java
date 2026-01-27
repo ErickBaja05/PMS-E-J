@@ -51,7 +51,7 @@ public class gestionClienteNController implements Initializable {
             txtEstado.setText(cliente.getEstado());
             txtFechaNacimiento.setText(fechaTexto);
             txtCelular.setText(cliente.getTelefono());
-            mostrarMensaje("Información del Cliente recuperada exitosamente", false);
+            mostrarMensaje("Información del Cliente consultada exitosamente", false);
             clienteConsultado = cliente;
             if(SesionActual.getUsuario().getPerfil_us().equals("AD")){
                 btnModificar.setDisable(false);

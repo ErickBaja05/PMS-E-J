@@ -64,7 +64,7 @@
                </Button>
                               <VBox fx:id="clientesSubMenu" managed="false" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                  <children>
-                                    <Button fx:id="btnRegistrarClienteN" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarClienteN" text="REGISTAR CLIENTE NATURAL">
+                                    <Button fx:id="btnRegistrarClienteN" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarClienteN" text="REGISTRAR CLIENTE NATURAL">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />

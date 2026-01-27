@@ -53,20 +53,20 @@ public class registrarClienteN implements Initializable {
 
         // SE DEBE PROPORCIONAR TODOS LOS DATOS
         if(txtCedula.getText().isEmpty() || txtCelular.getText().isEmpty() || txtCorreo.getText().isEmpty() || txtDireccion.getText().isEmpty() || txtFechaNacimiento.getText().isEmpty() || txtNombre.getText().isEmpty()) {
-            mostrarMensaje("Debe ingresar todos los datos para registar a un cliente",true);
+            mostrarMensaje("Debe ingresar todos los datos para registrar a un cliente",true);
             return;
         }
 
         // 10 DÍGITOS PARA LA CÉDULA
         if (!(txtCedula.getText().matches("[0-9]{10}"))){
-            mostrarMensaje("La cédula de identidad deben ser solo números y deben ser 10 digitos",true);
+            mostrarMensaje("Cédula no válida, la cédula deben ser solo números y debe tener 10 dígitos",true);
             return;
         }
 
         // 10 DÍGITOS PARA EL CELULAR
 
         if (!(txtCelular.getText().matches("[0-9]{10}"))){
-            mostrarMensaje("El numero de telefono es incorrecto, ingrese solo números y que sean 10", true);
+            mostrarMensaje("El número de teléfono es incorrecto, ingrese solo números y que sean 10", true);
             return;
         }
 
@@ -91,6 +91,8 @@ public class registrarClienteN implements Initializable {
             return;
         }
 
+
+
         String cedula = txtCedula.getText();
         String nombre  = txtNombre.getText();
         String correo  = txtCorreo.getText();
@@ -105,7 +107,7 @@ public class registrarClienteN implements Initializable {
             fechaNacimiento = LocalDate.parse(fecha_nacimientoS, formatter);
 
         }catch(DateTimeParseException e){
-            mostrarMensaje("La fecha debe tener el formato dd/mm/yyyy",true);
+            mostrarMensaje("Fecha de nacimiento no válida, la fecha ingresada no cumple el formato dd/mm/yyyy",true);
             return;
         }
 
@@ -116,7 +118,7 @@ public class registrarClienteN implements Initializable {
             clienteNaturalService.insertarClienteNatural(nuevoCliente);
             mostrarMensaje("Cliente registrado exitosamente", false);
             limpiarCampos();
-        }catch(ClienteYaExisteException | FechaNacimientoInvalidaException  | CedulaNoValidaException | CelularNoValidoException e){
+        }catch(ClienteYaExisteException | FechaNacimientoInvalidaException  | CedulaNoValidaException | CelularNoValidoException | NombreNoVálidoException e){
             mostrarMensaje(e.getMessage(), true);
         }
 
