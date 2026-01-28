@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,26 +30,41 @@ public class LoginController implements Initializable {
     private Button btnPassOlvi;
 
     @FXML
-    private PasswordField textFieldPassword;
+    private PasswordField passFieldPassword;
+
+    @FXML
+    private TextField textFieldPassword;
 
     @FXML
     private TextField textFieldUsername;
+
+    @FXML
+    private Button verPassword;
 
     private UsuarioService usuarioService;
 
     @FXML
     private void iniciarSesion(ActionEvent event) {
+        String perfilUsuario;
         try {
             UsuarioSesionDTO sesion = usuarioService.login(
                     textFieldUsername.getText(),
                     textFieldPassword.getText()
             );
 
+
+
             SesionActual.iniciarSesion(sesion);
+
+            if(SesionActual.getUsuario().getPerfil_us().equals("VE")){
+                perfilUsuario = "AUXILIAR";
+            }else{
+                perfilUsuario = "ADMINISTRADOR";
+            }
 
             mostrarInfo("Bienvenido",
                     "Inicio de sesión exitoso",
-                    "Bienvenido al sistema PMS-E&J, " + sesion.getNombre_us()
+                    "Bienvenido al sistema PMS-E&J, " + sesion.getNombre_us() + "\nPerfil: " + perfilUsuario
             );
 
             String vista = switch (sesion.getPerfil_us()) {
@@ -99,5 +115,32 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuarioService = new UsuarioServiceImpl();
 
+        FontIcon icon = new FontIcon("fa-eye");
+        icon.getStyleClass().add("botonVer");
+
+        verPassword.setGraphic(icon);
+
+        // Sincronizar contenido
+        textFieldPassword.textProperty().bindBidirectional(passFieldPassword.textProperty());
+        textFieldPassword.setManaged(false);
+        textFieldPassword.setVisible(false);
+
+        // Acción del ojito
+        verPassword.setOnAction(e -> {
+            if (textFieldPassword.isVisible()) {
+                textFieldPassword.setVisible(false);
+                textFieldPassword.setManaged(false);
+                passFieldPassword.setVisible(true);
+                passFieldPassword.setManaged(true);
+            } else {
+                textFieldPassword.setVisible(true);
+                textFieldPassword.setManaged(true);
+                passFieldPassword.setVisible(false);
+                passFieldPassword.setManaged(false);
+            }
+        });
     }
+
+
 }
+
