@@ -19,12 +19,17 @@
 
 .botonVer{
     -fx-icon-size: 25;
-    -fx-background-color: #50af36;
+    -fx-background-color: #c6b3b3;
     -fx-background-radius: 20;
 }
 
 .botonVer:hover{
-    -fx-background-color: #269126;
+    -fx-background-color: #b38c8c;
     -fx-cursor: hand;
+}
+
+.iconoUsuario, .iconoEmail{
+    -fx-icon-size: 45;
+    -fx-icon-color: #c6b3b3;
 }
 

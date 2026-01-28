@@ -11,10 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
@@ -40,6 +37,9 @@ public class LoginController implements Initializable {
 
     @FXML
     private Button verPassword;
+
+    @FXML
+    private Label lblIconoUsuario;
 
     private UsuarioService usuarioService;
 
@@ -117,8 +117,12 @@ public class LoginController implements Initializable {
 
         FontIcon icon = new FontIcon("fa-eye");
         icon.getStyleClass().add("botonVer");
+        FontIcon icon2 = new FontIcon("fa-vcard");
+        icon2.getStyleClass().add("iconoUsuario");
 
         verPassword.setGraphic(icon);
+        lblIconoUsuario.setText(null);
+        lblIconoUsuario.setGraphic(icon2);
 
         // Sincronizar contenido
         textFieldPassword.textProperty().bindBidirectional(passFieldPassword.textProperty());

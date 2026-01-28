@@ -54,7 +54,7 @@
 
 .botonVer{
     -fx-icon-size: 25;
-    -fx-background-color:  white;
+    -fx-background-color:  #d2c2c2;
     -fx-background-radius: 20;
 }
 
@@ -68,4 +68,9 @@
     -fx-text-fill: #ececec;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
+}
+
+.iconoUsuario{
+    -fx-icon-size: 45;
+    -fx-icon-color: #d2c2c2;
 }

@@ -28,11 +28,12 @@
             <Label styleClass="lblSubtitulo" text="NOMBRE DE USUARIO:" />
          </children>
       </HBox>
-      <HBox prefHeight="41.0" prefWidth="933.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="933.0" spacing="20.0">
          <children>
       
               <!-- CAMPOS -->
               <TextField fx:id="txtUsuario" maxWidth="-Infinity" prefHeight="40" prefWidth="826.0" promptText="Ingrese el nombre de usuario" styleClass="textField" />
+            <Label fx:id="lblIconoUsuario" text="Label" />
          </children>
       </HBox>
       <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="933.0">
@@ -40,10 +41,11 @@
             <Label styleClass="lblSubtitulo" text="CORREO ELECTRÓNICO:" />
          </children>
       </HBox>
-      <HBox prefHeight="42.0" prefWidth="933.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="933.0" spacing="20.0">
          <children>
       
               <TextField fx:id="txtCorreo" maxWidth="-Infinity" prefHeight="40.0" prefWidth="829.0" promptText="Ingrese el correo electrónico" styleClass="textField" />
+            <Label fx:id="lblIconoEmail" text="Label" />
          </children>
       </HBox>
       <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="933.0">

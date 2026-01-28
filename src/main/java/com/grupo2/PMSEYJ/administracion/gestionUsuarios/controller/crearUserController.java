@@ -48,10 +48,18 @@ public class crearUserController implements Initializable {
     @FXML
     private TextField txtUsuario;
 
+    @FXML
+    private Label lblIconoEmail;
+
+    @FXML
+    private Label lblIconoUsuario;
+
+
     private UsuarioService usuarioService;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         usuarioService = new UsuarioServiceImpl();
         // Cargar tipos de usuario
         ComboBTipoUser.getItems().addAll(
@@ -62,6 +70,18 @@ public class crearUserController implements Initializable {
         icon.getStyleClass().add("botonVer");
 
         verPassword.setGraphic(icon);
+
+        FontIcon icon2 = new FontIcon("fa-vcard");
+        icon2.getStyleClass().add("iconoUsuario");
+
+        FontIcon icon3 = new FontIcon("fa-envelope");
+        icon3.getStyleClass().add("iconoEmail");
+
+        lblIconoUsuario.setText(null);
+        lblIconoUsuario.setGraphic(icon2);
+
+        lblIconoEmail.setText(null);
+        lblIconoEmail.setGraphic(icon3);
 
         // Sincronizar contenido
         textFieldPassword.textProperty().bindBidirectional(passFieldPassword.textProperty());

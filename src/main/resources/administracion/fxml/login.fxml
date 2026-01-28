@@ -53,7 +53,12 @@
       <VBox alignment="CENTER_LEFT" layoutX="685.0" layoutY="169.0" prefHeight="438.0" prefWidth="483.0" spacing="15.0">
          <children>
             <Label styleClass="labelForm" text="Nombre de usuario:" />
-            <TextField fx:id="textFieldUsername" maxWidth="-Infinity" prefHeight="88.0" prefWidth="411.2" promptText="Ingrese su usuario" styleClass="textField" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <TextField fx:id="textFieldUsername" maxWidth="-Infinity" prefHeight="88.0" prefWidth="411.2" promptText="Ingrese su usuario" styleClass="textField" />
+                  <Label fx:id="lblIconoUsuario" alignment="CENTER" text="Label" />
+               </children>
+            </HBox>
             <Label styleClass="labelForm" text="Contraseña:" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
