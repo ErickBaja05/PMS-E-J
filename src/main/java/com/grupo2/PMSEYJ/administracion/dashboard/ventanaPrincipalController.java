@@ -224,6 +224,9 @@ public class ventanaPrincipalController implements Initializable {
     private Label lblUsuario;
 
     @FXML
+    private Label lblPerfilUsuario;
+
+    @FXML
     void logOut(ActionEvent event) throws IOException {
         SesionActual.cerrarSesion();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -437,6 +440,7 @@ public class ventanaPrincipalController implements Initializable {
                     SesionActual.getUsuario().getNombre_us().toUpperCase()
             );
         }
+        lblPerfilUsuario.setText("ADMINISTRADOR");
         if(SesionActual.getUsuario().getPerfil_us().equals("VE")){
 
             btnAdministracion.setVisible(false);
@@ -471,6 +475,8 @@ public class ventanaPrincipalController implements Initializable {
             btnPromocionesExistentes.setManaged(false);
             btnGenerarReporteVentas.setManaged(false);
             btnReporteARCSA.setManaged(false);
+
+            lblPerfilUsuario.setText("AUXILIAR");
 
         }
         FontIcon icon = new FontIcon("fa-angle-double-left");

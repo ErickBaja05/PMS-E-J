@@ -14,7 +14,9 @@
 }
 
 .lblSubtitulo{
-    -fx-font-size: 18;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
 }
 
 .btn{
@@ -39,8 +41,22 @@
     -fx-font-family: "Roboto", sans-serif;
     -fx-font-size: 16;
 }
-.txtFieldNegrita{
-    -fx-font-weight: bold;
+
+
+.textField:focused {
+    -fx-border-color: #009688; /* Borde verde al escribir */
+    -fx-background-color: #FDFEFE;
+}
+
+.botonVer{
+    -fx-icon-size: 25;
+    -fx-background-color: #50af36;
+    -fx-background-radius: 20;
+}
+
+.botonVer:hover{
+    -fx-background-color: #269126;
+    -fx-cursor: hand;
 }
 
 .mensajeError{
