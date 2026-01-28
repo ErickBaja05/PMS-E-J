@@ -1,14 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 /* --- CONFIGURACIÓN GENERAL --- */
 .root {
     -fx-background-color: #f4f4f4;
 }
 
 /* Estilo base para botones */
-.button {
-    -fx-cursor: hand;
-    -fx-background-radius: 5;
-    -fx-font-weight: bold;
-}
+
 
 /* --- CONTENEDORES --- */
 /* Tarjeta Principal Blanca */
@@ -48,73 +45,13 @@
 }
 
 /* --- INPUTS --- */
-.input-field {
-    -fx-background-color: #f3efee;
-    -fx-font-family: "Roboto", sans-serif;
-    -fx-font-size: 16;
-}
+
 
 /* --- BOTONES ESPECÍFICOS --- */
 
 /* Botón Actualizar (Azul Oscuro) */
-.btn-update {
-    -fx-background-color: #0a7e73;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 8;
-    -fx-padding: 8 16;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
-    -fx-font-size: 14px;
-    -fx-font-family: "Roboto", sans-serif;
-}
-.btn-update:hover {
-    -fx-background-color: #1b655c;
-    -fx-cursor: hand;
-}
 
-/* Botón Habilitar (Verde) */
-.btn-success {
-    -fx-background-color: #27ae60;
-    -fx-text-fill: white;
-}
-.btn-success:hover {
-    -fx-background-color: #2ecc71;
-}
 
-/* Botón Deshabilitar (Rojo) */
-.btn-danger {
-    -fx-background-color: #e74c3c;
-    -fx-text-fill: white;
-}
-.btn-danger:hover {
-    -fx-background-color: #c0392b;
-}
-
-.btnAccion{
-    -fx-font-weight: bold;
-    -fx-background-color: #f3efee;
-    -fx-background-radius: 5;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
-    -fx-font-size: 13px;
-
-}
-
-.btnAccion:hover{
-    -fx-background-color: #b5b8ab;
-    -fx-cursor: hand;
-}
-
-.table-view .column-header {
-    -fx-background-color: #0b9f6d;
-}
-.table-view .column-header .label {
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 13px;
-
-}
 /* --- TABLAS --- */
 .table-view-rounded {
     -fx-background-radius: 8;

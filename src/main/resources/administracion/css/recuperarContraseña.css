@@ -1,21 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-.btn{
-    -fx-background-color: #0a7e73;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 8;
-    -fx-padding: 8 16;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
-    -fx-font-size: 14px;
-    -fx-font-family: "Roboto", sans-serif;
-}
-
-.btn:hover{
-    -fx-background-color: #1b655c;
-    -fx-cursor: hand;
-}
 
 
 .lblTitulo,.lblSubtitulo,.lblCedula{
@@ -38,16 +22,3 @@
     -fx-font-size: 16;
 }
 
-.mensajeError{
-    -fx-font-family: "Roboto", sans-serif;
-    -fx-font-size: 16;
-    -fx-text-fill: #c83131;
-    -fx-text-alignment: center;
-}
-
-.mensajeConfirmacion{
-    -fx-font-family: "Roboto", sans-serif;
-    -fx-font-size: 16;
-    -fx-text-fill: #222bd3;
-    -fx-text-alignment: center;
-}

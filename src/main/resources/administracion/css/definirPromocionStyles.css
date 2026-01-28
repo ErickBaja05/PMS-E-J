@@ -8,7 +8,7 @@
 /* --- CONFIGURACIÓN GENERAL --- */
 .root {
     -fx-background-color: #F0F4F4;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Roboto", sans-serif;
 }
 
 /* --- TARJETA PRINCIPAL --- */
@@ -32,7 +32,6 @@
 
 /* --- TEXTOS --- */
 .label-titulo {
-    -fx-font-family: "Roboto", sans-serif;
     -fx-font-weight: bold;
 }
 
@@ -46,16 +45,7 @@
 }
 
 /* --- CAMPOS DE ENTRADA (Inputs) --- */
-.text-field, .text-area, .date-picker {
-    -fx-background-color: #f3efee;
-    -fx-font-family: "Roboto", sans-serif;
-    -fx-font-size: 14;
-}
 
-.text-field:focused, .text-area:focused, .date-picker:focused {
-    -fx-border-color: #009688; /* Borde verde al escribir */
-    -fx-background-color: #FDFEFE;
-}
 
 /* --- RADIO BUTTONS --- */
 .radio-button {
@@ -100,15 +90,3 @@
 }
 
 /* Botón Cancelar */
-.btn-cancelar {
-    -fx-font-weight: bold;
-    -fx-background-color: #f3efee;
-    -fx-background-radius: 5;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
-    -fx-font-size: 13px;
-}
-.btn-cancelar:hover {
-    -fx-background-color: #b5b8ab;
-    -fx-cursor: hand;
-}

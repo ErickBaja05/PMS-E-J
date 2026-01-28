@@ -4,11 +4,6 @@
     -fx-background-color: #f4f4f4;
 }
 
-/* Estilo base para botones */
-.button {
-    -fx-cursor: hand;
-    -fx-font-weight: bold;
-}
 
 /* --- TARJETA PRINCIPAL --- */
 .card-panel {
@@ -47,21 +42,7 @@
 
 /* --- BOTONES ESPECÍFICOS --- */
 /* Botón Explorar (Azul Oscuro) */
-.btn-explorar {
-    -fx-background-color: #0a7e73;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 8;
-    -fx-padding: 8 16;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
-    -fx-font-size: 14px;
-    -fx-font-family: "Roboto", sans-serif;
-}
-.btn-explorar:hover {
-    -fx-background-color: #1b655c;
-    -fx-cursor: hand;
-}
+
 
 /* Botón Registrar (Verde) */
 .btn-registrar {
@@ -78,15 +59,3 @@
 }
 
 /* Botón Cancelar (Gris Claro) */
-.btn-cancelar {
-    -fx-font-weight: bold;
-    -fx-background-color: #f3efee;
-    -fx-background-radius: 5;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
-    -fx-font-size: 13px;
-}
-.btn-cancelar:hover {
-    -fx-background-color: #b5b8ab;
-    -fx-cursor: hand;
-}

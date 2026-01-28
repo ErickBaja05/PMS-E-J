@@ -4,9 +4,6 @@
     -fx-font-family: "Roboto", sans-serif;
 }
 
-.lblTitulo,.lblSubtitulo,.lblCedula{
-    -fx-font-family: "Roboto", sans-serif;
-}
 
 .lblTitulo{
     -fx-font-weight: bold;
@@ -14,39 +11,11 @@
 }
 
 .lblSubtitulo{
-    -fx-font-family: "Roboto", sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 14;
 }
 
-.btn{
-    -fx-background-color: #0a7e73;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 8;
-    -fx-padding: 8 16;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
-    -fx-font-size: 14px;
-    -fx-font-family: "Roboto", sans-serif;
-}
 
-.btn:hover{
-    -fx-background-color: #1b655c;
-    -fx-cursor: hand;
-}
-
-.textField{
-    -fx-background-color: #f3efee;
-    -fx-font-family: "Roboto", sans-serif;
-    -fx-font-size: 16;
-}
-
-
-.textField:focused {
-    -fx-border-color: #009688; /* Borde verde al escribir */
-    -fx-background-color: #FDFEFE;
-}
 
 .botonVer{
     -fx-icon-size: 25;
@@ -59,16 +28,3 @@
     -fx-cursor: hand;
 }
 
-.mensajeError{
-
-    -fx-font-family: "Roboto", sans-serif;
-    -fx-font-size: 20;
-    -fx-text-fill: #c83131;
-}
-
-.mensajeConfirmacion{
-
-    -fx-font-family: "Roboto", sans-serif;
-    -fx-font-size: 20;
-    -fx-text-fill: #222bd3;
-}

@@ -2,7 +2,7 @@
 /* --- CONFIGURACIÓN GENERAL --- */
 .root {
     -fx-background-color: #F0F4F4; /* Fondo general menta muy suave */
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Roboto", sans-serif;
 }
 
 /* --- TARJETA PRINCIPAL --- */
@@ -14,15 +14,12 @@
 }
 
 /* --- TEXTOS --- */
-.label-titulo {
-    -fx-font-family: "Roboto", sans-serif;
-}
+
 
 .label-instruccion {
     -fx-font-family: "Roboto", sans-serif;
     -fx-text-fill: #7F8C8D;
 }
-
 
 
 .label-campo {
@@ -31,16 +28,7 @@
 }
 
 /* --- CAMPOS DE TEXTO (Inputs) --- */
-.text-field {
-    -fx-background-color: #f3efee;
-    -fx-font-family: "Roboto", sans-serif;
-    -fx-font-size: 16;
-}
 
-.text-field:focused {
-    -fx-border-color: #009688; /* Borde verde al escribir */
-    -fx-background-color: #FDFEFE;
-}
 
 /* --- TABS (PESTAÑAS MODERNAS) --- */
 .tab-pane .tab-header-area .tab-header-background {
@@ -90,16 +78,3 @@
 }
 
 /* Botón Cancelar */
-.btn-cancelar {
-    -fx-font-weight: bold;
-    -fx-background-color: #f3efee;
-    -fx-background-radius: 5;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.2, 0, 2);
-    -fx-font-size: 13px;
-}
-
-.btn-cancelar:hover {
-    -fx-background-color: #b5b8ab;
-    -fx-cursor: hand;
-}
