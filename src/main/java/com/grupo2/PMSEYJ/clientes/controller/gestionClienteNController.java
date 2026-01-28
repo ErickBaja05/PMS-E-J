@@ -78,11 +78,7 @@ public class gestionClienteNController implements Initializable {
             return;
         }
         if (!cel.matches("[0-9]+")) {
-            mostrarMensaje("Número celular no válido, el número ingresado contiene caracteres no permitidos", true);
-            return;
-        }
-        if (!cel.startsWith("09")) {
-            mostrarMensaje("Número celular no válido, el número ingresado con comienza con 09", true);
+            mostrarMensaje("Número de teléfono celular no válido, el número ingresado contiene caracteres no permitidos", true);
             return;
         }
 

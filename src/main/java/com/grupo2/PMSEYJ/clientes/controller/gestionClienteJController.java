@@ -42,7 +42,7 @@ public class gestionClienteJController implements Initializable {
             txtDireccionJ.setText(cliente.getDireccion());
             txtEstado.setText(cliente.getEstado());
             txtCelularJ.setText(cliente.getTelefono());
-            mostrarMensaje("Información del Cliente recuperada exitosamente", false);
+            mostrarMensaje("Información del Cliente consultada exitosamente", false);
             clienteConsultado = cliente;
             if(SesionActual.getUsuario().getPerfil_us().equals("AD")){
                 btnModificarJ.setDisable(false);
@@ -69,11 +69,11 @@ public class gestionClienteJController implements Initializable {
         // Validación CELULAR (Caso de Uso 2)
         String cel = txtCelularJ.getText().trim();
         if (cel.length() != 10) {
-            mostrarMensaje("Número celular no válido, el número ingresado no tiene 10 dígitos", true);
+            mostrarMensaje("Número de teléfono celular no válido, el número ingresado no tiene 10 dígitos", true);
             return;
         }
         if (!cel.matches("[0-9]+")) {
-            mostrarMensaje("Número celular no válido, el número ingresado contiene caracteres no permitidos", true);
+            mostrarMensaje("Número de teléfono celular no válido, el número ingresado contiene caracteres no permitidos", true);
             return;
         }
         if (!cel.startsWith("09")) {
@@ -84,15 +84,15 @@ public class gestionClienteJController implements Initializable {
 
         // Validación DIRECCIÓN (Caso de Uso 3)
         String dir = txtDireccionJ.getText().trim();
-        if (dir.isEmpty() || dir.length() > 100) {
-            mostrarMensaje("Dirección no válida, la dirección ingresada está vacía o tiene más de 100 caracteres", true);
+        if (dir.isEmpty() || dir.length() > 200) {
+            mostrarMensaje("Dirección no válida, la dirección ingresada está vacía o tiene más de 200 caracteres", true);
             return;
         }
 
         // Validación CORREO (Caso de Uso 4)
         String corr = txtCorreoJ.getText().trim();
-        if (corr.isEmpty() || corr.length() > 50) {
-            mostrarMensaje("Correo no válido, el correo ingresado está vacío o tiene más de 50 caracteres", true);
+        if (corr.isEmpty() || corr.length() > 100) {
+            mostrarMensaje("Correo no válido, el correo ingresado está vacío o tiene más de 100 caracteres", true);
             return;
         }
 

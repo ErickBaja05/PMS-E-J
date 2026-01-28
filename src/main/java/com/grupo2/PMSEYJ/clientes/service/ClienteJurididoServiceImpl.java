@@ -4,8 +4,7 @@ import com.grupo2.PMSEYJ.clientes.dao.ClienteJuridicoDAO;
 import com.grupo2.PMSEYJ.clientes.dto.GestionClienteJuridicoDTO;
 import com.grupo2.PMSEYJ.clientes.dto.NuevoClienteJuridicoDTO;
 import com.grupo2.PMSEYJ.clientes.model.ClienteJuridico;
-import com.grupo2.PMSEYJ.core.exception.CelularNoValidoException;
-import com.grupo2.PMSEYJ.core.exception.ClienteYaExisteException;
+import com.grupo2.PMSEYJ.core.exception.*;
 
 public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
 
@@ -15,14 +14,27 @@ public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
     public void insertarClienteJuridico(NuevoClienteJuridicoDTO clienteJuridico) {
         ClienteJuridico existeCliente = clienteJuridicoDAO.consultarPorRuc(clienteJuridico.getRuc());
         if(existeCliente != null){
-            throw new ClienteYaExisteException("Ya existe un cliente con ese RUC");
+            throw new ClienteYaExisteException("Ya existe un cliente con el RUC proporcionado");
         }
         if(!validarRuc(clienteJuridico.getRuc())){
-            throw new ClienteYaExisteException("Error en el número de RUC");
+            throw new ClienteYaExisteException("Error en el número de RUC, no cumple con el formato ecuatoriano válido");
         }
 
         if(!clienteJuridico.getTelefono_cj().matches("^09\\d{8}$")){
-            throw new CelularNoValidoException("El número de celular debe comenzar con 09");
+            throw new CelularNoValidoException("Número de teléfono celular no válido, el número ingresado no empieza por 09");
+        }
+
+
+        if(!clienteJuridico.getRazon_social().matches("^[a-zA-ZáÁéÉíÍóÓúÚñÑ& ]+$")){
+            throw new NombreNoVálidoException("Razón social no válida, contiene caracteres no permitidos");
+        }
+
+        if(!clienteJuridico.getCorreo_cj().matches("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+            throw new CorreoNoValidoException("El correo no tiene formato válido");
+        }
+
+        if(!clienteJuridico.getDireccion_cj().matches("^[a-zA-ZáÁéÉíÍóÓúÚñÑ0-9 .,_-]+$")){
+            throw new DireccionNoValidaException("Dirección no válida, la dirección contiene caracteres no válidos");
         }
         ClienteJuridico nuevoCliente = new ClienteJuridico();
         nuevoCliente.setRuc(clienteJuridico.getRuc());
@@ -61,19 +73,27 @@ public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
 
     @Override
     public void actualizarCorreo(String RUC, String correo) {
+        if(!correo.matches("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+            throw new CorreoNoValidoException("El correo no tiene formato válido");
+        }
         clienteJuridicoDAO.actualizarCorreoPorRUC(RUC, correo);
 
     }
 
     @Override
     public void actualizarDireccion(String cedula, String direccion) {
+        if(!direccion.matches("^[a-zA-ZáÁéÉíÍóÓúÚñÑ0-9 .,_-]+$")){
+            throw new DireccionNoValidaException("Dirección no válida, la dirección contiene caracteres no válidos");
+        }
         clienteJuridicoDAO.actualizarDireccionPorRUC(cedula, direccion);
 
     }
 
     @Override
     public void actualizarTelefono(String cedula, String telefono) {
-        clienteJuridicoDAO.actualizarTelefonoPorRUC(cedula, telefono);
+        if(!telefono.matches("^09\\d{8}$")){
+            throw new CelularNoValidoException("Número de teléfono celular no válido, el número ingresado no empieza por 09");
+        }
 
     }
 

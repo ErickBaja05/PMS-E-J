@@ -49,7 +49,7 @@ public class registrarClienteJ implements Initializable {
 
         // SE DEBE PROPORCIONAR TODOS LOS DATOS
         if (txtCedulaJ.getText().isEmpty() || txtCelularJ.getText().isEmpty() || txtCorreoJ.getText().isEmpty() || txtDireccionJ.getText().isEmpty()  || txtNombre.getText().isEmpty()) {
-            mostrarMensaje("Debe ingresar todos los datos para registar a un cliente", true);
+            mostrarMensaje("Debe ingresar todos los datos para registrar a un cliente", true);
             return;
         }
 
@@ -62,7 +62,7 @@ public class registrarClienteJ implements Initializable {
         // 10 DÍGITOS PARA EL CELULAR
 
         if (!(txtCelularJ.getText().matches("[0-9]{10}"))) {
-            mostrarMensaje("El numero de telefono es incorrecto, ingrese solo números y que sean 10", true);
+            mostrarMensaje("El número de teléfono es incorrecto, ingrese solo números y que sean 10", true);
             return;
         }
 
@@ -75,7 +75,7 @@ public class registrarClienteJ implements Initializable {
 
         // HASTA 200 CARACTERES PARA LA DIRECCION
 
-        if (txtDireccionJ.getText().length() > 100) {
+        if (txtDireccionJ.getText().length() > 200) {
             mostrarMensaje("La dirección no debe superar los 200 caracteres", true);
             return;
         }

@@ -91,16 +91,25 @@ public class ClienteNaturalServiceImpl implements ClienteNaturalService {
 
     @Override
     public void actualizarCorreo(String cedula, String correo) {
+        if(!correo.matches("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+            throw new CorreoNoValidoException("El correo no tiene formato válido");
+        }
         clienteNaturalDAO.actualizarCorreoPorCedula(cedula, correo);
     }
 
     @Override
     public void actualizarDireccion(String cedula, String direccion) {
+        if(!direccion.matches("^[a-zA-ZáÁéÉíÍóÓúÚñÑ0-9 .,_-]+$")){
+            throw new DireccionNoValidaException("Dirección no válida, la dirección contiene caracteres no válidos");
+        }
         clienteNaturalDAO.actualizarDireccionPorCedula(cedula, direccion);
     }
 
     @Override
     public void actualizarTelefono(String cedula, String telefono) {
+        if(!telefono.matches("^09\\d{8}$")){
+            throw new CelularNoValidoException("Número de celular no válido, el número ingresado no empieza por 09");
+        }
         clienteNaturalDAO.actualizarTelefonoPorCedula(cedula, telefono);
 
     }
