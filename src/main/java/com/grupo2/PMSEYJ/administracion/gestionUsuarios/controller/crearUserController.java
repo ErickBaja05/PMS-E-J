@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -36,7 +37,13 @@ public class crearUserController implements Initializable {
     private TextField txtCorreo;
 
     @FXML
-    private PasswordField txtPassword;
+    private PasswordField passFieldPassword;
+
+    @FXML
+    private TextField textFieldPassword;
+
+    @FXML
+    private Button verPassword;
 
     @FXML
     private TextField txtUsuario;
@@ -50,6 +57,31 @@ public class crearUserController implements Initializable {
         ComboBTipoUser.getItems().addAll(
                 "Administrador", "Auxiliar");
         ComboBTipoUser.setPromptText("Tipo de usuario");
+
+        FontIcon icon = new FontIcon("fa-eye");
+        icon.getStyleClass().add("botonVer");
+
+        verPassword.setGraphic(icon);
+
+        // Sincronizar contenido
+        textFieldPassword.textProperty().bindBidirectional(passFieldPassword.textProperty());
+        textFieldPassword.setManaged(false);
+        textFieldPassword.setVisible(false);
+
+        // Acción del ojito
+        verPassword.setOnAction(e -> {
+            if (textFieldPassword.isVisible()) {
+                textFieldPassword.setVisible(false);
+                textFieldPassword.setManaged(false);
+                passFieldPassword.setVisible(true);
+                passFieldPassword.setManaged(true);
+            } else {
+                textFieldPassword.setVisible(true);
+                textFieldPassword.setManaged(true);
+                passFieldPassword.setVisible(false);
+                passFieldPassword.setManaged(false);
+            }
+        });
     }
 
     @FXML
@@ -57,7 +89,7 @@ public class crearUserController implements Initializable {
 
         String usuario = txtUsuario.getText();
         String correo = txtCorreo.getText();
-        String password = txtPassword.getText();
+        String password = passFieldPassword.getText();
         String tipoUsuario = ComboBTipoUser.getSelectionModel().getSelectedItem();
         String perfil;
 
@@ -153,7 +185,8 @@ public class crearUserController implements Initializable {
     private void limpiarFormulario() {
         txtUsuario.clear();
         txtCorreo.clear();
-        txtPassword.clear();
+        passFieldPassword.clear();
+        textFieldPassword.clear();
         ComboBTipoUser.getSelectionModel().clearSelection();
     }
 }

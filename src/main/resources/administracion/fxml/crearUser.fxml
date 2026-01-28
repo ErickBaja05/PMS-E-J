@@ -15,29 +15,65 @@
 <AnchorPane prefHeight="682.0" prefWidth="1016.0" stylesheets="@../css/crearUsuario.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.administracion.gestionUsuarios.controller.crearUserController">
 
     <!-- CONTENEDOR CENTRAL -->
-    <VBox fx:id="contenedorCentral" alignment="CENTER" layoutX="32.0" layoutY="30.0" prefHeight="611.0" prefWidth="954.0" spacing="15" style="-fx-background-color: #ffffff; -fx-border-radius: 10; -fx-background-radius: 10;" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+    <VBox fx:id="contenedorCentral" alignment="CENTER" layoutX="51.0" layoutY="35.0" prefHeight="611.0" prefWidth="930.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-border-radius: 10; -fx-background-radius: 10;" AnchorPane.bottomAnchor="36.19999999999993" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="35.39999999999998" AnchorPane.topAnchor="35.0">
 
         <!-- TÍTULO -->
-        <Label styleClass="lblTitulo" text="MENÚ PARA LA CREACIÓN DE USUARIOS DEL SISTEMA" />
+        <Label styleClass="lblTitulo" text="MENÚ PARA LA CREACIÓN DE USUARIOS DEL SISTEMA">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin></Label>
       <ComboBox fx:id="ComboBTipoUser" prefHeight="37.0" prefWidth="216.0" promptText="Escoja tipo de usuario">
          <styleClass>
             <String fx:value="textField" />
             <String fx:value="txtFieldNegrita" />
          </styleClass></ComboBox>
+      <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="933.0">
+         <children>
+            <Label styleClass="lblSubtitulo" text="NOMBRE DE USUARIO:" />
+         </children>
+      </HBox>
+      <HBox prefHeight="41.0" prefWidth="933.0">
+         <children>
+      
+              <!-- CAMPOS -->
+              <TextField fx:id="txtUsuario" maxWidth="-Infinity" prefHeight="40" prefWidth="826.0" promptText="Ingrese el nombre de usuario" styleClass="textField" />
+         </children>
+      </HBox>
+      <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="933.0">
+         <children>
+            <Label styleClass="lblSubtitulo" text="CORREO ELECTRÓNICO:" />
+         </children>
+      </HBox>
+      <HBox prefHeight="42.0" prefWidth="933.0">
+         <children>
+      
+              <TextField fx:id="txtCorreo" maxWidth="-Infinity" prefHeight="40.0" prefWidth="829.0" promptText="Ingrese el correo electrónico" styleClass="textField" />
+         </children>
+      </HBox>
+      <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="933.0">
+         <children>
+            <Label styleClass="lblSubtitulo" text="CONTRASEÑA:" />
+         </children>
+      </HBox>
+      <HBox prefHeight="42.0" prefWidth="933.0" spacing="20.0">
+         <children>
+      
+              <PasswordField fx:id="passFieldPassword" maxWidth="-Infinity" prefHeight="54.0" prefWidth="829.0" promptText="Ingrese la contraseña" styleClass="textField" />
+            <TextField fx:id="textFieldPassword" prefHeight="42.0" prefWidth="829.0" promptText="Ingrese la contraseña" styleClass="textField" />
+            <Button fx:id="verPassword" mnemonicParsing="false" styleClass="botonVer" />
+         </children>
+      </HBox>
 
-        <!-- CAMPOS -->
-        <TextField fx:id="txtUsuario" prefHeight="40" prefWidth="300" promptText="Ingrese el nombre de usuario" styleClass="textField" />
-
-        <TextField fx:id="txtCorreo" prefHeight="40" prefWidth="300" promptText="Ingrese el correo electrónico" styleClass="textField" />
-
-        <PasswordField fx:id="txtPassword" prefHeight="40" prefWidth="300" promptText="Ingrese la contraseña" styleClass="textField" />
-
-        <!-- BOTONES -->
-        <HBox alignment="CENTER_RIGHT" spacing="20">
+              <!-- BOTONES -->
+        <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="0.0" prefWidth="764.0" spacing="20">
             <Button fx:id="butCrearUser" onAction="#crearUsuario" prefHeight="38.0" prefWidth="228.0" styleClass="btn" text="CREAR USUARIO" textAlignment="CENTER">
             <cursor>
                <Cursor fx:constant="HAND" />
-            </cursor></Button>
+            </cursor>
+            <HBox.margin>
+               <Insets top="20.0" />
+            </HBox.margin>
+         </Button>
         </HBox>
 
         <!-- MENSAJES -->
