@@ -5,6 +5,8 @@ import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.NuevoUsuarioDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.UsuarioSesionDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.model.Usuario;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dao.UsuarioDAO;
+import com.grupo2.PMSEYJ.core.exception.CorreoNoValidoException;
+import com.grupo2.PMSEYJ.core.exception.PasswordNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.UsuarioYaExisteException;
 
 public class UsuarioServiceImpl implements UsuarioService {
@@ -42,10 +44,19 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario existenteNombre = usuarioDAO.buscarPorNombre(nuevoUsuario.getNombre());
         Usuario existeCorreo = usuarioDAO.buscarPorEmail(nuevoUsuario.getCorreo());
         if(existenteNombre != null) {
-            throw new UsuarioYaExisteException("El nombre de usuario ya esta registrado!");
+            throw new UsuarioYaExisteException("Ya existe un usuario con el nombre de usuario proporcionado!");
         }
         if(existeCorreo != null) {
-            throw new UsuarioYaExisteException("El correo de usuario ya esta registrado!");
+            throw new UsuarioYaExisteException("Ya existe un usuario con el correo proporcionado!");
+        }
+
+        if (!nuevoUsuario.getCorreo().matches("\"^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,16}$\"")) {
+            throw new CorreoNoValidoException("El correo tiene formato inválido");
+        }
+
+        if(!nuevoUsuario.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9])[A-Za-z\\d\\W]{8,16}$")){
+            throw  new PasswordNoValidoException("La contraseña debe tener de entre 8 y 16 caracteres con al menos una minúscula, una mayúscula y un carácter especial");
+
         }
 
         Usuario usuario = new Usuario();

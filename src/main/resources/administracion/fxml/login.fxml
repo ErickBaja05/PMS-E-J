@@ -78,9 +78,14 @@
                </children>
             </HBox>
             <Button id="botonLogin" fx:id="botonLogin" maxWidth="-Infinity" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="72.0" prefWidth="411.2" text="INICIAR SESIÓN" />
+            <Label style="-fx-text-fill: #ececec; -fx-font-size: 12;" text="El sistema determinará automaticamente su perfil de usuario.">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="16.0" prefWidth="534.0">
                <children>
-                  <Button id="btnPassOlvi" fx:id="btnPassOlvi" alignment="CENTER" mnemonicParsing="false" onAction="#recuperarContraseña" styleClass="labels" text="¿Olvidó su contraseña?" textAlignment="CENTER" />
+                  <Button id="btnPassOlvi" fx:id="btnPassOlvi" alignment="CENTER" mnemonicParsing="false" onAction="#recuperarContraseña" styleClass="labels" text="¿Olvidó su contraseña?" />
                </children>
             </HBox>
          </children>

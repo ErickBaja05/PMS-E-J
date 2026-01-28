@@ -117,7 +117,7 @@ public class configuracionPagosImpuestosController {
             parametrosService.habilitarMetodoPago(gestionMetodoPagoDTO.getNombre_pago());
             gestionMetodoPagoDTO.setEstado_pago("HABILITADO");
             tablaMetodosPago.refresh();
-            mostrarMensaje("Éxito", "Metodo habilitado", Alert.AlertType.INFORMATION);
+            mostrarMensaje("Éxito", "Método de pago habilitado exitosamente", Alert.AlertType.INFORMATION);
         }else{
             mostrarMensaje("Método de pago no seleccionado", "Debe seleccionar un método de pago para habilitar.",
                     Alert.AlertType.ERROR);

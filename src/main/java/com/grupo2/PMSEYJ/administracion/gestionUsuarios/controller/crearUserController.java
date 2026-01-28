@@ -4,6 +4,8 @@ import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.NuevoUsuarioDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.UsuarioSesionDTO;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.service.UsuarioService;
 import com.grupo2.PMSEYJ.administracion.gestionUsuarios.service.UsuarioServiceImpl;
+import com.grupo2.PMSEYJ.core.exception.CorreoNoValidoException;
+import com.grupo2.PMSEYJ.core.exception.PasswordNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.UsuarioYaExisteException;
 import com.grupo2.PMSEYJ.core.session.SesionActual;
 import javafx.event.ActionEvent;
@@ -117,7 +119,7 @@ public class crearUserController implements Initializable {
 
         // Validación adicional: tipo de usuario
         if (tipoUsuario == null) {
-            mostrarError("Seleccione el tipo de usuario");
+            mostrarError("Perfil de usuario no válido o vacío");
             return;
         }
 
@@ -131,7 +133,7 @@ public class crearUserController implements Initializable {
         if (usuario == null || usuario.trim().isEmpty() ||
                 usuario.length() < 10 || usuario.length() >= 51) {
 
-            mostrarError("El usuario debe tener entre 10 y 50 caracteres ");
+            mostrarError("Nombre de usuario no válido. Debe tener entre 10 y 50 caracteres ");
             return;
         }
 
@@ -141,10 +143,12 @@ public class crearUserController implements Initializable {
             return;
         }
 
-        if (!correo.matches("^.+@.+\\..+$")) {
-            mostrarError("Correo electrónico no válido");
+        if(correo.length() > 100){
+            mostrarError("El correo electrónico no debe superar los 100 caracteres");
             return;
         }
+
+
 
         // ESCENARIO ALTERNATIVO 3: Contraseña no válida
         if (password == null || password.trim().isEmpty()) {
@@ -152,18 +156,6 @@ public class crearUserController implements Initializable {
             return;
         }
 
-        // Expresión regular para:
-        // 8 a 16 caracteres
-        // al menos una minúscula
-        // al menos una mayúscula
-        // al menos un carácter especial
-        String regexPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,16}$";
-
-        if (!password.matches(regexPassword)) {
-            mostrarError(
-                    "La contraseña debe tener de entre 8 y 16 caracteres con al menos una minúscula, una mayúscula y un carácter especial");
-            return;
-        }
 
         NuevoUsuarioDTO nuevoUsuario = new NuevoUsuarioDTO();
         nuevoUsuario.setCorreo(correo);
@@ -181,10 +173,10 @@ public class crearUserController implements Initializable {
 
             mostrarExito("El usuario " + nuevoUsuario.getNombre() + " se ha registrado correctamente");
             limpiarFormulario();
-        } catch (UsuarioYaExisteException e) {
+        } catch (UsuarioYaExisteException | PasswordNoValidoException | CorreoNoValidoException e) {
             mostrarError(e.getMessage());
         }
-        // ESCENARIO ALTERNATIVO 4: Usuario o correo existente (simulado)
+
 
     }
 
