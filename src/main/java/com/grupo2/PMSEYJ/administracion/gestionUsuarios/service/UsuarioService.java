@@ -5,7 +5,7 @@ import com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto.UsuarioSesionDTO;
 
 public interface UsuarioService {
 
-    UsuarioSesionDTO login(String usuario, String password);
+    UsuarioSesionDTO login(String usuario, String password, String perfil);
     void insertarUsuario(NuevoUsuarioDTO nuevoUsuario);
     InfoUsuarioDTO consultarUsuarioPorNombre(String nombre);
     InfoUsuarioDTO consultarUsuarioPorEmail(String nombre);

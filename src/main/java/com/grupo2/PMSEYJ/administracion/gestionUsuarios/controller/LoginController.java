@@ -41,6 +41,11 @@ public class LoginController implements Initializable {
     @FXML
     private Label lblIconoUsuario;
 
+    @FXML
+    private ComboBox<String> comboPerfiles;
+
+    String[] perfilesUsuario = {"ADMINISTRADOR", "AUXILIAR"};
+
     private UsuarioService usuarioService;
 
     @FXML
@@ -49,7 +54,8 @@ public class LoginController implements Initializable {
         try {
             UsuarioSesionDTO sesion = usuarioService.login(
                     textFieldUsername.getText(),
-                    textFieldPassword.getText()
+                    textFieldPassword.getText(),
+                    comboPerfiles.getSelectionModel().getSelectedItem()
             );
 
 
@@ -114,6 +120,8 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usuarioService = new UsuarioServiceImpl();
+
+        comboPerfiles.getItems().addAll(perfilesUsuario);
 
         FontIcon icon = new FontIcon("fa-eye");
         icon.getStyleClass().add("botonVer");
