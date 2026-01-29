@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 #fondo{
-    -fx-background: linear-gradient(to right,rgba(5, 37, 133, 1) 44%, rgba(8, 89, 1, 1) 85%);
+    -fx-background-color: linear-gradient(to right,rgba(5, 37, 133, 1) 44%, rgba(8, 89, 1, 1) 85%);
 }
 
 #separador{
@@ -75,4 +75,12 @@
 .iconoUsuario{
     -fx-icon-size: 45;
     -fx-icon-color: #d2c2c2;
+}
+
+.perfilesUsuario{
+    -fx-background-color:  #d2c2c2;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-font-family: 'Roboto', sans-serif;
 }

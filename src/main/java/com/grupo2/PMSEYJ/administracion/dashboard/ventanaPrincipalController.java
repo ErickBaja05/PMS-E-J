@@ -164,6 +164,9 @@ public class ventanaPrincipalController implements Initializable {
     private Button btngenerarReporteRentabilidad;
 
     @FXML
+    private Button btnGoMain;
+
+    @FXML
     private VBox cajaBoxSubMenu;
 
     @FXML
@@ -430,6 +433,15 @@ public class ventanaPrincipalController implements Initializable {
 
     }
 
+    @FXML
+    public void goMain(ActionEvent event) throws IOException {
+
+        String vista = "/administracion/fxml/ventanaPrincipal.fxml";
+
+        Parent root = FXMLLoader.load(getClass().getResource(vista));
+        NavigationUtil.changeScene(event,root);
+
+    }
 
 
     @Override
@@ -502,6 +514,9 @@ public class ventanaPrincipalController implements Initializable {
         FontIcon icon11 = new FontIcon("fa-briefcase");
         icon11.getStyleClass().add("buttonsIcon");
 
+        FontIcon icon12 = new FontIcon("fa-home");
+        icon12.getStyleClass().add("buttonsIcon");
+
         btnLogOut.setGraphic(icon);
         btnFacturacion.setGraphic(icon3);
         btnCaja.setGraphic(icon4);
@@ -516,6 +531,8 @@ public class ventanaPrincipalController implements Initializable {
         lblLogoMed.setGraphic(icon10);
         lblLogoMed.setText(null);
         btnAdministracion.setGraphic(icon11);
+
+        btnGoMain.setGraphic(icon12);
 
 
         facturacionSubMenu.setOnMouseEntered(e -> {

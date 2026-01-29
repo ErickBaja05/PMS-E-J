@@ -15,7 +15,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 
     @Override
-    public UsuarioSesionDTO login(String username, String password) {
+    public UsuarioSesionDTO login(String username, String password, String perfil) {
 
         if (username == null || username.isBlank()) {
             throw new IllegalArgumentException("El usuario no puede estar vacío.");
@@ -25,12 +25,22 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new IllegalArgumentException("La contraseña no puede estar vacía.");
         }
 
-        Usuario usuario = usuarioDAO.buscarPorNombre(username);
-
-        if (usuario == null || !usuario.getPassword().equals(password)) {
-            throw new IllegalArgumentException("Usuario o contraseña incorrectos.");
+        if(perfil == null || perfil.isBlank()) {
+            throw new IllegalArgumentException("El perfil de usuario no puede estar vacio");
         }
 
+
+        Usuario usuario = usuarioDAO.buscarPorNombre(username);
+
+        if(perfil.equals("ADMINISTRADOR")) {
+            if(usuario == null || !usuario.getPassword().equals(password) || !usuario.getPerfil().equals("AD")) {
+                throw new IllegalArgumentException("Usuario o contraseña incorrectos.");
+            }
+        }else{
+            if(usuario == null || !usuario.getPassword().equals(password) || !usuario.getPerfil().equals("VE")) {
+                throw new IllegalArgumentException("Usuario o contraseña incorrectos.");
+            }
+        }
 
         return new UsuarioSesionDTO(
                 usuario.getIdUsuario(),
