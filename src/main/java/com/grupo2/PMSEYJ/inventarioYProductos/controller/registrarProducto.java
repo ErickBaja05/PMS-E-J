@@ -152,7 +152,7 @@ public class registrarProducto implements Initializable {
         Double pvp = Double.parseDouble(txtPVP.getText());
         String indice_t = txtIndiceTerapeutico.getText().toUpperCase();
 
-        NuevoProductoDTO nuevoProductoDTO = new NuevoProductoDTO(codigo_aux,codigo_br,nombre_p,descripcion,categoria,forma_venta,tipo_venta,pvp,indice_t);
+        NuevoProductoDTO nuevoProductoDTO = new NuevoProductoDTO(codigo_br,codigo_aux,nombre_p,descripcion,categoria,forma_venta,tipo_venta,pvp,indice_t);
         NuevoLaboratorioDTO nuevoLaboratorioDTO = new NuevoLaboratorioDTO(txtLaboratorio.getText().toUpperCase());
         try{
             productosService.insertarProducto(nuevoProductoDTO,nuevoLaboratorioDTO);

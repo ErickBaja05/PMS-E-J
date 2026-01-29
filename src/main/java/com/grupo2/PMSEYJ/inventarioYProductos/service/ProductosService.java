@@ -8,7 +8,8 @@ public interface ProductosService {
     void insertarLaboratorio(NuevoLaboratorioDTO nuevoLaboratorio);
     boolean verificarExistenciaLaboratorio(String nombreLaboratorio);
     void insertarProducto(NuevoProductoDTO nuevoProducto, NuevoLaboratorioDTO nuevoLaboratorio);
-    boolean verificarExistenciaProducto(String codAux);
+    boolean verificarExistenciaProductoBarras(String codBarras);
+    boolean verificarExistenciaProductoAux(String codAux);
 
 
 }

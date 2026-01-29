@@ -51,15 +51,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
+
                         <VBox spacing="5.0">
-                            <children>
-                                <Label maxWidth="Infinity" styleClass="lblInformacion" text="Código Auxiliar">
-                                    <padding><Insets left="5.0" /></padding>
-                                </Label>
-                                <TextField fx:id="txtCodigoAuxiliar" prefHeight="35.0" promptText="14455-COD-45" styleClass="textField" />
-                            </children>
-                        </VBox>
-                        <VBox spacing="5.0" GridPane.columnIndex="1">
                             <children>
                                 <Label maxWidth="Infinity" styleClass="lblInformacion" text="Código de Barras">
                                     <padding><Insets left="5.0" /></padding>
@@ -67,6 +60,15 @@
                                 <TextField fx:id="txtCodigoBarras" prefHeight="35.0" promptText="1445566895" styleClass="textField" />
                             </children>
                         </VBox>
+                        <VBox spacing="5.0" GridPane.columnIndex="1">
+                            <children>
+                                <Label maxWidth="Infinity" styleClass="lblInformacion" text="Código Auxiliar">
+                                    <padding><Insets left="5.0" /></padding>
+                                </Label>
+                                <TextField fx:id="txtCodigoAuxiliar" prefHeight="35.0" promptText="14455-COD-45" styleClass="textField" />
+                            </children>
+                        </VBox>
+
                         <VBox spacing="5.0" GridPane.rowIndex="1">
                             <children>
                                 <Label maxWidth="Infinity" styleClass="lblInformacion" text="Nombre de Producto">

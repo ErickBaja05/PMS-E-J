@@ -1,8 +1,8 @@
 package com.grupo2.PMSEYJ.inventarioYProductos.dto;
 
 public class NuevoProductoDTO {
+    private String codigo_barras;
     private String codigo_aux;
-    private String codigo_br;
     private String nombre_p;
     private String descripcion;
     private String categoria;
@@ -15,9 +15,10 @@ public class NuevoProductoDTO {
 
     }
 
-    public NuevoProductoDTO(String codigo_aux, String codigo_br, String nombre_p, String descripcion, String categoria, String forma_venta, String tipo_venta, Double pvp, String indice_t) {
+
+    public NuevoProductoDTO(String codigo_barras, String codigo_aux, String nombre_p, String descripcion, String categoria, String forma_venta, String tipo_venta, Double pvp, String indice_t) {
+        this.codigo_barras = codigo_barras;
         this.codigo_aux = codigo_aux;
-        this.codigo_br = codigo_br;
         this.nombre_p = nombre_p;
         this.descripcion = descripcion;
         this.categoria = categoria;
@@ -27,20 +28,20 @@ public class NuevoProductoDTO {
         this.indice_t = indice_t;
     }
 
+    public String getCodigo_barras() {
+        return codigo_barras;
+    }
+
+    public void setCodigo_barras(String codigo_barras) {
+        this.codigo_barras = codigo_barras;
+    }
+
     public String getCodigo_aux() {
         return codigo_aux;
     }
 
     public void setCodigo_aux(String codigo_aux) {
         this.codigo_aux = codigo_aux;
-    }
-
-    public String getCodigo_br() {
-        return codigo_br;
-    }
-
-    public void setCodigo_br(String codigo_br) {
-        this.codigo_br = codigo_br;
     }
 
     public String getNombre_p() {

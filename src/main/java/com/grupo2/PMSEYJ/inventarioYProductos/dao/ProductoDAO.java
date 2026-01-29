@@ -12,9 +12,9 @@ public class ProductoDAO {
     // ===============================
     private Producto mapearProducto(ResultSet rs) throws SQLException {
         Producto p = new Producto();
-        p.setCodigo_aux(rs.getString("codigo_ax"));
+        p.setCodigo_barras(rs.getString("codigo_barras"));
         p.setId_lab(rs.getInt("id_lab"));
-        p.setCodigo_br(rs.getString("codigo_br"));
+        p.setCodigo_aux(rs.getString("codigo_aux"));
         p.setNombre_p(rs.getString("nombre_p"));
         p.setDescripcion(rs.getString("descripcion"));
         p.setCategoria(rs.getString("categoria"));       // char(1) → String
@@ -80,8 +80,28 @@ public class ProductoDAO {
         return null;
     }
 
+    public Producto consultarPorCodBarras(String codAux) {
+        String sql = "SELECT * FROM producto WHERE codigo_barras = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, codAux);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return mapearProducto(rs);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al consultar producto por nombre", e);
+        }
+
+        return null;
+    }
+
     public Producto consultarPorCodAux(String codAux) {
-        String sql = "SELECT * FROM producto WHERE codigo_ax = ?";
+        String sql = "SELECT * FROM producto WHERE codigo_aux = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -106,7 +126,7 @@ public class ProductoDAO {
     public void insertar(Producto p) {
         String sql = """
             INSERT INTO producto (
-                codigo_ax, id_lab, codigo_br, nombre_p, descripcion,
+                codigo_barras, id_lab, codigo_aux, nombre_p, descripcion,
                 categoria, forma_venta, tipo_venta, pvp, indice_t
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)
         """;
@@ -114,9 +134,9 @@ public class ProductoDAO {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, p.getCodigo_aux());
+            ps.setString(1, p.getCodigo_barras());
             ps.setInt(2, p.getId_lab());
-            ps.setString(3, p.getCodigo_br());
+            ps.setString(3, p.getCodigo_aux());
             ps.setString(4, p.getNombre_p());
             ps.setString(5, p.getDescripcion());
             ps.setString(6, p.getCategoria());     // ya es String

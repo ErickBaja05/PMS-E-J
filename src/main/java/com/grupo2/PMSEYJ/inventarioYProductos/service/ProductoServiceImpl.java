@@ -35,19 +35,23 @@ public class ProductoServiceImpl implements ProductosService{
     @Override
     public void insertarProducto(NuevoProductoDTO nuevoProducto, NuevoLaboratorioDTO nuevoLaboratorio) {
 
-        if(verificarExistenciaProducto(nuevoProducto.getCodigo_aux())){
+        if(verificarExistenciaProductoBarras(nuevoProducto.getCodigo_barras())) {
+            throw new ProductoYaExisteException("Ya existe un producto con el código de barras proporcionado");
+        }
+
+        if(verificarExistenciaProductoAux(nuevoProducto.getCodigo_aux())){
             throw new ProductoYaExisteException("Ya existe un producto con el código auxiliar proporcionado");
         }
 
-        if(!nuevoProducto.getCodigo_br().matches("^\\d{1,13}$")){
+        if(!nuevoProducto.getCodigo_barras().matches("^\\d{1,13}$")){
             throw new CodigoDeBarrasNoValidoException("El código de barras no puede exceder los 13 caracteres");
         }
 
         Producto p = new Producto();
         Laboratorio laboratorio;
 
+        p.setCodigo_barras(nuevoProducto.getCodigo_barras());
         p.setCodigo_aux(nuevoProducto.getCodigo_aux());
-        p.setCodigo_br(nuevoProducto.getCodigo_br());
         p.setNombre_p(nuevoProducto.getNombre_p());
         p.setDescripcion(nuevoProducto.getDescripcion());
         p.setCategoria(nuevoProducto.getCategoria());
@@ -67,7 +71,12 @@ public class ProductoServiceImpl implements ProductosService{
     }
 
     @Override
-    public boolean verificarExistenciaProducto(String codAux) {
-        return productoDAO.consultarPorCodAux(codAux) != null;
+    public boolean verificarExistenciaProductoBarras(String codigoBarras) {
+        return productoDAO.consultarPorCodBarras(codigoBarras) != null;
+    }
+
+    @Override
+    public boolean verificarExistenciaProductoAux(String codigoAux) {
+        return productoDAO.consultarPorCodAux(codigoAux) != null;
     }
 }
