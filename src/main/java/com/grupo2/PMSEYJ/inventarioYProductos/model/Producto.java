@@ -12,7 +12,7 @@ public class Producto {
     private String forma_venta;
     private String tipo_venta;
     private Double pvp;
-    private String indice_t;
+    private Integer id_indice_t;
     private String principio_ac;
     private LocalDate fecha_uv;
     private Boolean tiene_iva;
@@ -21,7 +21,7 @@ public class Producto {
 
     }
 
-    public Producto(String codigo_barras, String codigo_aux, String nombre_p, String descripcion, String categoria, String forma_venta, String tipo_venta, Double pvp, String indice_t) {
+    public Producto(String codigo_barras, String codigo_aux, String nombre_p, String descripcion, String categoria, String forma_venta, String tipo_venta, Double pvp) {
         this.codigo_barras = codigo_barras;
         this.codigo_aux = codigo_aux;
         this.nombre_p = nombre_p;
@@ -30,7 +30,6 @@ public class Producto {
         this.forma_venta = forma_venta;
         this.tipo_venta = tipo_venta;
         this.pvp = pvp;
-        this.indice_t = indice_t;
     }
 
     public String getCodigo_barras() {
@@ -105,12 +104,12 @@ public class Producto {
         this.pvp = pvp;
     }
 
-    public String getIndice_t() {
-        return indice_t;
+    public Integer getId_indice_t() {
+        return id_indice_t;
     }
 
-    public void setIndice_t(String indice_t) {
-        this.indice_t = indice_t;
+    public void setId_indice_t(Integer id_indice_t) {
+        this.id_indice_t = id_indice_t;
     }
 
     public String getPrincipio_ac() {

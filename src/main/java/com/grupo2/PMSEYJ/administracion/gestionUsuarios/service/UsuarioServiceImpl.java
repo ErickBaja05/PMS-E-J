@@ -60,7 +60,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new UsuarioYaExisteException("Ya existe un usuario con el correo proporcionado!");
         }
 
-        if (!nuevoUsuario.getCorreo().matches("\"^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,16}$\"")) {
+        if (!nuevoUsuario.getCorreo().matches("^(?=.{1,254}$)[a-z0-9._-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) {
             throw new CorreoNoValidoException("El correo tiene formato inválido");
         }
 

@@ -3,8 +3,10 @@ package com.grupo2.PMSEYJ.inventarioYProductos.controller;
 
 import com.grupo2.PMSEYJ.core.exception.CodigoDeBarrasNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.ProductoYaExisteException;
+import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoIndiceTerapeuticoDTO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoLaboratorioDTO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoProductoDTO;
+import com.grupo2.PMSEYJ.inventarioYProductos.model.IndiceTerapeutico;
 import com.grupo2.PMSEYJ.inventarioYProductos.service.ProductoServiceImpl;
 import com.grupo2.PMSEYJ.inventarioYProductos.service.ProductosService;
 import javafx.event.ActionEvent;
@@ -152,10 +154,11 @@ public class registrarProducto implements Initializable {
         Double pvp = Double.parseDouble(txtPVP.getText());
         String indice_t = txtIndiceTerapeutico.getText().toUpperCase();
 
-        NuevoProductoDTO nuevoProductoDTO = new NuevoProductoDTO(codigo_br,codigo_aux,nombre_p,descripcion,categoria,forma_venta,tipo_venta,pvp,indice_t);
+        NuevoProductoDTO nuevoProductoDTO = new NuevoProductoDTO(codigo_br,codigo_aux,nombre_p,descripcion,categoria,forma_venta,tipo_venta,pvp);
         NuevoLaboratorioDTO nuevoLaboratorioDTO = new NuevoLaboratorioDTO(txtLaboratorio.getText().toUpperCase());
+        NuevoIndiceTerapeuticoDTO nuevoIndiceTerapeuticoDTO = new NuevoIndiceTerapeuticoDTO(indice_t);
         try{
-            productosService.insertarProducto(nuevoProductoDTO,nuevoLaboratorioDTO);
+            productosService.insertarProducto(nuevoProductoDTO,nuevoLaboratorioDTO,nuevoIndiceTerapeuticoDTO);
             mostrarMensaje("Producto registrado exitosamente",false);
         }catch(ProductoYaExisteException | CodigoDeBarrasNoValidoException e){
             mostrarMensaje(e.getMessage(),true);

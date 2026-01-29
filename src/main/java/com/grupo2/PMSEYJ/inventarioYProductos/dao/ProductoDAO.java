@@ -28,7 +28,7 @@ public class ProductoDAO {
             p.setFecha_uv(fechaUv.toLocalDate());
         }
 
-        p.setIndice_t(rs.getString("indice_t"));
+        p.setId_indice_t(rs.getInt("id_indice_t"));
         p.setPrincipio_ac(rs.getString("principio_ac"));
         p.setTiene_iva(rs.getBoolean("tiene_iva"));
 
@@ -127,7 +127,7 @@ public class ProductoDAO {
         String sql = """
             INSERT INTO producto (
                 codigo_barras, id_lab, codigo_aux, nombre_p, descripcion,
-                categoria, forma_venta, tipo_venta, pvp, indice_t
+                categoria, forma_venta, tipo_venta, pvp, id_indice_t
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)
         """;
 
@@ -143,7 +143,7 @@ public class ProductoDAO {
             ps.setString(7, p.getForma_venta());   // ya es String
             ps.setString(8, p.getTipo_venta());    // ya es String
             ps.setDouble(9, p.getPvp());
-            ps.setString(10, p.getIndice_t());
+            ps.setInt(10, p.getId_indice_t());
 
             ps.executeUpdate();
 
