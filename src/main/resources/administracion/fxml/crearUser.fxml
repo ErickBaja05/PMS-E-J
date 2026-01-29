@@ -22,7 +22,15 @@
          <VBox.margin>
             <Insets bottom="10.0" />
          </VBox.margin></Label>
-      <ComboBox fx:id="ComboBTipoUser" prefHeight="37.0" prefWidth="216.0" promptText="Escoja tipo de usuario" styleClass="text-field" />
+      <HBox alignment="BOTTOM_LEFT" prefHeight="41.0" prefWidth="909.0">
+         <children>
+            <Label styleClass="lblSubtitulo" text="PERFIL DE USUARIO:" />
+         </children>
+      </HBox>
+      <ComboBox fx:id="ComboBTipoUser" prefHeight="37.0" prefWidth="216.0" promptText="Escoja un perfil" styleClass="text-field">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ComboBox>
       <HBox alignment="BOTTOM_LEFT" prefHeight="30.0" prefWidth="933.0">
          <children>
             <Label styleClass="lblSubtitulo" text="NOMBRE DE USUARIO:" />
