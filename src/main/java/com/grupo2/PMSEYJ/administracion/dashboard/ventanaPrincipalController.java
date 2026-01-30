@@ -235,7 +235,7 @@ public class ventanaPrincipalController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Hasta pronto");
         alert.setHeaderText("Sesión cerrada con éxito");
-        alert.setContentText("La sesión se cerró con éxito, debera volvera a iniciar sesión para acceder a cualquier funcionalidad.");
+        alert.setContentText("La sesión se cerró con éxito, deberá volver a iniciar sesión para acceder a cualquier funcionalidad.");
         alert.showAndWait();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/administracion/fxml/login.fxml"));
         Parent root = loader.load();

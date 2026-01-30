@@ -33,7 +33,7 @@ public class recuperarPasswordController implements Initializable {
 
         // 1. VALIDACIÓN: ¿Está vacío?
         if (correo.isEmpty()) {
-            lblMensaje.setText("El correo electrónico no puede estar vacio.");
+            lblMensaje.setText("El correo electrónico no puede estar vacío.");
             lblMensaje.getStyleClass().remove("mensajeConfirmacion");
             lblMensaje.getStyleClass().add("mensajeError");
             return;
