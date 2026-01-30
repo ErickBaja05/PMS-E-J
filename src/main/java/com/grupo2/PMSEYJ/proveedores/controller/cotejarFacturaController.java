@@ -1,3 +1,4 @@
+/*
 package com.grupo2.PMSEYJ.proveedores.controller;
 
 import com.grupo2.PMSEYJ.core.util.NavigationUtil;
@@ -250,3 +251,4 @@ public class cotejarFacturaController {
         public void setCantidad(int cantidad) { this.cantidad = cantidad; } // Necesario set para editar
     }
 }
+*/

@@ -109,7 +109,7 @@ public class configuracionPagosImpuestosController {
 
         GestionMetodoPagoDTO gestionMetodoPagoDTO = tablaMetodosPago.getSelectionModel().getSelectedItem();
         if(gestionMetodoPagoDTO != null){
-            if(gestionMetodoPagoDTO.getEstado_pago().equals("DESHABILITADO")){
+            if(gestionMetodoPagoDTO.getEstado_pago().equals("HABILITADO")){
                 mostrarMensaje("Método ya habilitado", "El método de pago: " + gestionMetodoPagoDTO.getNombre_pago() + " ya se encuentra habilitado",
                         Alert.AlertType.ERROR);
                 return;
