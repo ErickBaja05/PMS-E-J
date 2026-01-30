@@ -24,12 +24,12 @@
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label styleClass="lblTitulo" text="Gestión de Cliente Jurídico">
+                        <Label styleClass="lblTitulo" text="GESTIÓN DE CLIENTES DE TIPO PERSONA NATURAL">
                             <font>
                                 <Font name="System Bold" size="28.0" />
                             </font>
                         </Label>
-                        <Label styleClass="lblSubtitulo" text="Consulte, modifique o cambie el estado de un cliente jurídico mediante su Número de RUC." textFill="#707070">
+                        <Label styleClass="lblSubtitulo" text="Consulte, modifique o cambie el estado de un cliente de tipo persona jurídica mediante su número de RUC." textFill="#707070">
                             <font>
                                 <Font size="15.0" />
                             </font></Label>

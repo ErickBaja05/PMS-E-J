@@ -23,12 +23,12 @@
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label styleClass="lblTitulo" text="REGISTRAR CLIENTE JURÍDICO EN EL SISTEMA">
+                        <Label styleClass="lblTitulo" text="REGISTRAR PERSONA JURÍDICA EN EL SISTEMA">
                             <font>
                                 <Font name="System Bold" size="28.0" />
                             </font>
                         </Label>
-                        <Label styleClass="lblSubtitulo" text="INGRESE TODOS LOS DATOS PARA REGISTRAR UN NUEVO CLIENTE JURÍDICO EN EL SISTEMA" textFill="#707070">
+                        <Label styleClass="lblSubtitulo" text="Ingrese todos los datos para registrar un nuevo cliente de tipo persona jurídica en el sistema" textFill="#707070">
                             <font>
                                 <Font size="15.0" />
                             </font></Label>

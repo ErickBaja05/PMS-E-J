@@ -64,25 +64,25 @@
                </Button>
                               <VBox fx:id="clientesSubMenu" managed="false" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                  <children>
-                                    <Button fx:id="btnRegistrarClienteN" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarClienteN" text="REGISTRAR CLIENTE NATURAL">
+                                    <Button fx:id="btnRegistrarClienteN" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarClienteN" text="REGISTRAR PERSONA NATURAL">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="btnRegistrarClienteJ" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarClienteJ" text="REGISTRAR CLIENTE JURÍDICO">
+                                    <Button fx:id="btnRegistrarClienteJ" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirRegistrarClienteJ" text="REGISTRAR PERSONA JURÍDICA">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="btnConsultarClienteN" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteN" text="GESTIÓN CLIENTE NATURAL">
+                                    <Button fx:id="btnConsultarClienteN" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteN" text="GESTIÓN PERSONAS NATURALES">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="btnConsultarClienteJ" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteJ" text="GESTIÓN CLIENTE JURÍDICO">
+                                    <Button fx:id="btnConsultarClienteJ" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarClienteJ" text="GESTIÓN PERSONAS JURÍDICAS">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
