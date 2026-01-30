@@ -66,14 +66,14 @@ public class registrarClienteN implements Initializable {
         // 10 DÍGITOS PARA EL CELULAR
 
         if (!(txtCelular.getText().matches("[0-9]{10}"))){
-            mostrarMensaje("El número de teléfono es incorrecto, ingrese solo números y que sean 10", true);
+            mostrarMensaje("El número de teléfono celular es incorrecto, ingrese solo números y que sean 10", true);
             return;
         }
 
         // HASTA 100 DIGITOS PARA EL CORREO
 
         if(txtCorreo.getText().length() > 100){
-            mostrarMensaje("El correo no debe superar los 100 caracteres",true);
+            mostrarMensaje("El correo electrónico no debe superar los 100 caracteres",true);
             return;
         }
 
@@ -118,7 +118,7 @@ public class registrarClienteN implements Initializable {
             clienteNaturalService.insertarClienteNatural(nuevoCliente);
             mostrarMensaje("Cliente registrado exitosamente", false);
             limpiarCampos();
-        }catch(ClienteYaExisteException | FechaNacimientoInvalidaException  | CedulaNoValidaException | CelularNoValidoException | NombreNoVálidoException e){
+        }catch(ClienteYaExisteException | FechaNacimientoInvalidaException  | CedulaNoValidaException | CelularNoValidoException | NombreNoVálidoException| CorreoNoValidoException | IllegalArgumentException | DireccionNoValidaException e){
             mostrarMensaje(e.getMessage(), true);
         }
 

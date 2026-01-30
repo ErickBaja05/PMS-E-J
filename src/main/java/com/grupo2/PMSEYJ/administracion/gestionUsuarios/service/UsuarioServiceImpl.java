@@ -26,7 +26,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         if(perfil == null || perfil.isBlank()) {
-            throw new IllegalArgumentException("El perfil de usuario no puede estar vacio");
+            throw new IllegalArgumentException("El perfil de usuario no puede estar vacío");
         }
 
 
@@ -34,11 +34,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         if(perfil.equals("ADMINISTRADOR")) {
             if(usuario == null || !usuario.getPassword().equals(password) || !usuario.getPerfil().equals("AD")) {
-                throw new IllegalArgumentException("Usuario o contraseña incorrectos.");
+                throw new IllegalArgumentException("Credenciales incorrectas");
             }
         }else{
             if(usuario == null || !usuario.getPassword().equals(password) || !usuario.getPerfil().equals("VE")) {
-                throw new IllegalArgumentException("Usuario o contraseña incorrectos.");
+                throw new IllegalArgumentException("Credenciales incorrectas");
             }
         }
 
@@ -61,7 +61,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         if (!nuevoUsuario.getCorreo().matches("^(?=.{1,254}$)[a-z0-9._-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) {
-            throw new CorreoNoValidoException("El correo tiene formato inválido");
+            throw new CorreoNoValidoException("El correo electrónico no tiene formato válido");
         }
 
         if(!nuevoUsuario.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9])[A-Za-z\\d\\W]{8,16}$")){

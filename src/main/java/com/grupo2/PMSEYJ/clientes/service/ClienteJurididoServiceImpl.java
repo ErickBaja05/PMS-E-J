@@ -14,10 +14,10 @@ public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
     public void insertarClienteJuridico(NuevoClienteJuridicoDTO clienteJuridico) {
         ClienteJuridico existeCliente = clienteJuridicoDAO.consultarPorRuc(clienteJuridico.getRuc());
         if(existeCliente != null){
-            throw new ClienteYaExisteException("Ya existe un cliente con el RUC proporcionado");
+            throw new ClienteYaExisteException("Ya existe un cliente con el RUC proporcionado!");
         }
         if(!validarRuc(clienteJuridico.getRuc())){
-            throw new ClienteYaExisteException("Error en el número de RUC, no cumple con el formato ecuatoriano válido");
+            throw new CedulaNoValidaException("Error en el número de RUC, no cumple con el formato ecuatoriano válido");
         }
 
         if(!clienteJuridico.getTelefono_cj().matches("^09\\d{8}$")){
@@ -30,11 +30,11 @@ public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
         }
 
         if(!clienteJuridico.getCorreo_cj().matches("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
-            throw new CorreoNoValidoException("El correo no tiene formato válido");
+            throw new CorreoNoValidoException("El correo electrónico no tiene formato válido");
         }
 
         if(!clienteJuridico.getDireccion_cj().matches("^[a-zA-ZáÁéÉíÍóÓúÚñÑ0-9 .,_-]+$")){
-            throw new DireccionNoValidaException("Dirección no válida, la dirección contiene caracteres no válidos");
+            throw new DireccionNoValidaException("Dirección no válida, la nueva dirección fiscal contiene caracteres no válidos”");
         }
         ClienteJuridico nuevoCliente = new ClienteJuridico();
         nuevoCliente.setRuc(clienteJuridico.getRuc());
@@ -74,7 +74,7 @@ public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
     @Override
     public void actualizarCorreo(String RUC, String correo) {
         if(!correo.matches("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
-            throw new CorreoNoValidoException("El correo no tiene formato válido");
+            throw new CorreoNoValidoException("El nuevo correo electrónico no tiene formato válido");
         }
         clienteJuridicoDAO.actualizarCorreoPorRUC(RUC, correo);
 

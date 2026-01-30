@@ -119,7 +119,7 @@ public class crearUserController implements Initializable {
 
         // Validación adicional: tipo de usuario
         if (tipoUsuario == null) {
-            mostrarError("Perfil de usuario no válido o vacío");
+            mostrarError("Perfil no valido, se permiten solo los valores ADMINISTRADOR o AUXILIAR");
             return;
         }
 
@@ -133,13 +133,13 @@ public class crearUserController implements Initializable {
         if (usuario == null || usuario.trim().isEmpty() ||
                 usuario.length() < 10 || usuario.length() >= 51) {
 
-            mostrarError("Nombre de usuario no válido. Debe tener entre 10 y 50 caracteres ");
+            mostrarError("El nombre de usuario no es válido. Debe tener entre 10 y 50 caracteres");
             return;
         }
 
         // ESCENARIO ALTERNATIVO 2: Correo no válido
         if (correo == null || correo.trim().isEmpty()) {
-            mostrarError("El correo electrónico  no puede estar vacio");
+            mostrarError("El correo electrónico no puede estar vacío");
             return;
         }
 

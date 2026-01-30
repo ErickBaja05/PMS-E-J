@@ -41,7 +41,7 @@ public class recuperarPasswordController implements Initializable {
 
         // 2. ESCENARIO 1: Validar formato de correo
         if (!esFormatoValido(correo)) {
-            lblMensaje.setText("Formato del correo incorrecto");
+            lblMensaje.setText("El correo electrónico no tiene formato válido");
             lblMensaje.getStyleClass().remove("mensajeConfirmacion");
             lblMensaje.getStyleClass().add("mensajeError");
             return;
@@ -69,7 +69,7 @@ public class recuperarPasswordController implements Initializable {
 
     private boolean esFormatoValido(String email) {
         // Validación simple con expresión regular
-        return email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
+        return email.matches("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     }
 
     private boolean estaRegistrado(String email) {

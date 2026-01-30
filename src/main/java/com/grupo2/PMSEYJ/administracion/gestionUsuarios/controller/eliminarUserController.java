@@ -89,7 +89,7 @@ public class eliminarUserController implements Initializable {
 
         String nombreUsuario = seleccionado.getNombre_us();
         if(nombreUsuario.equals(SesionActual.getUsuario().getNombre_us())){
-            mostrarAlerta("Error de eliminación", "No puede eliminar el usuario con el que inició sesión. Ingrese desde otro usuario e intente nuevamente", Alert.AlertType.ERROR);
+            mostrarAlerta("Error de eliminación", "No puede eliminar el usuario que tiene la sesión activa. Inicie sesión con otro usuario e intente nuevamente", Alert.AlertType.ERROR);
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

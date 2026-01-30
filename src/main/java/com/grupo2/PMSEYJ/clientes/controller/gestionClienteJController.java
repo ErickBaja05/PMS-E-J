@@ -30,7 +30,7 @@ public class gestionClienteJController implements Initializable {
 
         // Validación de entrada vacía
         if (RUC.isEmpty()) {
-            mostrarMensaje("Por favor, ingrese un RUC para buscar.", true);
+            mostrarMensaje("No existe un cliente con el RUC proporcionado", true);
             return;
         }
 
@@ -60,20 +60,13 @@ public class gestionClienteJController implements Initializable {
     // --- 2, 3 y 4. MODIFICAR DATOS (Celular, Dirección, Correo) ---
     @FXML
     void modificarDatosJ(ActionEvent event) {
-        // Verificar que haya un cliente cargado
-        if (txtNombre.getText().isEmpty()) {
-            mostrarMensaje("Cliente no registrado", true);
-            return;
-        }
+
 
         // Validación CELULAR (Caso de Uso 2)
         String cel = txtCelularJ.getText().trim();
-        if (cel.length() != 10) {
-            mostrarMensaje("Número de teléfono celular no válido, el número ingresado no tiene 10 dígitos", true);
-            return;
-        }
-        if (!cel.matches("[0-9]+")) {
-            mostrarMensaje("Número de teléfono celular no válido, el número ingresado contiene caracteres no permitidos", true);
+
+        if (!cel.matches("[0-9]{10}")) {
+            mostrarMensaje("El nuevo número de teléfono celular es incorrecto, ingrese solo números y que sean 10", true);
             return;
         }
         if (!cel.startsWith("09")) {
@@ -85,14 +78,14 @@ public class gestionClienteJController implements Initializable {
         // Validación DIRECCIÓN (Caso de Uso 3)
         String dir = txtDireccionJ.getText().trim();
         if (dir.isEmpty() || dir.length() > 200) {
-            mostrarMensaje("Dirección no válida, la dirección ingresada está vacía o tiene más de 200 caracteres", true);
+            mostrarMensaje("Dirección no válida, la nueva dirección fiscal está vacía o tiene más de 200 caracteres", true);
             return;
         }
 
         // Validación CORREO (Caso de Uso 4)
         String corr = txtCorreoJ.getText().trim();
         if (corr.isEmpty() || corr.length() > 100) {
-            mostrarMensaje("Correo no válido, el correo ingresado está vacío o tiene más de 100 caracteres", true);
+            mostrarMensaje("Correo no válido, el nuevo correo electrónico está vacío o tiene más de 100 caracteres.", true);
             return;
         }
 

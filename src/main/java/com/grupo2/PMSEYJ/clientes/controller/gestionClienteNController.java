@@ -33,7 +33,7 @@ public class gestionClienteNController implements Initializable {
 
         // Validación de entrada vacía
         if (cedula.isEmpty()) {
-            mostrarMensaje("Por favor, ingrese una cédula para buscar.", true);
+            mostrarMensaje("No existe un Cliente con la cédula proporcionada!", true);
             return;
         }
 
@@ -73,26 +73,23 @@ public class gestionClienteNController implements Initializable {
 
         // Validación CELULAR (Caso de Uso 2)
         String cel = txtCelular.getText().trim();
-        if (cel.length() != 10) {
-            mostrarMensaje("Número celular no válido, el número ingresado no tiene 10 dígitos", true);
+        if (!cel.matches("[0-9]{10}")) {
+            mostrarMensaje("El nuevo número de teléfono celular es incorrecto, ingrese solo números y que sean 10", true);
             return;
         }
-        if (!cel.matches("[0-9]+")) {
-            mostrarMensaje("Número de teléfono celular no válido, el número ingresado contiene caracteres no permitidos", true);
-            return;
-        }
+
 
         // Validación DIRECCIÓN (Caso de Uso 3)
         String dir = txtDireccion.getText().trim();
         if (dir.isEmpty() || dir.length() > 200) {
-            mostrarMensaje("Dirección no válida, la dirección ingresada está vacía o tiene más de 200 caracteres", true);
+            mostrarMensaje("Dirección no válida, la nueva dirección está vacía o tiene más de 200 caracteres", true);
             return;
         }
 
         // Validación CORREO (Caso de Uso 4)
         String corr = txtCorreo.getText().trim();
         if (corr.isEmpty() || corr.length() > 100) {
-            mostrarMensaje("Correo no válido, el correo ingresado está vacío o tiene más de 100 caracteres", true);
+            mostrarMensaje("Correo no válido, el nuevo correo electrónico está vacío o tiene más de 100 caracteres", true);
             return;
         }
 

@@ -35,7 +35,7 @@ public class ClienteNaturalServiceImpl implements ClienteNaturalService {
         }
 
         if(!clienteNatural.getTelefono().matches("^09\\d{8}$")){
-            throw new CelularNoValidoException("Número de celular no válido, el número ingresado no empieza por 09");
+            throw new CelularNoValidoException("Número de teléfono celular no válido, el número ingresado no empieza por 09");
         }
 
         if(!clienteNatural.getNombre().matches("^[a-zA-ZáÁéÉíÍóÓúÚñÑ ]+$")){
@@ -43,7 +43,7 @@ public class ClienteNaturalServiceImpl implements ClienteNaturalService {
         }
 
         if(!clienteNatural.getCorreo().matches("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
-            throw new CorreoNoValidoException("El correo no tiene formato válido");
+            throw new CorreoNoValidoException("El correo electrónico no tiene formato válido");
         }
 
         if(!clienteNatural.getDireccion().matches("^[a-zA-ZáÁéÉíÍóÓúÚñÑ0-9 .,_-]+$")){
@@ -92,7 +92,7 @@ public class ClienteNaturalServiceImpl implements ClienteNaturalService {
     @Override
     public void actualizarCorreo(String cedula, String correo) {
         if(!correo.matches("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
-            throw new CorreoNoValidoException("El correo no tiene formato válido");
+            throw new CorreoNoValidoException("El nuevo correo electrónico no tiene formato válido");
         }
         clienteNaturalDAO.actualizarCorreoPorCedula(cedula, correo);
     }
@@ -100,7 +100,7 @@ public class ClienteNaturalServiceImpl implements ClienteNaturalService {
     @Override
     public void actualizarDireccion(String cedula, String direccion) {
         if(!direccion.matches("^[a-zA-ZáÁéÉíÍóÓúÚñÑ0-9 .,_-]+$")){
-            throw new DireccionNoValidaException("Dirección no válida, la dirección contiene caracteres no válidos");
+            throw new DireccionNoValidaException("Dirección no válida, la nueva dirección contiene caracteres no válidos");
         }
         clienteNaturalDAO.actualizarDireccionPorCedula(cedula, direccion);
     }
@@ -108,7 +108,7 @@ public class ClienteNaturalServiceImpl implements ClienteNaturalService {
     @Override
     public void actualizarTelefono(String cedula, String telefono) {
         if(!telefono.matches("^09\\d{8}$")){
-            throw new CelularNoValidoException("Número de celular no válido, el número ingresado no empieza por 09");
+            throw new CelularNoValidoException("El núevo número de teléfono celular es incorrecto, debe empezar por 09");
         }
         clienteNaturalDAO.actualizarTelefonoPorCedula(cedula, telefono);
 

@@ -110,7 +110,7 @@ public class configuracionPagosImpuestosController {
         GestionMetodoPagoDTO gestionMetodoPagoDTO = tablaMetodosPago.getSelectionModel().getSelectedItem();
         if(gestionMetodoPagoDTO != null){
             if(gestionMetodoPagoDTO.getEstado_pago().equals("DESHABILITADO")){
-                mostrarMensaje("Método ya habilitado", "El método de pago: " + gestionMetodoPagoDTO.getNombre_pago() + " Ya se encuentra habilitado",
+                mostrarMensaje("Método ya habilitado", "El método de pago: " + gestionMetodoPagoDTO.getNombre_pago() + " ya se encuentra habilitado",
                         Alert.AlertType.ERROR);
                 return;
             }
@@ -134,7 +134,7 @@ public class configuracionPagosImpuestosController {
         GestionMetodoPagoDTO gestionMetodoPagoDTO = tablaMetodosPago.getSelectionModel().getSelectedItem();
         if(gestionMetodoPagoDTO != null){
             if(gestionMetodoPagoDTO.getEstado_pago().equals("DESHABILITADO")){
-                mostrarMensaje("Método ya Deshabilitado", "El método de pago: " + gestionMetodoPagoDTO.getNombre_pago() + " Ya se encuentra deshabilitado",
+                mostrarMensaje("Método ya Deshabilitado", "El método de pago: " + gestionMetodoPagoDTO.getNombre_pago() + " ya se encuentra deshabilitado",
                         Alert.AlertType.ERROR);
                 return;
             }
