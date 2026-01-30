@@ -112,7 +112,7 @@ public class gestionProveedores implements Initializable {
     @FXML
     void darDeAltaProveedor(ActionEvent event) {
         if(proveedorConsultado.getEstado_pv().equals("A")){
-            mostrarMensaje("El proveedor se encuentra activo!",true);
+            mostrarMensaje("El proveedor ya se encuentra activo!",true);
             return;
         }
 
@@ -126,7 +126,7 @@ public class gestionProveedores implements Initializable {
     @FXML
     void darDeBajaProveedor(ActionEvent event) {
         if(proveedorConsultado.getEstado_pv().equals("I")){
-            mostrarMensaje("El proveedor se encuentra inactivo!",true);
+            mostrarMensaje("El proveedor ya se encuentra inactivo!",true);
             return;
         }
 
