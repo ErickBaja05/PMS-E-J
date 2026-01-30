@@ -1,23 +1,18 @@
-package com.grupo2.PMSEYJ.proveedores.model;
+package com.grupo2.PMSEYJ.proveedores.dto;
 
-public class Proveedor {
-
-    Integer id_prove;
+public class NuevoProveedorDTO {
     String nombre_pro;
     String telefono_pro;
     String correo_pro;
-    String estado_pv;
 
-    public Proveedor() {
+    public NuevoProveedorDTO() {
 
     }
 
-    public Integer getId_prove() {
-        return id_prove;
-    }
-
-    public void setId_prove(Integer id_prove) {
-        this.id_prove = id_prove;
+    public NuevoProveedorDTO(String nombre_pro, String telefono_pro, String correo_pro) {
+        this.nombre_pro = nombre_pro;
+        this.telefono_pro = telefono_pro;
+        this.correo_pro = correo_pro;
     }
 
     public String getNombre_pro() {
@@ -42,13 +37,5 @@ public class Proveedor {
 
     public void setCorreo_pro(String correo_pro) {
         this.correo_pro = correo_pro;
-    }
-
-    public String getEstado_pv() {
-        return estado_pv;
-    }
-
-    public void setEstado_pv(String estado_pv) {
-        this.estado_pv = estado_pv;
     }
 }

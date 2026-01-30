@@ -22,6 +22,7 @@ public class ProveedorDAO {
         proveedor.setNombre_pro(rs.getString("nombre_pro"));
         proveedor.setTelefono_pro(rs.getString("telefono_pro"));
         proveedor.setCorreo_pro(rs.getString("correo_pro"));
+        proveedor.setEstado_pv(rs.getString("estado_pv"));
 
         return proveedor;
     }
@@ -75,7 +76,7 @@ public class ProveedorDAO {
     // INSERTAR PROVEEDOR
     // ===============================
     public void insertar(Proveedor proveedor) {
-        String sql = "INSERT INTO proveedores (nombre_pro,telefono_pro,correo_pro) VALUES (?,?,?)";
+        String sql = "INSERT INTO proveedores (nombre_pro,telefono_pro,correo_pro,estado_pv) VALUES (?,?,?,?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -83,6 +84,7 @@ public class ProveedorDAO {
             ps.setString(1, proveedor.getNombre_pro());
             ps.setString(2, proveedor.getTelefono_pro());
             ps.setString(3, proveedor.getCorreo_pro());
+            ps.setString(4, proveedor.getEstado_pv());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -110,6 +112,32 @@ public class ProveedorDAO {
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, telefono_pro);
+            ps.setString(2, nombre_pro);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el telefono del proveedor", e);
+        }
+    }
+    public void darDeAlta(String estado, String nombre_pro) {
+        String sql = "UPDATE proveedores SET estado_pv = ? WHERE nombre_pro = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, estado);
+            ps.setString(2, nombre_pro);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el telefono del proveedor", e);
+        }
+    }
+    public void darDeBaja(String estado, String nombre_pro) {
+        String sql = "UPDATE proveedores SET estado_pv = ? WHERE nombre_pro = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, estado);
             ps.setString(2, nombre_pro);
             ps.executeUpdate();
 

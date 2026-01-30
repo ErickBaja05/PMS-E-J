@@ -61,7 +61,7 @@
 
                 <Separator prefWidth="200.0" />
 
-                <GridPane hgap="40.0" vgap="20.0">
+                <GridPane hgap="40.0" prefHeight="366.0" prefWidth="834.0" vgap="60.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -70,6 +70,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <VBox spacing="5.0" GridPane.columnSpan="2">
@@ -101,6 +102,16 @@
                                 <TextField fx:id="txtTelefonoCelularProveedor" prefHeight="35.0" promptText="09XXXXXXXX" styleClass="textField" />
                             </children>
                         </VBox>
+                  <VBox spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                     <children>
+                        <Label maxWidth="Infinity" styleClass="lblInformacion" text="Estado">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="txtEstadoProveedor" editable="false" prefHeight="31.0" prefWidth="490.0" style="-fx-font-weight: bold;" styleClass="textField" />
+                     </children>
+                  </VBox>
                     </children>
                 </GridPane>
 
@@ -109,7 +120,8 @@
                         <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#modificarDatosProveedor" prefHeight="45.0" prefWidth="130.0" styleClass="btnAccion" text="MODIFICAR">
                             <cursor><Cursor fx:constant="HAND" /></cursor>
                         </Button>
-                        <Button fx:id="btnEmilinar" mnemonicParsing="false" onAction="#eliminarProveedor" prefHeight="45.0" prefWidth="130.0" styleClass="btnAccion" text="ELIMINAR">
+                  <Button fx:id="btnDarDEAlta" mnemonicParsing="false" onAction="#darDeAltaProveedor" prefHeight="52.0" prefWidth="130.0" styleClass="btnAccion" text="DAR DE ALTA" />
+                        <Button fx:id="btnDarDeBaja" mnemonicParsing="false" onAction="#darDeBajaProveedor" prefHeight="45.0" prefWidth="130.0" styleClass="btnAccion" text="DAR DE BAJA">
                             <cursor><Cursor fx:constant="HAND" /></cursor>
                         </Button>
                     </children>

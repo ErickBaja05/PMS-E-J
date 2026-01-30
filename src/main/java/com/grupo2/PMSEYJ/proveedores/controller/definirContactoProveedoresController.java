@@ -4,7 +4,7 @@ import com.grupo2.PMSEYJ.core.exception.CelularNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.CorreoNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.NombreNoVálidoException;
 import com.grupo2.PMSEYJ.core.exception.ProveedorYaExisteException;
-import com.grupo2.PMSEYJ.proveedores.dto.ProveedorDTO;
+import com.grupo2.PMSEYJ.proveedores.dto.NuevoProveedorDTO;
 import com.grupo2.PMSEYJ.proveedores.service.ProveedoresService;
 import com.grupo2.PMSEYJ.proveedores.service.ProveedoresServiceImpl;
 import javafx.event.ActionEvent;
@@ -53,10 +53,10 @@ public class definirContactoProveedoresController implements Initializable {
                 return;
             }
 
-            ProveedorDTO proveedorDTO = new ProveedorDTO(txtNombre.getText().toUpperCase(), txtTelefono.getText(), txtCorreo.getText());
+            NuevoProveedorDTO nuevoProveedorDTO = new NuevoProveedorDTO(txtNombre.getText().toUpperCase(), txtTelefono.getText(), txtCorreo.getText());
 
-            proveedoresService.insertarProveedor(proveedorDTO);
-            mostrarMensaje("Proveedor " + proveedorDTO.getNombre_pro() + " registrado exitosamente",false);
+            proveedoresService.insertarProveedor(nuevoProveedorDTO);
+            mostrarMensaje("Proveedor " + nuevoProveedorDTO.getNombre_pro() + " registrado exitosamente",false);
 
 
         } catch (IllegalArgumentException | CelularNoValidoException | CorreoNoValidoException | ProveedorYaExisteException | NombreNoVálidoException e) {

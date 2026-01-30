@@ -5,7 +5,8 @@ import com.grupo2.PMSEYJ.core.exception.CorreoNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.NombreNoVálidoException;
 import com.grupo2.PMSEYJ.core.exception.ProveedorYaExisteException;
 import com.grupo2.PMSEYJ.proveedores.dao.ProveedorDAO;
-import com.grupo2.PMSEYJ.proveedores.dto.ProveedorDTO;
+import com.grupo2.PMSEYJ.proveedores.dto.GestionProveedorDTO;
+import com.grupo2.PMSEYJ.proveedores.dto.NuevoProveedorDTO;
 import com.grupo2.PMSEYJ.proveedores.model.Proveedor;
 
 public class ProveedoresServiceImpl implements ProveedoresService{
@@ -18,7 +19,7 @@ public class ProveedoresServiceImpl implements ProveedoresService{
     }
 
     @Override
-    public void insertarProveedor(ProveedorDTO nuevoProveedor) {
+    public void insertarProveedor(NuevoProveedorDTO nuevoProveedor) {
 
         if(verificarExistenciaProveedor(nuevoProveedor.getNombre_pro())){
             throw new ProveedorYaExisteException("Ya existe un proveedor con el nombre proporcionado");
@@ -36,25 +37,24 @@ public class ProveedoresServiceImpl implements ProveedoresService{
             throw new NombreNoVálidoException("El nombre del proveedor contiene caracteres inválidos");
         }
 
-
-
         Proveedor proveedor = new Proveedor();
         proveedor.setCorreo_pro(nuevoProveedor.getCorreo_pro());
         proveedor.setTelefono_pro(nuevoProveedor.getTelefono_pro());
         proveedor.setNombre_pro(nuevoProveedor.getNombre_pro());
+        proveedor.setEstado_pv("A");
 
         proveedorDAO.insertar(proveedor);
 
     }
 
     @Override
-    public ProveedorDTO consultarProveedorPorNombre(String nombre) {
+    public GestionProveedorDTO consultarProveedorPorNombre(String nombre) {
         Proveedor proveedor = proveedorDAO.consultarPorNombre(nombre);
         if(proveedor == null){
             throw  new IllegalArgumentException("No existe el proveedor con el nombre proporcionado!");
         }
 
-        return new ProveedorDTO(proveedor.getNombre_pro(),proveedor.getTelefono_pro(),proveedor.getCorreo_pro());
+        return new GestionProveedorDTO(proveedor.getNombre_pro(),proveedor.getTelefono_pro(),proveedor.getCorreo_pro(), proveedor.getEstado_pv());
     }
 
     @Override
@@ -79,5 +79,16 @@ public class ProveedoresServiceImpl implements ProveedoresService{
     @Override
     public void eliminarProveedorPorNombre(String nombre) {
         proveedorDAO.eliminarProveedor(nombre);
+    }
+
+    @Override
+    public void darDeAltaProveedor(String nombre) {
+        proveedorDAO.darDeAlta("A" ,nombre);
+    }
+
+    @Override
+    public void darDeBajaProveedor(String nombre) {
+        proveedorDAO.darDeBaja("I" ,nombre);
+
     }
 }
