@@ -110,12 +110,16 @@
                   </HBox>
                     </children>
                 </GridPane>
-
-                <Label fx:id="lblMensaje" wrapText="true">
-                    <font>
-                        <Font name="System Italic" size="14.0" />
-                    </font>
-                </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+      
+                      <Label fx:id="lblMensaje" prefHeight="91.0" prefWidth="834.0" wrapText="true">
+                          <font>
+                              <Font name="System Italic" size="14.0" />
+                          </font>
+                      </Label>
+               </children>
+            </HBox>
             </children>
         </VBox>
     </children>

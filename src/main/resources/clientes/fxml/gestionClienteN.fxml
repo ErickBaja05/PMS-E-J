@@ -149,12 +149,16 @@
                         </Button>
                     </children>
                 </HBox>
-
-                <Label fx:id="lblMensaje" wrapText="true">
-                    <font>
-                        <Font name="System Italic" size="14.0" />
-                    </font>
-                </Label>
+            <HBox minHeight="-Infinity" prefHeight="59.0" prefWidth="200.0">
+               <children>
+      
+                      <Label fx:id="lblMensaje" prefHeight="71.0" prefWidth="834.0" wrapText="true">
+                          <font>
+                              <Font name="System Italic" size="14.0" />
+                          </font>
+                      </Label>
+               </children>
+            </HBox>
             </children>
         </VBox>
     </children>

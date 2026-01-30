@@ -108,7 +108,7 @@ public class ClienteNaturalServiceImpl implements ClienteNaturalService {
     @Override
     public void actualizarTelefono(String cedula, String telefono) {
         if(!telefono.matches("^09\\d{8}$")){
-            throw new CelularNoValidoException("El núevo número de teléfono celular es incorrecto, debe empezar por 09");
+            throw new CelularNoValidoException("El nuevo número de teléfono celular es incorrecto, debe empezar por 09");
         }
         clienteNaturalDAO.actualizarTelefonoPorCedula(cedula, telefono);
 

@@ -3,6 +3,9 @@ package com.grupo2.PMSEYJ.clientes.controller;
 import com.grupo2.PMSEYJ.clientes.dto.GestionClienteJuridicoDTO;
 import com.grupo2.PMSEYJ.clientes.service.ClienteJuridicoService;
 import com.grupo2.PMSEYJ.clientes.service.ClienteJurididoServiceImpl;
+import com.grupo2.PMSEYJ.core.exception.CelularNoValidoException;
+import com.grupo2.PMSEYJ.core.exception.CorreoNoValidoException;
+import com.grupo2.PMSEYJ.core.exception.DireccionNoValidaException;
 import com.grupo2.PMSEYJ.core.session.SesionActual;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,10 +72,6 @@ public class gestionClienteJController implements Initializable {
             mostrarMensaje("El nuevo número de teléfono celular es incorrecto, ingrese solo números y que sean 10", true);
             return;
         }
-        if (!cel.startsWith("09")) {
-            mostrarMensaje("Número celular no válido, el número ingresado debe comenzar con 09", true);
-            return;
-        }
 
 
         // Validación DIRECCIÓN (Caso de Uso 3)
@@ -89,10 +88,16 @@ public class gestionClienteJController implements Initializable {
             return;
         }
 
-        clienteJuridicoService.actualizarCorreo(txtCedulaJ.getText(),corr);
-        clienteJuridicoService.actualizarDireccion(txtCedulaJ.getText(), dir);
-        clienteJuridicoService.actualizarTelefono(txtCedulaJ.getText(),cel);
-        mostrarMensaje("Datos actualizados correctamente", false);
+        try{
+            clienteJuridicoService.actualizarCorreo(txtCedulaJ.getText(),corr);
+            clienteJuridicoService.actualizarDireccion(txtCedulaJ.getText(), dir);
+            clienteJuridicoService.actualizarTelefono(txtCedulaJ.getText(),cel);
+            mostrarMensaje("Datos actualizados correctamente", false);
+        }catch(CorreoNoValidoException | DireccionNoValidaException | CelularNoValidoException e){
+            mostrarMensaje(e.getMessage(), true);
+        }
+
+
     }
 
     // --- 5. DAR DE BAJA ---

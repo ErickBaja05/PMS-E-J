@@ -17,7 +17,7 @@
 
 <AnchorPane prefHeight="682.0" prefWidth="1016.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../css/generalClientes.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.clientes.controller.gestionClienteJController">
     <children>
-        <VBox layoutX="50.0" layoutY="50.0" spacing="30.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="50.799999999999955" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.799999999999955" AnchorPane.topAnchor="50.0">
+        <VBox layoutX="51.2" layoutY="50.0" prefHeight="612.0" prefWidth="915.0" spacing="30.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 15;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
             <padding>
                 <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
             </padding>
@@ -138,12 +138,16 @@
                         </Button>
                     </children>
                 </HBox>
-
-                <Label fx:id="lblMensaje" wrapText="true">
-                    <font>
-                        <Font name="System Italic" size="14.0" />
-                    </font>
-                </Label>
+            <HBox minHeight="-Infinity" prefHeight="59.0" prefWidth="833.0">
+               <children>
+      
+                      <Label fx:id="lblMensaje" prefHeight="107.0" prefWidth="833.0" wrapText="true">
+                          <font>
+                              <Font name="System Italic" size="14.0" />
+                          </font>
+                      </Label>
+               </children>
+            </HBox>
             </children>
         </VBox>
     </children>

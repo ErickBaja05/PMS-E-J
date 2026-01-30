@@ -3,6 +3,9 @@ package com.grupo2.PMSEYJ.clientes.controller;
 import com.grupo2.PMSEYJ.clientes.dto.GestionClienteNaturalDTO;
 import com.grupo2.PMSEYJ.clientes.service.ClienteNaturalService;
 import com.grupo2.PMSEYJ.clientes.service.ClienteNaturalServiceImpl;
+import com.grupo2.PMSEYJ.core.exception.CelularNoValidoException;
+import com.grupo2.PMSEYJ.core.exception.CorreoNoValidoException;
+import com.grupo2.PMSEYJ.core.exception.DireccionNoValidaException;
 import com.grupo2.PMSEYJ.core.session.SesionActual;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -93,12 +96,17 @@ public class gestionClienteNController implements Initializable {
             return;
         }
 
-        // Si todo es correcto:
-        clienteNaturalService.actualizarCorreo(txtCedula.getText(),corr);
-        clienteNaturalService.actualizarDireccion(txtDireccion.getText(),dir);
-        clienteNaturalService.actualizarTelefono(txtCedula.getText(),cel);
+        try{
+            clienteNaturalService.actualizarCorreo(txtCedula.getText(),corr);
+            clienteNaturalService.actualizarDireccion(txtDireccion.getText(),dir);
+            clienteNaturalService.actualizarTelefono(txtCedula.getText(),cel);
 
-        mostrarMensaje("Datos actualizados correctamente", false);
+            mostrarMensaje("Datos actualizados correctamente", false);
+        } catch (CorreoNoValidoException | DireccionNoValidaException | CelularNoValidoException e) {
+            mostrarMensaje(e.getMessage(), true);
+
+        }
+
     }
 
     // --- 5. DAR DE BAJA ---

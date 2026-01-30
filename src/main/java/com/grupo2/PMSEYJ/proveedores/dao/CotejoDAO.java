@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.grupo2.PMSEYJ.core.database.DatabaseConnection;
+import com.grupo2.PMSEYJ.proveedores.model.Cotejo;
 import com.grupo2.PMSEYJ.proveedores.model.Proveedor;
 
 
@@ -15,146 +16,88 @@ public class CotejoDAO {
     // ===============================
     // MÉTODO PRIVADO DE MAPEO
     // ===============================
-    private Proveedor mapearProveedor(ResultSet rs) throws SQLException {
-        Proveedor proveedor = new Proveedor();
-        proveedor.setId_prove(rs.getInt("id_prove"));
-        proveedor.setNombre_pro(rs.getString("nombre_pro"));
-        proveedor.setTelefono_pro(rs.getString("telefono_pro"));
-        proveedor.setCorreo_pro(rs.getString("correo_pro"));
-        proveedor.setEstado_pv(rs.getString("estado_pv"));
-
-        return proveedor;
+    private Cotejo mapearCotejo(ResultSet rs) throws SQLException {
+        Cotejo cotejo = new Cotejo();
+        cotejo.setId_ct(rs.getInt("id_ct"));
+        cotejo.setId_fc(rs.getInt("id_fc"));
+        cotejo.setId_lote(rs.getInt("id_lote"));
+        cotejo.setCantidad(rs.getInt("cantidad"));
+        return cotejo;
     }
 
     // ===============================
-    // CONSULTAR TODOS LOS PROVEEDORES
+    // CONSULTAR TODOS LOS DETALLES DE UN COTEJO
     // ===============================
-    public List<Proveedor> consultarTodos() {
-        String sql = "SELECT * FROM proveedores";
-        List<Proveedor> lista = new ArrayList<>();
+    public List<Cotejo> consultarPorFactura(Integer idFc) {
+        String sql = "SELECT * FROM cotejo WHERE id_factura = ?";
+        List<Cotejo> lista = new ArrayList<>();
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            while (rs.next()) {
-                lista.add(mapearProveedor(rs));
+            ps.setInt(1, idFc); // asignamos el parámetro idFc
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapearCotejo(rs));
+                }
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error al consultar todos los proveedores", e);
+            throw new RuntimeException("Error al consultar los cotejos por factura", e);
         }
 
         return lista;
     }
 
-    // ===============================
-    // CONSULTAR POR NOMBRE
-    // ===============================
-    public Proveedor consultarPorNombre(String nombre_pro) {
-        String sql = "SELECT * FROM proveedores WHERE nombre_pro = ?";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, nombre_pro);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return mapearProveedor(rs);
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Error al consultar proveedor por nombre", e);
-        }
-
-        return null;
-    }
 
     // ===============================
-    // INSERTAR PROVEEDOR
+    // INSERTAR COTEJO
     // ===============================
-    public void insertar(Proveedor proveedor) {
-        String sql = "INSERT INTO proveedores (nombre_pro,telefono_pro,correo_pro,estado_pv) VALUES (?,?,?,?)";
+    public void insertar(Cotejo cotejo) {
+        String sql = "INSERT INTO cotejo (id_fc,id_lote,cantidad) VALUES (?,?,?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, proveedor.getNombre_pro());
-            ps.setString(2, proveedor.getTelefono_pro());
-            ps.setString(3, proveedor.getCorreo_pro());
-            ps.setString(4, proveedor.getEstado_pv());
+            ps.setInt(1, cotejo.getId_fc() );
+            ps.setInt(2, cotejo.getId_lote() );
+            ps.setInt(3, cotejo.getCantidad());
+
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error al insertar indice", e);
+            throw new RuntimeException("Error al insertar cotejo", e);
         }
     }
 
-    public void actualizarCorreoPorNombre(String correo_pro, String nombre_pro) {
-        String sql = "UPDATE proveedores SET correo_pro = ? WHERE nombre_pro = ?";
+
+
+    public void actualizarCantidadPorLoteYFactura(Integer cantidad, Integer id_fc, Integer id_lote) {
+        String sql = "UPDATE cotejo SET cantidad = ? WHERE id_fc = ? AND id_lote = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, correo_pro);
-            ps.setString(2, nombre_pro);
+            ps.setInt(1, cantidad);
+            ps.setInt(2, id_fc);
+            ps.setInt(3, id_lote);
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error al actualizar el correo del proveedor", e);
+            throw new RuntimeException("Error al actualizar la cantidad", e);
         }
     }
 
-    public void actualizarTelefonoPorNombre(String telefono_pro, String nombre_pro) {
-        String sql = "UPDATE proveedores SET telefono_pro = ? WHERE nombre_pro = ?";
+    public void eliminarProducto(Integer id_fc, Integer id_lote) {
+        String sql = "DELETE FROM cotejo WHERE id_fc = ? AND id_lote = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, telefono_pro);
-            ps.setString(2, nombre_pro);
+            ps.setInt(1, id_fc);
+            ps.setInt(2, id_lote);
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error al actualizar el telefono del proveedor", e);
-        }
-    }
-    public void darDeAlta(String estado, String nombre_pro) {
-        String sql = "UPDATE proveedores SET estado_pv = ? WHERE nombre_pro = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, estado);
-            ps.setString(2, nombre_pro);
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Error al actualizar el telefono del proveedor", e);
-        }
-    }
-    public void darDeBaja(String estado, String nombre_pro) {
-        String sql = "UPDATE proveedores SET estado_pv = ? WHERE nombre_pro = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, estado);
-            ps.setString(2, nombre_pro);
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Error al actualizar el telefono del proveedor", e);
-        }
-    }
-
-    public void eliminarProveedor(String nombre_pro) {
-        String sql = "DELETE FROM proveedores WHERE nombre_pro = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, nombre_pro);
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Error al actualizar el telefono del proveedor", e);
+            throw new RuntimeException("Error al eliminar el producto", e);
         }
     }
 }

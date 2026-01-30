@@ -83,7 +83,7 @@ public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
     @Override
     public void actualizarDireccion(String cedula, String direccion) {
         if(!direccion.matches("^[a-zA-ZáÁéÉíÍóÓúÚñÑ0-9 .,_-]+$")){
-            throw new DireccionNoValidaException("Dirección no válida, la dirección contiene caracteres no válidos");
+            throw new DireccionNoValidaException("Dirección no válida, la nueva dirección fiscal contiene caracteres no válidos");
         }
         clienteJuridicoDAO.actualizarDireccionPorRUC(cedula, direccion);
 
@@ -92,7 +92,7 @@ public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
     @Override
     public void actualizarTelefono(String cedula, String telefono) {
         if(!telefono.matches("^09\\d{8}$")){
-            throw new CelularNoValidoException("Número de teléfono celular no válido, el número ingresado no empieza por 09");
+            throw new CelularNoValidoException("El nuevo número de teléfono celular es incorrecto, debe empezar por 09 ");
         }
 
     }
