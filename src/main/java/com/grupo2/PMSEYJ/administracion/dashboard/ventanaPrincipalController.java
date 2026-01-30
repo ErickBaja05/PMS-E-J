@@ -740,6 +740,11 @@ public class ventanaPrincipalController implements Initializable {
     }
 
     @FXML
+    void abrirConsultaProductos(ActionEvent event) {
+        cargarContenido("/inventarioYProductos/fxml/consultaDeProductos.fxml");
+    }
+
+    @FXML
     void abrirDefinirPromociones(ActionEvent event) {
         cargarContenido("/administracion/fxml/definirPromocion.fxml");
 
@@ -749,6 +754,11 @@ public class ventanaPrincipalController implements Initializable {
     void abrirProveedores(ActionEvent event) {
         cargarContenido("/proveedores/fxml/definirContactoProveedores.fxml");
 
+    }
+
+    @FXML
+    void abrirGestionProveedores(ActionEvent event) {
+        cargarContenido("/proveedores/fxml/gestionProveedores.fxml");
     }
 
     @FXML

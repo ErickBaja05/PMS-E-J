@@ -98,28 +98,34 @@
               </Button>
                               <VBox fx:id="proveedoresSubMenu" managed="false" prefHeight="200.0" prefWidth="100.0" styleClass="submenu" visible="false">
                                  <children>
-                                    <Button fx:id="btnIngresarFactura" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirIngresarFactura" text="INGRESAR FACTURA">
+                                    <Button fx:id="btnContactoProveedores" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirProveedores" text="REGISTRAR PROVEEDOR">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSeparation" />
-                                       </styleClass></Button>
-                                    <Button fx:id="btnCotejarFactura" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirCotejarFactura" text="COTEJAR FACTURA">
+                                       </styleClass>
+                                    </Button>
+                                    <Button fx:id="btnGestionProveedores" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirGestionProveedores" text="GESTIONAR PROVEEDORES">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
-                                       </styleClass></Button>
+                                       </styleClass>
+                                    </Button>
                                     <Button fx:id="btnConsultarPedido" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarPedido" text="GESTIONAR PEDIDO">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass>
                                     </Button>
-                                    <Button fx:id="btnContactoProveedores" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirProveedores" text="DEFINIR PROVEEDOR">
+                                    <Button fx:id="btnIngresarFactura" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirIngresarFactura" text="INGRESAR FACTURA">
                                        <styleClass>
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
-                                       </styleClass>
-                                    </Button>
+                                       </styleClass></Button>
+                                    <Button fx:id="btnCotejarFactura" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirCotejarFactura" text="COTEJAR FACTURA">
+                                       <styleClass>
+                                          <String fx:value="navBtn" />
+                                          <String fx:value="navBtnSubmenu" />
+                                       </styleClass></Button>
                                  </children></VBox>
                            </children>
                         </VBox>
@@ -140,6 +146,12 @@
                                           <String fx:value="navBtn" />
                                           <String fx:value="navBtnSubmenu" />
                                        </styleClass></Button>
+                                    <Button fx:id="btnConsultaProductos" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultaProductos" text="CONSULTA DE PRODUCTOS">
+                                       <styleClass>
+                                          <String fx:value="navBtn" />
+                                          <String fx:value="navBtnSubmenu" />
+                                       </styleClass>
+                                    </Button>
                                     <Button fx:id="btnConsultarStock" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#abrirConsultarStock" text="CONSULTAR STOCK">
                                        <styleClass>
                                           <String fx:value="navBtn" />
