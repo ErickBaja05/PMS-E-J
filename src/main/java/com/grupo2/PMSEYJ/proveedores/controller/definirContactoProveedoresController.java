@@ -1,13 +1,23 @@
 package com.grupo2.PMSEYJ.proveedores.controller;
 
+import com.grupo2.PMSEYJ.core.exception.CelularNoValidoException;
+import com.grupo2.PMSEYJ.core.exception.CorreoNoValidoException;
+import com.grupo2.PMSEYJ.core.exception.NombreNoVálidoException;
+import com.grupo2.PMSEYJ.core.exception.ProveedorYaExisteException;
+import com.grupo2.PMSEYJ.proveedores.dto.ProveedorDTO;
+import com.grupo2.PMSEYJ.proveedores.service.ProveedoresService;
+import com.grupo2.PMSEYJ.proveedores.service.ProveedoresServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 
-public class definirContactoProveedoresController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class definirContactoProveedoresController implements Initializable {
 
     @FXML private Button btnCancelar;
     @FXML private Button btnRegistrar;
@@ -16,34 +26,40 @@ public class definirContactoProveedoresController {
     @FXML private TextField txtNombre;
     @FXML private TextField txtTelefono;
 
+    private ProveedoresService proveedoresService;
+
     @FXML
     void registrarProveedor(ActionEvent event) {
         try {
             // 1. Validar que nada esté vacío primero
-            validarVacio(txtNombre, "Nombre del proveedor");
-            validarVacio(txtTelefono, "Número de Teléfono");
-            validarVacio(txtCorreo, "Correo Electrónico");
+            validarVacio(txtNombre);
+            validarVacio(txtTelefono);
+            validarVacio(txtCorreo);
 
             // 2. Validar formatos específicos
-            validarFormato(txtNombre.getText(), "^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]{5,30}$",
-                    "El nombre debe tener entre 5 y 30 letras.");
-
-            validarFormato(txtTelefono.getText(), "\\d{10}",
-                    "El teléfono debe tener exactamente 10 números.");
-
-            validarFormato(txtCorreo.getText(), "^[A-Za-z0-9+_.-]+@(.+)$",
-                    "El formato del correo no es válido.");
-
-            // 3. Lógica de negocio
-            if (verificarSiExiste(txtNombre.getText(), txtCorreo.getText())) {
-                throw new IllegalArgumentException("El proveedor ya existe.");
+            if(txtNombre.getText().length() > 100) {
+                mostrarMensaje("El nombre del proveedor no puede exceder los 100 caracteres",true);
+                return;
             }
 
-            // Si la operación es exitosa
-            mostrarMensaje("Registro exitoso", false);
-            limpiarCampos();
+            if(!txtTelefono.getText().matches("\\d{10}")) {
+                mostrarMensaje("El número de teléfono celular es incorrecto, ingrese solo números y que sean 10",true);
+                return;
+            }
 
-        } catch (IllegalArgumentException e) {
+
+            if(txtNombre.getText().length() > 100) {
+                mostrarMensaje("El correo electrónico no puede exceder los 100 caracteres",true);
+                return;
+            }
+
+            ProveedorDTO proveedorDTO = new ProveedorDTO(txtNombre.getText().toUpperCase(), txtTelefono.getText(), txtCorreo.getText());
+
+            proveedoresService.insertarProveedor(proveedorDTO);
+            mostrarMensaje("Proveedor " + proveedorDTO.getNombre_pro() + " registrado exitosamente",false);
+
+
+        } catch (IllegalArgumentException | CelularNoValidoException | CorreoNoValidoException | ProveedorYaExisteException | NombreNoVálidoException e) {
             // Captura el mensaje de error de cualquier validación fallida
             mostrarMensaje(e.getMessage(), true);
         }
@@ -51,24 +67,22 @@ public class definirContactoProveedoresController {
 
     // --- MÉTODOS DE VALIDACIÓN PERSONALIZADOS ---
 
-    private void validarVacio(TextField campo, String nombreCampo) {
+    private void validarVacio(TextField campo) {
         if (campo.getText() == null || campo.getText().trim().isEmpty()) {
-            throw new IllegalArgumentException("El campo " + nombreCampo + " no puede estar vacío.");
+            throw new IllegalArgumentException("Debe ingresar todos los datos para registrar a un proveedor");
         }
     }
 
-
-    private void validarFormato(String valor, String regex, String mensajeError) {
-        if (!valor.trim().matches(regex)) {
-            throw new IllegalArgumentException(mensajeError);
-        }
-    }
 
     // --- APOYO ---
 
     private void mostrarMensaje(String texto, boolean esError) {
+        if(esError) {
+            lblMensaje.getStyleClass().setAll("mensajeError");
+        }else{
+            lblMensaje.getStyleClass().setAll("mensajeConfirmacion");
+        }
         lblMensaje.setText(texto);
-        lblMensaje.setTextFill(esError ? Color.RED : Color.DARKGREEN);
     }
 
     private void limpiarCampos() {
@@ -77,15 +91,16 @@ public class definirContactoProveedoresController {
         txtCorreo.clear();
     }
 
-    private boolean verificarSiExiste(String nombre, String correo) {
-        // Tu lógica de base de datos aquí
-        return false;
-    }
 
     @FXML
     void cancelarOperacion(ActionEvent event) {
         limpiarCampos();
         lblMensaje.setText("");
         txtNombre.requestFocus(); // Pone el cursor de nuevo en el nombre
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        proveedoresService = new ProveedoresServiceImpl();
     }
 }

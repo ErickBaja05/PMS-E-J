@@ -25,7 +25,7 @@ public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
         }
 
 
-        if(!clienteJuridico.getRazon_social().matches("^[a-zA-ZáÁéÉíÍóÓúÚñÑ& ]+$")){
+        if(!clienteJuridico.getRazon_social().matches("^[a-zA-ZáÁéÉíÍóÓúÚñÑ&0-9 ]+$")){
             throw new NombreNoVálidoException("Razón social no válida, contiene caracteres no permitidos");
         }
 

@@ -8,11 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.grupo2.PMSEYJ.core.database.DatabaseConnection;
-import com.grupo2.PMSEYJ.inventarioYProductos.model.IndiceTerapeutico;
 import com.grupo2.PMSEYJ.proveedores.model.Proveedor;
 
 
-public class ProveedorDao {
+public class ProveedorDAO {
 
     // ===============================
     // MÉTODO PRIVADO DE MAPEO
@@ -73,10 +72,10 @@ public class ProveedorDao {
     }
 
     // ===============================
-    // INSERTAR INDICE
+    // INSERTAR PROVEEDOR
     // ===============================
     public void insertar(Proveedor proveedor) {
-        String sql = "INSERT INTO indice_terapeutico (nombre_indice) VALUES (?,?,?)";
+        String sql = "INSERT INTO proveedores (nombre_pro,telefono_pro,correo_pro) VALUES (?,?,?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -88,6 +87,47 @@ public class ProveedorDao {
 
         } catch (SQLException e) {
             throw new RuntimeException("Error al insertar indice", e);
+        }
+    }
+
+    public void actualizarCorreoPorNombre(String correo_pro, String nombre_pro) {
+        String sql = "UPDATE proveedores SET correo_pro = ? WHERE nombre_pro = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, correo_pro);
+            ps.setString(2, nombre_pro);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el correo del proveedor", e);
+        }
+    }
+
+    public void actualizarTelefonoPorNombre(String telefono_pro, String nombre_pro) {
+        String sql = "UPDATE proveedores SET telefono_pro = ? WHERE nombre_pro = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, telefono_pro);
+            ps.setString(2, nombre_pro);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el telefono del proveedor", e);
+        }
+    }
+
+    public void eliminarProveedor(String nombre_pro) {
+        String sql = "DELETE FROM proveedores WHERE nombre_pro = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, nombre_pro);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar el telefono del proveedor", e);
         }
     }
 }
