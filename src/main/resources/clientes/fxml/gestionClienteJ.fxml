@@ -24,7 +24,7 @@
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label styleClass="lblTitulo" text="GESTIÓN DE CLIENTES DE TIPO PERSONA NATURAL">
+                        <Label styleClass="lblTitulo" text="GESTIÓN DE CLIENTES DE TIPO PERSONA JURÍDICA">
                             <font>
                                 <Font name="System Bold" size="28.0" />
                             </font>
