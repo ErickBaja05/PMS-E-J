@@ -1,6 +1,7 @@
 package com.grupo2.PMSEYJ.inventarioYProductos.service;
 
-import com.grupo2.PMSEYJ.core.exception.CodigoDeBarrasNoValidoException;
+import com.grupo2.PMSEYJ.core.exception.CodigoDeBarrasOAuxiliarNoValidoException;
+import com.grupo2.PMSEYJ.core.exception.NombreNoVálidoException;
 import com.grupo2.PMSEYJ.core.exception.ProductoYaExisteException;
 import com.grupo2.PMSEYJ.inventarioYProductos.dao.IndiceTerapeuticoDAO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dao.LaboratorioDAO;
@@ -60,8 +61,30 @@ public class ProductoServiceImpl implements ProductosService{
         }
 
         if(!nuevoProducto.getCodigo_barras().matches("^\\d{1,13}$")){
-            throw new CodigoDeBarrasNoValidoException("El código de barras no puede exceder los 13 caracteres");
+            throw new CodigoDeBarrasOAuxiliarNoValidoException("El código de barras no puede exceder los 13 caracteres");
         }
+
+        if(!nuevoProducto.getCodigo_aux().matches("^[A-Za-z0-9Ññ-]{1,15}$")){
+            throw new CodigoDeBarrasOAuxiliarNoValidoException("El código auxiliar contiene caracteres inválidos");
+        }
+
+        if(!nuevoProducto.getNombre_p().matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ _&\\-/()]{5,150}$")){
+            throw new NombreNoVálidoException("El nombre del producto contiene símbolos no permitidos");
+        }
+
+        if(!nuevoProducto.getDescripcion().matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ,.]{5,200}$")){
+            throw new IllegalArgumentException("La descripción del producto contiene símbolos no permitidos");
+        }
+
+       if(!nuevoLaboratorio.getNombre_lab().matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ,.&_\\-()/]{5,50}$")){
+           throw new IllegalArgumentException("El nombre del laboratorio contiene símbolos no permitidos");
+       }
+
+       if(!nuevoIndiceTerapeutico.getNombre_indice().matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ,./()%]{5,100}$")){
+           throw new IllegalArgumentException("El índice terapéutico contiene símbolos");
+       }
+
+
 
         Producto p = new Producto();
         Laboratorio laboratorio;

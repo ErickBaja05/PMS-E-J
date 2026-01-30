@@ -1,19 +1,17 @@
 package com.grupo2.PMSEYJ.inventarioYProductos.controller;
 
 
-import com.grupo2.PMSEYJ.core.exception.CodigoDeBarrasNoValidoException;
+import com.grupo2.PMSEYJ.core.exception.CodigoDeBarrasOAuxiliarNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.ProductoYaExisteException;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoIndiceTerapeuticoDTO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoLaboratorioDTO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoProductoDTO;
-import com.grupo2.PMSEYJ.inventarioYProductos.model.IndiceTerapeutico;
 import com.grupo2.PMSEYJ.inventarioYProductos.service.ProductoServiceImpl;
 import com.grupo2.PMSEYJ.inventarioYProductos.service.ProductosService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -98,14 +96,34 @@ public class registrarProducto implements Initializable {
             return;
         };
 
-        if(!validarFormato(txtCodigoAuxiliar.getText(),"[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\\- ]{2,15}$", "El código auxiliar tiene formato invalido o sobrepasa los 15 caracteres")){
-            return;
-        };
+        if(txtCodigoAuxiliar.getText().length() > 15){
+            mostrarMensaje("El código auxiliar no puede sobrepasar los 15 caracteres",true);
+        }
+
         if(!validarFormato(txtCodigoBarras.getText(),"[0-9]+","El código de barras solo deben ser números")){
             return;
         }
-        if(!validarFormato(txtPVP.getText(),"^\\d+(\\.\\d{1,2})?$","El PVP deben ser solo números. Utilize \".\" para separar decimales (máximo 2)")){
+        if(!validarFormato(txtPVP.getText(),"^\\d+(\\.\\d{1,2})?$","El PVP deben ser solo números. Utilice \".\" para separar decimales (máximo 2)")){
             return;
+        }
+
+        if(txtNombreProducto.getText().length() < 5 || txtNombreProducto.getText().length() > 150){
+            mostrarMensaje("El nombre del producto debe tener entre 5 y 150 caracteres",true);
+            return;
+        }
+
+        if(txtLaboratorio.getText().length() < 3 || txtLaboratorio.getText().length() > 50){
+            mostrarMensaje("El nombre del laboratorio debe tener entre 3 y 50 caracteres",true);
+            return;
+        }
+
+        if(txtDescripcion.getText().length() < 5 || txtDescripcion.getText().length() > 200){
+            mostrarMensaje("La descripción del producto debe tener entre 5 y 200 caracteres",true);
+            return;
+        }
+
+        if(txtIndiceTerapeutico.getText().length() < 5 || txtIndiceTerapeutico.getText().length() > 100){
+            mostrarMensaje("El índice terapéutico debe tener entre 5 y 100 caracteres",true);
         }
 
 
@@ -159,8 +177,8 @@ public class registrarProducto implements Initializable {
         NuevoIndiceTerapeuticoDTO nuevoIndiceTerapeuticoDTO = new NuevoIndiceTerapeuticoDTO(indice_t);
         try{
             productosService.insertarProducto(nuevoProductoDTO,nuevoLaboratorioDTO,nuevoIndiceTerapeuticoDTO);
-            mostrarMensaje("Producto registrado exitosamente",false);
-        }catch(ProductoYaExisteException | CodigoDeBarrasNoValidoException e){
+            mostrarMensaje("Producto " + nuevoProductoDTO.getNombre_p() + "registrado exitosamente",false);
+        }catch(ProductoYaExisteException | CodigoDeBarrasOAuxiliarNoValidoException e){
             mostrarMensaje(e.getMessage(),true);
         }
 
@@ -185,7 +203,7 @@ public class registrarProducto implements Initializable {
 
     private boolean validarVacio(TextField campo, String nombreCampo) {
         if (campo.getText() == null || campo.getText().trim().isEmpty()) {
-            mostrarMensaje("El campo " + nombreCampo + " no puede estar vacío.",true);
+            mostrarMensaje("Debe ingresar todos los campos para registrar un producto",true);
             return false;
 
         }
