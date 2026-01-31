@@ -1,9 +1,8 @@
-package com.grupo2.PMSEYJ.proveedores.model;
+package com.grupo2.PMSEYJ.proveedores.dto;
 
 import java.time.LocalDate;
 
-public class Lote {
-    Integer id_lote;
+public class NuevoLoteDTO {
     String codigo_barras;
     String num_lote;
     Integer stock;
@@ -14,15 +13,7 @@ public class Lote {
     String estado;
     Boolean tiene_iva;
 
-    public Lote(){}
-
-    public Integer getId_lote() {
-        return id_lote;
-    }
-
-    public void setId_lote(Integer id_lote) {
-        this.id_lote = id_lote;
-    }
+    public NuevoLoteDTO(){}
 
     public String getCodigo_barras() {
         return codigo_barras;

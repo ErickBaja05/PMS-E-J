@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 /* --- CONFIGURACIÓN GENERAL --- */
 .root {
     -fx-background-color: #f4f4f4;
@@ -18,6 +20,8 @@
     -fx-border-color: #e0e0e0;
 }
 
+
+
 /* Cabecera: tiene sombra y padding de 20 */
 .card-header {
     -fx-padding: 20;
@@ -37,6 +41,8 @@
 /* --- TEXTOS --- */
 .label-subtitulo {
     -fx-text-fill: #2c3e50; /* Azul oscuro */
+    -fx-font-family: 'Roboto', sans-serif;
+    -fx-font-size: 14;
 }
 
 .label-nota {

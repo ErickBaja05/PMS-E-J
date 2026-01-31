@@ -6,6 +6,7 @@ import com.grupo2.PMSEYJ.core.exception.NombreNoVálidoException;
 import com.grupo2.PMSEYJ.core.exception.ProveedorYaExisteException;
 import com.grupo2.PMSEYJ.proveedores.dao.ProveedorDAO;
 import com.grupo2.PMSEYJ.proveedores.dto.GestionProveedorDTO;
+import com.grupo2.PMSEYJ.proveedores.dto.NuevaFacturaCompraDTO;
 import com.grupo2.PMSEYJ.proveedores.dto.NuevoProveedorDTO;
 import com.grupo2.PMSEYJ.proveedores.model.Proveedor;
 
@@ -77,11 +78,6 @@ public class ProveedoresServiceImpl implements ProveedoresService{
     }
 
     @Override
-    public void eliminarProveedorPorNombre(String nombre) {
-        proveedorDAO.eliminarProveedor(nombre);
-    }
-
-    @Override
     public void darDeAltaProveedor(String nombre) {
         proveedorDAO.darDeAlta("A" ,nombre);
     }
@@ -89,6 +85,26 @@ public class ProveedoresServiceImpl implements ProveedoresService{
     @Override
     public void darDeBajaProveedor(String nombre) {
         proveedorDAO.darDeBaja("I" ,nombre);
+
+    }
+
+    @Override
+    public void crearFacturaCompra(NuevaFacturaCompraDTO nuevaFacturaCompra) {
+
+    }
+
+    @Override
+    public boolean verificarEstadoFacturaCompra(String num_fc) {
+        return false;
+    }
+
+    @Override
+    public boolean verificarExistenciaFacturaCompra(String num_fc) {
+        return false;
+    }
+
+    @Override
+    public void agregarProducto(NuevaFacturaCompraDTO nuevaFacturaCompra) {
 
     }
 }

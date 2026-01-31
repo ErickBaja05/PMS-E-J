@@ -14,7 +14,7 @@ public class ProductoDAO {
         Producto p = new Producto();
         p.setCodigo_barras(rs.getString("codigo_barras"));
         p.setId_lab(rs.getInt("id_lab"));
-        p.setCodigo_aux(rs.getString("codigo_aux"));
+        p.setCodigo_aux(rs.getString("codigo_barras"));
         p.setNombre_p(rs.getString("nombre_p"));
         p.setDescripcion(rs.getString("descripcion"));
         p.setCategoria(rs.getString("categoria"));       // char(1) → String
@@ -101,7 +101,7 @@ public class ProductoDAO {
     }
 
     public Producto consultarPorCodAux(String codAux) {
-        String sql = "SELECT * FROM producto WHERE codigo_aux = ?";
+        String sql = "SELECT * FROM producto WHERE codigo_barras = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -126,7 +126,7 @@ public class ProductoDAO {
     public void insertar(Producto p) {
         String sql = """
             INSERT INTO producto (
-                codigo_barras, id_lab, codigo_aux, nombre_p, descripcion,
+                codigo_barras, id_lab, codigo_barras, nombre_p, descripcion,
                 categoria, forma_venta, tipo_venta, pvp, id_indice_t
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)
         """;
