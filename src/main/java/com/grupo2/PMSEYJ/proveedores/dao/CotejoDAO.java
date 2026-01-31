@@ -28,14 +28,14 @@ public class CotejoDAO {
     // ===============================
     // CONSULTAR TODOS LOS DETALLES DE UN COTEJO
     // ===============================
-    public List<Cotejo> consultarPorFactura(Integer idFc) {
-        String sql = "SELECT * FROM cotejo WHERE id_factura = ?";
+    public List<Cotejo> consultarPorFactura(int id_fc) {
+        String sql = "SELECT * FROM cotejo WHERE id_fc = ?";
         List<Cotejo> lista = new ArrayList<>();
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, idFc); // asignamos el parámetro idFc
+            ps.setInt(1, id_fc); // asignamos el parámetro idFc
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     lista.add(mapearCotejo(rs));

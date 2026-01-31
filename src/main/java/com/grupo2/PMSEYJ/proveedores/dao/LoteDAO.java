@@ -1,5 +1,6 @@
 package com.grupo2.PMSEYJ.proveedores.dao;
 
+import com.grupo2.PMSEYJ.clientes.model.ClienteNatural;
 import com.grupo2.PMSEYJ.core.database.DatabaseConnection;
 import com.grupo2.PMSEYJ.proveedores.model.Lote;
 
@@ -65,6 +66,26 @@ public class LoteDAO {
         }
 
         return lista;
+    }
+
+    public Lote consultarPorId(int id_cn) {
+        String sql = "SELECT * FROM lote WHERE id_lote = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id_cn);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapearLote(rs); // aquí retornas el objeto mapeado
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al consultar lote por ID", e);
+        }
+
+        return null; // si no encuentra nada
     }
 
     // ===============================

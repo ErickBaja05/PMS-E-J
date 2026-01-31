@@ -79,7 +79,7 @@ public class registrarClienteN implements Initializable {
 
         // HASTA 200 CARACTERES PARA LA DIRECCION
 
-        if(txtDireccion.getText().length() > 100){
+        if(txtDireccion.getText().length() > 200){
             mostrarMensaje("La dirección no debe superar los 200 caracteres",true);
             return;
         }

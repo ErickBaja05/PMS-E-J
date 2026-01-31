@@ -26,6 +26,8 @@ module com.grupo2.PMSEYJ {
     opens com.grupo2.PMSEYJ.app to javafx.fxml;
     opens com.grupo2.PMSEYJ.administracion.gestionUsuarios.dto to javafx.base;
     opens com.grupo2.PMSEYJ.administracion.gestionParametros.dto to javafx.base;
+    opens com.grupo2.PMSEYJ.inventarioYProductos.dto to javafx.base;
+    opens com.grupo2.PMSEYJ.proveedores.dto to javafx.base;
 
     exports com.grupo2.PMSEYJ.app;
 

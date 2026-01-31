@@ -61,16 +61,7 @@
                         <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="66.19997863769532" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1">
-                           <children>
-                              <Label styleClass="label-subtitulo" text="Lote">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                                      <TextField fx:id="txtLote" prefHeight="35.0" promptText="Lote (Entero +)" />
-                           </children>
-                        </VBox>
+
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                            <children>
                               <Label styleClass="label-subtitulo" text="Código de barras del Producto">
@@ -81,10 +72,18 @@
                                       <TextField fx:id="txtCodigoBarras" prefHeight="35.0" promptText="13 caracteres numéricos" />
                            </children>
                         </VBox>
+                                <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1">
+                                    <children>
+                                        <Label styleClass="label-subtitulo" text="Lote">
+                                            <font>
+                                                <Font size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="txtLote" prefHeight="35.0" promptText="Lote (Entero +)" />
+                                    </children>
+                                </VBox>
 
-                                <Button fx:id="btnAgregarItem" onAction="#handleAgregarProducto" prefHeight="40.0" prefWidth="Infinity" styleClass="btn-agregar" text="AGREGAR PRODUCTO" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                                    <font><Font name="System Bold" size="13.0" /></font>
-                                </Button>
+
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="2">
                            <children>
                               <Label styleClass="label-subtitulo" text="Fecha de Vencimiento">
@@ -142,6 +141,9 @@
                               <TextField fx:id="txtTamañoCaja" promptText="Unidades en la caja" />
                            </children>
                         </VBox>
+                                <Button fx:id="btnAgregarItem" onAction="#handleAgregarProducto" prefHeight="40.0" prefWidth="Infinity" styleClass="btn-agregar" text="AGREGAR PRODUCTO" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                    <font><Font name="System Bold" size="13.0" /></font>
+                                </Button>
                             </children>
                         </GridPane>
                     </children>
@@ -152,10 +154,9 @@
                         <TableView fx:id="tvDetalleFactura" prefHeight="246.0" prefWidth="986.0" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="colCodigoBarras" prefWidth="157.60003679990768" text="Código de barras" />
-                        <TableColumn fx:id="colNombreProducto" prefWidth="235.20001220703125" text="Nombre" />
-                                <TableColumn fx:id="colLote" prefWidth="167.99993896484375" text="Número de Lote" />
+                        <TableColumn fx:id="colNombreProducto" prefWidth="297.5999755859375" text="Nombre" />
+                                <TableColumn fx:id="colLote" prefWidth="132.800048828125" text="Número de Lote" />
                                 <TableColumn fx:id="colVencimiento" prefWidth="140.0" text="Fecha de Vencimiento" />
-                                <TableColumn fx:id="colCajas" text="Cajas" />
                                 <TableColumn fx:id="colPrecioCompra" prefWidth="88.800048828125" text="Costo" />
                                 <TableColumn fx:id="colSubtotal" prefWidth="112.0" text="Precio de Venta" />
                             </columns>

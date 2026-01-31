@@ -13,7 +13,6 @@ public class Producto {
     private String tipo_venta;
     private Double pvp;
     private Integer id_indice_t;
-    private String principio_ac;
     private LocalDate fecha_uv;
     private Boolean tiene_iva;
 
@@ -112,13 +111,6 @@ public class Producto {
         this.id_indice_t = id_indice_t;
     }
 
-    public String getPrincipio_ac() {
-        return principio_ac;
-    }
-
-    public void setPrincipio_ac(String principio_ac) {
-        this.principio_ac = principio_ac;
-    }
 
     public LocalDate getFecha_uv() {
         return fecha_uv;

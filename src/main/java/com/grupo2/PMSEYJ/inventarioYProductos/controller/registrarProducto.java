@@ -2,6 +2,7 @@ package com.grupo2.PMSEYJ.inventarioYProductos.controller;
 
 
 import com.grupo2.PMSEYJ.core.exception.CodigoDeBarrasOAuxiliarNoValidoException;
+import com.grupo2.PMSEYJ.core.exception.NombreNoVálidoException;
 import com.grupo2.PMSEYJ.core.exception.ProductoYaExisteException;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoIndiceTerapeuticoDTO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoLaboratorioDTO;
@@ -124,7 +125,9 @@ public class registrarProducto implements Initializable {
 
         if(txtIndiceTerapeutico.getText().length() < 5 || txtIndiceTerapeutico.getText().length() > 100){
             mostrarMensaje("El índice terapéutico debe tener entre 5 y 100 caracteres",true);
+            return;
         }
+
 
 
         String codigo_aux = txtCodigoAuxiliar.getText();
@@ -178,7 +181,7 @@ public class registrarProducto implements Initializable {
         try{
             productosService.insertarProducto(nuevoProductoDTO,nuevoLaboratorioDTO,nuevoIndiceTerapeuticoDTO);
             mostrarMensaje("Producto " + nuevoProductoDTO.getNombre_p() + "registrado exitosamente",false);
-        }catch(ProductoYaExisteException | CodigoDeBarrasOAuxiliarNoValidoException e){
+        }catch(ProductoYaExisteException | CodigoDeBarrasOAuxiliarNoValidoException | NombreNoVálidoException | IllegalArgumentException e){
             mostrarMensaje(e.getMessage(),true);
         }
 

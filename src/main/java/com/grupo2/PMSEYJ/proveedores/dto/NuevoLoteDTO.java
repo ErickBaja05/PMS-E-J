@@ -6,6 +6,7 @@ public class NuevoLoteDTO {
     String codigo_barras;
     String num_lote;
     Integer stock;
+    Integer n_cajasCompradas;
     LocalDate fecha_vn;
     Double precio_compra;
     Integer rentabilidad;
@@ -14,6 +15,18 @@ public class NuevoLoteDTO {
     Boolean tiene_iva;
 
     public NuevoLoteDTO(){}
+
+    public NuevoLoteDTO(String codigo_barras, String num_lote, Integer n_cajasCompradas, LocalDate fecha_vn, Double precio_compra, Integer rentabilidad, Integer tamano_caja, String estado, Boolean tiene_iva) {
+        this.codigo_barras = codigo_barras;
+        this.num_lote = num_lote;
+        this.n_cajasCompradas = n_cajasCompradas;
+        this.fecha_vn = fecha_vn;
+        this.precio_compra = precio_compra;
+        this.rentabilidad = rentabilidad;
+        this.tamano_caja = tamano_caja;
+        this.estado = estado;
+        this.tiene_iva = tiene_iva;
+    }
 
     public String getCodigo_barras() {
         return codigo_barras;
@@ -37,6 +50,14 @@ public class NuevoLoteDTO {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Integer getN_cajasCompradas() {
+        return n_cajasCompradas;
+    }
+
+    public void setN_cajasCompradas(Integer n_cajasCompradas) {
+        this.n_cajasCompradas = n_cajasCompradas;
     }
 
     public LocalDate getFecha_vn() {

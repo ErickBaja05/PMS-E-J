@@ -1,9 +1,9 @@
 package com.grupo2.PMSEYJ.proveedores.service;
 
-import com.grupo2.PMSEYJ.proveedores.dto.GestionProveedorDTO;
-import com.grupo2.PMSEYJ.proveedores.dto.NuevaFacturaCompraDTO;
-import com.grupo2.PMSEYJ.proveedores.dto.NuevoCotejoDTO;
-import com.grupo2.PMSEYJ.proveedores.dto.NuevoProveedorDTO;
+import com.grupo2.PMSEYJ.proveedores.dto.*;
+
+
+import java.util.List;
 
 public interface ProveedoresService {
 
@@ -14,9 +14,15 @@ public interface ProveedoresService {
     void actualizarTelefonoPorNombre(String telefono, String nombre);
     void darDeAltaProveedor(String nombre);
     void darDeBajaProveedor(String nombre);
-    void crearFacturaCompra(NuevaFacturaCompraDTO nuevaFacturaCompra);
+    Integer crearFacturaCompra(NuevaFacturaCompraDTO nuevaFacturaCompra);
     boolean verificarEstadoFacturaCompra(String num_fc);
     boolean verificarExistenciaFacturaCompra(String num_fc);
-    void agregarProducto(NuevaFacturaCompraDTO nuevaFacturaCompra);
+    void agregarProducto(Integer id_fc , NuevoLoteDTO nuevoLote);
+    boolean verificarSiYaFueIngresada(String num_fc);
+    void ingresarFacturaCompra(String num_fc);
+    List<CotejoDTO> consultarProductosFacturaPendiente(String num_fc);
+    List<ProductoLoteDTO> armarTablaPendiente(List <CotejoDTO> pendientes);
+    FacturaCompraPendienteDTO consultarFacturaCompra(String num_fc);
+
 
 }

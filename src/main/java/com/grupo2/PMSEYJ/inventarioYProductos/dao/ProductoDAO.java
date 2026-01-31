@@ -29,7 +29,6 @@ public class ProductoDAO {
         }
 
         p.setId_indice_t(rs.getInt("id_indice_t"));
-        p.setPrincipio_ac(rs.getString("principio_ac"));
         p.setTiene_iva(rs.getBoolean("tiene_iva"));
 
         return p;
@@ -80,13 +79,13 @@ public class ProductoDAO {
         return null;
     }
 
-    public Producto consultarPorCodBarras(String codAux) {
+    public Producto consultarPorCodBarras(String codigoBarras) {
         String sql = "SELECT * FROM producto WHERE codigo_barras = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, codAux);
+            ps.setString(1, codigoBarras);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -101,7 +100,7 @@ public class ProductoDAO {
     }
 
     public Producto consultarPorCodAux(String codAux) {
-        String sql = "SELECT * FROM producto WHERE codigo_barras = ?";
+        String sql = "SELECT * FROM producto WHERE codigo_aux = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -126,7 +125,7 @@ public class ProductoDAO {
     public void insertar(Producto p) {
         String sql = """
             INSERT INTO producto (
-                codigo_barras, id_lab, codigo_barras, nombre_p, descripcion,
+                codigo_barras, id_lab, codigo_aux, nombre_p, descripcion,
                 categoria, forma_venta, tipo_venta, pvp, id_indice_t
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)
         """;
@@ -144,7 +143,6 @@ public class ProductoDAO {
             ps.setString(8, p.getTipo_venta());    // ya es String
             ps.setDouble(9, p.getPvp());
             ps.setInt(10, p.getId_indice_t());
-
             ps.executeUpdate();
 
         } catch (SQLException e) {

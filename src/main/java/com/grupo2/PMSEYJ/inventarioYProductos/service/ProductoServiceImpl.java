@@ -2,6 +2,7 @@ package com.grupo2.PMSEYJ.inventarioYProductos.service;
 
 import com.grupo2.PMSEYJ.core.exception.CodigoDeBarrasOAuxiliarNoValidoException;
 import com.grupo2.PMSEYJ.core.exception.NombreNoVálidoException;
+import com.grupo2.PMSEYJ.core.exception.ProductoNoExisteException;
 import com.grupo2.PMSEYJ.core.exception.ProductoYaExisteException;
 import com.grupo2.PMSEYJ.inventarioYProductos.dao.IndiceTerapeuticoDAO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dao.LaboratorioDAO;
@@ -68,7 +69,7 @@ public class ProductoServiceImpl implements ProductosService{
             throw new CodigoDeBarrasOAuxiliarNoValidoException("El código auxiliar contiene caracteres inválidos");
         }
 
-        if(!nuevoProducto.getNombre_p().matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ _&\\-/()]{5,150}$")){
+        if(!nuevoProducto.getNombre_p().matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 _&\\-/().]{5,150}$")){
             throw new NombreNoVálidoException("El nombre del producto contiene símbolos no permitidos");
         }
 
@@ -76,7 +77,7 @@ public class ProductoServiceImpl implements ProductosService{
             throw new IllegalArgumentException("La descripción del producto contiene símbolos no permitidos");
         }
 
-       if(!nuevoLaboratorio.getNombre_lab().matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ,.&_\\-()/]{5,50}$")){
+       if(!nuevoLaboratorio.getNombre_lab().matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ,.&_\\-()/]{3,50}$")){
            throw new IllegalArgumentException("El nombre del laboratorio contiene símbolos no permitidos");
        }
 
@@ -130,5 +131,14 @@ public class ProductoServiceImpl implements ProductosService{
     @Override
     public boolean verificarExistenciaIndiceTerapeutico(String nombreIndiceTerapeutico) {
         return indiceTerapeuticoDAO.consultarPorNombre(nombreIndiceTerapeutico) != null;
+    }
+
+    @Override
+    public Producto consultarProductoPorCodigoBarras(String codigoBarras) {
+        Producto producto = productoDAO.consultarPorCodBarras(codigoBarras);
+        if(producto == null){
+            throw new ProductoNoExisteException("No existe un producto con el código de barras ingresado, créelo previamente en Productos -> Crear Producto");
+        }
+        return producto;
     }
 }
