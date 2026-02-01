@@ -148,8 +148,8 @@ public class ingresarFacturaController implements Initializable {
             return;
         }
 
-        if(Integer.parseInt(txtTamañoCaja.getText()) <= 0 || Integer.parseInt(txtTamañoCaja.getText()) > 100){
-            mostrarAlerta("El número de unidades de una caja no debe ser mayor a 100 ni menor a 1", Alert.AlertType.ERROR);
+        if(Integer.parseInt(txtTamañoCaja.getText()) <= 0 || Integer.parseInt(txtTamañoCaja.getText()) > 999){
+            mostrarAlerta("El número de unidades de una caja no debe ser mayor a 999 ni menor a 1", Alert.AlertType.ERROR);
             return;
         }
 

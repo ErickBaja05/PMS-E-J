@@ -89,8 +89,8 @@ public class cotejarFacturaController2 implements Initializable {
         try{
             facturaACotejar = proveedoresService.consultarFacturaCompra(txtNumFactura.getText(),proveedor.getId_prove());
             boolean fue_ingresada = proveedoresService.verificarSiYaFueIngresada(facturaACotejar.getNum_fc(),proveedor.getId_prove());
-            if(fue_ingresada){
-                mostrarAlerta("La factura no ha sido ingresada al sistema todavía, no hay información para cotejar",Alert.AlertType.ERROR);
+            if(!fue_ingresada){
+                mostrarAlerta("La factura no ha sido ingresada al sistema todavía, no hay información para cotejar",Alert.AlertType.INFORMATION);
                 return;
             }
 
@@ -130,6 +130,11 @@ public class cotejarFacturaController2 implements Initializable {
     void handleAgregarProducto(ActionEvent event) {
         if(txtCantidad.getText().isEmpty() || !txtCantidad.getText().matches("[0-9-]+" ) || Integer.parseInt(txtCantidad.getText()) < 0) {
             mostrarAlerta("La cantidad recibida debe ser un número entero mayor a 0", Alert.AlertType.ERROR);
+            return;
+        }
+
+        if(Integer.parseInt(txtCantidad.getText()) <= 0 || Integer.parseInt(txtCantidad.getText()) > 100) {
+            mostrarAlerta("La cantidad recibida no puede ser mayor a 100", Alert.AlertType.ERROR);
             return;
         }
         tvDetalleFactura.getSelectionModel().getSelectedItem().setCantidad(Integer.valueOf(txtCantidad.getText()));
