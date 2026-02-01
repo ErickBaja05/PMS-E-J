@@ -99,7 +99,7 @@ public class generarReporteCotejoController implements Initializable {
 
     @FXML
     void handleImprimir(ActionEvent event) {
-        mostrarAlerta("Reporte de cotejo impreso exitosamente", Alert.AlertType.INFORMATION);
+        mostrarAlerta("Reporte descargado correctamente", Alert.AlertType.INFORMATION);
     }
 
     @Override

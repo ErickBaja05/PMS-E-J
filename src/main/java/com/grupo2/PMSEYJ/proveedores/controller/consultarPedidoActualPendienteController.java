@@ -138,6 +138,11 @@ public class consultarPedidoActualPendienteController implements Initializable {
             return;
         }
 
+        if(Integer.parseInt(txtCantidad.getText()) <= 0 || Integer.parseInt(txtCantidad.getText()) >= 100){
+            mostrarAlerta("No puede solicitar más de 100 cajas ni menos de 1", Alert.AlertType.ERROR);
+            return;
+        }
+
         productoPedido.setCodigo_barras(txtCodigo.getText());
         productoPedido.setCantidad_cajas(Integer.valueOf(txtCantidad.getText()));
         boolean encontrado = false;
@@ -173,6 +178,11 @@ public class consultarPedidoActualPendienteController implements Initializable {
             return;
         }
 
+        if(Integer.parseInt(txtCantidad.getText()) <= 0 || Integer.parseInt(txtCantidad.getText()) >= 100){
+            mostrarAlerta("No puede solicitar más de 100 cajas ni menos de 1", Alert.AlertType.ERROR);
+            return;
+        }
+
         productoPedido.setCantidad_cajas(Integer.parseInt(txtCantidad.getText()));
         productoPedido.setNumero_p(numero_producto);
         productoPedido.setNombre_p(txtNombre.getText());
@@ -180,6 +190,10 @@ public class consultarPedidoActualPendienteController implements Initializable {
 
         for (ProductoPedidoDTO producto : listaProductos){
             if(producto.getCodigo_barras().equals(productoPedido.getCodigo_barras())){
+                mostrarAlerta("El producto ya se encuentra en el pedido", Alert.AlertType.ERROR);
+                return;
+            }
+            if(producto.getNombre_p().equals(productoPedido.getNombre_p())){
                 mostrarAlerta("El producto ya se encuentra en el pedido", Alert.AlertType.ERROR);
                 return;
             }
@@ -244,6 +258,10 @@ public class consultarPedidoActualPendienteController implements Initializable {
                 txtCodigo.setText(newValue.getCodigo_barras());
                 txtNombre.setText(newValue.getNombre_p());
                 txtCantidad.setText(String.valueOf(newValue.getCantidad_cajas()));
+            }else{
+                txtCodigo.setText(oldValue.getCodigo_barras());
+                txtNombre.setText(oldValue.getNombre_p());
+                txtCantidad.setText(String.valueOf(oldValue.getCantidad_cajas()));
             }
         });
 

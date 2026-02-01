@@ -40,7 +40,7 @@
                     <children>
                         <VBox prefHeight="65.0" prefWidth="676.0" spacing="10.0">
                             <children>
-                                <Label styleClass="lblCedula" text="Nombre del proveedor">
+                                <Label styleClass="lblCedula" text="Nombre del Proveedor">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
@@ -75,7 +75,7 @@
                     <children>
                         <VBox spacing="5.0" GridPane.columnSpan="2">
                             <children>
-                                <Label maxWidth="Infinity" styleClass="lblInformacion" text="Nombre del proveedor">
+                                <Label maxWidth="Infinity" styleClass="lblInformacion" text="Nombre del Proveedor">
                                     <padding><Insets left="5.0" /></padding>
                                 </Label>
                                 <TextField fx:id="txtNombreResultado" editable="false" prefHeight="35.0" style="-fx-background-color: #f9f9f9;">

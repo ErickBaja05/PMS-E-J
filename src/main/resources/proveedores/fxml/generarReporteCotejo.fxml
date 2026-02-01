@@ -71,7 +71,7 @@
 
                         <HBox alignment="CENTER_RIGHT" spacing="15.0">
                             <children>
-                                <Button fx:id="btnImprimir" onAction="#handleImprimir" prefHeight="45.0" prefWidth="180.0" styleClass="btn-imprimir" text="IMPRIMIR">
+                                <Button fx:id="btnImprimir" onAction="#handleImprimir" prefHeight="45.0" prefWidth="180.0" styleClass="btn-imprimir" text="DESCARGAR">
                                     <font><Font name="System Bold" size="13.0" /></font>
                                 </Button>
                                 <Button fx:id="btnCerrar" onAction="#handleCerrar" prefHeight="45.0" prefWidth="150.0" styleClass="btn-cerrar" text="CERRAR">

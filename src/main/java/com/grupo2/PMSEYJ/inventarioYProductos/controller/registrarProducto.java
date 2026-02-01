@@ -215,7 +215,7 @@ public class registrarProducto implements Initializable {
 
     private boolean validarSeleccion(ComboBox campo, String nombreCampo) {
         if(campo.getValue()== null ){
-            mostrarMensaje("Debe seleccionar una opcion en " + nombreCampo,true);
+            mostrarMensaje("Debe ingresar todos los campos para registrar un producto " ,true);
             return false;
         }
         return true;

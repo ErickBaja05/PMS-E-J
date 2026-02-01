@@ -179,6 +179,8 @@ public class cotejarFacturaController2 implements Initializable {
                 resultadoDeCotejo = "COTEJADO CON DIFERENCIAS";
             }
         }
+        mostrarAlerta("Cotejamiento terminado. Estado: " + resultadoDeCotejo, Alert.AlertType.INFORMATION);
+
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/proveedores/fxml/generarReporteCotejo.fxml"));
         Parent root = loader.load();
