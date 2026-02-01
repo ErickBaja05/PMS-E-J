@@ -72,6 +72,23 @@ public class ProveedoresServiceImpl implements ProveedoresService{
     }
 
     @Override
+    public GestionProveedorDTO consultarProveedorPorID(Integer id_prove) {
+        Proveedor proveedor = proveedorDAO.consultarPorID(id_prove);
+        if(proveedor == null){
+            throw  new IllegalArgumentException("No existe el proveedor con el nombre proporcionado!");
+        }
+
+        return new GestionProveedorDTO(proveedor.getNombre_pro(),proveedor.getTelefono_pro(),proveedor.getCorreo_pro(), proveedor.getEstado_pv());
+    }
+
+    @Override
+    public LotePedidoDTO consultarLotePorId(Integer id_lote) {
+        Lote lote = loteDAO.consultarPorId(id_lote);
+        return new LotePedidoDTO(lote.getCodigo_barras(),lote.getNum_lote());
+    }
+
+
+    @Override
     public void actualizarCorreoPorNombre(String correo, String nombre) {
         if(!correo.matches("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
             throw new CorreoNoValidoException("El nuevo correo electrónico no tiene formato de email válido");
@@ -128,8 +145,8 @@ public class ProveedoresServiceImpl implements ProveedoresService{
     }
 
     @Override
-    public boolean verificarEstadoFacturaCompra(String num_fc) {
-        FacturaCompra facturaCompra = facturaCompraDAO.consultarPorNumero(num_fc);
+    public boolean verificarEstadoFacturaCompra(String num_fc, Integer id_prove) {
+        FacturaCompra facturaCompra = facturaCompraDAO.consultarPorNumeroYProveedor(num_fc,id_prove);
         return facturaCompra.getEstado().equals("N");
     }
 
@@ -209,6 +226,10 @@ public class ProveedoresServiceImpl implements ProveedoresService{
     public List<CotejoDTO> consultarProductosFacturaPendiente(String num_fc, Integer id_prove) {
         List<CotejoDTO> listaCotejoDTO = new ArrayList<>();
         FacturaCompra facturaCompra = facturaCompraDAO.consultarPorNumeroYProveedor(num_fc,id_prove);
+        if(facturaCompra == null){
+            GestionProveedorDTO proveedor = consultarProveedorPorID(id_prove);
+            throw new FacturaNoExisteException("No existe una factura con el número: " + num_fc + "del proveedor" + proveedor.getNombre_pro());
+        }
         List<Cotejo> cotejos =  cotejoDAO.consultarPorFactura(facturaCompra.getId_fc());
         for(Cotejo cotejo : cotejos){
             listaCotejoDTO.add(new CotejoDTO(cotejo.getId_fc(),cotejo.getId_lote(),cotejo.getCantidad()));
@@ -235,6 +256,10 @@ public class ProveedoresServiceImpl implements ProveedoresService{
     @Override
     public FacturaCompraPendienteDTO consultarFacturaCompra(String num_fc,Integer id_prove) {
         FacturaCompra factura = facturaCompraDAO.consultarPorNumeroYProveedor(num_fc,id_prove);
+        GestionProveedorDTO proveedor = consultarProveedorPorID(id_prove);
+        if(factura == null){
+            throw new FacturaNoExisteException("No existe una factura con el número: " + num_fc + " del proveedor: " + proveedor.getNombre_pro());
+        }
         FacturaCompraPendienteDTO facturaPendiente = new FacturaCompraPendienteDTO();
         facturaPendiente.setId_fc(factura.getId_fc());
         facturaPendiente.setNum_fc(factura.getNum_fc());

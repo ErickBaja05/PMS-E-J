@@ -4,11 +4,7 @@
 }
 
 /* Estilo base para todos los botones */
-.button {
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-cursor: hand;
-}
+
 /* Efecto hover opcional para que se vea mejor */
 .button:hover {
     -fx-opacity: 0.9;
@@ -45,6 +41,14 @@
 .btn-finalizar {
     -fx-background-color: #27ae60;
     -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.btn-finalizar:hover {
+    -fx-background-color: #14753d;
+    -fx-cursor: hand;
+
 }
 
 /* --- ETIQUETAS Y TEXTOS --- */

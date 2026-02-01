@@ -12,7 +12,6 @@ module com.grupo2.PMSEYJ {
     requires javafx.base;
 
 
-
     // Abre los paquetes con controladores para FXML
     opens com.grupo2.PMSEYJ.auditoria.controller to javafx.fxml;
     opens com.grupo2.PMSEYJ.ventasYFacturacion.caja.controller to javafx.fxml;

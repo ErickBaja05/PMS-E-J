@@ -73,6 +73,29 @@ public class ProveedorDAO {
     }
 
     // ===============================
+    // CONSULTAR POR ID
+    // ===============================
+    public Proveedor consultarPorID(Integer id_prove) {
+        String sql = "SELECT * FROM proveedores WHERE id_prove = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id_prove);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return mapearProveedor(rs);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al consultar proveedor por nombre", e);
+        }
+
+        return null;
+    }
+
+    // ===============================
     // INSERTAR PROVEEDOR
     // ===============================
     public void insertar(Proveedor proveedor) {

@@ -1,116 +1,122 @@
 package com.grupo2.PMSEYJ.proveedores.controller;
 
-import com.grupo2.PMSEYJ.proveedores.model.DetalleReporte;
+import com.grupo2.PMSEYJ.proveedores.dto.FacturaCompraPendienteDTO;
+import com.grupo2.PMSEYJ.proveedores.dto.ResultadoCotejoDTO;
+import com.grupo2.PMSEYJ.proveedores.dto.ResumenPedidoDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.time.LocalDateTime;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class generarReporteCotejoController {
-
-    @FXML private TextField txtInputFactura;
-    @FXML private Label lblFacturaActual, lblEstadoActual;
-
-    @FXML private TableView<DetalleReporte> tvReporte;
-    @FXML private TableColumn<DetalleReporte, String> colCodigo, colEstadoProducto;
-    @FXML private TableColumn<DetalleReporte, Integer> colUnidadesCompradas, colCantidadReal, colDiferencia;
-
-    private final ObservableList<DetalleReporte> listaReporte =
-            FXCollections.observableArrayList();
+public class generarReporteCotejoController implements Initializable {
 
     @FXML
-    public void initialize() {
+    private Button btnCerrar;
 
-        // ===== CONFIGURACIÓN CON LAMBDAS + PROPERTIES =====
-        colCodigo.setCellValueFactory(cell -> cell.getValue().codigoProperty());
+    @FXML
+    private Button btnImprimir;
 
-        colUnidadesCompradas.setCellValueFactory(cell -> cell.getValue().compradasProperty().asObject());
+    @FXML
+    private TableColumn<ResultadoCotejoDTO, Integer> colCantidadReal;
 
-        colCantidadReal.setCellValueFactory(cell -> cell.getValue().realProperty().asObject());
+    @FXML
+    private TableColumn<ResultadoCotejoDTO, String> colCodigo;
 
-        colDiferencia.setCellValueFactory(cell -> cell.getValue().diferenciaProperty().asObject());
+    @FXML
+    private TableColumn<ResultadoCotejoDTO, Integer> colDiferencia;
 
-        colEstadoProducto.setCellValueFactory(cell -> cell.getValue().estadoProperty());
+    @FXML
+    private TableColumn<ResultadoCotejoDTO, String> colEstadoProducto;
 
-        tvReporte.setItems(listaReporte);
-        tvReporte.setPlaceholder(new Label("No hay datos para mostrar"));
+    @FXML
+    private TableColumn<ResultadoCotejoDTO, Integer> colUnidadesCompradas;
+
+    @FXML
+    private Label lblEstadoActual;
+
+    @FXML
+    private Label lblFacturaActual;
+
+    @FXML
+    private TableView<ResultadoCotejoDTO> tvReporte;
+
+    private List<ResultadoCotejoDTO> resultadoCotejo = new ArrayList<>();
+    private String resultadoDeCotejo;
+    private final ObservableList<ResultadoCotejoDTO> cotejo = FXCollections.observableArrayList();
+    private FacturaCompraPendienteDTO facturaACotejar;
+
+    public void setResultadoCotejo(List<ResultadoCotejoDTO> resultadoCotejo) {
+        this.resultadoCotejo = resultadoCotejo;
+        cotejo.clear();
+        cotejo.addAll(resultadoCotejo);
+        tvReporte.setItems(cotejo);
     }
 
-    @FXML
-    void handleGenerarReporte(ActionEvent event) {
-
-        String numFactura = txtInputFactura.getText().trim();
-        listaReporte.clear();
-        lblFacturaActual.setText("---");
-        lblEstadoActual.setText("---");
-
-        if (numFactura.isEmpty()) {
-            mostrarAlerta("Por favor ingrese un número de factura.", Alert.AlertType.WARNING);
-            return;
-        }
-
-        if (!validarExistenciaFactura(numFactura)) {
-            mostrarAlerta("Factura no registrada", Alert.AlertType.ERROR);
-            return;
-        }
-
-        String estado = obtenerEstadoFactura(numFactura);
-        if ("NO COTEJADA".equals(estado)) {
-            mostrarAlerta("Esta factura aún no ha sido cotejada", Alert.AlertType.WARNING);
-            return;
-        }
-
-        lblFacturaActual.setText(numFactura);
-        lblEstadoActual.setText(estado);
-
-        cargarDatosSimulados();
-
-        System.out.println(
-                "LOG: Generación de reporte | Factura: " + numFactura +
-                        " | Usuario: Admin | Fecha: " + LocalDateTime.now()
-        );
-
-        mostrarAlerta("Reporte generado exitosamente.", Alert.AlertType.INFORMATION);
+    public void setResultadoDeCotejo(String resultadoDeCotejo) {
+        this.resultadoDeCotejo = resultadoDeCotejo;
+        lblEstadoActual.setText(resultadoDeCotejo);
     }
 
-    @FXML
-    void handleImprimir(ActionEvent event) {
-        if (listaReporte.isEmpty()) {
-            mostrarAlerta("No hay datos para imprimir.", Alert.AlertType.WARNING);
-            return;
-        }
-        mostrarAlerta("Enviando reporte a la impresora...", Alert.AlertType.INFORMATION);
+    public void setFacturaACotejar(FacturaCompraPendienteDTO facturaACotejar) {
+        this.facturaACotejar = facturaACotejar;
+        lblFacturaActual.setText(facturaACotejar.getNum_fc());
     }
 
     @FXML
     void handleCerrar(ActionEvent event) {
-        ((Stage) txtInputFactura.getScene().getWindow()).close();
+        try {
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            currentStage.close();
+
+
+            Stage parentStage = (Stage) currentStage.getOwner();
+
+            Parent root = FXMLLoader.load(getClass().getResource("/administracion/fxml/ventanaPrincipal.fxml"));
+            parentStage.setScene(new Scene(root));
+            parentStage.setTitle("Menú Principal");
+            parentStage.show();
+
+            parentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    @FXML
+    void handleImprimir(ActionEvent event) {
+        mostrarAlerta("Reporte de cotejo impreso exitosamente", Alert.AlertType.INFORMATION);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        colCodigo.setCellValueFactory(new PropertyValueFactory<>("nombre_pro"));
+        colUnidadesCompradas.setCellValueFactory(new PropertyValueFactory<>("cajas_compradas"));
+        colCantidadReal.setCellValueFactory(new PropertyValueFactory<>("cajas_recibidas"));
+        colDiferencia.setCellValueFactory(new PropertyValueFactory<>("diferencia"));
+        colEstadoProducto.setCellValueFactory(new PropertyValueFactory<>("resultado"));
+
+
+
+    }
     private void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
-    }
-
-    // ===== MÉTODOS SIMULADOS =====
-    private boolean validarExistenciaFactura(String factura) {
-        return factura.equals("F-001") || factura.equals("F-002");
-    }
-
-    private String obtenerEstadoFactura(String factura) {
-        if (factura.equals("F-002")) return "NO COTEJADA";
-        return "COTEJADA CON DIFERENCIAS";
-    }
-
-    private void cargarDatosSimulados() {
-        listaReporte.add(new DetalleReporte("AUX-101", 100, 100, 0, "CORRECTO"));
-        listaReporte.add(new DetalleReporte("AUX-205", 50, 48, -2, "FALTANTE"));
-        listaReporte.add(new DetalleReporte("AUX-309", 20, 25, 5, "EXCEDENTE"));
     }
 }

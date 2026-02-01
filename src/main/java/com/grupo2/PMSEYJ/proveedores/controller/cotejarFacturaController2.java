@@ -1,338 +1,232 @@
 package com.grupo2.PMSEYJ.proveedores.controller;
 
+import com.grupo2.PMSEYJ.core.exception.FacturaNoExisteException;
 import com.grupo2.PMSEYJ.core.util.NavigationUtil;
-import com.grupo2.PMSEYJ.proveedores.model.ProductoDetalle;
-import com.grupo2.PMSEYJ.proveedores.model.ResultadoItem;
+import com.grupo2.PMSEYJ.inventarioYProductos.model.Producto;
+import com.grupo2.PMSEYJ.inventarioYProductos.service.ProductoServiceImpl;
+import com.grupo2.PMSEYJ.inventarioYProductos.service.ProductosService;
+import com.grupo2.PMSEYJ.proveedores.dto.*;
+import com.grupo2.PMSEYJ.proveedores.service.ProveedoresService;
+import com.grupo2.PMSEYJ.proveedores.service.ProveedoresServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class cotejarFacturaController2 {
+public class cotejarFacturaController2 implements Initializable {
 
-    // =========================
-    // CONTROLES FXML
-    // =========================
-    @FXML private TextField txtNumFactura;
-    @FXML private TextField txtNombre;
-    @FXML private TextField txtCantidad;
-
-    @FXML private Button btnAgregarItem;
-    @FXML private Button btnCancelarEdicion;
-    @FXML private Button btnCotejarFactura;
-
-    @FXML private TableView<ProductoDetalle> tvFacturaOriginal;
-    @FXML private TableColumn<ProductoDetalle, String> colProductoOrig;
-    @FXML private TableColumn<ProductoDetalle, Integer> colCantidadOrig;
-
-    @FXML private TableView<ProductoDetalle> tvDetalleFactura;
-    @FXML private TableColumn<ProductoDetalle, String> colProducto;
-    @FXML private TableColumn<ProductoDetalle, Integer> colCantidad;
-
-    // =========================
-    // LISTAS Y ESTADO
-    // =========================
-    private final ObservableList<ProductoDetalle> listaCotejo =
-            FXCollections.observableArrayList();
-
-    private final ObservableList<ProductoDetalle> listaOriginalDisplay =
-            FXCollections.observableArrayList();
-
-    private final List<ProductoDetalle> facturaOriginal = new ArrayList<>();
-
-    private String estadoFactura = null;
-    private ProductoDetalle productoEnEdicion = null;
-
-    // =========================
-    // INITIALIZE
-    // =========================
     @FXML
-    public void initialize() {
+    private Button btnAgregarItem;
 
-        colProductoOrig.setCellValueFactory(cell -> cell.getValue().nombreProperty());
-        colCantidadOrig.setCellValueFactory(cell -> cell.getValue().cantidadProperty().asObject());
-        tvFacturaOriginal.setItems(listaOriginalDisplay);
+    @FXML
+    private Button btnCancelarEdicion;
 
-        colProducto.setCellValueFactory(cell -> cell.getValue().nombreProperty());
-        colCantidad.setCellValueFactory(cell -> cell.getValue().cantidadProperty().asObject());
-        tvDetalleFactura.setItems(listaCotejo);
+    @FXML
+    private Button btnCotejarFactura;
 
-        tvFacturaOriginal.setPlaceholder(new Label("Busque una factura para ver el detalle"));
-        tvDetalleFactura.setPlaceholder(new Label("Ingrese la cantidad real de los productos"));
+    @FXML
+    private TableColumn<ResumenPedidoDTO, Integer> colCantidad;
 
-        bloquearIngresoProductos();
-    }
+    @FXML
+    private TableColumn<ResumenPedidoDTO, Integer> colCantidadOrig;
 
-    // =========================
-    // CONTROL DE ESTADO UI
-    // =========================
-    private void bloquearIngresoProductos() {
-        txtNombre.setDisable(true);
-        txtCantidad.setDisable(true);
-        btnAgregarItem.setDisable(true);
-        btnCancelarEdicion.setDisable(true);
-        tvDetalleFactura.setDisable(true);
-        btnCotejarFactura.setDisable(true);
-    }
+    @FXML
+    private TableColumn<ResumenPedidoDTO, String> colProducto;
 
-    private void habilitarIngresoProductos() {
-        txtNombre.setDisable(false);
-        txtCantidad.setDisable(false);
-        btnAgregarItem.setDisable(false);
-        tvDetalleFactura.setDisable(false);
-        btnCotejarFactura.setDisable(false);
-    }
+    @FXML
+    private TableColumn<ResumenPedidoDTO, String> colProductoOrig;
 
-    // =========================
-    // BUSCAR FACTURA
-    // =========================
+    @FXML
+    private TableView<ResumenPedidoDTO> tvDetalleFactura;
+
+    @FXML
+    private TableView<ResumenPedidoDTO> tvFacturaOriginal;
+
+
+    @FXML
+    private ComboBox<String> comboProveedores;
+
+    @FXML
+    private TextField txtCantidad;
+
+    @FXML
+    private TextField txtNombre;
+
+    @FXML
+    private TextField txtNumFactura;
+    private ProveedoresService proveedoresService;
+    private ProductosService productosService;
+    private ObservableList<ResumenPedidoDTO> productosDeFactura = FXCollections.observableArrayList();
+    private ObservableList<ResumenPedidoDTO> productosQueLlegaron = FXCollections.observableArrayList();
+    private FacturaCompraPendienteDTO facturaACotejar;
+    private List<ResultadoCotejoDTO> resultadoCotejo = new ArrayList<>();
+    private String resultadoDeCotejo = "SIN NOVEDADES DE SOBRANTES NI FALTANTES";
+
     @FXML
     void buscarFactura(ActionEvent event) {
-
-        String numFactura = txtNumFactura.getText().trim();
-
-        if (numFactura.isEmpty()) {
-            mostrarMensaje("Error", "Ingrese el número de la factura.", Alert.AlertType.WARNING);
+        if(txtNumFactura.getText().isEmpty() || !txtNumFactura.getText().matches("[0-9-]+")) {
+            mostrarAlerta("No existe una factura con el número: " + txtNumFactura.getText() + " del proveedor" + comboProveedores.getSelectionModel().getSelectedItem(),Alert.AlertType.ERROR);
             return;
         }
 
-        // SIMULACIÓN BD
-        if (!"101".equals(numFactura)) {
-            mostrarMensaje("Error", "Factura no registrada", Alert.AlertType.ERROR);
-            limpiarTodo();
+        if(comboProveedores.getSelectionModel().getSelectedItem() == null){
+            mostrarAlerta("No existe una factura con el número: " + txtNumFactura.getText() + " del proveedor" + comboProveedores.getSelectionModel().getSelectedItem(),Alert.AlertType.ERROR);
             return;
         }
+        ProveedorDTO proveedor = proveedoresService.consultarProveedorNombre(comboProveedores.getSelectionModel().getSelectedItem());
+        try{
+            facturaACotejar = proveedoresService.consultarFacturaCompra(txtNumFactura.getText(),proveedor.getId_prove());
+            List<CotejoDTO> cotejos = proveedoresService.consultarProductosFacturaPendiente(txtNumFactura.getText(),proveedor.getId_prove());
 
-        if ("COTEJADA".equals(estadoFactura) ||
-                "COTEJADA CON DIFERENCIAS".equals(estadoFactura)) {
+            for (CotejoDTO cotejo : cotejos) {
+                ResumenPedidoDTO resumenPedidoDTO = new ResumenPedidoDTO();
+                ResumenPedidoDTO resumenPedidoDTO1 = new ResumenPedidoDTO();
 
-            mostrarMensaje("Advertencia",
-                    "La factura ya fue cotejada",
-                    Alert.AlertType.WARNING);
-            return;
+                resumenPedidoDTO.setCantidad(cotejo.getCantidad());
+                LotePedidoDTO lotePedidoDTO = proveedoresService.consultarLotePorId(cotejo.getId_lote());
+                Producto producto = productosService.consultarProductoPorCodigoBarras(lotePedidoDTO.getCodigo_barras());
+
+                resumenPedidoDTO.setNombre_pro(producto.getNombre_p());
+                resumenPedidoDTO1.setNombre_pro(producto.getNombre_p());
+
+                productosDeFactura.add(resumenPedidoDTO);
+                productosQueLlegaron.add(resumenPedidoDTO1);
+            }
+
+            mostrarAlerta("Factura cargada exitosamente, ingrese la cantidad real recibida", Alert.AlertType.INFORMATION);
+        }catch(IllegalArgumentException | FacturaNoExisteException e){
+            mostrarAlerta(e.getMessage(),Alert.AlertType.ERROR);
         }
 
-        // FACTURA VÁLIDA
-        estadoFactura = "NO COTEJADA";
-        limpiarListas();
-        cancelarEdicion(null);
 
-        facturaOriginal.clear();
-        facturaOriginal.add(new ProductoDetalle("Paracetamol", 10));
-        facturaOriginal.add(new ProductoDetalle("Ibuprofeno", 5));
-        facturaOriginal.add(new ProductoDetalle("Amoxicilina", 20));
 
-        listaOriginalDisplay.setAll(facturaOriginal);
-
-        habilitarIngresoProductos();
-
-        mostrarMensaje("Éxito",
-                "Factura cargada. Ingrese la cantidad real de los productos.",
-                Alert.AlertType.INFORMATION);
     }
 
-    // =========================
-    // AGREGAR / EDITAR PRODUCTO
-    // =========================
-    @FXML
-    void handleAgregarProducto(ActionEvent event) {
-
-        String nombre = txtNombre.getText().trim();
-        String cantidadTxt = txtCantidad.getText().trim();
-
-        if (nombre.isEmpty() && cantidadTxt.isEmpty()) {
-            mostrarMensaje("Error",
-                    "Debe ingresar el nombre del producto y la cantidad real.",
-                    Alert.AlertType.WARNING);
-            return;
-        }
-
-        if (nombre.isEmpty()) {
-            mostrarMensaje("Error",
-                    "Debe ingresar el nombre del producto.",
-                    Alert.AlertType.WARNING);
-            return;
-        }
-
-        if (cantidadTxt.isEmpty()) {
-            mostrarMensaje("Error",
-                    "Debe ingresar la cantidad real del producto.",
-                    Alert.AlertType.WARNING);
-            return;
-        }
-
-        int cantidad;
-        try {
-            cantidad = Integer.parseInt(cantidadTxt);
-        } catch (NumberFormatException e) {
-            mostrarMensaje("Error",
-                    "Cantidad no válida, ingrese un número entero mayor o igual a 0",
-                    Alert.AlertType.ERROR);
-            return;
-        }
-
-        if (cantidad < 0) {
-            mostrarMensaje("Error",
-                    "Cantidad no válida, ingrese un número entero mayor o igual a 0",
-                    Alert.AlertType.ERROR);
-            return;
-        }
-
-        if (productoEnEdicion == null) {
-            listaCotejo.add(new ProductoDetalle(nombre, cantidad));
-        } else {
-            productoEnEdicion.setNombre(nombre);
-            productoEnEdicion.setCantidad(cantidad);
-            cancelarEdicion(null);
-        }
-
-        txtNombre.clear();
-        txtCantidad.clear();
-    }
-
-    // =========================
-    // SELECCIONAR PARA EDITAR
-    // =========================
-    @FXML
-    void seleccionarProductoParaEditar(MouseEvent event) {
-        ProductoDetalle seleccion = tvDetalleFactura.getSelectionModel().getSelectedItem();
-        if (seleccion != null) {
-            productoEnEdicion = seleccion;
-            txtNombre.setText(seleccion.getNombre());
-            txtCantidad.setText(String.valueOf(seleccion.getCantidad()));
-            btnAgregarItem.setText("ACTUALIZAR");
-            btnCancelarEdicion.setDisable(false);
-        }
-    }
-
-    // =========================
-    // CANCELAR EDICIÓN
-    // =========================
     @FXML
     void cancelarEdicion(ActionEvent event) {
-        productoEnEdicion = null;
-        txtNombre.clear();
-        txtCantidad.clear();
-        tvDetalleFactura.getSelectionModel().clearSelection();
-        btnAgregarItem.setText("AGREGAR");
-        btnCancelarEdicion.setDisable(true);
+        limpiarCampos();
+
     }
 
-    // =========================
-    // PROCESAR COTEJO
-    // =========================
-    private ObservableList<ResultadoItem> procesarCotejo() {
-
-        if (listaCotejo.isEmpty()) {
-            mostrarMensaje("Error",
-                    "No hay productos ingresados para cotejar.",
-                    Alert.AlertType.WARNING);
-            return null;
+    @FXML
+    void handleAgregarProducto(ActionEvent event) {
+        if(txtCantidad.getText().isEmpty() || !txtCantidad.getText().matches("[0-9-]+" ) || Integer.parseInt(txtCantidad.getText()) < 0) {
+            mostrarAlerta("La cantidad recibida debe ser un número entero mayor a 0", Alert.AlertType.ERROR);
+            return;
         }
+        tvDetalleFactura.getSelectionModel().getSelectedItem().setCantidad(Integer.valueOf(txtCantidad.getText()));
+        tvDetalleFactura.refresh();
 
-        boolean coincide = true;
-        ObservableList<ResultadoItem> resultados = FXCollections.observableArrayList();
+    }
 
-        for (ProductoDetalle original : facturaOriginal) {
+    @FXML
+    void handleCotejarFactura(ActionEvent event) throws IOException {
+        resultadoCotejo.clear();
 
-            ProductoDetalle recibido = listaCotejo.stream()
-                    .filter(p -> p.getNombre().equalsIgnoreCase(original.getNombre()))
-                    .findFirst()
-                    .orElse(new ProductoDetalle(original.getNombre(), 0));
+        for(ResumenPedidoDTO resumenPedidoDTO : productosQueLlegaron) {
+            if(resumenPedidoDTO.getCantidad() == null || resumenPedidoDTO.getCantidad() <= 0) {
+                mostrarAlerta("Debe ingresar la cantidad de todos los productos recibidos", Alert.AlertType.ERROR);
+                return;
 
-            ResultadoItem item = new ResultadoItem(
-                    original.getNombre(),
-                    original.getCantidad(),
-                    recibido.getCantidad()
-            );
-
-            resultados.add(item);
-
-            if (item.diferenciaProperty().get() != 0) {
-                coincide = false;
             }
         }
 
-        estadoFactura = coincide ? "COTEJADA" : "COTEJADA CON DIFERENCIAS";
 
-        mostrarMensaje("Resultado",
-                coincide
-                        ? "Cotejo de factura exitoso"
-                        : "Cotejo de factura con sobrantes o faltantes",
-                coincide ? Alert.AlertType.INFORMATION : Alert.AlertType.WARNING);
+        for (ResumenPedidoDTO resumenPedidoDTO : productosDeFactura) {
+            ResultadoCotejoDTO resultado = new ResultadoCotejoDTO(); // NUEVO objeto en cada iteración
 
-        return resultados;
-    }
+            resultado.setNombre_pro(resumenPedidoDTO.getNombre_pro());
+            resultado.setCajas_compradas(resumenPedidoDTO.getCantidad());
 
-    // =========================
-    // FINALIZAR COTEJO
-    // =========================
-    @FXML
-    void handleCotejarFactura(ActionEvent event) {
+            ResumenPedidoDTO encontrado = null;
+            for (ResumenPedidoDTO resumenPedidoDTO1 : productosQueLlegaron) {
+                if (resumenPedidoDTO.getNombre_pro().equals(resumenPedidoDTO1.getNombre_pro())) {
+                    encontrado = resumenPedidoDTO1;
+                    break; // ya lo encontraste
+                }
+            }
 
-        ObservableList<ResultadoItem> resultados = procesarCotejo();
-        if (resultados == null) return;
+            if (encontrado != null) {
+                resultado.setCajas_recibidas(encontrado.getCantidad());
+            }
 
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/proveedores/fxml/resultadoCotejo.fxml"));
-            Parent root = loader.load();
-
-            resultadoCotejoController controller = loader.getController();
-            controller.setDatosResultado(
-                    txtNumFactura.getText(),
-                    estadoFactura,
-                    resultados
-            );
-
-            NavigationUtil.openNewWindow(event, root, "Resultado Cotejo");
-
-            // AL CERRAR LA VENTANA
-            limpiarTodo();
-
-        } catch (IOException e) {
-            mostrarMensaje("Error Crítico",
-                    "No se pudo abrir la ventana de reporte.",
-                    Alert.AlertType.ERROR);
+            resultadoCotejo.add(resultado);
         }
+
+
+        for (ResultadoCotejoDTO resultadocotejo : resultadoCotejo) {
+            int diferencia = resultadocotejo.getCajas_recibidas() - resultadocotejo.getCajas_compradas();
+            resultadocotejo.setDiferencia(diferencia);
+
+            if (diferencia == 0) {
+                resultadocotejo.setResultado("SIN DIFERENCIAS");
+            } else if (diferencia > 0) {
+                resultadocotejo.setResultado("SOBRANTE");
+                resultadoDeCotejo = "COTEJADO CON DIFERENCIAS";
+            } else {
+                resultadocotejo.setResultado("FALTANTE");
+                resultadoDeCotejo = "COTEJADO CON DIFERENCIAS";
+            }
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/proveedores/fxml/generarReporteCotejo.fxml"));
+        Parent root = loader.load();
+
+        generarReporteCotejoController controller = loader.getController();
+        controller.setResultadoDeCotejo(resultadoDeCotejo);
+        controller.setResultadoCotejo(resultadoCotejo);
+        controller.setFacturaACotejar(facturaACotejar);
+        NavigationUtil.openNewWindow(event,root,"/proveedores/fxml/generarReporteCotejo.fxml");
+
     }
 
-    // =========================
-    // UTILIDADES
-    // =========================
-    private void limpiarListas() {
-        listaCotejo.clear();
-        listaOriginalDisplay.clear();
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        proveedoresService = new ProveedoresServiceImpl();
+        productosService = new ProductoServiceImpl();
+        List<ProveedorDTO> proveedores = proveedoresService.consultarTodosLosProveedores();
+        List<String> nombre_proveedores = new ArrayList<>();
+        for (ProveedorDTO proveedor : proveedores) {
+            nombre_proveedores.add(proveedor.getNombre_pro());
+        }
+
+        tvDetalleFactura.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue != null) {
+
+                txtNombre.setText(newValue.getNombre_pro());
+            }
+        });
+        tvFacturaOriginal.setItems(productosDeFactura);
+        tvDetalleFactura.setItems(productosQueLlegaron);
+        colProductoOrig.setCellValueFactory(new PropertyValueFactory<>("nombre_pro"));
+        colCantidadOrig.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+        colProducto.setCellValueFactory(new PropertyValueFactory<>("nombre_pro"));
+        colCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+        comboProveedores.setItems(FXCollections.observableArrayList(nombre_proveedores));
+
     }
 
-    private void limpiarTodo() {
-
-        limpiarListas();
-        facturaOriginal.clear();
-
-        txtNumFactura.clear();
-        txtNombre.clear();
-        txtCantidad.clear();
-
-        estadoFactura = null;
-        productoEnEdicion = null;
-
-        bloquearIngresoProductos();
-    }
-
-    private void mostrarMensaje(String titulo, String mensaje, Alert.AlertType tipo) {
+    private void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);
-        alert.setTitle(titulo);
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+
+    private void limpiarCampos(){
+        txtCantidad.setText(null);
+        txtNombre.setText(null);
     }
 }

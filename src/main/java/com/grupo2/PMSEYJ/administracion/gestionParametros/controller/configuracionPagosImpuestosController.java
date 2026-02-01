@@ -62,7 +62,7 @@ public class configuracionPagosImpuestosController {
             listaMetodos = FXCollections.observableArrayList(listaMetodosPago);
             tablaMetodosPago.setItems(listaMetodos);
         }catch (RuntimeException e){
-            mostrarMensaje("Error al consultar metodos pagos", e.getMessage(), Alert.AlertType.ERROR);
+            mostrarMensaje("Error al consultar métodos pagos", e.getMessage(), Alert.AlertType.ERROR);
         }
 
 
@@ -141,7 +141,7 @@ public class configuracionPagosImpuestosController {
             parametrosService.deshabilitarMetodoPago(gestionMetodoPagoDTO.getNombre_pago());
             gestionMetodoPagoDTO.setEstado_pago("DESHABILITADO");
             tablaMetodosPago.refresh();
-            mostrarMensaje("Éxito", "Metodo deshabilitado", Alert.AlertType.INFORMATION);
+            mostrarMensaje("Éxito", "Método de pago deshabilitado exitosamente", Alert.AlertType.INFORMATION);
         }else{
             mostrarMensaje("Método de pago no seleccionado", "Debe seleccionar un método de pago para deshabilitar.",
                     Alert.AlertType.ERROR);

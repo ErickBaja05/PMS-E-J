@@ -16,7 +16,7 @@ public interface ProveedoresService {
     void darDeAltaProveedor(String nombre);
     void darDeBajaProveedor(String nombre);
     Integer crearFacturaCompra(NuevaFacturaCompraDTO nuevaFacturaCompra);
-    boolean verificarEstadoFacturaCompra(String num_fc);
+    boolean verificarEstadoFacturaCompra(String num_fc, Integer id_prove);
     boolean verificarExistenciaFacturaCompra(String num_fc, Integer id_fc);
     void agregarProducto(Integer id_fc , NuevoLoteDTO nuevoLote);
     boolean verificarSiYaFueIngresada(String num_fc,Integer id_prove);
@@ -35,6 +35,8 @@ public interface ProveedoresService {
     NuevoPedidoDTO consultarPedidoPendiente ();
     void definirProveedorAPedido(Integer id_pedido, Integer id_proveedor);
     void enviarPedido(Integer id_pedido, String estado);
+    GestionProveedorDTO consultarProveedorPorID(Integer id_prove);
+    LotePedidoDTO consultarLotePorId(Integer id_lote);
 
 
 }

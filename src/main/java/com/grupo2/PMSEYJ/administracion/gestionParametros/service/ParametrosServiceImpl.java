@@ -51,7 +51,7 @@ public class ParametrosServiceImpl implements ParametrosService {
         List<GestionMetodoPagoDTO> gestionMetodosPago = new ArrayList<>();
 
         if (metodosPago == null) {
-            throw new RuntimeException("No existen métodos de pago, comuniquese con el administrador del sistema");
+            throw new RuntimeException("No existen métodos de pago, comuníquese con el administrador del sistema");
         }
 
         for (MetodoPago metodoPago : metodosPago) {

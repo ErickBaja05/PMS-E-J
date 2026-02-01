@@ -224,6 +224,7 @@ public class ingresarFacturaController implements Initializable {
             num_fc = facturaPendiente.getNum_fc();
             bloquearControles(false);
 
+
         }catch(StockYaIngresadoException | NumeroDeFacturaNoValidaException | IllegalArgumentException e){
             mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
