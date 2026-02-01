@@ -40,7 +40,7 @@
 
                             <TextField fx:id="txtNumFactura" prefHeight="31.0" prefWidth="294.0" promptText="XXX-XXX-XXXXXXXXX" />
 
-                            <Button onAction="#buscarFactura" prefHeight="37.0" prefWidth="120" styleClass="btn" text="BUSCAR" />
+                            <Button fx:id="btnBuscar" onAction="#buscarFactura" prefHeight="37.0" prefWidth="120" styleClass="btn" text="BUSCAR" />
                         </children>
                     </HBox>
                <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0">

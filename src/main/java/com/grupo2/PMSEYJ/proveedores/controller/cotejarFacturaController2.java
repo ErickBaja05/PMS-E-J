@@ -36,6 +36,9 @@ public class cotejarFacturaController2 implements Initializable {
     private Button btnCotejarFactura;
 
     @FXML
+    private Button btnBuscar;
+
+    @FXML
     private TableColumn<ResumenPedidoDTO, Integer> colCantidad;
 
     @FXML
@@ -112,6 +115,11 @@ public class cotejarFacturaController2 implements Initializable {
             }
 
             mostrarAlerta("Factura cargada exitosamente, ingrese la cantidad real recibida", Alert.AlertType.INFORMATION);
+            btnBuscar.setDisable(true);
+            comboProveedores.setDisable(true);
+            txtNumFactura.setDisable(true);
+            btnAgregarItem.setDisable(false);
+            btnCancelarEdicion.setDisable(false);
         }catch(IllegalArgumentException | FacturaNoExisteException e){
             mostrarAlerta(e.getMessage(),Alert.AlertType.ERROR);
         }
@@ -208,6 +216,7 @@ public class cotejarFacturaController2 implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        btnAgregarItem.setDisable(true);
         proveedoresService = new ProveedoresServiceImpl();
         productosService = new ProductoServiceImpl();
         List<ProveedorDTO> proveedores = proveedoresService.consultarTodosLosProveedores();
