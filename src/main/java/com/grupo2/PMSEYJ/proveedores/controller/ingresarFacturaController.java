@@ -195,6 +195,11 @@ public class ingresarFacturaController implements Initializable {
             return;
         }
 
+        if(comboProveedores.getSelectionModel().getSelectedItem() == null){
+            mostrarAlerta("No existe un proveedor con el nombre proporcionado.", Alert.AlertType.ERROR);
+            return;
+        }
+
         NuevaFacturaCompraDTO nuevaFacturaCompra = new NuevaFacturaCompraDTO();
         nuevaFacturaCompra.setFecha_fc(LocalDate.now());
 

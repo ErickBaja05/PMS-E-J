@@ -208,7 +208,7 @@ public class consultarPedidoActualPendienteController implements Initializable {
     private void enviarPedido(ActionEvent event) throws IOException {
 
         if(listaProductos.isEmpty()){
-            mostrarAlerta("Debe ingresar al menos 1 producto al pedido", Alert.AlertType.ERROR);
+            mostrarAlerta("Pedido vacío, debe ingresar al menos 1 producto al pedido", Alert.AlertType.ERROR);
             return;
         }
         List<ResumenPedidoDTO> resumenPedido = new ArrayList<>();

@@ -65,7 +65,7 @@ public class ProveedoresServiceImpl implements ProveedoresService{
     public GestionProveedorDTO consultarProveedorPorNombre(String nombre) {
         Proveedor proveedor = proveedorDAO.consultarPorNombre(nombre);
         if(proveedor == null){
-            throw  new IllegalArgumentException("No existe el proveedor con el nombre proporcionado!");
+            throw  new IllegalArgumentException("No existe un proveedor con el nombre proporcionado!");
         }
 
         return new GestionProveedorDTO(proveedor.getNombre_pro(),proveedor.getTelefono_pro(),proveedor.getCorreo_pro(), proveedor.getEstado_pv());
@@ -75,7 +75,7 @@ public class ProveedoresServiceImpl implements ProveedoresService{
     public GestionProveedorDTO consultarProveedorPorID(Integer id_prove) {
         Proveedor proveedor = proveedorDAO.consultarPorID(id_prove);
         if(proveedor == null){
-            throw  new IllegalArgumentException("No existe el proveedor con el nombre proporcionado!");
+            throw  new IllegalArgumentException("No existe un proveedor con el nombre proporcionado!");
         }
 
         return new GestionProveedorDTO(proveedor.getNombre_pro(),proveedor.getTelefono_pro(),proveedor.getCorreo_pro(), proveedor.getEstado_pv());
