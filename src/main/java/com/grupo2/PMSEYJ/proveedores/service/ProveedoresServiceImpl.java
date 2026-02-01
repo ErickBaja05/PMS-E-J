@@ -202,7 +202,7 @@ public class ProveedoresServiceImpl implements ProveedoresService{
             cotejo.setId_fc(id_fc);
             cotejoDAO.insertar(cotejo);
         }catch(ProductoNoExisteException e){
-            throw new ProductoNoExisteException(e.getMessage() + " para poder ingresar mercadería de este producto");
+            throw new ProductoNoExisteException(e.getMessage());
         }
 
 
