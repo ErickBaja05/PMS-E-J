@@ -119,7 +119,7 @@ public class ingresarFacturaController implements Initializable {
             return;
         }
 
-        if(txtPrecioCompra.getText().isEmpty() || !txtPrecioCompra.getText().matches("^\\d+(\\.\\d{1,2})$")){
+        if(txtPrecioCompra.getText().isEmpty() || !txtPrecioCompra.getText().matches("^\\d+(\\.\\d{1,2})?$")){
             mostrarAlerta("El precio de compra debe ser un número decimal con hasta 2 decimales", Alert.AlertType.ERROR);
             return;
         }

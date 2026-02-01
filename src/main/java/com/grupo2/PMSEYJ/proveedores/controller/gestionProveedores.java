@@ -90,7 +90,7 @@ public class gestionProveedores implements Initializable {
 
 
         if(txtCorreoProveedor.getText().length() > 100) {
-            mostrarMensaje("El nuevo electrónico no puede exceder los 100 caracteres",true);
+            mostrarMensaje("El nuevo correo electrónico no puede exceder los 100 caracteres",true);
             return;
         }
 

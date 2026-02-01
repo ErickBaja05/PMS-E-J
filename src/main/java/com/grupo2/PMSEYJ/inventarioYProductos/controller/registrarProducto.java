@@ -180,7 +180,7 @@ public class registrarProducto implements Initializable {
         NuevoIndiceTerapeuticoDTO nuevoIndiceTerapeuticoDTO = new NuevoIndiceTerapeuticoDTO(indice_t);
         try{
             productosService.insertarProducto(nuevoProductoDTO,nuevoLaboratorioDTO,nuevoIndiceTerapeuticoDTO);
-            mostrarMensaje("Producto " + nuevoProductoDTO.getNombre_p() + "registrado exitosamente",false);
+            mostrarMensaje("Producto " + nuevoProductoDTO.getNombre_p() + " registrado exitosamente",false);
         }catch(ProductoYaExisteException | CodigoDeBarrasOAuxiliarNoValidoException | NombreNoVálidoException | IllegalArgumentException e){
             mostrarMensaje(e.getMessage(),true);
         }
