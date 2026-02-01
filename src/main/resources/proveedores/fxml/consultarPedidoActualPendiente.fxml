@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -13,14 +14,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="682.0" prefWidth="1016.0" stylesheets="@../css/consultarPedidoStyles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.proveedores.controller.consultarPedidoActualPendienteController">
+<AnchorPane prefHeight="682.0" prefWidth="1016.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo2.PMSEYJ.proveedores.controller.consultarPedidoActualPendienteController">
     <children>
         <VBox spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
             <children>
 
                 <VBox spacing="15.0" styleClass="card-container">
                     <children>
-                        <Label styleClass="label-titulo" text="Gestión de Pedidos a Proveedores">
+                        <Label styleClass="label-titulo" text="GESTIÓN DE PEDIDO A PROVEEDOR">
                             <font><Font name="System Bold" size="24.0" /></font>
                         </Label>
 
@@ -35,12 +36,12 @@
                                 <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Label styleClass="label-campo" text="Código Interno del Producto" GridPane.rowIndex="0">
+                                <Label styleClass="label-campo" text="Código de barras del producto" GridPane.rowIndex="0">
                                     <font><Font name="System Bold" size="13.0" /></font>
                                 </Label>
                                 <HBox spacing="10.0" GridPane.rowIndex="1">
                                     <children>
-                                        <TextField fx:id="txtCodigo" prefHeight="32.0" prefWidth="193.0" promptText="Cód. Interno" styleClass="input-field" HBox.hgrow="ALWAYS" />
+                                        <TextField fx:id="txtCodigo" prefHeight="32.0" prefWidth="193.0" promptText="Código de barras" styleClass="input-field" HBox.hgrow="ALWAYS" />
                                         <Button fx:id="btnBuscar" onAction="#handleBuscar" prefHeight="40.0" prefWidth="90.0" styleClass="btn-buscar" text="Buscar">
                                         </Button>
                                     </children>
@@ -51,7 +52,7 @@
                                 </Label>
                                 <TextField fx:id="txtNombre" editable="false" prefHeight="40.0" promptText="Se autocompleta al buscar..." styleClass="input-field, input-readonly" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                                <Label styleClass="label-campo" text="Cantidad" GridPane.columnIndex="2">
+                                <Label styleClass="label-campo" text="Cantidad de cajas a solicitar" GridPane.columnIndex="2">
                                     <font><Font name="System Bold" size="13.0" /></font>
                                 </Label>
                                 <TextField fx:id="txtCantidad" prefHeight="40.0" promptText="0" styleClass="input-field" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -64,6 +65,7 @@
                                 </Button>
                                 <Button fx:id="btnEliminar" onAction="#handleEliminar" prefHeight="40.0" prefWidth="120.0" styleClass="btn-eliminar" text="Eliminar">
                                 </Button>
+                        <Button fx:id="btnAgregar" onAction="#handleAgregar" prefHeight="40.0" prefWidth="120.0" styleClass="btn-eliminar" text="Agregar" />
                             </children>
                         </HBox>
                     </children>
@@ -72,19 +74,23 @@
                 <TableView fx:id="tvPedidos" styleClass="table-view-rounded" VBox.vgrow="ALWAYS">
                     <columns>
                         <TableColumn fx:id="colNum" prefWidth="50.0" text="#" />
-                        <TableColumn fx:id="colCodigo" prefWidth="180.0" text="Código Interno" />
+                        <TableColumn fx:id="colCodigo" prefWidth="180.0" text="Código de barras" />
                         <TableColumn fx:id="colNombre" prefWidth="480.0" text="Nombre del Producto" />
-                        <TableColumn fx:id="colCantidad" prefWidth="150.0" text="Cantidad" />
+                        <TableColumn fx:id="colCantidad" prefWidth="150.0" text="Cantidad Cajas" />
                     </columns>
                     <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
                 </TableView>
 
                 <HBox alignment="CENTER_RIGHT">
                <children>
-                  <Button mnemonicParsing="false" styleClass="btn-enviar" text="ENVIAR PEDIDO A PROVEEDOR" />
+                  <Button mnemonicParsing="false" onAction="#enviarPedido" styleClass="btn-enviar" text="ENVIAR PEDIDO A PROVEEDOR" />
                </children>
                 </HBox>
             </children>
         </VBox>
     </children>
+   <stylesheets>
+      <URL value="@../css/consultarPedidoStyles.css" />
+      <URL value="@../css/generalProveedores.css" />
+   </stylesheets>
 </AnchorPane>

@@ -8,17 +8,10 @@ public class FacturaCompra {
     String estado;
     LocalDate fecha_fc;
     Boolean fue_ingresada;
+    Integer id_prove;
 
     public FacturaCompra(){
 
-    }
-
-    public FacturaCompra(Integer id_fc, String num_fc, String estado, LocalDate fecha_fc, Boolean fue_ingresada) {
-        this.id_fc = id_fc;
-        this.num_fc = num_fc;
-        this.estado = estado;
-        this.fecha_fc = fecha_fc;
-        this.fue_ingresada = fue_ingresada;
     }
 
     public Integer getId_fc() {
@@ -59,5 +52,13 @@ public class FacturaCompra {
 
     public void setFue_ingresada(Boolean fue_ingresada) {
         this.fue_ingresada = fue_ingresada;
+    }
+
+    public Integer getId_prove() {
+        return id_prove;
+    }
+
+    public void setId_prove(Integer id_prove) {
+        this.id_prove = id_prove;
     }
 }

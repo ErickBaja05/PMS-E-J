@@ -1,15 +1,16 @@
-package com.grupo2.PMSEYJ.proveedores.model;
+package com.grupo2.PMSEYJ.proveedores.dto;
 
-public class DetallePedido {
-    Integer id_pedido;
-    String codigo_barras;
-    Integer cantidad;
 
-    public DetallePedido(){
+
+public class DetallePedidoDTO {
+    private Integer id_pedido;
+    private String codigo_barras;
+    private Integer cantidad;
+
+    public DetallePedidoDTO(){
 
     }
-
-    public DetallePedido(Integer id_pedido, String codigo_barras, Integer cantidad) {
+    public DetallePedidoDTO(Integer id_pedido, String codigo_barras, Integer cantidad) {
         this.id_pedido = id_pedido;
         this.codigo_barras = codigo_barras;
         this.cantidad = cantidad;

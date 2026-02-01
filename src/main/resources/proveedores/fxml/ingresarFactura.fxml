@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -23,22 +24,34 @@
 
                 <VBox prefHeight="57.0" prefWidth="986.0" spacing="10.0" styleClass="card-base, card-header">
                     <children>
-                        <Label text="REGISTRO DE FACTURA DE COMPRA">
+                        <Label styleClass="lblTitulo" text="REGISTRO DE FACTURA DE COMPRA">
                             <font><Font name="System Bold" size="20.0" /></font>
                         </Label>
-                        <HBox alignment="BOTTOM_LEFT" spacing="15.0">
-                            <children>
-                                <Label text="Número de factura del proveedor:">
-                                    <font><Font name="System Bold" size="14.0" /></font>
-                                </Label>
-                                <TextField fx:id="txtNumFactura" prefHeight="35.0" prefWidth="250.0" promptText="XXX-XXX-XXXXXXXXX" />
-                        <Button fx:id="btnValidarFactura" onAction="#handleValidarFactura" prefHeight="27.0" prefWidth="131.0" styleClass="btn-agregar" text="VALIDAR">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Button>
-                            </children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                     <children>
+                              <HBox alignment="BOTTOM_LEFT" spacing="15.0">
+                                  <children>
+                                      <Label styleClass="label-subtitulo" text="Número de factura del proveedor:">
+                                          <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                      </Label>
+                                      <TextField fx:id="txtNumFactura" prefHeight="35.0" prefWidth="250.0" promptText="XXX-XXX-XXXXXXXXX" />
+                              <Button fx:id="btnValidarFactura" onAction="#handleValidarFactura" prefHeight="27.0" prefWidth="131.0" styleClass="btn-agregar" text="VALIDAR">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                                  </children>
+                              </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label styleClass="label-subtitulo" text="Escoja al proveedor que emite factura:" />
+                              <ComboBox fx:id="comboProveedores" prefHeight="30.0" prefWidth="374.0" promptText="Escoja proveedor" styleClass="text-field" />
+                           </children>
                         </HBox>
+                     </children>
+                  </VBox>
                     </children>
                 </VBox>
 

@@ -1,64 +1,108 @@
 package com.grupo2.PMSEYJ.proveedores.controller;
 
-import com.grupo2.PMSEYJ.proveedores.model.ProductoPedido;
+
+
+import com.grupo2.PMSEYJ.proveedores.dto.ProveedorDTO;
+import com.grupo2.PMSEYJ.proveedores.dto.ResumenPedidoDTO;
+import com.grupo2.PMSEYJ.proveedores.service.ProveedoresService;
+import com.grupo2.PMSEYJ.proveedores.service.ProveedoresServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import java.util.Arrays;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class enviarPedidoController {
-
-    @FXML private TableView<ProductoPedido> tvReporte;
-    @FXML private TableColumn<ProductoPedido, String> colNombre;
-    @FXML private TableColumn<ProductoPedido, Integer> colCantidad;
-    @FXML private ComboBox<String> cmbProveedores;
-
-    // VALORES QUEMADOS: Proveedores registrados
-    private final List<String> proveedoresRegistrados = Arrays.asList("DIFFARE", "DIKAPHARMA", "QUIMFALA");
+public class enviarPedidoController implements Initializable {
 
     @FXML
-    public void initialize() {
-        colNombre.setCellValueFactory(cell -> cell.getValue().nombreProperty());
-        colCantidad.setCellValueFactory(cell -> cell.getValue().cantidadProperty().asObject());
+    private Button btnCancelar;
 
-        // Cargar proveedores registrados en el ComboBox
-        cmbProveedores.setItems(FXCollections.observableArrayList(proveedoresRegistrados));
-    }
+    @FXML
+    private Button btnConfirmarEnvio;
 
-    public void cargarReporte(ObservableList<ProductoPedido> datos) {
-        tvReporte.setItems(datos);
+    @FXML
+    private ComboBox<String> cmbProveedores;
+
+    @FXML
+    private TableColumn<ResumenPedidoDTO, Integer> colCantidad;
+
+    @FXML
+    private TableColumn<ResumenPedidoDTO, String> colNombre;
+
+    @FXML
+    private TableView<ResumenPedidoDTO> tvReporte;
+
+    private Integer id_pedido;
+    private List<ResumenPedidoDTO>  resumenPedido;
+    private final ObservableList<ResumenPedidoDTO> productosPedido = FXCollections.observableArrayList();
+    private ProveedoresService proveedoresService;
+
+    @FXML
+    void handleCancelar(ActionEvent event) {
+        mostrarAlerta("No se ha enviado el pedido al proveedor", Alert.AlertType.INFORMATION);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     void handleConfirmarEnvio(ActionEvent event) {
-        String proveedorElegido = cmbProveedores.getValue();
+        if(cmbProveedores.getSelectionModel().getSelectedItem() == null){
+            mostrarAlerta("No existe un proveedor con el nombre proporcionado",  Alert.AlertType.ERROR);
+            return;
+        }
 
-        // 1. Verificar nombreProveedor (Paso 5 y Escenario Alternativo 2)
-        if (proveedorElegido == null || !proveedoresRegistrados.contains(proveedorElegido)) {
-            mostrarAlerta("Proveedor no encontrado, no se ha enviado el pedido", Alert.AlertType.ERROR);
-            return; // El caso de uso termina sin enviar el pedido
+        ProveedorDTO proveedorDTO = proveedoresService.consultarProveedorNombre(cmbProveedores.getSelectionModel().getSelectedItem());
+
+        proveedoresService.definirProveedorAPedido(id_pedido,proveedorDTO.getId_prove());
+        proveedoresService.enviarPedido(id_pedido,"E");
+        mostrarAlerta("Pedido enviado al proveedor satisfactoriamente", Alert.AlertType.INFORMATION);
+        try {
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            currentStage.close();
+
+
+            Stage parentStage = (Stage) currentStage.getOwner();
+
+            Parent root = FXMLLoader.load(getClass().getResource("/administracion/fxml/ventanaPrincipal.fxml"));
+            parentStage.setScene(new Scene(root));
+            parentStage.setTitle("Menú Principal");
+            parentStage.show();
+
+            parentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 
-        // 2. Escenario Básico: Envío exitoso (Pasos 6 al 10)
-        // Aquí el sistema registraría la acción y crearía el pedido vacío
-        mostrarAlerta("Pedido enviado exitosamente", Alert.AlertType.INFORMATION);
 
-        // Al limpiar tvReporte, se limpia automáticamente masterData del padre
-        tvReporte.getItems().clear(); // Esto cumple con crear un pedido vacío
 
-        // Cerrar ventana tras el éxito
-        ((Stage) cmbProveedores.getScene().getWindow()).close();
+
     }
 
-    @FXML
-    void handleCancelar(ActionEvent event) {
-        ((Stage) cmbProveedores.getScene().getWindow()).close();
+
+    public void setId_pedido(Integer id_pedido) {
+        this.id_pedido = id_pedido;
+    }
+
+    public void setResumenPedido(List<ResumenPedidoDTO> resumenPedido) {
+        this.resumenPedido = resumenPedido;
+        productosPedido.clear();
+        productosPedido.addAll(resumenPedido);
+        tvReporte.setItems(productosPedido);
     }
 
     private void mostrarAlerta(String mensaje, Alert.AlertType tipo) {
@@ -68,4 +112,20 @@ public class enviarPedidoController {
         alert.showAndWait();
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        colCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre_pro"));
+        proveedoresService = new ProveedoresServiceImpl();
+        List<ProveedorDTO> proveedores = proveedoresService.consultarTodosLosProveedores();
+        List<String> nombresProveedores = new ArrayList<>();
+        for (ProveedorDTO proveedor : proveedores) {
+            nombresProveedores.add(proveedor.getNombre_pro());
+        }
+        cmbProveedores.setItems(FXCollections.observableArrayList(nombresProveedores));
+
+    }
 }
+
+
+

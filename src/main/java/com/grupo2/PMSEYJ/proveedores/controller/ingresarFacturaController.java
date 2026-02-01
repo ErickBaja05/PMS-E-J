@@ -7,7 +7,6 @@ import com.grupo2.PMSEYJ.inventarioYProductos.model.Producto;
 import com.grupo2.PMSEYJ.inventarioYProductos.service.ProductoServiceImpl;
 import com.grupo2.PMSEYJ.inventarioYProductos.service.ProductosService;
 import com.grupo2.PMSEYJ.proveedores.dto.*;
-import com.grupo2.PMSEYJ.proveedores.model.Cotejo;
 import com.grupo2.PMSEYJ.proveedores.service.ProveedoresService;
 import com.grupo2.PMSEYJ.proveedores.service.ProveedoresServiceImpl;
 import javafx.collections.FXCollections;
@@ -17,10 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.net.URL;
-import java.sql.SQLOutput;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -44,9 +40,6 @@ public class ingresarFacturaController implements Initializable {
 
     @FXML
     private CheckBox checkIVA;
-
-    @FXML
-    private TableColumn<ProductoLoteDTO, Integer> colCajas;
 
     @FXML
     private TableColumn<ProductoLoteDTO, String > colCodigoBarras;
@@ -93,8 +86,12 @@ public class ingresarFacturaController implements Initializable {
     @FXML
     private TextField txtTamañoCaja;
 
+    @FXML
+    private ComboBox<String> comboProveedores;
+
     private Integer id_fc;
-    String num_fc;
+    private String num_fc;
+    private Integer id_prove;
 
     private ObservableList<ProductoLoteDTO> listaDetalleFactura = FXCollections.observableArrayList();
 
@@ -106,6 +103,13 @@ public class ingresarFacturaController implements Initializable {
             mostrarAlerta("El código de barras solo deben ser números y deben ser 13",Alert.AlertType.ERROR);
             return;
         }
+
+        if(comboProveedores.getSelectionModel().getSelectedItem()==null){
+            mostrarAlerta("No existe un proveedor con el nombre proporcionado",Alert.AlertType.ERROR);
+            return;
+        }
+
+
         if(txtLote.getText().isEmpty()){
             mostrarAlerta("Lote inválido: El lote solo acepta letras y números, no se permite ningún símbolo",Alert.AlertType.ERROR);
             return;
@@ -158,10 +162,9 @@ public class ingresarFacturaController implements Initializable {
             String fechavn = nuevoLote.getFecha_vn().format(formatter);
             Double iva = parametrosService.consultarValorIva();
             ProductoLoteDTO detalle = new ProductoLoteDTO(nuevoLote.getCodigo_barras(),producto.getNombre_p(), nuevoLote.getNum_lote(),fechavn, nuevoLote.getN_cajasCompradas(), nuevoLote.getPrecio_compra(), nuevoLote.getTamano_caja(), nuevoLote.getRentabilidad(), nuevoLote.getN_cajasCompradas(), porCaja,checkIVA.isSelected(),iva);
-
-
             listaDetalleFactura.add(detalle);
             mostrarAlerta("Producto agregado correctamente", Alert.AlertType.INFORMATION);
+
         }catch(LoteYaExisteException | NumeroDeLoteNoValidoException | FechaFormatoErroneoException | ProductoNoExisteException e){
             mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
@@ -174,8 +177,15 @@ public class ingresarFacturaController implements Initializable {
             mostrarAlerta("Debe ingresar al menos 1 producto para registrar cambios en la mercadería", Alert.AlertType.ERROR);
             return;
         }
-        proveedoresService.ingresarFacturaCompra(num_fc);
-        mostrarAlerta("Mercadería ingresada exitosamente, los stocks de los lotes ingresados se han actualizado", Alert.AlertType.INFORMATION);
+        try{
+            proveedoresService.ingresarFacturaCompra(num_fc,id_prove);
+            mostrarAlerta("Mercadería ingresada exitosamente, los stocks de los lotes ingresados se han actualizado", Alert.AlertType.INFORMATION);
+            limpiarCamposProducto();
+            bloquearControles(true);
+        }catch (FacturaYaIngresadaException e){
+            mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
+        }
+
     }
 
     @FXML
@@ -190,22 +200,31 @@ public class ingresarFacturaController implements Initializable {
 
         nuevaFacturaCompra.setNum_fc(txtNumFactura.getText());
         try{
+            ProveedorDTO proveedor = proveedoresService.consultarProveedorNombre(comboProveedores.getSelectionModel().getSelectedItem());
+            nuevaFacturaCompra.setId_prove(proveedor.getId_prove());
+        }catch (IllegalArgumentException e){
+            mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
+        }
+
+        try{
             id_fc = proveedoresService.crearFacturaCompra(nuevaFacturaCompra);
             num_fc = nuevaFacturaCompra.getNum_fc();
+            id_prove = nuevaFacturaCompra.getId_prove();
             mostrarAlerta("Factura agregada correctamente, comience a ingresar productos", Alert.AlertType.INFORMATION);
             bloquearControles(false);
 
         }catch(FacturaYaIngresadaException e){
             mostrarAlerta(e.getMessage(), Alert.AlertType.INFORMATION);
-            List<CotejoDTO> cotejos = proveedoresService.consultarProductosFacturaPendiente(txtNumFactura.getText());
+            id_prove = nuevaFacturaCompra.getId_prove();
+            List<CotejoDTO> cotejos = proveedoresService.consultarProductosFacturaPendiente(txtNumFactura.getText(),nuevaFacturaCompra.getId_prove());
             List<ProductoLoteDTO> pendientes = proveedoresService.armarTablaPendiente(cotejos);
             listaDetalleFactura.addAll(pendientes);
-            FacturaCompraPendienteDTO facturaPendiente = proveedoresService.consultarFacturaCompra(txtNumFactura.getText());
+            FacturaCompraPendienteDTO facturaPendiente = proveedoresService.consultarFacturaCompra(txtNumFactura.getText(),id_prove);
             id_fc = facturaPendiente.getId_fc();
             num_fc = facturaPendiente.getNum_fc();
             bloquearControles(false);
 
-        }catch(StockYaIngresadoException | NumeroDeFacturaNoValidaException e){
+        }catch(StockYaIngresadoException | NumeroDeFacturaNoValidaException | IllegalArgumentException e){
             mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
 
@@ -219,7 +238,7 @@ public class ingresarFacturaController implements Initializable {
         // Control de Factura (inverso al resto)
         txtNumFactura.setDisable(!bloquear);
         btnValidarFactura.setDisable(!bloquear);
-
+        comboProveedores.setDisable(!bloquear);
         // Controles de producto y tabla
         txtCodigoBarras.setDisable(bloquear);
         txtLote.setDisable(bloquear);
@@ -234,6 +253,7 @@ public class ingresarFacturaController implements Initializable {
 
         btnAgregarItem.setDisable(bloquear);
         btnGuardarFactura.setDisable(bloquear);
+
 
     }
 
@@ -253,6 +273,10 @@ public class ingresarFacturaController implements Initializable {
         txtPrecioCompra.clear();
         txtRentabilidad.clear();
         txtCantCajas.clear();
+        txtTamañoCaja.clear();
+        txtNumFactura.clear();
+        checkIVA.selectedProperty().set(false);
+        listaDetalleFactura.clear();
     }
 
     @Override
@@ -269,6 +293,12 @@ public class ingresarFacturaController implements Initializable {
         colPrecioCompra.setCellValueFactory(new PropertyValueFactory<>("costo_unitario"));
         colSubtotal.setCellValueFactory(new PropertyValueFactory<>("precio_venta"));
         tvDetalleFactura.setItems(listaDetalleFactura);
+        List<ProveedorDTO> proveedores = proveedoresService.consultarTodosLosProveedores();
+        List<String> nombres = new ArrayList<>();
+        for (ProveedorDTO proveedor : proveedores) {
+            nombres.add(proveedor.getNombre_pro());
+        }
+        comboProveedores.getItems().addAll(nombres);
     }
 }
 

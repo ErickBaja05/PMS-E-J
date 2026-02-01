@@ -10,6 +10,7 @@ import com.grupo2.PMSEYJ.inventarioYProductos.dao.ProductoDAO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoIndiceTerapeuticoDTO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoLaboratorioDTO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoProductoDTO;
+import com.grupo2.PMSEYJ.inventarioYProductos.dto.ProductoPedidoDTO;
 import com.grupo2.PMSEYJ.inventarioYProductos.model.IndiceTerapeutico;
 import com.grupo2.PMSEYJ.inventarioYProductos.model.Laboratorio;
 import com.grupo2.PMSEYJ.inventarioYProductos.model.Producto;
@@ -140,5 +141,14 @@ public class ProductoServiceImpl implements ProductosService{
             throw new ProductoNoExisteException("No existe un producto con el código de barras ingresado, créelo previamente en Productos -> Crear Producto");
         }
         return producto;
+    }
+
+    @Override
+    public ProductoPedidoDTO consultarProductoPorCodigoBarra(String codigoBarras) {
+        Producto producto = productoDAO.consultarPorCodBarras(codigoBarras);
+        if(producto == null){
+            throw new ProductoNoExisteException("No existe un producto con el código de barras ingresado, créelo previamente en Productos -> Crear Producto");
+        }
+        return new ProductoPedidoDTO(producto.getCodigo_barras(),producto.getNombre_p());
     }
 }

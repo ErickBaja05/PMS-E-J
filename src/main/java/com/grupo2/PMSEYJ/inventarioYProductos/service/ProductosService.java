@@ -3,6 +3,7 @@ package com.grupo2.PMSEYJ.inventarioYProductos.service;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoIndiceTerapeuticoDTO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoLaboratorioDTO;
 import com.grupo2.PMSEYJ.inventarioYProductos.dto.NuevoProductoDTO;
+import com.grupo2.PMSEYJ.inventarioYProductos.dto.ProductoPedidoDTO;
 import com.grupo2.PMSEYJ.inventarioYProductos.model.Producto;
 
 public interface ProductosService {
@@ -15,6 +16,7 @@ public interface ProductosService {
     void insertarIndiceTerapeutico(NuevoIndiceTerapeuticoDTO nuevoIndiceTerapeutico);
     boolean verificarExistenciaIndiceTerapeutico(String nombreIndiceTerapeutico);
     Producto consultarProductoPorCodigoBarras(String codigoBarras);
+    ProductoPedidoDTO consultarProductoPorCodigoBarra(String codigoBarras);
 
 
 }

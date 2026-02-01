@@ -71,15 +71,7 @@
 
 /* --- TABLAS (TableView) --- */
 
-.table-view .column-header {
-    -fx-background-color: #10B981;
-}
-.table-view .column-header .label {
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 13px;
 
-}
 
 /* 1. Centrar el contenido de TODAS las celdas (filas de datos) */
 .table-cell {

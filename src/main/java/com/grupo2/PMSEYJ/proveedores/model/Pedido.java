@@ -1,18 +1,22 @@
 package com.grupo2.PMSEYJ.proveedores.model;
 
+import java.time.LocalDate;
+
 public class Pedido {
     Integer id_pedido;
     Integer id_prove;
     String estado;
+    LocalDate fecha_pv;
 
     public Pedido(){
 
     }
 
-    public Pedido(Integer id_pedido, Integer id_prove, String estado) {
+    public Pedido(Integer id_pedido, Integer id_prove, String estado, LocalDate fecha_pv) {
         this.id_pedido = id_pedido;
         this.id_prove = id_prove;
         this.estado = estado;
+        this.fecha_pv = fecha_pv;
     }
 
     public Integer getId_pedido() {
@@ -37,5 +41,13 @@ public class Pedido {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public LocalDate getFecha_pv() {
+        return fecha_pv;
+    }
+
+    public void setFecha_pv(LocalDate fecha_pv) {
+        this.fecha_pv = fecha_pv;
     }
 }
