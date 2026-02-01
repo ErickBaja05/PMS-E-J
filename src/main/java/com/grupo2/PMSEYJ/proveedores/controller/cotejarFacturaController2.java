@@ -84,9 +84,16 @@ public class cotejarFacturaController2 implements Initializable {
             mostrarAlerta("No existe una factura con el número: " + txtNumFactura.getText() + " del proveedor" + comboProveedores.getSelectionModel().getSelectedItem(),Alert.AlertType.ERROR);
             return;
         }
+
         ProveedorDTO proveedor = proveedoresService.consultarProveedorNombre(comboProveedores.getSelectionModel().getSelectedItem());
         try{
             facturaACotejar = proveedoresService.consultarFacturaCompra(txtNumFactura.getText(),proveedor.getId_prove());
+            boolean fue_ingresada = proveedoresService.verificarSiYaFueIngresada(facturaACotejar.getNum_fc(),proveedor.getId_prove());
+            if(fue_ingresada){
+                mostrarAlerta("La factura no ha sido ingresada al sistema todavía, no hay información para cotejar",Alert.AlertType.ERROR);
+                return;
+            }
+
             List<CotejoDTO> cotejos = proveedoresService.consultarProductosFacturaPendiente(txtNumFactura.getText(),proveedor.getId_prove());
 
             for (CotejoDTO cotejo : cotejos) {

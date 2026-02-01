@@ -132,6 +132,11 @@ public class ingresarFacturaController implements Initializable {
             return;
         }
 
+        if(Integer.parseInt(txtCantCajas.getText()) <= 0 || Integer.parseInt(txtCantCajas.getText()) > 100){
+            mostrarAlerta("El número de cajas compradas no debe ser mayor a 100 ni menor a 1", Alert.AlertType.ERROR);
+            return;
+        }
+
 
         if(dpVencimiento.getValue() == null){
             mostrarAlerta("La fecha de vencimiento debe ser mayor a la fecha actual", Alert.AlertType.ERROR);
@@ -140,6 +145,11 @@ public class ingresarFacturaController implements Initializable {
 
         if(txtTamañoCaja.getText().isEmpty() || !txtTamañoCaja.getText().matches("[0-9]+") || Integer.parseInt(txtTamañoCaja.getText()) < 0){
             mostrarAlerta("El tamaño de caja debe ser un número entero mayor a 0",Alert.AlertType.ERROR);
+            return;
+        }
+
+        if(Integer.parseInt(txtTamañoCaja.getText()) <= 0 || Integer.parseInt(txtTamañoCaja.getText()) > 100){
+            mostrarAlerta("El número de unidades de una caja no debe ser mayor a 100 ni menor a 1", Alert.AlertType.ERROR);
             return;
         }
 
