@@ -89,7 +89,7 @@
 
                         <VBox spacing="5.0" GridPane.rowIndex="2">
                             <children>
-                                <Label maxWidth="Infinity" styleClass="lblInformacion" text="Categoria">
+                                <Label maxWidth="Infinity" styleClass="lblInformacion" text="Categoría">
                                     <padding><Insets left="5.0" /></padding>
                                 </Label>
                         <ComboBox fx:id="comboCategoria" prefHeight="0.0" prefWidth="385.0" promptText="Escoja una categoría" styleClass="textField" />

@@ -170,7 +170,7 @@ public class ProveedoresServiceImpl implements ProveedoresService{
             }
 
             if(!nuevoLote.getNum_lote().matches("^[A-Za-z0-9-]{1,12}$")){
-                throw new NumeroDeLoteNoValidoException("Lote inválido: El lote solo acepta letras, números y el -");
+                throw new NumeroDeLoteNoValidoException("Lote inválido: El lote solo acepta letras, números y el símbolo -");
             }
 
             if(!nuevoLote.getFecha_vn().isAfter(LocalDate.now()) || nuevoLote.getFecha_vn().isEqual(LocalDate.now())){

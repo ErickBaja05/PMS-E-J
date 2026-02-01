@@ -105,13 +105,13 @@ public class ingresarFacturaController implements Initializable {
         }
 
         if(comboProveedores.getSelectionModel().getSelectedItem()==null){
-            mostrarAlerta("No existe un proveedor con el nombre proporcionado",Alert.AlertType.ERROR);
+            mostrarAlerta("No existe un proveedor con el nombre proporcionado!",Alert.AlertType.ERROR);
             return;
         }
 
 
         if(txtLote.getText().isEmpty()){
-            mostrarAlerta("Lote inválido: El lote solo acepta letras y números, no se permite ningún símbolo",Alert.AlertType.ERROR);
+            mostrarAlerta("Lote inválido: El lote solo acepta letras, números y el símbolo -",Alert.AlertType.ERROR);
             return;
         }
         if(txtLote.getText().length() > 12){
@@ -134,7 +134,7 @@ public class ingresarFacturaController implements Initializable {
 
 
         if(dpVencimiento.getValue() == null){
-            mostrarAlerta("La fecha de vencimiento no puede estar vacía", Alert.AlertType.ERROR);
+            mostrarAlerta("La fecha de vencimiento debe ser mayor a la fecha actual", Alert.AlertType.ERROR);
             return;
         }
 

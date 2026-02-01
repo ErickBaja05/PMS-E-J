@@ -148,7 +148,6 @@ public class consultarPedidoActualPendienteController implements Initializable {
                 tvPedidos.refresh();
                 proveedoresService.actualizarDetallePedido(producto.getCantidad_cajas(),id_pedido,producto.getCodigo_barras());
                 encontrado = true;
-                limpiarCamposProducto();
                 break;
             }
         }
@@ -182,7 +181,6 @@ public class consultarPedidoActualPendienteController implements Initializable {
         for (ProductoPedidoDTO producto : listaProductos){
             if(producto.getCodigo_barras().equals(productoPedido.getCodigo_barras())){
                 mostrarAlerta("El producto ya se encuentra en el pedido", Alert.AlertType.ERROR);
-                limpiarCamposProducto();
                 return;
             }
         }
