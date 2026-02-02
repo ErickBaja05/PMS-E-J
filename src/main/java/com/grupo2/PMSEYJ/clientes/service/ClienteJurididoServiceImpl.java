@@ -118,6 +118,34 @@ public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
         return (codigoProvincia >= 1 && codigoProvincia <= 24) || codigoProvincia == 30;
     }
 
+    private static boolean validarCedula(String cedula) {
+        if (cedula == null || !cedula.matches("\\d{10}")) {
+            return false; // Debe tener exactamente 10 dígitos numéricos
+        }
+
+        int suma = 0;
+        for (int i = 0; i < 9; i++) {
+            int digito = Character.getNumericValue(cedula.charAt(i));
+            if ((i + 1) % 2 != 0) { // Posición impar (1, 3, 5, 7, 9)
+                int producto = digito * 2;
+                if (producto > 9) {
+                    producto -= 9;
+                }
+                suma += producto;
+            } else { // Posición par (2, 4, 6, 8)
+                suma += digito;
+            }
+        }
+
+        int residuo = suma % 10;
+        int digitoVerificadorCalculado = (residuo == 0) ? 0 : (10 - residuo);
+        int digitoVerificadorReal = Character.getNumericValue(cedula.charAt(9));
+
+        validarProvincia(cedula);
+
+        return (digitoVerificadorCalculado == digitoVerificadorReal) && validarProvincia(cedula) ;
+    }
+
     public static boolean validarRuc(String ruc) {
         if (ruc == null || !ruc.matches("\\d{13}")) {
             return false; // Debe tener exactamente 13 dígitos numéricos
@@ -129,26 +157,53 @@ public class ClienteJurididoServiceImpl implements ClienteJuridicoService {
             return false;
         }
 
-        // Coeficientes para Módulo 11
-        int[] coeficientes = {4, 3, 2, 7, 6, 5, 4, 3, 2};
-        int suma = 0;
-
-        for (int i = 0; i < coeficientes.length; i++) {
-            int digito = Character.getNumericValue(ruc.charAt(i));
-            suma += digito * coeficientes[i];
+        // Validar provincia
+        if (!validarProvincia(ruc)) {
+            return false;
         }
 
-        int residuo = suma % 11;
-        int verificadorCalculado = 11 - residuo;
+        // El tercer dígito define el tipo de contribuyente
+        int tercerDigito = Character.getNumericValue(ruc.charAt(2));
 
-        if (verificadorCalculado == 11) {
-            verificadorCalculado = 0;
-        } else if (verificadorCalculado == 10) {
-            return false; // Dígito inválido según normativa
+        if (tercerDigito < 6) {
+            // Persona natural: validar la cédula (primeros 10 dígitos)
+            String cedula = ruc.substring(0, 10);
+            return validarCedula(cedula);
+        } else if (tercerDigito == 9) {
+            // Sociedad privada: módulo 11 con coeficientes {4,3,2,7,6,5,4,3,2}
+            int[] coeficientes = {4, 3, 2, 7, 6, 5, 4, 3, 2};
+            int suma = 0;
+            for (int i = 0; i < coeficientes.length; i++) {
+                int digito = Character.getNumericValue(ruc.charAt(i));
+                suma += digito * coeficientes[i];
+            }
+            int residuo = suma % 11;
+            int verificadorCalculado = 11 - residuo;
+            if (verificadorCalculado == 11) verificadorCalculado = 0;
+            if (verificadorCalculado == 10) return false;
+
+            int verificadorReal = Character.getNumericValue(ruc.charAt(9));
+            return verificadorCalculado == verificadorReal;
+        } else if (tercerDigito == 6) {
+            // Entidad pública: módulo 11 con coeficientes {3,2,7,6,5,4,3,2}
+            int[] coeficientes = {3, 2, 7, 6, 5, 4, 3, 2};
+            int suma = 0;
+            for (int i = 0; i < coeficientes.length; i++) {
+                int digito = Character.getNumericValue(ruc.charAt(i));
+                suma += digito * coeficientes[i];
+            }
+            int residuo = suma % 11;
+            int verificadorCalculado = 11 - residuo;
+            if (verificadorCalculado == 11) verificadorCalculado = 0;
+            if (verificadorCalculado == 10) return false;
+
+            int verificadorReal = Character.getNumericValue(ruc.charAt(8)); // ojo: posición distinta
+            return verificadorCalculado == verificadorReal;
         }
 
-        int verificadorReal = Character.getNumericValue(ruc.charAt(9));
-        return verificadorCalculado == verificadorReal && validarProvincia(ruc);
+        return false; // No corresponde a ningún tipo válido
     }
+
+
 
 }

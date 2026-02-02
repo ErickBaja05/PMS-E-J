@@ -273,7 +273,7 @@ public class consultarPedidoActualPendienteController implements Initializable {
                 numero_producto++;
                 listaProductos.add(producto);
             }
-            mostrarAlerta("Producto pendiente cargado exitosamente", Alert.AlertType.INFORMATION);
+            mostrarAlerta("Pedido pendiente cargado exitosamente", Alert.AlertType.INFORMATION);
         }
 
 

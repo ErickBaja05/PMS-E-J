@@ -96,7 +96,7 @@ public class configuracionPagosImpuestosController {
             }
 
         } catch (NumberFormatException e) {
-            mostrarMensaje("Error", "El valor del IVA debe ser un numero decimal mayor que 0 y menor o igual a 100",
+            mostrarMensaje("Error", "El valor del IVA debe ser un número decimal mayor que 0 y menor o igual a 100",
                     Alert.AlertType.ERROR);
         }
     }

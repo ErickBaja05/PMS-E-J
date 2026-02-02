@@ -62,8 +62,8 @@ public class ProductoServiceImpl implements ProductosService{
             throw new ProductoYaExisteException("Ya existe un producto con el código auxiliar proporcionado");
         }
 
-        if(!nuevoProducto.getCodigo_barras().matches("^\\d{1,13}$")){
-            throw new CodigoDeBarrasOAuxiliarNoValidoException("El código de barras no puede exceder los 13 caracteres");
+        if(!nuevoProducto.getCodigo_barras().matches("^\\d{13}$")){
+            throw new CodigoDeBarrasOAuxiliarNoValidoException("El código de barras debe tener exactamente 13 dígitos");
         }
 
         if(!nuevoProducto.getCodigo_aux().matches("^[A-Za-z0-9Ññ-]{1,15}$")){
@@ -82,8 +82,8 @@ public class ProductoServiceImpl implements ProductosService{
            throw new IllegalArgumentException("El nombre del laboratorio contiene símbolos no permitidos");
        }
 
-       if(!nuevoIndiceTerapeutico.getNombre_indice().matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ,./()%]{5,100}$")){
-           throw new IllegalArgumentException("El índice terapéutico contiene símbolos");
+       if(!nuevoIndiceTerapeutico.getNombre_indice().matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ\\- ,./()%]{5,100}$")){
+           throw new IllegalArgumentException("El índice terapéutico contiene símbolos no permitidos");
        }
 
 
