@@ -51,8 +51,8 @@
                                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                             <children>
-                                                <Label styleClass="label-campo" text="Código Auxiliar:" />
-                                                <TextField fx:id="txtCodigoProd" prefHeight="40.0" promptText="Ingrese código del producto" styleClass="text-field" GridPane.columnIndex="1" />
+                                                <Label styleClass="label-campo" text="Código de Barras:" />
+                                                <TextField fx:id="txtCodigoProd" prefHeight="40.0" promptText="Ingrese código de barras del producto" styleClass="text-field" GridPane.columnIndex="1" />
 
                                                 <Label styleClass="label-campo" text="Meta de Ventas:" GridPane.rowIndex="1" />
                                                 <TextField fx:id="txtMetaProd" prefHeight="40.0" promptText="Ej: 100 (unidades)" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />

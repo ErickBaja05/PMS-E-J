@@ -47,28 +47,43 @@
                         </Label>
 
                         <VBox spacing="10.0">
-                            <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="option-panel">
-                                <children>
-                                    <RadioButton fx:id="rtDUnProducto" minWidth="260.0" mnemonicParsing="false" onAction="#darDescuentoUP" selected="true" text="Descuento Individual (Producto)">
-                                        <toggleGroup>
-                                            <ToggleGroup fx:id="grupoPromocion" />
-                                        </toggleGroup>
-                                        <font><Font size="13.0" /></font>
-                                    </RadioButton>
-                                    <TextField fx:id="txtCodigoProducto" prefHeight="40.0" promptText="Ingrese el código (Ej: PROD-102)" HBox.hgrow="ALWAYS" />
-                                    <Button fx:id="btValidar" minWidth="100.0" mnemonicParsing="false" onAction="#validarProducto" prefHeight="40.0" styleClass="btn-validar" text="VALIDAR">
-                                        <cursor><Cursor fx:constant="HAND" /></cursor>
-                                        <font><Font name="System Bold" size="12.0" /></font>
-                                    </Button>
-                                </children>
-                            </HBox>
+                     <VBox prefHeight="152.0" prefWidth="853.0">
+                        <children>
+                                  <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="option-panel">
+                                      <children>
+                                          <RadioButton fx:id="rtDUnProducto" minWidth="260.0" mnemonicParsing="false" onAction="#darDescuentoUP" selected="true" text="Descuento Individual (Producto)">
+                                              <toggleGroup>
+                                                  <ToggleGroup fx:id="grupoPromocion" />
+                                              </toggleGroup>
+                                              <font>
+                                       <Font size="13.0" />
+                                    </font>
+                                          </RadioButton>
+                                          <TextField fx:id="txtCodigoProducto" prefHeight="40.0" promptText="Ingrese el código de barras del producto" HBox.hgrow="ALWAYS" />
+                                          <Button fx:id="btValidar" minWidth="100.0" mnemonicParsing="false" onAction="#validarProducto" prefHeight="40.0" styleClass="btn-validar" text="VALIDAR">
+                                              <cursor>
+                                       <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                              <font>
+                                       <Font name="System Bold" size="12.0" />
+                                    </font>
+                                          </Button>
+                                      </children>
+                                  </HBox>
+                           <HBox alignment="CENTER_RIGHT" prefHeight="54.0" prefWidth="853.0">
+                              <children>
+                                 <TextField disable="true" prefHeight="31.0" prefWidth="558.0" promptText="Porcentaje de Descuento para el producto" />
+                              </children>
+                           </HBox>
+                        </children>
+                     </VBox>
 
                             <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="option-panel">
                                 <children>
                                     <RadioButton fx:id="rtDTodaMercaderia" minWidth="260.0" mnemonicParsing="false" onAction="#darDescuentoTM" text="Descuento Global (Toda Mercadería)" toggleGroup="$grupoPromocion">
                                         <font><Font size="13.0" /></font>
                                     </RadioButton>
-                                    <TextField fx:id="txtCodigoProducto1" prefHeight="40.0" promptText="Ingrese porcentaje de descuento (Ej: 20%)" HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="txtCodigoProducto1" prefHeight="40.0" promptText="Ingrese porcentaje de descuento" HBox.hgrow="ALWAYS" />
                                 </children>
                             </HBox>
                         </VBox>
