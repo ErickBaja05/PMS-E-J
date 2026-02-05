@@ -70,6 +70,13 @@ VS Code
 Locate the MainApp class of the project. It is placed in the route: src/main/java/com/grupo2/PMSEYJ/app/MainApp.java
 Execute the application from the IDE.
 
+For a first login:
+
+1.- Select "ADMINISTRADOR" option in the checkbox
+2.- Type ADMINISTRADOR in the field username
+3.- Type Admin123* in the field password
+4.- Click the login button
+
 ## 🗄️ Database Configuration (Required)
 
 Before running the application, ensure your PostgreSQL environment matches the connection parameters expected by the system.
