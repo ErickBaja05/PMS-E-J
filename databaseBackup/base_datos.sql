@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict fxDWIOF6nuueelx8iQd0TdV2HljZ4GMKfZrCk71hirzfzRtjRps9Zk24K8BJkY0
+\restrict iVnld6IrSBtQdrXL7UydEghpfqmXMQOHlYcEg4gfVa5LRMYy30Qs3VdrNx06Kbz
 
 -- Dumped from database version 18.0
 -- Dumped by pg_dump version 18.0
@@ -1041,6 +1041,7 @@ COPY public.proveedores (id_prove, nombre_pro, telefono_pro, correo_pro, estado_
 --
 
 COPY public.usuarios (id_usuario, nombre_us, correo_us, password_us, perfil_us) FROM stdin;
+1	ADMINISTRADOR	correo@correo.com	Admin123*	AD
 \.
 
 
@@ -1160,7 +1161,7 @@ SELECT pg_catalog.setval('public.proveedores_id_prove_seq', 1, false);
 -- Name: usuarios_id_usuario_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.usuarios_id_usuario_seq', 1, false);
+SELECT pg_catalog.setval('public.usuarios_id_usuario_seq', 1, true);
 
 
 --
@@ -1511,5 +1512,5 @@ ALTER TABLE ONLY public.promo_producto
 -- PostgreSQL database dump complete
 --
 
-\unrestrict fxDWIOF6nuueelx8iQd0TdV2HljZ4GMKfZrCk71hirzfzRtjRps9Zk24K8BJkY0
+\unrestrict iVnld6IrSBtQdrXL7UydEghpfqmXMQOHlYcEg4gfVa5LRMYy30Qs3VdrNx06Kbz
 
