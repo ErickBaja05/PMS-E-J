@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 
 public class MainApp extends Application {
-
+    //Estoy aprendiendo Git
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Carga el FXML desde resources

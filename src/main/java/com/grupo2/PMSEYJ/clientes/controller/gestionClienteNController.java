@@ -1,5 +1,5 @@
 package com.grupo2.PMSEYJ.clientes.controller;
-
+// Segundo archivo que modifico
 import com.grupo2.PMSEYJ.clientes.dto.GestionClienteNaturalDTO;
 import com.grupo2.PMSEYJ.clientes.service.ClienteNaturalService;
 import com.grupo2.PMSEYJ.clientes.service.ClienteNaturalServiceImpl;
