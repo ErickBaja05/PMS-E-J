@@ -1,5 +1,7 @@
 --
 -- PostgreSQL database dump
+
+-- Realizada con comandos genericos, deberia funcionar sin problemas.
 --
 
 \restrict iVnld6IrSBtQdrXL7UydEghpfqmXMQOHlYcEg4gfVa5LRMYy30Qs3VdrNx06Kbz
