@@ -1,5 +1,5 @@
 module com.grupo2.PMSEYJ {
-    // Módulos JavaFX
+    // Módulos JavaFX para la interfaz gráfica
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
@@ -10,7 +10,6 @@ module com.grupo2.PMSEYJ {
     requires java.sql;
     requires java.desktop;
     requires javafx.base;
-
 
     // Abre los paquetes con controladores para FXML
     opens com.grupo2.PMSEYJ.auditoria.controller to javafx.fxml;
@@ -30,13 +29,12 @@ module com.grupo2.PMSEYJ {
 
     exports com.grupo2.PMSEYJ.app;
 
-
     // Exporta paquetes compartidos
     /*
-    exports com.grupo2.PMSEYJ.core;
-    exports com.grupo2.PMSEYJ.auditoria.dto;
-    exports com.grupo2.PMSEYJ.auditoria.service;
-    exports com.grupo2.PMSEYJ.auditoria.viewmodel;
-    */
+     * exports com.grupo2.PMSEYJ.core;
+     * exports com.grupo2.PMSEYJ.auditoria.dto;
+     * exports com.grupo2.PMSEYJ.auditoria.service;
+     * exports com.grupo2.PMSEYJ.auditoria.viewmodel;
+     */
 
 }
